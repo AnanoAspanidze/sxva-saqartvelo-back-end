@@ -9,10 +9,6 @@ namespace sxva_saqartvelo_back_end.Controllers
     public class AccountController : Controller
     {
         // GET: Account
-        public ActionResult Register()
-        {
-            return View();
-        }
 
         public ActionResult Login()
         {
@@ -20,6 +16,11 @@ namespace sxva_saqartvelo_back_end.Controllers
         }
 
         public ActionResult Logout()
+        {
+            return View();
+        }
+
+        public ActionResult Register()
         {
             return View();
         }

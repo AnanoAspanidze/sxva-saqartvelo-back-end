@@ -1,0 +1,139 @@
+.candidats-listing{
+    width: 98%;
+}
+.candidat{
+    padding-top: 20px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.candidat div{
+     margin-left: 15px;
+     margin-right: 15px;
+    background: linear-gradient(to top, #1dade4 65%, rgba(255, 255, 255, 0) 35%);
+
+}
+.candidat-skils-fn{
+    margin-left: 15px;
+       min-height: 69px;
+}
+.candidat h3{
+    padding-top: 10px;
+}
+.candidat li{
+    display: inline-block;
+    padding: 5px;
+}
+.candidat-statistics a{
+     color: black;
+}
+#candidats-with-filter{
+    margin-top: 30px;
+}
+.candidats-on-listing-page{
+    border: 3px solid rgba(15, 76, 109, 0.3);
+    margin-bottom: 30px;
+}
+.filter{
+    border-top: 3px solid rgba(15, 76, 109, 0.3);
+    border-left: 3px solid rgba(15, 76, 109, 0.3);
+    /* padding: 15px; */
+    margin-bottom: auto;
+}
+/* .show-more-arrow{
+    height: 12px;
+    transform: rotate(180deg);
+} */
+.bullet-pagination{
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+.bullet{
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #999999;
+    margin: 2px;
+    margin-bottom: 25px;
+}
+.active-bullet{
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #999999;
+    margin: 2px;
+    margin-bottom: 25px;
+    background-color: #ea2140;
+}
+.rating-from-to{
+    display: flex;
+    justify-content: space-between;
+    margin: auto 0.5%;
+}
+.rating-from-to > .col{
+    margin: 2%;
+}
+.slider-range-two{
+    width: 100%;
+    margin: 0 auto;
+}
+.clear-search{
+    text-align: right;
+    cursor: pointer;
+}
+.clear-search img{
+    width: 25px;
+}
+.line{
+    width: 101%;
+    height: 3px;
+    background-color: rgba(15, 76, 109, 0.3);
+    position: absolute;
+    left: -0.5%;
+}
+.line:last-child{
+    width: 101.7%;
+    left: -0.8%;
+}
+.possibilities span{
+    cursor: pointer;
+}
+.possibilities input[type=checkbox]{  
+    display: none;
+}
+.possibilities img{  
+    width: 18px;
+    height: 18px;
+    padding-bottom: 5px;
+    margin-right: 6px;
+}
+.rating-from-to input{
+    border: 3px solid #1dade4;
+}
+.hide{
+    display: none;
+}
+.arrow-up{
+    transform: none !important;
+}
+.checkbox{
+    background-image: url('../../img/checkbox-before.svg');
+    width: 100%;
+    height: 100%;
+}
+.checked-box{
+    background-image: url('../../img/checked-box.svg');
+    width: 100%;
+    height: 100%;
+}
+.filter-name{
+    padding-bottom: 18px !important;
+    display: flex;
+}
+.filter-name img{
+    height: 12px;
+    transform: rotate(180deg);
+}
+.possibilities-headline, .rating-headline{
+    cursor: pointer;
+}

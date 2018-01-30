@@ -1,0 +1,138 @@
+/*--- General Components ---*/
+button{
+    /* height: 4.4vh; */
+    min-height: 25px;
+    /* width: 18vh; */
+    min-width: 103px;
+    background: rgba(255, 255, 255, 0);
+    border: 1px solid white;
+    padding-top: 5px;
+    cursor: pointer;
+  }
+  .button-active{
+    color: black;
+    background-color: white;
+  }
+
+  .hero-btn{
+      width: 44vmax;
+      max-width: 282px;
+  }
+
+ 
+  /*--- Candidat Container ---*/
+  .candidat img{
+    border-radius: 100%;
+    /* width: 215px; */
+    /* height: 215px; */
+    border: 2px solid #f8d830;
+    visibility: hidden;
+  }
+
+
+
+.candidat .image-a {
+    /* background: #000; */
+    border-radius: 200px;
+    border: 2px solid #fff;
+    display: inline-block;
+    width: 15vmax;
+    position:  absolute;
+    height: 15vmax;
+    min-width: 150px;
+    min-height: 150px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: auto 100%;
+    top:  50%
+    /* line-height: 218px; */
+    background-color: #fff
+    background-repeat: no-repeat
+    background-position: center top
+    background-size: auto 100%;
+}
+
+
+
+  /*--- Pagnation ---*/
+  .pagination{
+    margin-top: 80px;
+  }
+  .pagination a {
+    color: black;
+    border: none;
+    border: 1px solid white !important;
+    border-left: 1px solid #ea2140 !important;
+    background: none;
+  }
+  .pagination li:first-child a{
+    border: 1px solid white !important;;
+  }
+  .pagination .active a{
+    background-color: #ea2140 !important;
+    border: 1px solid white !important;
+  }
+  .pagination span{
+    color: #ea2140
+  }
+
+  /*--- search form ---*/
+.search-window{
+  width: 55%;
+  display: flex;
+}
+.search-window input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+.search-window input:focus{
+  color: white;
+  background-color: #1caee5;
+  border: 2px solid #fad72c;
+}
+  
+.form-control{
+  display: inline;
+  width: 79%;
+  height: 45px;
+  border-radius: 0;
+  border: 2px solid #fad72c;
+  border-right: 0px;
+  background-color: #1caee5;
+}
+.search-button{
+  width: 4%;
+  height: 45px;
+  background-color: #1caee5;
+  border: 2px solid #fad72c;
+  border-left: 0px;
+  height: 45px;
+  margin-left: -0.5%;
+}
+.search-button img{
+  height: 20px !important;
+}
+
+.candidat  .hover:hover .image-a{
+  border-color: #e7e010;
+}
+
+.candidat  .hover:hover{
+  background-color: #e7e010;
+}
+.candidat  .hover{
+      width: 16vmax;
+      margin-left: 0px;
+      margin-right: 0px;
+    height: 16vmax;
+    min-width: 158px;
+    min-height: 158px;
+    display: inline-block;
+    background: transparent;
+    border: 2px solid #e7e010;
+    border-radius: 400px;
+    position: relative;
+}

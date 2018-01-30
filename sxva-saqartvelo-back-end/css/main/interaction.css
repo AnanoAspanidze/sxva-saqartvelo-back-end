@@ -1,0 +1,91 @@
+  /*back pulse*/
+  .hvr-back-pulse{
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -webkit-transition-property: color, background-color;
+  transition-property: color, background-color;
+}
+.hvr-back-pulse:hover{
+    -webkit-animation-name: hvr-back-pulse;
+    animation-name: hvr-back-pulse;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-delay: 0.5s;
+    animation-delay: 0.5s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    background-color: #1CAEE5;
+    background-color: #1CAEE5;
+    color: white;
+}
+@-webkit-keyframes hvr-back-pulse {
+    50% {
+      background-color: rgba(32, 152, 209, 0.75);
+    }
+  }
+  @keyframes hvr-back-pulse {
+    50% {
+      background-color: rgba(32, 152, 209, 0.75);
+    }
+  }
+
+ /* Icon Forward */
+.hvr-icon-forward {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  position: relative;
+  padding-right: 1.2em;
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+}
+.hvr-icon-forward:before {
+  /* content: "\f138"; */
+  position: absolute;
+  right: 1em;
+  padding: 0 5px;
+  font-family: FontAwesome;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-icon-forward:hover:before, .hvr-icon-forward:focus:before, .hvr-icon-forward:active:before {
+  -webkit-transform: translateX(4px);
+  transform: translateX(10px);
+}
+
+/*--- Candidate Hover---*/
+.hvr-yellow-back{
+  background-color: #f8d830;
+}
+.candidat img, .candidat h3{
+  cursor: pointer;
+}
+.candidat a:hover{
+  color: white;
+  text-decoration: none;
+}
+
+/*--- Pagination Hover  ---*/
+.pagination a:hover {
+  color: white;
+  background-color: #ea2140;
+}
+.pagination a:hover span{
+  color: white;
+}
+.pagination li:nth-child(5) a:hover {
+  color: #A8A8A8;
+  background-color: #F7F7F7;
+  cursor: default;
+}

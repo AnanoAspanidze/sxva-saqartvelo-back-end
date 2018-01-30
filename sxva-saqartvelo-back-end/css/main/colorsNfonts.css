@@ -1,0 +1,46 @@
+/*--- Colors ---*/
+.main-blue {
+    background-color: rgba(17, 76, 108, 0.82);
+  }
+ .second-blue{
+    background-color: #1dade4;
+}
+
+
+
+  /*--- Fonts ---*/
+  .main-font{
+    font-family: "BPG Nino Mtavruli Bold", sans-serif;
+  }
+
+  /* Button Fonts */
+.btn-font{
+    font-family: "BPG Nino Mtavruli Bold", sans-serif;
+    font-size: 14px;
+    color: white;
+}
+
+/* Candidat Fonts */
+.candidat-name-fn{
+    font-family: "BPG Nino Mtavruli Bold", sans-serif;
+    font-size: 20px;
+    color: black;
+}
+.candidat-skils-fn a{
+    font-family: "BPG Nino Mtavruli Bold", sans-serif;
+    font-size: 16px;
+    color: black;
+}
+.candidat-statistics-fn{
+    font-family: "BPG Nino Mtavruli Bold", sans-serif;
+    font-size: 14px;
+    color: black;
+    text-align: left;
+}
+
+/*--- Pagination Font ---*/
+.pagination{
+    font-family: "BPG Nino Mtavruli Bold", sans-serif;
+    font-size: 14px;
+}
+.nino-mtavruli { font-family: "BPG Nino Mtavruli"; } .color-while{color: #fff;}
