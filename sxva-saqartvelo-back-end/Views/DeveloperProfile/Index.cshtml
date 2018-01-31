@@ -1,8 +1,11 @@
-﻿<section id="hero-section"></section>
+﻿<link href="~/css/pagesNcomponents/homepage.css" rel="stylesheet" />
+<link href="~/css/profile/style.css" rel="stylesheet" />
+<link href="~/css/mystyle.css" rel="stylesheet" />
+<section id="hero-section"></section>
 <section class="container-fluid">
     <h1 class="my">ჩემი პროფილი</h1>
     <div class="row justify-content-between col-9 blue">
-        <div class=" col-xl-6 col-md-12 profile">
+        <div class="col-xl-6 col-md-12 profile">
             <div class="person row">
                 <div class="img-background"><img class="developerImage" src="" alt="profile picture"></div>
                 <div class="info align-items-end">
@@ -85,8 +88,8 @@ $(function(){
      // printCandidats ფაილში რომ მასივებია, იქ რომელ ინდექსზე დგას ეს დეველოპერი
      var personIndex = 0;
 
-     $(".developerImage").attr("src", "img/pp/"+photos[personIndex]);
-     $(".img-background").css("background-image","url(./img/pp/"+ photos[personIndex] + ")");
+     $(".developerImage").attr("src", "/img/pp/"+photos[personIndex]);
+     $(".img-background").css("background-image","url(/img/pp/"+ photos[personIndex] + ")");
      $(".name-surname").text(names[personIndex] + " " + surnames[personIndex]);
      $(".position").text(positions[personIndex]);
 
