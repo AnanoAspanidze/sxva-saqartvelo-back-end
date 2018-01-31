@@ -1,0 +1,139 @@
+﻿<section id="hero-section"></section>
+<section class="container-fluid">
+    <h1 class="my">ჩემი პროფილი</h1>
+    <div class="row justify-content-between col-9 blue">
+        <div class=" col-xl-6 col-md-12 profile">
+            <div class="person row">
+                <div class="img-background"><img class="developerImage" src="" alt="profile picture"></div>
+                <div class="info align-items-end">
+                    <h3 class="name-surname"></h3>
+                    <p class="rank position"></p>
+
+                </div>
+            </div>
+            <div class="ინფო">
+                <ul class="sia">
+                    <li class="skills">
+                        უნარები:
+                    </li>
+                    <li>
+                        პროექტების რაოდენობა: <span class="projectQuantity">15</span>
+                    </li>
+                    <li>
+                        მიმდინარე პროექტების რაოდენობა: <span class="projectsInProgressQuantity">4</span>
+                    </li>
+                    <li>
+                        რეიტინგი: <span class="rating">8.7</span>/10
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="col-xl-6 col-md-12 des1 hidden-md">
+            <button class="kon col  hidden-sm ">კონტაქტი</button>
+            <article class="bio">
+                <h2>ბიორგრაფია</h2>
+                <div class="biography">
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+<section class="pprojects col-11">
+    <div class="middle ">
+        <h1>სამუშაო ისტორია</h1>
+        <select>
+            <option>ახალი</option>
+            <option>ძველი</option>
+        </select>
+    </div>
+
+
+    <div class="allProjects">
+
+
+        <!-- 		<div class="projects">
+                    <h3><b>პროექტის სახელი</b></h3>
+                    <p class="pro1 col-12">პროექტის აღწერა პროექტის აღწერა პროექტის აღწერა პროექტის აღწერა პროექტის აღწერა</p>
+                    <p class="pro2 col-5">დამკვეთი: <span>შპს მეიდან გრუპი</span></p>
+                    <p class="pro2">15.10.2017 - მიმდინარე</p>
+                    <p class="pro2">პროექტის შეფასება: <span>9</span>/10</p>
+                    <p class="pro1 col-12">
+                        კომპლექსურად აღწერს ადამიანის პერსონალურ მახასიათებლებს,
+                        რომელიც მისი გამოცდილების ინტიმურ დეტალებსაც ეყრდნობა.
+                        ბიოგრაფია უფრო მეტია ვიდრე უბრალოდ ფაქტთა ჩამონათვალი. ის
+                        ასევე ამ ფაქტებთან დაკავშირებულ ემოციური განცდების
+                        გამოცდილებას ასახავს
+                    </p>
+                </div> -->
+
+    </div>
+
+
+
+
+    <div class="load">
+        <h3 class="kon">იტვირთება...</h3>
+    </div>
+</section>
+
+
+
+<script>
+
+$(function(){
+     // printCandidats ფაილში რომ მასივებია, იქ რომელ ინდექსზე დგას ეს დეველოპერი
+     var personIndex = 0;
+
+     $(".developerImage").attr("src", "img/pp/"+photos[personIndex]);
+     $(".img-background").css("background-image","url(./img/pp/"+ photos[personIndex] + ")");
+     $(".name-surname").text(names[personIndex] + " " + surnames[personIndex]);
+     $(".position").text(positions[personIndex]);
+
+var candidateSkills = skills[personIndex].split(",");
+var candidateSkillsHtml = "უნარები: ";
+
+candidateSkills.forEach(function(skill){
+	candidateSkillsHtml+="<span>#" + skill +"</span> &nbsp &nbsp";
+});
+
+     $(".skills").html(candidateSkillsHtml);
+     $(".projectQuantity").text(projectQuantities[personIndex]);
+     $(".projectsInProgressQuantity").text(projectInProgressQuantities[personIndex]);
+     $(".rating").text(ratings[personIndex]);
+     $(".biography").html(bios[personIndex]);
+
+
+
+var projectNames = ["tsnuli.ge", "gaakartule.ge"];
+var projectCustomers = ["საქართველოს ბანკი", "TBC ბანკი"];
+var projectDescriptions = ["სოციალური საწარმო „წნული“ შეიქმნა კასპის შშმ პირთა კავშირის მიერ, საქართველოს ბანკის ფონდ „ სიცოცხლის ხის“ დაფინანსებით. 2016 წელს ფონდ „ სიცოცხლის ხის“ მიერ გამოცხადებულ სოციალური მეწარმეობის მხარდამჭერ კონკურსში კასპის შშმ პირთა კავშირის მიერ წარმოდგენილმა პროექტმა, ქ. კასპში მცხოვრებ შეზღუდული შესაძლებლობების მქონე პირთა შინ დასაქმების ქსელის შექმნასთან დაკავშირებით, 154 საკონკურსო პროექტს შორის გაიმარჯვა, მოიპოვა გრანტი და შექმნა სოციალური საწარმო.",
+"კომპიუტერული ტექნოლოგიები ადამიანის საქმიანობის ყველა სფეროს განუყოფელი ნაწილი გახდა. სხვადასხვა ქვეყნებში აქტიურად მიმდინარეობს კომპიუტერული პროგრამებისა და მათი ინტერფეისების ლოკალურ ენებზე ადაპტირება. თუკი ის აპლიკაციები, და პროგრამები რომლებსაც მომავალში სასწავლო პროცესის მიმდინარეობისას და მუშაობისას გამოვიყენებთ არ იქნება ქართულ ენაზე თარგმნილი, ადაპტირებული მაშინ ქართული ენა დაკარგავს აქტუალობას და მისი მნიშვნელობა, გამოყენების არეალი კიდევ უფრო შემცირდება. ამგვარად აუცილებელია ქართული ენის კომპიუტერულ პროგრამებში ინტეგრირება.ეს პროექტი ამ მიმართულებით ერთ-ერთი პატარა ნაბიჯია. პროექტის ფარგლებში, თქვენი დახმარებით თარგმნილი, ქართული წინადადებები ჩაიტვირთება Microsoft-ის მიერ შექმნილ მანქანური სწავლის (Machine Learning) პლათფორმაში. მას შემდეგ რაც პლათფორმა მიღებულ ინფორმაციას გაანალიზებს, “შეისწავლის ქართულს” მივიღებთ პროგრამას, რომელსაც შეეძლება ქართული ტექსტის ინგლისურად თარგმნა და ინგლისური ტექსტის ქართულად თარგმნა. მართალია ქართული ენა უკვე წარმოდგენილია Microsoft-ის ზოგიერთ პროდუქტში, მაგრამ მთარგმნელობითი პროგრამა იქნება პირველი ნაბიჯი Microsoft-ის სხვადასხვა პროგრამებში, მათ შორის Windows ოპერაციულ სისტემაში ქართული ენის მთარგმნელობითი ფუნქციონალის სრულფასოვანი ინტეგრაციისაკენ. პროექტის წარატებით განხორციელება შესაძლებელს გახდის Microsoft-ის უამრავ პროგრამულ პროდუქტში ქართულ ინგლისური მთარგმნელობითი პროგრამის გამოყენებას. ამის გარდა, ვებ დეველოპერებს და იმ პროგრამისტებს რომლებიც Windows სისტემისათვის შექმნიან თავიანთ პროგრამულ პროდუქტს საშუალება ექნებათ გამოიყენონ, ავტომატურად მიაბან ჩვენი ძალიასხმევით შექმნილი ავტომატური თარგმნის პროგრამა."];
+//var projectDates = [];
+var projectRatings = [10,10];
+//var projectComments = [];
+
+
+//if no projects
+if(projectNames.length<1)
+{
+	$("section.pprojects").remove();
+}
+
+
+else {
+
+	for(var i = 0; i < projectNames.length; i++)
+{
+    var projectHtml = '<div class="projects"><h3><b>'+ projectNames[i] +'</b></h3><p class="pro1 col-12">'+
+    projectDescriptions[i] +'</p><p class="pro2 col-5">დამკვეთი: <span>'+projectCustomers[i] +'</span></p><p class="pro2">პროექტის შეფასება: <span>'+ projectRatings[i]+'</span>/10</p></div>';
+
+	$(".allProjects").append(projectHtml);
+};
+
+}
+
+
+});
+
+</script>
