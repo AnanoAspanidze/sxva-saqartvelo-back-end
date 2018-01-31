@@ -147,7 +147,7 @@ body{background-image:none;}
     margin: 0;
 }
 #hero-section {
-    background-image: url(../../img/sublime.png);
+    background-image: url(/img/sublime.png);
     height: 34vh;
     top: 0;
     background-position-y: inherit;

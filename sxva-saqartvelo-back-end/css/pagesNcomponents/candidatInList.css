@@ -117,12 +117,12 @@
     transform: none !important;
 }
 .checkbox{
-    background-image: url('../../img/checkbox-before.svg');
+    background-image: url('/img/checkbox-before.svg');
     width: 100%;
     height: 100%;
 }
 .checked-box{
-    background-image: url('../../img/checked-box.svg');
+    background-image: url('/img/checked-box.svg');
     width: 100%;
     height: 100%;
 }

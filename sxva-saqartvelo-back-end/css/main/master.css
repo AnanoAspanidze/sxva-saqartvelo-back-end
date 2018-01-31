@@ -12,7 +12,7 @@ header{
   margin-top: auto;
   position: absolute;
   left: 4.357%; top: 19%;
-  background-image: url('../../img/logo.svg');
+  background-image: url('/img/logo.svg');
   background-size: auto 100%;
   background-repeat: no-repeat;
 }
@@ -86,7 +86,7 @@ header{
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url('../../img/hero.jpg');
+  background-image: url('/img/hero.jpg');
   background-repeat: no-repeat;
   height: 42vh;
   background-position: center;
