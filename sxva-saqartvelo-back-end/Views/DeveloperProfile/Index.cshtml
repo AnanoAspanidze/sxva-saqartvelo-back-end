@@ -80,10 +80,14 @@
     </div>
 </section>
 
+<script src="~/Scripts/JS/printCandidats.js"></script>
+
 
 
 <script>
-
+    $(document).ready(function () {
+        $('#footer').hide();
+    });
 $(function(){
      // printCandidats ფაილში რომ მასივებია, იქ რომელ ინდექსზე დგას ეს დეველოპერი
      var personIndex = 0;
@@ -138,5 +142,5 @@ else {
 
 
 });
-
 </script>
+
