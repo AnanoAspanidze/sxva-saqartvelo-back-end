@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OtherGeorgiaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Issues" Relationship="Self.FK_Issue_Admin" FromRole="Admin" ToRole="Issue" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Logo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Rating" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Projects" Relationship="Self.FK_Project_Company" FromRole="Company" ToRole="Project" />
+  </EntityType>
+  <EntityType Name="ContactForm">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="Binary" MaxLength="50" FixedLength="false" Nullable="false" />
+    <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Freelancer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Field" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Rating" Type="Int32" Nullable="false" />
+    <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Bio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Freelancer_Skill" Relationship="Self.FK_Freelancer_Skill_Freelancer" FromRole="Freelancer" ToRole="Freelancer_Skill" />
+    <NavigationProperty Name="Projects" Relationship="Self.FK_Project_Freelancer" FromRole="Freelancer" ToRole="Project" />
+  </EntityType>
+  <EntityType Name="Freelancer_Skill">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SkillID" Type="Int32" Nullable="false" />
+    <Property Name="FreelancerID" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Freelancer" Relationship="Self.FK_Freelancer_Skill_Freelancer" FromRole="Freelancer_Skill" ToRole="Freelancer" />
+    <NavigationProperty Name="Skill" Relationship="Self.FK_Freelancer_Skill_Skill" FromRole="Freelancer_Skill" ToRole="Skill" />
+  </EntityType>
+  <EntityType Name="Issue">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Body" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AdminID" Type="Int32" Nullable="false" />
+    <Property Name="isCompleted" Type="Boolean" Nullable="false" />
+    <Property Name="ProjectID" Type="Int32" Nullable="false" />
+    <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Admin" Relationship="Self.FK_Issue_Admin" FromRole="Issue" ToRole="Admin" />
+    <NavigationProperty Name="Project" Relationship="Self.FK_Issue_Project" FromRole="Issue" ToRole="Project" />
+    <NavigationProperty Name="Issue_Status" Relationship="Self.FK_Issue_Status_Issue" FromRole="Issue" ToRole="Issue_Status" />
+  </EntityType>
+  <EntityType Name="Issue_Status">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IssueID" Type="Int32" Nullable="false" />
+    <Property Name="StatusID" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Issue" Relationship="Self.FK_Issue_Status_Issue" FromRole="Issue_Status" ToRole="Issue" />
+    <NavigationProperty Name="Status" Relationship="Self.FK_Issue_Status_Status" FromRole="Issue_Status" ToRole="Status" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CompanyID" Type="Int32" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="FreelancerID" Type="Int32" />
+    <Property Name="FreelancerRating" Type="Int32" />
+    <Property Name="CompanyRating" Type="Int32" />
+    <Property Name="FreelancerEvaluation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CompanyEvaluation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Progress" Type="Int32" />
+    <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Company" Relationship="Self.FK_Project_Company" FromRole="Project" ToRole="Company" />
+    <NavigationProperty Name="Freelancer" Relationship="Self.FK_Project_Freelancer" FromRole="Project" ToRole="Freelancer" />
+    <NavigationProperty Name="Issues" Relationship="Self.FK_Issue_Project" FromRole="Project" ToRole="Issue" />
+    <NavigationProperty Name="Project_Status" Relationship="Self.FK_Project_Status_Project" FromRole="Project" ToRole="Project_Status" />
+  </EntityType>
+  <EntityType Name="Project_Status">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StatusID" Type="Int32" Nullable="false" />
+    <Property Name="ProjectID" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Project" Relationship="Self.FK_Project_Status_Project" FromRole="Project_Status" ToRole="Project" />
+    <NavigationProperty Name="Status" Relationship="Self.FK_Project_Status_Status" FromRole="Project_Status" ToRole="Status" />
+  </EntityType>
+  <EntityType Name="Skill">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Freelancer_Skill" Relationship="Self.FK_Freelancer_Skill_Skill" FromRole="Skill" ToRole="Freelancer_Skill" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Issue_Status" Relationship="Self.FK_Issue_Status_Status" FromRole="Status" ToRole="Issue_Status" />
+    <NavigationProperty Name="Project_Status" Relationship="Self.FK_Project_Status_Status" FromRole="Status" ToRole="Project_Status" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Issue_Admin">
+    <End Role="Admin" Type="Self.Admin" Multiplicity="1" />
+    <End Role="Issue" Type="Self.Issue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Issue">
+        <PropertyRef Name="AdminID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Project_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="1" />
+    <End Role="Project" Type="Self.Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Freelancer_Skill_Freelancer">
+    <End Role="Freelancer" Type="Self.Freelancer" Multiplicity="1" />
+    <End Role="Freelancer_Skill" Type="Self.Freelancer_Skill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Freelancer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Freelancer_Skill">
+        <PropertyRef Name="FreelancerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Project_Freelancer">
+    <End Role="Freelancer" Type="Self.Freelancer" Multiplicity="0..1" />
+    <End Role="Project" Type="Self.Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Freelancer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="FreelancerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Freelancer_Skill_Skill">
+    <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+    <End Role="Freelancer_Skill" Type="Self.Freelancer_Skill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Skill">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Freelancer_Skill">
+        <PropertyRef Name="SkillID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Issue_Project">
+    <End Role="Project" Type="Self.Project" Multiplicity="1" />
+    <End Role="Issue" Type="Self.Issue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Issue">
+        <PropertyRef Name="ProjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Issue_Status_Issue">
+    <End Role="Issue" Type="Self.Issue" Multiplicity="1" />
+    <End Role="Issue_Status" Type="Self.Issue_Status" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Issue">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Issue_Status">
+        <PropertyRef Name="IssueID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Issue_Status_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="1" />
+    <End Role="Issue_Status" Type="Self.Issue_Status" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Issue_Status">
+        <PropertyRef Name="StatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Project_Status_Project">
+    <End Role="Project" Type="Self.Project" Multiplicity="1" />
+    <End Role="Project_Status" Type="Self.Project_Status" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Project_Status">
+        <PropertyRef Name="ProjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Project_Status_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="1" />
+    <End Role="Project_Status" Type="Self.Project_Status" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Project_Status">
+        <PropertyRef Name="StatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OtherGeorgiaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admins" EntityType="Self.Admin" />
+    <EntitySet Name="Companies" EntityType="Self.Company" />
+    <EntitySet Name="ContactForms" EntityType="Self.ContactForm" />
+    <EntitySet Name="Freelancers" EntityType="Self.Freelancer" />
+    <EntitySet Name="Freelancer_Skill" EntityType="Self.Freelancer_Skill" />
+    <EntitySet Name="Issues" EntityType="Self.Issue" />
+    <EntitySet Name="Issue_Status" EntityType="Self.Issue_Status" />
+    <EntitySet Name="Projects" EntityType="Self.Project" />
+    <EntitySet Name="Project_Status" EntityType="Self.Project_Status" />
+    <EntitySet Name="Skills" EntityType="Self.Skill" />
+    <EntitySet Name="Status" EntityType="Self.Status" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_Issue_Admin" Association="Self.FK_Issue_Admin">
+      <End Role="Admin" EntitySet="Admins" />
+      <End Role="Issue" EntitySet="Issues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Project_Company" Association="Self.FK_Project_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Project" EntitySet="Projects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Freelancer_Skill_Freelancer" Association="Self.FK_Freelancer_Skill_Freelancer">
+      <End Role="Freelancer" EntitySet="Freelancers" />
+      <End Role="Freelancer_Skill" EntitySet="Freelancer_Skill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Project_Freelancer" Association="Self.FK_Project_Freelancer">
+      <End Role="Freelancer" EntitySet="Freelancers" />
+      <End Role="Project" EntitySet="Projects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Freelancer_Skill_Skill" Association="Self.FK_Freelancer_Skill_Skill">
+      <End Role="Skill" EntitySet="Skills" />
+      <End Role="Freelancer_Skill" EntitySet="Freelancer_Skill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Issue_Project" Association="Self.FK_Issue_Project">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="Issue" EntitySet="Issues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Issue_Status_Issue" Association="Self.FK_Issue_Status_Issue">
+      <End Role="Issue" EntitySet="Issues" />
+      <End Role="Issue_Status" EntitySet="Issue_Status" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Issue_Status_Status" Association="Self.FK_Issue_Status_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Issue_Status" EntitySet="Issue_Status" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Project_Status_Project" Association="Self.FK_Project_Status_Project">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="Project_Status" EntitySet="Project_Status" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Project_Status_Status" Association="Self.FK_Project_Status_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Project_Status" EntitySet="Project_Status" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

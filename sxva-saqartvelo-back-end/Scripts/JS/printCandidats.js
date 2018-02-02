@@ -44,7 +44,7 @@ candidateSkills.forEach(function(skill){
 	candidateSkillsHtml+=`<li><a href="#">` + skill +`</a></li>`;
 });
     candidateSkillsHtml+=`</ul>`;
-    let candidatHTML = `<div><div class='hover'><a href="/DeveloperProfile/Index/`+ names[i]+`-`+ surnames[i]+ `" class="image-a" style="background-image: url(/img/pp/`+ photos[i] + `);"><img class="img-thumbnail img-candidat" src="/img/pp/` + photos[i] +`" alt="profile picture"></a></div><div class="candidat-text-content"><a href="profile-`+ names[i]+`-`+ surnames[i]+ `.html"><h3 class="candidat-name-fn">` + names[i] + ` ` + surnames[i] + `</h3></a>` +candidateSkillsHtml+ `<ul class="candidat-statistics-fn candidat-statistics"><li>განხორციელებული პროექტები: <a href="#">` + projectQuantities[i] +`</a></li><li>რეიტინგი: `+ratings[i]+` / 10</li></ul></div></div>`;    
+    let candidatHTML = `<div><div class='hover'><a href="/Freelancer/Details/`+ names[i]+`-`+ surnames[i]+ `" class="image-a" style="background-image: url(/img/pp/`+ photos[i] + `);"><img class="img-thumbnail img-candidat" src="/img/pp/` + photos[i] +`" alt="profile picture"></a></div><div class="candidat-text-content"><a href="profile-`+ names[i]+`-`+ surnames[i]+ `.html"><h3 class="candidat-name-fn">` + names[i] + ` ` + surnames[i] + `</h3></a>` +candidateSkillsHtml+ `<ul class="candidat-statistics-fn candidat-statistics"><li>განხორციელებული პროექტები: <a href="#">` + projectQuantities[i] +`</a></li><li>რეიტინგი: `+ratings[i]+` / 10</li></ul></div></div>`;    
     e.innerHTML = candidatHTML;
     i++;
 });

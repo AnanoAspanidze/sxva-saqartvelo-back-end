@@ -250,8 +250,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\DeveloperProfileController.cs" />
-    <Compile Include="Controllers\DevelopersController.cs" />
+    <Compile Include="Controllers\FreelancerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\AdminFilter.cs" />
     <Compile Include="Filters\LoginFilter.cs" />
@@ -324,10 +323,10 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Developers\Index.cshtml" />
-    <Content Include="Views\DeveloperProfile\Index.cshtml" />
+    <Content Include="Views\Freelancer\Index.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Freelancer\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
