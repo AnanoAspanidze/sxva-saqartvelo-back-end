@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="51036908ccc6451e8e6d2790edb0f9ae" Name="Diagram1">
+        <EntityTypeShape EntityType="OtherGeorgiaModel.Admin" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OtherGeorgiaModel.Company" Width="1.5" PointX="3.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OtherGeorgiaModel.ContactForm" Width="1.5" PointX="2.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OtherGeorgiaModel.Freelancer" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OtherGeorgiaModel.Freelancer_Skill" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OtherGeorgiaModel.Issue" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OtherGeorgiaModel.Issue_Status" Width="1.5" PointX="10.5" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OtherGeorgiaModel.Project" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OtherGeorgiaModel.Project_Status" Width="1.5" PointX="11.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OtherGeorgiaModel.Skill" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="OtherGeorgiaModel.Status" Width="1.5" PointX="8.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="OtherGeorgiaModel.sysdiagram" Width="1.5" PointX="4.75" PointY="9.875" IsExpanded="true" />
+        <AssociationConnector Association="OtherGeorgiaModel.FK_Issue_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="OtherGeorgiaModel.FK_Project_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="OtherGeorgiaModel.FK_Freelancer_Skill_Freelancer" ManuallyRouted="false" />
+        <AssociationConnector Association="OtherGeorgiaModel.FK_Project_Freelancer" ManuallyRouted="false" />
+        <AssociationConnector Association="OtherGeorgiaModel.FK_Freelancer_Skill_Skill" ManuallyRouted="false" />
+        <AssociationConnector Association="OtherGeorgiaModel.FK_Issue_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="OtherGeorgiaModel.FK_Issue_Status_Issue" ManuallyRouted="false" />
+        <AssociationConnector Association="OtherGeorgiaModel.FK_Issue_Status_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="OtherGeorgiaModel.FK_Project_Status_Project" ManuallyRouted="false" />
+        <AssociationConnector Association="OtherGeorgiaModel.FK_Project_Status_Status" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
