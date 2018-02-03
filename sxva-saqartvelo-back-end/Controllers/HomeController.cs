@@ -9,8 +9,6 @@ namespace sxva_saqartvelo_back_end.Controllers
 {
     public class HomeController : Controller
     {
-
-
         OtherGeorgiaEntities _db = new OtherGeorgiaEntities();
 
 

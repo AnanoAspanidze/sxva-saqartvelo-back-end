@@ -107,6 +107,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\InputErrorValidation.css" />
     <Content Include="Content\Site.css" />
     <Content Include="css\main\colorsNfonts.css" />
     <Content Include="css\main\components.css" />
@@ -222,6 +223,8 @@
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\JS\burger.js" />
     <Content Include="Scripts\JS\filter.js" />
     <Content Include="Scripts\JS\interaction.js" />
@@ -295,12 +298,14 @@
     <Compile Include="Models\Issue_Status.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Project.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Project_Status.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\Skill.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>

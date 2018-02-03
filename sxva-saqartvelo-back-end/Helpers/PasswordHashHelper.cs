@@ -8,7 +8,7 @@ namespace sxva_saqartvelo_back_end.Helpers
     public class PasswordHashHelper
     {
         //Password Hash
-        public string MD5Hash(string input)
+        public static string MD5Hash(string input)
         {
             byte[] data = System.Security.Cryptography.MD5.Create().ComputeHash(System.Text.Encoding.UTF8.GetBytes(input));
             string md5 = "";
