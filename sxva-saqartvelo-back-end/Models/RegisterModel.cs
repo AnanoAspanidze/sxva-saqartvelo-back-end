@@ -17,16 +17,16 @@ namespace sxva_saqartvelo_back_end.Models
         [Required(ErrorMessage = "გთხოვთ, ჩაწერეთ თქვენი პოზიცია")]
         public string Field { get; set; }  //Freelancer Position
 
-        
         [Required(ErrorMessage = "გთხოვთ, ჩაწერეთ თქვენი ბიოგრაფია")]
         public string Bio { get; set; }
 
+       
         [DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "გთხოვთ, ჩაწერეთ თქვენი ელ.ფოსტა")]
         [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
                             @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" +
                             @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$",
-                            ErrorMessage = "გთხოვთ, ჩაწეროთ სწორედ ელ.ფოსტის მისამართ")]
+                            ErrorMessage = "გთხოვთ ჩაწეროთ სწორედ ელ.ფოსტის მისამართ")]
         [StringLength(50, ErrorMessage = "ჩაწერილი ელ.ფოსტა არ უნდა აღემატებოდეს 50 სიმბოლოს")]
         public string Email { get; set; }
 
@@ -35,7 +35,7 @@ namespace sxva_saqartvelo_back_end.Models
         [Required(ErrorMessage = "გთხოვთ, ჩაწერეთ თქვენი პაროლი")]
         //[RegularExpression("^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}$",
         //    ErrorMessage = "გთხოვთ, ჩაწერეთ სწორედ პაროლი")]
-        [StringLength(50, MinimumLength = 6, ErrorMessage = "პაროლი უნდა შედგებოდეს მინიმუმ 6 სიმბოლოსგან")]
+        [StringLength(30, MinimumLength = 6, ErrorMessage = "პაროლი უნდა შედგებოდეს მინიმუმ 6 სიმბოლოსგან და მაქსიმუმ 30 სიმბოლოსგან")]
         public string Password { get; set; }
 
 

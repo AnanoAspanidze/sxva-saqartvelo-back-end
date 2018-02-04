@@ -1,4 +1,6 @@
-﻿<link href="~/css/pagesNcomponents/homepage.css" rel="stylesheet" />
+﻿@model sxva_saqartvelo_back_end.Models.LoginModel
+
+<link href="~/css/pagesNcomponents/homepage.css" rel="stylesheet" />
 <link href="~/css/profile/style.css" rel="stylesheet" />
 <section id="hero-section">
     <h1 class="nino-mtavruli color-while">ავტორიზაცია</h1>
@@ -6,17 +8,27 @@
 
 <section class="container-fluid">
     <div class="row col-9 cont">
-        <form class="cont1 container">
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "cont1 container" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
             <div class="cont2 col-12 col-sm-6 form-group">
-                <input type="email" class="form-control" placeholder="შეიყვანე ელ.ფოსტა">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "ელ.ფოსტა" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
             <div class="cont3 col-12 col-sm-6 form-group">
-                <input type="email" class="form-control" placeholder="შეიყვანე პაროლი">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "პაროლი" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+            <div class="cont3 col-12 col-sm-6 form-group">
+                <p style="color:red" class="LoginFailed">@ViewBag.message</p>
             </div>
             <div class="send container">
                 <button class="submit">შესვლა</button>
             </div>
-        </form>
+        }
     </div>
 </section>
 

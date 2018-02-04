@@ -22,5 +22,10 @@ namespace sxva_saqartvelo_back_end.Controllers
         {
             return View();
         }
+
+        public ActionResult FreelancerProfile()
+        {
+            return View();
+        }
     }
 }
