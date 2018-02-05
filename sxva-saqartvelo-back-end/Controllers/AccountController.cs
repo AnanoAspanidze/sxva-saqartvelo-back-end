@@ -34,22 +34,21 @@ namespace sxva_saqartvelo_back_end.Controllers
 
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel login)
         {
-            
-            //Freelancer freelancer = _db.Freelancers.FirstOrDefault(x => x.Email == login.Email && x.Password == PasswordHashHelper.MD5Hash(randomSecret + login.Password));
-            Freelancer flancer = _db.Freelancers.FirstOrDefault(x => x.Email == login.Email && x.Password == login.Password);
+            var hashedPassword = PasswordHashHelper.MD5Hash(randomSecret + login.Password);
 
+            Freelancer freelancer = _db.Freelancers.FirstOrDefault(x => x.Email == login.Email && x.Password == hashedPassword);
 
-            if (flancer == null)
+            if (freelancer == null)
             {
                 ViewBag.message = "მომხმარებლის სახელი ან პაროლი არასწორია";
                 return View();
             }
             else
             {
-                Session["freelancer"] = flancer;
+                Session["freelancer"] = freelancer;
                 return RedirectToAction("FreelancerProfile", "Freelancer");
             }
             
@@ -57,7 +56,8 @@ namespace sxva_saqartvelo_back_end.Controllers
 
         public ActionResult Logout()
         {
-            return View();
+            Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
 
 
@@ -118,49 +118,5 @@ namespace sxva_saqartvelo_back_end.Controllers
             return View();
 
         }
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Register(RegisterModel freelancer)
-        //{
-        //    Freelancer freelancerTbl = new Freelancer();
-
-        //    //Check Freelancer Is Registered Or Not
-        //    if (_db.Freelancers.Where(x => x.Email == freelancer.Email).Count() > 0)
-        //    {
-        //        ViewBag.RegistrationFailed = "ასეთი ელ.ფოსტით მომხმარებელი დარეგისტრირებულია";
-        //        return View();
-        //    }
-        //    else
-        //    {
-        //        try
-        //        {
-        //            //Add Freelancer To DB
-        //            if (ModelState.IsValid)
-        //            {
-        //                freelancerTbl.Name = freelancer.Name.Trim();
-        //                freelancerTbl.Surname = freelancer.Surname.Trim();
-        //                freelancerTbl.Field = freelancer.Field.Trim();
-        //                freelancerTbl.Bio = freelancer.Bio.Trim();
-        //                freelancerTbl.Email = freelancer.Email.Trim();
-        //                freelancerTbl.Password = PasswordHashHelper.MD5Hash(randomSecret + freelancer.Password.Trim());
-        //                freelancerTbl.Mobile = freelancer.Mobile.Trim();
-        //                freelancerTbl.Date = DateTime.Now;
-        //                _db.Freelancers.Add(freelancerTbl);
-        //                _db.SaveChanges();
-
-
-        //                ViewBag.RegistrationSuccess = "თქვენ წარმატებით დარეგისტრირდით, გთხოვთ გაიაროთ ავტორიზაცია";
-        //                return View();
-        //            }
-        //        }
-        //        catch (DataException)
-        //        {
-        //            ModelState.AddModelError("", "მონაცემების ჩაწერის დროს მოხდა შეცდომა");
-        //        }
-        //        return View(freelancer);
-        //    }
-
-        //}
     }
 }

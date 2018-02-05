@@ -1,7 +1,63 @@
-﻿
-@{
-    ViewBag.Title = "FreelancerProfile";
+﻿@model sxva_saqartvelo_back_end.Models.Freelancer
+
+@using sxva_saqartvelo_back_end.Models;
+@using sxva_saqartvelo_back_end.Helpers;
+
+@{ 
+    Freelancer freelancer = (Freelancer)Session["freelancer"];
 }
 
-<h2>FreelancerProfile</h2>
+@if (Session["freelancer"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            $('#header-nav').hide(); //დალოგინების დროს header-nav ავტორიზაცია, რეგისტრაციის დამალვა
+        });
+    </script>
+}
+
+@if(freelancer != null)
+{
+    
+    <div style="padding-top:200px; text-align:center" class="freelancer">
+        <p>გამარჯობა</p> @freelancer.Name @freelancer.Surname 
+    </div>
+    <div style="text-align:center; padding:10px" class="logOut">
+        <a href="/Account/Logout" class="logOut">გამოსვლა</a>
+    </div>
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $('#footer').hide();
+    });
+</script>
 

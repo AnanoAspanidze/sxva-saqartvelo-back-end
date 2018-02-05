@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using sxva_saqartvelo_back_end.Models;
+using sxva_saqartvelo_back_end.Filters;
 
 namespace sxva_saqartvelo_back_end.Controllers
 {
@@ -23,6 +24,7 @@ namespace sxva_saqartvelo_back_end.Controllers
             return View();
         }
 
+        [LoginFilter]
         public ActionResult FreelancerProfile()
         {
             return View();

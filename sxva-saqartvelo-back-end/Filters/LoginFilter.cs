@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using sxva_saqartvelo_back_end.Models;
 
 namespace sxva_saqartvelo_back_end.Filters
 {
@@ -12,16 +13,16 @@ namespace sxva_saqartvelo_back_end.Filters
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
 
-            //var user = (Freelancer)filterContext.HttpContext.Session["user"];
+            var freelancer = (Freelancer)filterContext.HttpContext.Session["freelancer"];
 
-            //if(user == null)
-            //{
-            //    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary
-            //    {
-            //        { "controller", "Account" },
-            //        { "action", "Login"}
-            //    });
-            //}
+            if (freelancer == null)
+            {
+                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary
+                {
+                    { "controller", "Account" },
+                    { "action", "Login"}
+                });
+            }
             base.OnActionExecuting(filterContext);
         }
     }
