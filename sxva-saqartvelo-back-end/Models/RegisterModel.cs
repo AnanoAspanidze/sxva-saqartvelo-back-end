@@ -40,10 +40,10 @@ namespace sxva_saqartvelo_back_end.Models
 
 
         [Compare("Password", ErrorMessage = "პაროლები არ ემთხვევა")]
-        [DataType(DataType.Password)]    
-    //    [RegularExpression("^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}$",
-    //ErrorMessage = "გთხოვთ, ჩაწერეთ სწორედ პაროლი")]
-        [StringLength(50, MinimumLength = 6, ErrorMessage = "პაროლი უნდა შედგებოდეს მინიმუმ 6 სიმბოლოსგან")]
+        [DataType(DataType.Password)]
+        //    [RegularExpression("^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8}$",
+        //ErrorMessage = "გთხოვთ, ჩაწერეთ სწორედ პაროლი")]
+        [StringLength(30, MinimumLength = 6, ErrorMessage = "პაროლი უნდა შედგებოდეს მინიმუმ 6 სიმბოლოსგან და მაქსიმუმ 30 სიმბოლოსგან")]
         [Required(ErrorMessage = "გთხოვთ, გაიმეორეთ თქვენი პაროლი")]
         public string RepeatPassword { get; set; }
 

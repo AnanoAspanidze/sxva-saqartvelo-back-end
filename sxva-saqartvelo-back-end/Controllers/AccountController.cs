@@ -15,21 +15,30 @@ namespace sxva_saqartvelo_back_end.Controllers
     {
         //Random 32 Bit Hash String
         //პაროლის დასაჰეშად
-        string randomSecret = "4afd759a8e1df217901aaeecd1ea9949";
+        string randomSecret = "4b47a904bc5e81234a754f552355bf44";
 
         OtherGeorgiaEntities _db = new OtherGeorgiaEntities();
 
         public ActionResult Login()
         {
-            //User Session
-            var currentFreelancer = LoginHelper.currentFreelancer();
+            ////User Session
+            //var currentFreelancer = LoginHelper.currentFreelancer();
 
-            //დალოგინებული იუზერი თუ ეცდება Login პეიჯზე გადასვლას დააბრუნოს იუზერი /Freelancer/FreelancerProfile-ზე
-            if(currentFreelancer != null)
+            ////დალოგინებული იუზერი თუ ეცდება Login პეიჯზე გადასვლას დააბრუნოს იუზერი /Freelancer/FreelancerProfile-ზე
+            //if(currentFreelancer != null)
+            //{
+            //    return RedirectToAction("FreelancerProfile", "Freelancer");
+            //}
+            //return View();
+
+            if(Session["freelancer"] != null)
             {
                 return RedirectToAction("FreelancerProfile", "Freelancer");
             }
+
             return View();
+
+
         }
 
 
@@ -63,6 +72,12 @@ namespace sxva_saqartvelo_back_end.Controllers
 
         public ActionResult Register()
         {
+            //დალოგინებული იუზერი თუ ეცდება Login პეიჯზე გადასვლას დააბრუნოს იუზერი /Freelancer/FreelancerProfile-ზე
+            if (Session["freelancer"] != null)
+            {
+                return RedirectToAction("FreelancerProfile", "Freelancer");
+            }
+
             return View();
         }
 
