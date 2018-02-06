@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using sxva_saqartvelo_back_end.Models;
 using sxva_saqartvelo_back_end.Helpers;
+using sxva_saqartvelo_back_end.Filters;
 using System.Data;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
@@ -19,6 +20,7 @@ namespace sxva_saqartvelo_back_end.Controllers
 
         OtherGeorgiaEntities _db = new OtherGeorgiaEntities();
 
+        [LoginFilterForLoggedInUser]
         public ActionResult Login()
         {
             ////User Session
@@ -31,14 +33,23 @@ namespace sxva_saqartvelo_back_end.Controllers
             //}
             //return View();
 
-            if(Session["freelancer"] != null)
-            {
-                return RedirectToAction("FreelancerProfile", "Freelancer");
-            }
+            //if (Session["freelancer"] != null)
+            //{
+            //    return RedirectToAction("FreelancerProfile", "Freelancer");
+            //}
+
+            //return View();
+
+            //var currentFreelancer = LoginHelper.currentFreelancer();
+
+            //if (currentFreelancer != null)
+            //{
+            //    return RedirectToAction("FreelancerProfile", "Freelancer");
+            //}
+
+            //return View();
 
             return View();
-
-
         }
 
 
@@ -47,6 +58,8 @@ namespace sxva_saqartvelo_back_end.Controllers
         public ActionResult Login(LoginModel login)
         {
             var hashedPassword = PasswordHashHelper.MD5Hash(randomSecret + login.Password);
+
+            //var currentFreelancer = LoginHelper.currentFreelancer();
 
             Freelancer freelancer = _db.Freelancers.FirstOrDefault(x => x.Email == login.Email && x.Password == hashedPassword);
 
@@ -70,14 +83,14 @@ namespace sxva_saqartvelo_back_end.Controllers
         }
 
 
+        [LoginFilterForLoggedInUser]
         public ActionResult Register()
         {
             //დალოგინებული იუზერი თუ ეცდება Login პეიჯზე გადასვლას დააბრუნოს იუზერი /Freelancer/FreelancerProfile-ზე
-            if (Session["freelancer"] != null)
-            {
-                return RedirectToAction("FreelancerProfile", "Freelancer");
-            }
-
+            //if (Session["freelancer"] != null)
+            //{
+            //    return RedirectToAction("FreelancerProfile", "Freelancer");
+            //}
             return View();
         }
 
