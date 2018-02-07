@@ -9,45 +9,29 @@ using sxva_saqartvelo_back_end.Filters;
 using System.Data;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
+using System.Web.Routing;
 
 namespace sxva_saqartvelo_back_end.Controllers
 {
     public class AccountController : Controller
     {
         //Random 32 Bit Hash String
-        //პაროლის დასაჰეშად
-        string randomSecret = "4b47a904bc5e81234a754f552355bf44";
+        string randomSecret = "4b47a904bc5e81234a754f552355bf44"; //პაროლის დასაჰეშად
 
         OtherGeorgiaEntities _db = new OtherGeorgiaEntities();
 
-        [LoginFilterForLoggedInUser]
+
+        //[LoginFilterForLoggedInUser]
         public ActionResult Login()
         {
-            ////User Session
-            //var currentFreelancer = LoginHelper.currentFreelancer();
+            //freelancer session
+            var freelancer = LoginHelper.freelancer();
 
-            ////დალოგინებული იუზერი თუ ეცდება Login პეიჯზე გადასვლას დააბრუნოს იუზერი /Freelancer/FreelancerProfile-ზე
-            //if(currentFreelancer != null)
-            //{
-            //    return RedirectToAction("FreelancerProfile", "Freelancer");
-            //}
-            //return View();
 
-            //if (Session["freelancer"] != null)
-            //{
-            //    return RedirectToAction("FreelancerProfile", "Freelancer");
-            //}
-
-            //return View();
-
-            //var currentFreelancer = LoginHelper.currentFreelancer();
-
-            //if (currentFreelancer != null)
-            //{
-            //    return RedirectToAction("FreelancerProfile", "Freelancer");
-            //}
-
-            //return View();
+            if (freelancer != null)
+            {
+                return RedirectToAction("FreelancerProfile", "Freelancer");
+            }
 
             return View();
         }
@@ -59,10 +43,8 @@ namespace sxva_saqartvelo_back_end.Controllers
         {
             var hashedPassword = PasswordHashHelper.MD5Hash(randomSecret + login.Password);
 
-            //var currentFreelancer = LoginHelper.currentFreelancer();
-
             Freelancer freelancer = _db.Freelancers.FirstOrDefault(x => x.Email == login.Email && x.Password == hashedPassword);
-
+            
             if (freelancer == null)
             {
                 ViewBag.message = "მომხმარებლის სახელი ან პაროლი არასწორია";
@@ -71,6 +53,7 @@ namespace sxva_saqartvelo_back_end.Controllers
             else
             {
                 Session["freelancer"] = freelancer;
+
                 return RedirectToAction("FreelancerProfile", "Freelancer");
             }
             
@@ -83,14 +66,16 @@ namespace sxva_saqartvelo_back_end.Controllers
         }
 
 
-        [LoginFilterForLoggedInUser]
+        //[LoginFilterForLoggedInUser]
         public ActionResult Register()
         {
-            //დალოგინებული იუზერი თუ ეცდება Login პეიჯზე გადასვლას დააბრუნოს იუზერი /Freelancer/FreelancerProfile-ზე
-            //if (Session["freelancer"] != null)
-            //{
-            //    return RedirectToAction("FreelancerProfile", "Freelancer");
-            //}
+            var freelancer = LoginHelper.freelancer();
+
+            if (freelancer != null)
+            {
+                return RedirectToAction("FreelancerProfile", "Freelancer");
+            }
+
             return View();
         }
 
@@ -104,7 +89,7 @@ namespace sxva_saqartvelo_back_end.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    //Check Freelancer Is Registered Or Not
+                    //Check Freelancer Is Exist Or Not
                     if (_db.Freelancers.Where(x => x.Email == freelancer.Email).Count() > 0)
                     {
                         ViewBag.RegistrationFailed = "ასეთი ელ.ფოსტით მომხმარებელი დარეგისტრირებულია";

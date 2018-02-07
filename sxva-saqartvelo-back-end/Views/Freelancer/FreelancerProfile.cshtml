@@ -4,10 +4,11 @@
 @using sxva_saqartvelo_back_end.Helpers;
 
 @{ 
-    Freelancer freelancer = (Freelancer)Session["freelancer"];
+    //Freelancer freelancer = (Freelancer)Session["freelancer"];
+    var freelancer = LoginHelper.freelancer();
 }
 
-@if (Session["freelancer"] != null)
+@if (freelancer != null)
 {
     <script>
         $(document).ready(function () {
