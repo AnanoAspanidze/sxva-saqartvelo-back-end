@@ -61,7 +61,7 @@ namespace sxva_saqartvelo_back_end.Controllers
 
         public ActionResult Logout()
         {
-            Session.Clear();
+            LoginHelper.Logout();
             return RedirectToAction("Index", "Home");
         }
 
