@@ -11,6 +11,7 @@ namespace sxva_saqartvelo_back_end.Models
 
         [DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "გთხოვთ, ჩაწერეთ თქვენი ელ.ფოსტა")]
+        [EmailAddress(ErrorMessage = "ელ.ფოსტის ფორმატი არასწორია")]
         public string Email { get; set; }
 
 

@@ -83,7 +83,7 @@ namespace sxva_saqartvelo_back_end.Controllers
         //Register Freelancer
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register([Bind(Include = "Name, Surname, Field, Bio, Email, Password, RepeatPassword, Mobile")]RegisterModel freelancer)    
+        public ActionResult Register([Bind(Include = "Name, Surname, Field, Email, Password, RepeatPassword, Mobile")]RegisterModel freelancer)    
         {
             try
             {
@@ -102,7 +102,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                         freelancerTbl.Name = freelancer.Name.Trim();
                         freelancerTbl.Surname = freelancer.Surname.Trim();
                         freelancerTbl.Field = freelancer.Field.Trim();
-                        freelancerTbl.Bio = freelancer.Bio.Trim();
+                        freelancerTbl.Bio = "Freelancer Bio";
                         freelancerTbl.Email = freelancer.Email.Trim();
                         freelancerTbl.Password = PasswordHashHelper.MD5Hash(randomSecret + freelancer.Password.Trim());
                         freelancerTbl.Mobile = freelancer.Mobile.Trim();
