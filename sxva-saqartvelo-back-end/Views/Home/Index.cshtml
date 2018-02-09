@@ -1,4 +1,6 @@
-﻿<link href="~/css/pagesNcomponents/homepage.css" rel="stylesheet" />
+﻿@model IEnumerable<sxva_saqartvelo_back_end.Models.Freelancer>
+
+<link href="~/css/pagesNcomponents/homepage.css" rel="stylesheet" />
 <link href="~/css/mystyle.css" rel="stylesheet" />
 <section id="hero-section">
     <button class="hvr-back-pulse hvr-icon-forward btn-font hero-btn" onclick="window.location='/Freelancer/Index';"> ყველა დეველოპერი</button>
@@ -8,24 +10,32 @@
 
     <div class="row">
 
-        <div class="candidat col-xl-3 col-md-4 col-sm-6 text-center"></div>
-
-        <div class="candidat col-xl-3 col-md-4 col-sm-6 text-center"></div>
-
-        <div class="candidat col-xl-3 col-md-4 col-sm-6 text-center"></div>
-
-        <div class="candidat col-xl-3 col-md-4 col-sm-6 text-center"></div>
-
-
-
-        <div class="candidat col-xl-3 col-md-4 col-sm-6 text-center"></div>
-
-        <div class="candidat col-xl-3 col-md-4 col-sm-6 text-center"></div>
-
-        <div class="candidat col-xl-3 col-md-4 col-sm-6 text-center"></div>
-
-        <div class="candidat col-xl-3 col-md-4 col-sm-6 text-center"></div>
-
+        @foreach (var item in Model)
+        {
+            <div class="candidat col-xl-3 col-md-4 col-sm-6 text-center">
+                <div>
+                    <div class='hover'>
+                        <a href="/Freelancer/Details/" class="image-a" style="background-image: url();"><img class="img-thumbnail img-candidat" src="" alt="profile picture"></a>
+                    </div>
+                    <div class="candidat-text-content">
+                        <a href=""><h3 class="candidat-name-fn">@item.Name @item.Surname</h3></a>
+                        <ul class="candidat-skils-fn">
+                            @{ 
+                                var skills = item.Freelancer_Skill.ToList();
+                            }
+                            @foreach (var i in skills)
+                            {
+                                <li><a href="#">@i.Skill.Name</a></li>
+                            }
+                        </ul>
+                        <ul class="candidat-statistics-fn candidat-statistics">
+                            <li>განხორციელებული პროექტები: <a href="#">3</a></li>
+                            <li>რეიტინგი: 10 / 10</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 
 

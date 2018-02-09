@@ -94,7 +94,7 @@ button{
   border: 2px solid #fad72c;
 }
   
-.form-control{
+.searchInput{
   display: inline;
   width: 79%;
   height: 45px;
@@ -102,6 +102,13 @@ button{
   border: 2px solid #fad72c;
   border-right: 0px;
   background-color: #1caee5;
+  padding: .5rem .75rem;
+  font-size: 1rem;
+  line-height: 1.25;
+  color: #495057;
+  background-image: none;
+  background-clip: padding-box;
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
 .search-button{
   width: 4%;
@@ -111,6 +118,7 @@ button{
   border-left: 0px;
   height: 45px;
   margin-left: -0.5%;
+  padding: 1px;
 }
 .search-button img{
   height: 20px !important;
@@ -121,18 +129,18 @@ button{
 }
 
 .candidat  .hover:hover{
-  background-color: #e7e010;
+  background-color: #e7e01073;
 }
 .candidat  .hover{
       width: 16vmax;
       margin-left: 0px;
       margin-right: 0px;
-    height: 16vmax;
-    min-width: 158px;
-    min-height: 158px;
-    display: inline-block;
-    background: transparent;
-    border: 2px solid #e7e010;
-    border-radius: 400px;
-    position: relative;
+      height: 16vmax;
+      min-width: 158px;
+      min-height: 158px;
+      display: inline-block;
+      background: transparent;
+      border: 2px solid #e7e01073;
+      border-radius: 400px;
+      position: relative;
 }

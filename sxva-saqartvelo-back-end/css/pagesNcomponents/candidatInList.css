@@ -10,7 +10,7 @@
      margin-left: 15px;
      margin-right: 15px;
     background: linear-gradient(to top, #1dade4 65%, rgba(255, 255, 255, 0) 35%);
-
+    padding-bottom: 10px;
 }
 .candidat-skils-fn{
     margin-left: 15px;
@@ -18,6 +18,7 @@
 }
 .candidat h3{
     padding-top: 10px;
+    margin-bottom: 10px;
 }
 .candidat li{
     display: inline-block;

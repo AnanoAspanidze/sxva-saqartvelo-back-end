@@ -112,8 +112,12 @@ footer.main-blue{
 @media only screen and (max-width: 989px){
   .candidat-skils-fn {
     min-height: 81px !important;
-}
 
+}
+.middle h1{
+        text-align: left;
+        font-size: 30px;
+    }
 }
 @media only screen and (max-width: 551px){
   .candidat-skils-fn {

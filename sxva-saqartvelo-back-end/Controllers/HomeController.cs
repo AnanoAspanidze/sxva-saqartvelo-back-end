@@ -14,7 +14,8 @@ namespace sxva_saqartvelo_back_end.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var freelancers = _db.Freelancers.ToList();
+            return View(freelancers);
         }
 
         public ActionResult About()
