@@ -1,5 +1,8 @@
-﻿@model IEnumerable<sxva_saqartvelo_back_end.Models.Freelancer>
+﻿@*@model IEnumerable<sxva_saqartvelo_back_end.Models.Freelancer>*@
+@model PagedList.IPagedList<sxva_saqartvelo_back_end.Models.Freelancer>
+@using PagedList.Mvc;
 
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 <link href="~/css/pagesNcomponents/homepage.css" rel="stylesheet" />
 <link href="~/css/mystyle.css" rel="stylesheet" />
 <section id="hero-section">
@@ -14,8 +17,10 @@
         {
             <div class="candidat col-xl-3 col-md-4 col-sm-6 text-center">
                 <div>
-                    <div class='hover'>
-                        <a href="/Freelancer/Details/" class="image-a" style="background-image: url();"><img class="img-thumbnail img-candidat" src="" alt="profile picture"></a>
+                    <div class="hover">
+                        <a href="" class="image-a" style="background-image: url(/img/pp/default-freelancer-pic.png);">
+                            <img class="img-thumbnail img-candidat" src="~/img/pp/default-freelancer-pic.png" alt="profile picture">
+                        </a>
                     </div>
                     <div class="candidat-text-content">
                         <a href=""><h3 class="candidat-name-fn">@item.Name @item.Surname</h3></a>
@@ -41,14 +46,8 @@
 
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
-            <li class="page-item"><a class="page-link" href="#"><span>&laquo;</span> წინა</a></li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">...</a></li>
-            <li class="page-item"><a class="page-link" href="#">47</a></li>
-            <li class="page-item"><a class="page-link" href="#">48</a></li>
-            <li class="page-item"><a class="page-link" href="#">შემდეგი <span>&raquo;</span></a></li>
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            @*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount*@
         </ul>
     </nav>
 </section>
@@ -56,3 +55,4 @@
 
 <script src="~/Scripts/JS/printCandidats.js"></script>
 <script src="~/Scripts/JS/interaction.js"></script>
+

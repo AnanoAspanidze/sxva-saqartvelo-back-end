@@ -58,6 +58,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -109,6 +117,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\InputErrorValidation.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
     <Content Include="css\main\colorsNfonts.css" />
     <Content Include="css\main\components.css" />
@@ -146,9 +155,9 @@
     <Content Include="img\pp\c2.jpg" />
     <Content Include="img\pp\c3.jpg" />
     <Content Include="img\pp\c4.jpg" />
+    <Content Include="img\pp\default-freelancer-pic.png" />
     <Content Include="img\pp\giga-lafanashvili.jpg" />
     <Content Include="img\pp\giorgi-qochiashvili.jpg" />
-    <Content Include="img\pp\nika-akhalaia.png" />
     <Content Include="img\pp\tsotne-guchua.jpg" />
     <Content Include="img\pp\tsotne-gvajaia.jpg" />
     <Content Include="img\pp\zviad-tchanturia.jpg" />

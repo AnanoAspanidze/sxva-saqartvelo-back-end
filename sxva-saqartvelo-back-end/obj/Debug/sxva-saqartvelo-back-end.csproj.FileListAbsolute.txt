@@ -216,3 +216,7 @@ C:\Users\Anano-PC\Documents\GitHub\sxva-saqartvelo-back-end\sxva-saqartvelo-back
 C:\Users\Anano-PC\Documents\GitHub\sxva-saqartvelo-back-end\sxva-saqartvelo-back-end\obj\Debug\sxva-saqartvelo-back-end.csprojResolveAssemblyReference.cache
 C:\Users\Anano-PC\Documents\GitHub\sxva-saqartvelo-back-end\sxva-saqartvelo-back-end\obj\Debug\sxva-saqartvelo-back-end.dll
 C:\Users\Anano-PC\Documents\GitHub\sxva-saqartvelo-back-end\sxva-saqartvelo-back-end\obj\Debug\sxva-saqartvelo-back-end.pdb
+E:\User\GND\Documents\GitHub\sxva-saqartvelo-back-end\sxva-saqartvelo-back-end\bin\PagedList.dll
+E:\User\GND\Documents\GitHub\sxva-saqartvelo-back-end\sxva-saqartvelo-back-end\bin\PagedList.Mvc.dll
+E:\User\GND\Documents\GitHub\sxva-saqartvelo-back-end\sxva-saqartvelo-back-end\bin\PagedList.xml
+E:\User\GND\Documents\GitHub\sxva-saqartvelo-back-end\sxva-saqartvelo-back-end\bin\PagedList.Mvc.xml

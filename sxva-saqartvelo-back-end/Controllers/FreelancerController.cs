@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using sxva_saqartvelo_back_end.Models;
 using sxva_saqartvelo_back_end.Filters;
+using PagedList.Mvc;
+using PagedList;
 
 namespace sxva_saqartvelo_back_end.Controllers
 {
@@ -13,9 +15,15 @@ namespace sxva_saqartvelo_back_end.Controllers
 
         OtherGeorgiaEntities _db = new OtherGeorgiaEntities();
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View();
+            //Mvc PagedList
+            int pageSize = 9;
+            int pageNumber = (page ?? 1);
+
+
+            var freelancers = _db.Freelancers.OrderBy(x => x.ID).ToPagedList(pageNumber, pageSize);
+            return View(freelancers);
         }
 
         //Freelancer Profile Details
