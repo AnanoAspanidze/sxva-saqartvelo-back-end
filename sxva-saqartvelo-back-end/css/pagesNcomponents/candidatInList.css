@@ -23,6 +23,7 @@
 .candidat li{
     display: inline-block;
     padding: 5px;
+    font-family: "BPG Nino Mtavruli Bold", sans-serif;
 }
 .candidat-statistics a{
      color: black;

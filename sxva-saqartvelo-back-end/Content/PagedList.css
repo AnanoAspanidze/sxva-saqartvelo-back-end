@@ -38,7 +38,7 @@
 .pagination > li > span:hover,
 .pagination > li > a:focus,
 .pagination > li > span:focus {
-  background-color: #eeeeee;
+  /*background-color: #eeeeee;*/
 }
 
 .pagination > .active > a,
@@ -143,7 +143,7 @@
 .pager li > a:hover,
 .pager li > a:focus {
   text-decoration: none;
-  background-color: #eeeeee;
+  /*background-color: #eeeeee;*/
 }
 
 .pager .next > a,
