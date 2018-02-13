@@ -21,14 +21,15 @@ namespace sxva_saqartvelo_back_end.Controllers
             int pageSize = 9;
             int pageNumber = (page ?? 1);
 
-            var freelancers = _db.Freelancers.OrderBy(x => x.ID).ToPagedList(pageNumber, pageSize);
+            var freelancers = _db.Freelancers.OrderBy(x => Guid.NewGuid()).ToPagedList(pageNumber, pageSize);
             return View(freelancers);
         }
 
         //Freelancer Profile Details
-        public ActionResult Details()
+        public ActionResult Details(int id)
         {
-            return View();
+            var freelancer = _db.Freelancers.FirstOrDefault(x=> x.ID == id);
+            return View(freelancer);
         }
 
         [LoginFilter]

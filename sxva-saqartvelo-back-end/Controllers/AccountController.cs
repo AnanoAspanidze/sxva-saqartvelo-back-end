@@ -102,6 +102,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                         freelancerTbl.Name = freelancer.Name.Trim();
                         freelancerTbl.Surname = freelancer.Surname.Trim();
                         freelancerTbl.Field = freelancer.Field.Trim();
+                        freelancerTbl.Photo = "default-freelancer-pic.png"; //default photo for freelancer
                         freelancerTbl.Bio = "Freelancer Bio";
                         freelancerTbl.Email = freelancer.Email.Trim();
                         freelancerTbl.Password = PasswordHashHelper.MD5Hash(randomSecret + freelancer.Password.Trim());

@@ -1,5 +1,4 @@
-﻿@*@model IEnumerable<sxva_saqartvelo_back_end.Models.Freelancer>*@
-@model PagedList.IPagedList<sxva_saqartvelo_back_end.Models.Freelancer>
+﻿@model PagedList.IPagedList<sxva_saqartvelo_back_end.Models.Freelancer>
 @using PagedList.Mvc;
 
 <link href="~/Content/PagedList.css" rel="stylesheet" />
@@ -18,12 +17,12 @@
             <div class="candidat col-xl-3 col-md-4 col-sm-6 text-center">
                 <div>
                     <div class="hover">
-                        <a href="" class="image-a" style="background-image: url(/img/pp/@item.Photo);">
+                        <a href="@Url.Action("Details", "Freelancer", new { id = item.ID})" class="image-a" style="background-image: url(/img/pp/@item.Photo);">
                             <img class="img-thumbnail img-candidat" src="~/img/pp/default-freelancer-pic.png" alt="profile picture">
                         </a>
                     </div>
                     <div class="candidat-text-content">
-                        <a href=""><h3 class="candidat-name-fn">@item.Name @item.Surname</h3></a>
+                        <a href="@Url.Action("Details", "Freelancer", new { id = item.ID})"><h3 class="candidat-name-fn">@item.Name @item.Surname</h3></a>
                         <ul class="candidat-skils-fn">
                             @{ 
                                 var skills = item.Freelancer_Skill.ToList();
@@ -34,8 +33,8 @@
                             }
                         </ul>
                         <ul class="candidat-statistics-fn candidat-statistics">
-                            <li>განხორციელებული პროექტები: <a href="#">3</a></li>
-                            <li>რეიტინგი: 10 / 10</li>
+                            <li>განხორციელებული პროექტები: <a href="#">?</a></li>
+                            <li>რეიტინგი: @item.Rating / 10</li>
                         </ul>
                     </div>
                 </div>
