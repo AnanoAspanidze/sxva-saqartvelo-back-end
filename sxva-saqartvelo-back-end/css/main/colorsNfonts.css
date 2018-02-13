@@ -31,6 +31,13 @@
     font-size: 16px;
     color: black;
 }
+
+    .candidat-skils-fn a:hover {
+        color: white;
+        text-decoration: none;
+    }
+
+
 .candidat-statistics-fn{
     font-family: "BPG Nino Mtavruli Bold", sans-serif;
     font-size: 14px;

@@ -72,8 +72,8 @@
   cursor: pointer;
 }
 .candidat a:hover{
-  color: white;
-  text-decoration: none;
+    color: white;
+    text-decoration: none;
 }
 
 /*--- Pagination Hover  ---*/
