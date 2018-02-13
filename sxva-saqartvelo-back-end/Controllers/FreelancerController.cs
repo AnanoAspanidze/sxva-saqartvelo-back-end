@@ -28,8 +28,12 @@ namespace sxva_saqartvelo_back_end.Controllers
         //Freelancer Profile Details
         public ActionResult Details(int id)
         {
-            var freelancer = _db.Freelancers.FirstOrDefault(x=> x.ID == id);
-            return View(freelancer);
+            var FreelancerProjectModel = new Freelancer_Project_Model
+            {
+                freelancer = _db.Freelancers.FirstOrDefault(x=> x.ID == id),
+                project = _db.Projects.Where(x=> x.FreelancerID == id).ToList()
+            };
+            return View(FreelancerProjectModel);
         }
 
         [LoginFilter]

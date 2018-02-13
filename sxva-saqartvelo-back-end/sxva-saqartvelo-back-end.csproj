@@ -303,6 +303,7 @@
     <Compile Include="Models\Freelancer.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Freelancer_Project_Model.cs" />
     <Compile Include="Models\Freelancer_Skill.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>

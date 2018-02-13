@@ -1,6 +1,5 @@
 ﻿@model PagedList.IPagedList<sxva_saqartvelo_back_end.Models.Freelancer>
 @using PagedList.Mvc;
-@using System.Text;
 
 <link href="~/Content/PagedList.css" rel="stylesheet" />
 <link href="~/css/mystyle.css" rel="stylesheet" />
@@ -117,12 +116,12 @@
                     <div class="candidat col-xl-4 col-sm-6 text-center">
                         <div>
                             <div class="hover">
-                                <a href="" class="image-a" style="background-image: url(/img/pp/@item.Photo);">
+                                <a href="@Url.Action("Details", "Freelancer", new { id = item.ID})" class="image-a" style="background-image: url(/img/pp/@item.Photo);">
                                     <img class="img-thumbnail img-candidat" src="~/img/pp/default-freelancer-pic.png" alt="profile picture">
                                 </a>
                             </div>
                             <div class="candidat-text-content">
-                                <a href=""><h3 class="candidat-name-fn">@item.Name @item.Surname</h3></a>
+                                <a href="@Url.Action("Details", "Freelancer", new { id = item.ID})"><h3 class="candidat-name-fn">@item.Name @item.Surname</h3></a>
                                 <ul class="candidat-skils-fn">
                                     @{
                                         var skilss = item.Freelancer_Skill.ToList();
