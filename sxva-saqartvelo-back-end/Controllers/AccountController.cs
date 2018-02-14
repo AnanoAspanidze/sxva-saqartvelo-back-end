@@ -83,7 +83,7 @@ namespace sxva_saqartvelo_back_end.Controllers
         //Register Freelancer
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register([Bind(Include = "Name, Surname, Field, Email, Password, RepeatPassword, Mobile")]RegisterModel freelancer)    
+        public ActionResult Register([Bind(Include = "Name, Surname, Field, Photo, Bio, Email, Password, RepeatPassword, Mobile")]RegisterModel freelancer)    
         {
             try
             {

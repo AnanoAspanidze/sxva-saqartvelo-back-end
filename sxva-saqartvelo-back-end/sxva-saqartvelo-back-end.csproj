@@ -148,6 +148,8 @@
     <Content Include="img\logos\geocell.jpg" />
     <Content Include="img\logos\geolab.png" />
     <Content Include="img\logos\gita.png" />
+    <Content Include="img\logos\if_visibility_password.svg" />
+    <Content Include="img\logos\VisibilityForPassword.png" />
     <Content Include="img\logos\leavingstone.png" />
     <Content Include="img\pp\ana-kekua.jpg" />
     <Content Include="img\pp\avtandil-gachechiladze.jpg" />
