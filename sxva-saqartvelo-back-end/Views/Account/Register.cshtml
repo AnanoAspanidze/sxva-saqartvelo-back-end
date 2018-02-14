@@ -28,10 +28,6 @@
                 @Html.EditorFor(model => model.Field, new { htmlAttributes = new { @class = "form-control", placeholder = "პოზიცია" } })
                 @Html.ValidationMessageFor(model => model.Field, "", new { @class = "text-danger" })
             </div>
-            @*<div class="cont3 col-12 col-sm-6 form-group">
-                @Html.EditorFor(model => model.Bio, new { htmlAttributes = new { @class = "form-control", placeholder = "ბიოგრაფია" } })
-                @Html.ValidationMessageFor(model => model.Bio, "", new { @class = "text-danger" })
-            </div>*@
             <div class="cont3 col-12 col-sm-6 form-group">
                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "ელ.ფოსტა" } })
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })

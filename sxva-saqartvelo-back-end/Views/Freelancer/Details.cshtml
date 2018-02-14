@@ -1,14 +1,12 @@
-﻿@model sxva_saqartvelo_back_end.Models.Freelancer_Project_Model
+﻿@model sxva_saqartvelo_back_end.Models.Freelancer
 
 <!--C# Code-->
 @{
-    var skills = Model.freelancer.Freelancer_Skill.ToList();  //ფრილანსერის სქილები
-    var implementedProjects = Model.freelancer.Projects.Count(); //ფრილანსერის განხორციელებული პროექტების რაოდენობა
-    var freelancer = Model.freelancer; //ფრილანსერების თეიბლი
-    var project = Model.project; //პროექტების თეიბლი ლისტად
+    var skills = Model.Freelancer_Skill.ToList(); //ფრილანსერის სქილები
+    var implementedProjects = Model.Projects.Count(); //ფრილანსერის განხორციელებული პროექტების რაოდენობა
+    var project = Model.Projects.ToList(); //პროექტების თეიბლი ლისტად
 }
 <!---->
-
 <!--CSS-->
 <link href="~/css/pagesNcomponents/homepage.css" rel="stylesheet" />
 <link href="~/css/profile/style.css" rel="stylesheet" />
@@ -21,12 +19,12 @@
     <div class="row justify-content-between col-9 blue">
         <div class="col-xl-6 col-md-12 profile">
             <div class="person row">
-                <div class="img-background" style="background-image: url(&quot;/img/pp/@freelancer.Photo&quot;);">
-                    <img class="developerImage" src="/img/pp/@freelancer.Photo" alt="profile picture">
+                <div class="img-background" style="background-image: url(&quot;/img/pp/@Model.Photo&quot;);">
+                    <img class="developerImage" src="/img/pp/@Model.Photo" alt="profile picture">
                 </div>
                 <div class="info align-items-end">
-                    <h3 class="name-surname">@freelancer.Name @freelancer.Surname</h3>
-                    <p class="rank position">@freelancer.Field</p>
+                    <h3 class="name-surname">@Model.Name @Model.Surname</h3>
+                    <p class="rank position">@Model.Field</p>
 
                 </div>
             </div>
@@ -34,7 +32,7 @@
                 <ul class="sia">
                     <li class="skills">
                         უნარები:
-                        @foreach(var i in skills)
+                        @foreach (var i in skills)
                         {
                             @i.Skill.Name <span> </span>
                         }
@@ -46,7 +44,7 @@
                         მიმდინარე პროექტების რაოდენობა: <span class="projectsInProgressQuantity">4</span>
                     </li>
                     <li>
-                        რეიტინგი: <span class="rating">@freelancer.Rating</span>/10
+                        რეიტინგი: <span class="rating">@Model.Rating</span>/10
                     </li>
 
                 </ul>
@@ -57,7 +55,7 @@
             <article class="bio">
                 <h2>ბიორგრაფია</h2>
                 <div class="biography">
-                    @Html.Raw(freelancer.Bio) @*ფრილანსერის ბიოგრაფია*@
+                    @Html.Raw(Model.Bio)
                 </div>
             </article>
         </div>
