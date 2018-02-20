@@ -125,6 +125,7 @@
                                 <ul class="candidat-skils-fn">
                                     @{
                                         var skilss = item.Freelancer_Skill.ToList();
+                                        var implementedProjects = item.Projects.Count();
                                     }
                                     @foreach (var i in skilss)
                                     {
@@ -132,7 +133,7 @@
                                     }
                                 </ul>
                                 <ul class="candidat-statistics-fn candidat-statistics">
-                                    <li>განხორციელებული პროექტები: <a href="#"></a></li>
+                                    <li>განხორციელებული პროექტები: <a href="#">@implementedProjects</a></li>
                                     <li>რეიტინგი: @item.Rating / 10</li>
                                 </ul>
                             </div>

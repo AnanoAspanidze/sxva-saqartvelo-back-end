@@ -50,6 +50,8 @@ border: 2px solid #f8d830;
 }
 
 .info {
+    margin-top: -16px;
+    margin-left: 26px;
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -172,14 +174,14 @@ body{background-image:none;}
     margin-top: 40px;
 }
 
-.sia li span {
+/*.sia li span {
     font-family: 'BPG Nino Mtavruli';
     font-size: 19pt;
-}
+}*/
 .kon {
     background: #ffffff;
     text-align: center;
-    color: #000;
+    .sia li span color: #000;
     box-sizing: border-box;
     border: 3pt solid #1787AA;
     font-size: 25px;
@@ -202,7 +204,7 @@ body{background-image:none;}
 .bio h2 {
     font-family: 'BPG Nino Mtavruli Bold';
     font-size: 17pt;
-    margin-bottom: 45px;
+    margin-bottom: 20px;
 }
 
 .bio p:last-child {margin-bottom: 45px;}

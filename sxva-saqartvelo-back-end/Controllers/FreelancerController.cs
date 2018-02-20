@@ -36,6 +36,7 @@ namespace sxva_saqartvelo_back_end.Controllers
         [LoginFilter]
         public ActionResult FreelancerProfile()
         {
+
             return View();
         }
     }
