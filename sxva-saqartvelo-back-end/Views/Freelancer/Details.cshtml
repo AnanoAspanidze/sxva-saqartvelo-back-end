@@ -1,11 +1,11 @@
-﻿
-@model sxva_saqartvelo_back_end.Models.Freelancer
+﻿@model sxva_saqartvelo_back_end.Models.Freelancer
 
 <!--C# Code-->
 @{
     var skills = Model.Freelancer_Skill.ToList(); //ფრილანსერის სქილები
     var implementedProjects = Model.Projects.Count(); //ფრილანსერის განხორციელებული პროექტების რაოდენობა
     var project = Model.Projects.ToList(); //პროექტების თეიბლი ლისტად
+    var ongoingProjects = Model.Projects.Where(x => x.Project_Status.Any(e => e.StatusID == 2)).Count(); //კონკრეტული ფრილანსერის მიმდინარე პროექტების რაოდენობა
 }
 <!---->
 <!--CSS-->
@@ -42,7 +42,7 @@
                         პროექტების რაოდენობა: <span class="projectQuantity">@implementedProjects</span>
                     </li>
                     <li>
-                        მიმდინარე პროექტების რაოდენობა: <span class="projectsInProgressQuantity">4</span>
+                        მიმდინარე პროექტების რაოდენობა: <span class="projectsInProgressQuantity">@ongoingProjects</span>
                     </li>
                     <li>
                         რეიტინგი: <span class="rating">@Model.Rating</span>/10

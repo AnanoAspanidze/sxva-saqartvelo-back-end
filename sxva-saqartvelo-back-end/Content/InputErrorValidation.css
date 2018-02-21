@@ -2,6 +2,9 @@
     border: 1px solid #e80c4d;
 }*/
 
+.cont1 span, input{
+    color: #e80c4d; 
+}
 .cont1{
     /*color: #e80c4d;*/
     /*color: red;*/
