@@ -279,6 +279,7 @@ body{background-image:none;}
     position: static;
     width: fit-content;
     margin: 100px auto;
+    visibility: hidden;
 }
 /* contact */
 .cont1 .form-control {

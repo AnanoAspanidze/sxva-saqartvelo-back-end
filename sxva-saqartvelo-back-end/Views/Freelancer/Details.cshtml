@@ -62,32 +62,39 @@
         </div>
     </div>
 </section>
-<section class="pprojects col-11">
-    <div class="middle ">
-        <h1>სამუშაო ისტორია</h1>
-        <select>
-            <option>ახალი</option>
-            <option>ძველი</option>
-        </select>
-    </div>
 
 
-    <div class="allProjects">
-        @foreach (var item in project)
-        {
-            <div class="projects">
-                <h3><b>@item.Name</b></h3>
-                <p class="pro1 col-12">@item.Description</p>
-                <p class="pro2 col-5">დამკვეთი: <span>@item.Company.Name</span></p>
-                <p class="pro2">პროექტის შეფასება: <span>10</span>/10</p>
+@if (project.Count > 0)
+{
+    <section class="pprojects col-11">
+        <div class="middle ">
+            <h1>სამუშაო ისტორია</h1>
+            <select>
+                <option>ახალი</option>
+                <option>ძველი</option>
+            </select>
+        </div>
+
+
+        <div class="allProjects">
+            @foreach (var item in project)
+            {
+                <div class="projects">
+                    <h3><b>@item.Name</b></h3>
+                    <p class="pro1 col-12">@item.Description</p>
+                    <p class="pro2 col-5">დამკვეთი: <span>@item.Company.Name</span></p>
+                    <p class="pro2">პროექტის შეფასება: <span>10</span>/10</p>
+                </div>
+            }
+        </div>
+
+        <div class="load">
+                <h3 class="kon">იტვირთება...</h3>
             </div>
-        }
-    </div>
+    </section>
+}
 
-    @*<div class="load">
-        <h3 class="kon">იტვირთება...</h3>
-    </div>*@
-</section>
+
 
 <script src="~/Scripts/JS/printCandidats.js"></script>
 
