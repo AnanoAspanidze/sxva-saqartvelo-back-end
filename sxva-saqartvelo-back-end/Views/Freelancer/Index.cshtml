@@ -1,5 +1,12 @@
-﻿@model PagedList.IPagedList<sxva_saqartvelo_back_end.Models.Freelancer>
+﻿@using sxva_saqartvelo_back_end.Models;
+@model PagedList.IPagedList<sxva_saqartvelo_back_end.Models.Freelancer>
 @using PagedList.Mvc;
+
+@{
+    OtherGeorgiaEntities db = new OtherGeorgiaEntities();
+    var skillsTolist = db.Skills.ToList();
+}
+
 
 <link href="~/Content/PagedList.css" rel="stylesheet" />
 <link href="~/css/mystyle.css" rel="stylesheet" />
@@ -30,33 +37,13 @@
                         </span>
                     </span>
                     <form class="possibilities">
-                        <div class="row">
-                            <label class="col-sm"><input type="checkbox"><span><img src="/img/checkbox.svg" class="checkbox">HTML</span></label>
-                            <label class="col-sm"><input type="checkbox"><span><img src="/img/checkbox.svg" class="checkbox">CSS</span></label>
-                        </div>
-                        <div class="row">
-                            <label class="col-sm"><input type="checkbox"><span><img src="/img/checkbox.svg" class="checkbox">Javascript</span></label>
-                            <label class="col-sm"><input type="checkbox"><span><img src="/img/checkbox.svg" class="checkbox">TypeScript</span></label>
-                        </div>
-                        <div class="row">
-                            <label class="col-sm"><input type="checkbox"><span><img src="/img/checkbox.svg" class="checkbox">React</span></label>
-                            <label class="col-sm"><input type="checkbox"><span><img src="/img/checkbox.svg" class="checkbox">React Native</span></label>
-                        </div>
-                        <div class="row">
-                            <label class="col-sm"><input type="checkbox"><span><img src="/img/checkbox.svg" class="checkbox">Angular 2</span></label>
-                            <label class="col-sm"><input type="checkbox"><span><img src="/img/checkbox.svg" class="checkbox">Mongo DB</span></label>
-                        </div>
-                        <div class="row">
-                            <label class="col-sm"><input type="checkbox"><span><img src="/img/checkbox.svg" class="checkbox">HTML</span></label>
-                            <label class="col-sm"><input type="checkbox"><span><img src="/img/checkbox.svg" class="checkbox">CSS</span></label>
-                        </div>
+                        @foreach (var s in skillsTolist)
+                        {
+                            <div class="row">
+                                <label class="col-sm"><input name="skills" type="checkbox"><span><img src="/img/checkbox.svg" class="checkbox">@s.Name</span></label>
+                            </div>
+                        }
                         <br>
-                        <!-- <div class="bullet-pagination">
-                            <span class="bullet"></span>
-                            <span class="active-bullet"></span>
-                            <span class="bullet"></span>
-                            <span class="bullet"></span>
-                        </div> -->
                     </form>
                 </section>
 
@@ -73,12 +60,6 @@
                     <form class="row rating-from-to">
                         <input type="text" placeholder="0" class="col min-rat" id="rating_low" value="0">
                         <input type="text" id="rating_hight" placeholder="100" class="col max-rat" value="100">
-
-                        <!-- <div class="row slider-range-two">
-                            <span class="rangeValues"></span>
-                            <input value="500" min="500" max="50000" step="500" type="range">
-                            <input value="50000" min="500" max="50000" step="500" type="range">
-                        </div> -->
                         <br>
 
                         <div style="" id="line">
@@ -124,10 +105,10 @@
                                 <a href="@Url.Action("Details", "Freelancer", new { id = item.ID})"><h3 class="candidat-name-fn">@item.Name @item.Surname</h3></a>
                                 <ul class="candidat-skils-fn">
                                     @{
-                                        var skilss = item.Freelancer_Skill.ToList();
+                                        var freelancerSkilss = item.Freelancer_Skill.ToList();
                                         var implementedProjects = item.Projects.Count();
                                     }
-                                    @foreach (var i in skilss)
+                                    @foreach (var i in freelancerSkilss)
                                     {
                                         <li><a href="#">@i.Skill.Name</a></li>
                                     }

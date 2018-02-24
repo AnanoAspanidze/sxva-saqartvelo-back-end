@@ -15,8 +15,12 @@ namespace sxva_saqartvelo_back_end.Controllers
 
         OtherGeorgiaEntities _db = new OtherGeorgiaEntities();
 
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, FormCollection formCollection)
         {
+            bool chkSkills = false;
+            string chkSkillsValue = "";
+            if (!string.IsNullOrEmpty(formCollection["skills"])) { chkSkills = true; }
+            if (chkSkills) { chkSkillsValue = formCollection["skills"]; }
             //Mvc PagedList
             int pageSize = 9;
             int pageNumber = (page ?? 1);
