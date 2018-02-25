@@ -226,6 +226,7 @@
     <Content Include="fonts\BPGNinoMtavruli-Regular.otf" />
     <Content Include="fonts\bpg_nino_mtavruli_normal.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\FilterDataByCheckBox.js" />
     <Content Include="Scripts\formValidation.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -353,6 +354,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Freelancer\Details.cshtml" />
     <Content Include="Views\Freelancer\FreelancerProfile.cshtml" />
+    <Content Include="Views\Shared\_PartialSkilss.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

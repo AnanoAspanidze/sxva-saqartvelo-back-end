@@ -17,16 +17,31 @@ namespace sxva_saqartvelo_back_end.Controllers
 
         public ActionResult Index(int? page, FormCollection formCollection)
         {
-            bool chkSkills = false;
-            string chkSkillsValue = "";
-            if (!string.IsNullOrEmpty(formCollection["skills"])) { chkSkills = true; }
-            if (chkSkills) { chkSkillsValue = formCollection["skills"]; }
             //Mvc PagedList
             int pageSize = 9;
             int pageNumber = (page ?? 1);
 
             var freelancers = _db.Freelancers.OrderBy(x => Guid.NewGuid()).ToPagedList(pageNumber, pageSize);
             return View(freelancers);
+        }
+
+        public PartialViewResult FilterSkills(string[] skills)
+        {
+            var result = new List<Skill>();
+
+            foreach(string skillName in skills)
+            {
+                var skillID = _db.Skills.FirstOrDefault(x => x.Name.Equals(skillName)).ID;
+                var freelancerSkills = _db.Skills.Where(x => x.ID == skillID).ToList();
+                foreach(var freelancerSkill in freelancerSkills)
+                {
+                    result.Add(freelancerSkill);
+                }
+            }
+
+            //result = result.OrderBy(x => Guid.NewGuid()).ToList();
+
+            return PartialView("_PartialSkilss", result);
         }
 
         //Freelancer Profile Details

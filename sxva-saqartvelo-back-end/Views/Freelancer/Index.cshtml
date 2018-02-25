@@ -40,7 +40,10 @@
                         @foreach (var s in skillsTolist)
                         {
                             <div class="row">
-                                <label class="col-sm"><input name="skills" type="checkbox"><span><img src="/img/checkbox.svg" class="checkbox">@s.Name</span></label>
+                                <label class="col-sm"><input class="ckbx" id="@s.ID" name="@s.Name" type="checkbox"><span><img src="/img/checkbox.svg" class="checkbox">@s.Name</span></label>
+                                
+                                @*@Html.CheckBox(s.Name)
+                                @Html.Label(s.Name)*@
                             </div>
                         }
                         <br>
@@ -91,7 +94,7 @@
         </div>
 
         <div class="col candidats-on-listing-page">
-            <div class="row">
+            <div id="row" class="row">
                 @foreach (var item in Model)
                 {
                     <div class="candidat col-xl-4 col-sm-6 text-center">
@@ -101,7 +104,7 @@
                                     <img class="img-thumbnail img-candidat" src="~/img/pp/default-freelancer-pic.png" alt="profile picture">
                                 </a>
                             </div>
-                            <div class="candidat-text-content">
+                            <div id="freelancerSkills" class="candidat-text-content">
                                 <a href="@Url.Action("Details", "Freelancer", new { id = item.ID})"><h3 class="candidat-name-fn">@item.Name @item.Surname</h3></a>
                                 <ul class="candidat-skils-fn">
                                     @{
@@ -131,6 +134,7 @@
         </div>
     </div>
 </div>
+
 
 
 <script src="~/Scripts/JS/printCandidats.js"></script>

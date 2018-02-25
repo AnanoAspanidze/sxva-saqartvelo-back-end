@@ -1,0 +1,10 @@
+﻿@model IEnumerable<sxva_saqartvelo_back_end.Models.Skill>
+
+<div id="freelancerSkills" class="candidat-text-content">
+    <ul class="candidat-skils-fn">
+        @foreach (var item in Model)
+        {
+            <li><a href="#">@item.Name</a></li>
+        }
+    </ul>
+</div>
