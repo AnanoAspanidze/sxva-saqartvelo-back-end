@@ -15,7 +15,7 @@ namespace sxva_saqartvelo_back_end.Controllers
 
         OtherGeorgiaEntities _db = new OtherGeorgiaEntities();
 
-        public ActionResult Index(int? page, FormCollection formCollection)
+        public ActionResult Index(int? page)
         {
             //Mvc PagedList
             int pageSize = 9;

@@ -8,6 +8,7 @@
 }
 
 
+
 <link href="~/Content/PagedList.css" rel="stylesheet" />
 <link href="~/css/mystyle.css" rel="stylesheet" />
 
@@ -40,7 +41,7 @@
                         @foreach (var s in skillsTolist)
                         {
                             <div class="row">
-                                <label class="col-sm"><input class="ckbx" id="@s.ID" name="@s.Name" type="checkbox"><span><img src="/img/checkbox.svg" class="checkbox">@s.Name</span></label>
+                                <label class="col-sm"><input class="ckbx" name="@s.Name" type="checkbox"><span><img src="/img/checkbox.svg" class="checkbox">@s.Name</span></label>
                                 
                                 @*@Html.CheckBox(s.Name)
                                 @Html.Label(s.Name)*@
@@ -94,7 +95,7 @@
         </div>
 
         <div class="col candidats-on-listing-page">
-            <div id="row" class="row">
+            <div class="row">
                 @foreach (var item in Model)
                 {
                     <div class="candidat col-xl-4 col-sm-6 text-center">
@@ -106,7 +107,7 @@
                             </div>
                             <div id="freelancerSkills" class="candidat-text-content">
                                 <a href="@Url.Action("Details", "Freelancer", new { id = item.ID})"><h3 class="candidat-name-fn">@item.Name @item.Surname</h3></a>
-                                <ul class="candidat-skils-fn">
+                                <ul id="candidatSkill" class="candidat-skils-fn">
                                     @{
                                         var freelancerSkilss = item.Freelancer_Skill.ToList();
                                         var implementedProjects = item.Projects.Count();
@@ -124,6 +125,43 @@
                         </div>
                     </div>
                  }
+                <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+                <script type="text/javascript" language="javascript"></script>
+                <script>
+                    $(document).ready(function () {
+                        $(function () {
+                            var skillName = $(this).attr("name");
+                            $('.possibilities-section .possibilities input[type=checkbox]').on(function () {
+
+                                var checkedSkills = [];
+
+                                $('.possibilities-section .possibilities input[type=checkbox]').each(function () {
+
+                                    var skillName = $(this).attr("name");
+
+                                    if ($(this).is(":checked")) {
+                                        checkedSkills.push(skillName);
+                                    }
+                                })
+
+                                $.ajax({
+                                    async: true,
+                                    method: "Get",
+                                    url: "/Freelancer/FilterSkills",
+                                    traditional: true,
+                                    data: { 'skills': checkedSkills },
+                                    succes: function (data) {
+                                        $("#candidatSkill").html(data);
+                                    },
+                                    error: function () {
+                                        alert("error");
+                                    }
+                                })
+                            });
+
+                        });
+                    });
+                </script>
 
             </div>
             <nav aria-label="Page navigation">
@@ -140,3 +178,6 @@
 <script src="~/Scripts/JS/printCandidats.js"></script>
 <script src="~/Scripts/JS/interaction.js"></script>
 <script src="~/Scripts/JS/filter.js"></script>
+
+
+
