@@ -13,8 +13,44 @@
     <link rel=icon href=/img/favicon.png>
     <link href="~/fonts/bpg-nino-mtavruli-bold-master/css/bpg-nino-mtavruli-bold.min.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript" language="javascript"></script>
+    <script>
+       $(function () {
+
+            //$('.possibilities-section .possibilities input[type=checkbox]').prop("checked", true);
+
+            $('.possibilities-section .possibilities input[type=checkbox]').change(function () {
+
+                            var checkedSkills = [];
+
+                            $('.possibilities-section .possibilities input[type=checkbox]').each(function () {
+
+                                var skillName = $(this).attr("name");
+                                if ($(this).is(":checked")) {
+                                    checkedSkills.push(skillName);
+                                }
+                            })
+
+                            $.ajax({
+                                async: true,
+                                method: "Get",
+                                url: "/Freelancer/FilterSkills",
+                                traditional: true,
+                                data: { 'skills': checkedSkills },
+                                succes: function (data) {
+                                    $("#candidatSkill").html(data);
+                                },
+                                error: function () {
+                                    alert("error");
+                                }
+                            })
+                        });
+
+       });
+    </script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

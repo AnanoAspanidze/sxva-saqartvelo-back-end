@@ -27,15 +27,15 @@ namespace sxva_saqartvelo_back_end.Controllers
 
         public PartialViewResult FilterSkills(string[] skills)
         {
-            var result = new List<Skill>();
+            var result = new List<Freelancer>();
 
-            foreach(string skillName in skills)
+            foreach(string skillNe in skills)
             {
-                var skillID = _db.Skills.FirstOrDefault(x => x.Name.Equals(skillName)).ID;
-                var freelancerSkills = _db.Skills.Where(x => x.ID == skillID).ToList();
-                foreach(var freelancerSkill in freelancerSkills)
+                var SkillIds = _db.Skills.FirstOrDefault(x => x.Name.Equals(skillNe)).ID;
+                var freelancers = _db.Freelancers.Where(x => x.Freelancer_Skill.Any(e=> e.SkillID == SkillIds)).ToList();
+                foreach(var f in freelancers)
                 {
-                    result.Add(freelancerSkill);
+                    result.Add(f);
                 }
             }
 

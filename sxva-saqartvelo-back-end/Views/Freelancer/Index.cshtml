@@ -125,44 +125,6 @@
                         </div>
                     </div>
                  }
-                <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-                <script type="text/javascript" language="javascript"></script>
-                <script>
-                    $(document).ready(function () {
-                        $(function () {
-                            var skillName = $(this).attr("name");
-                            $('.possibilities-section .possibilities input[type=checkbox]').on(function () {
-
-                                var checkedSkills = [];
-
-                                $('.possibilities-section .possibilities input[type=checkbox]').each(function () {
-
-                                    var skillName = $(this).attr("name");
-
-                                    if ($(this).is(":checked")) {
-                                        checkedSkills.push(skillName);
-                                    }
-                                })
-
-                                $.ajax({
-                                    async: true,
-                                    method: "Get",
-                                    url: "/Freelancer/FilterSkills",
-                                    traditional: true,
-                                    data: { 'skills': checkedSkills },
-                                    succes: function (data) {
-                                        $("#candidatSkill").html(data);
-                                    },
-                                    error: function () {
-                                        alert("error");
-                                    }
-                                })
-                            });
-
-                        });
-                    });
-                </script>
-
             </div>
             <nav aria-label="Page navigation">
                 <ul class="pagination justify-content-center">

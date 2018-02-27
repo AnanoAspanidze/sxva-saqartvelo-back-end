@@ -1,7 +1,48 @@
-﻿@model IEnumerable<sxva_saqartvelo_back_end.Models.Skill>
+﻿@model IEnumerable<sxva_saqartvelo_back_end.Models.Freelancer>
 
 
-        @foreach (var item in Model)
+        @*@foreach (var item in Model)
         {
-            <li><a href="#">@item.Name</a></li>
-        }
+            <li><a href="#">@item.Name @item.Surname</a></li>
+            <a href="@Url.Action("Details", "Freelancer", new { id = item.ID})"><h3 class="candidat-name-fn">@item.Name @item.Surname</h3></a>
+        }*@
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<link href="~/css/mystyle.css" rel="stylesheet" />
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="candidat col-xl-4 col-sm-6 text-center">
+            <div>
+                <div class="hover">
+                    <a href="@Url.Action("Details", "Freelancer", new { id = item.ID})" class="image-a" style="background-image: url(/img/pp/@item.Photo);">
+                        <img class="img-thumbnail img-candidat" src="~/img/pp/default-freelancer-pic.png" alt="profile picture">
+                    </a>
+                </div>
+                <div id="freelancerSkills" class="candidat-text-content">
+                    <a href="@Url.Action("Details", "Freelancer", new { id = item.ID})"><h3 class="candidat-name-fn">@item.Name @item.Surname</h3></a>
+                    <ul id="candidatSkill" class="candidat-skils-fn">
+                        @{
+                            var freelancerSkilss = item.Freelancer_Skill.ToList();
+                            var implementedProjects = item.Projects.Count();
+                        }
+                        @foreach (var i in freelancerSkilss)
+                        {
+                            <li><a href="#">@i.Skill.Name</a></li>
+                        }
+                    </ul>
+                    <ul class="candidat-statistics-fn candidat-statistics">
+                        <li>განხორციელებული პროექტები: <a href="#">@implementedProjects</a></li>
+                        <li>რეიტინგი: @item.Rating / 10</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+                            }
+</div>
+
+
+
+
+
