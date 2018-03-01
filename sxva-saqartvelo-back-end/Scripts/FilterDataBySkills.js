@@ -1,6 +1,6 @@
 ﻿$(function () {
 
-    //$('.possibilities-section .possibilities input[type=checkbox]').prop("checked", true);
+    $('.possibilities-section .possibilities input[type=checkbox]').prop("checked", true);
 
     $('.possibilities-section .possibilities input[type=checkbox]').change(function () {
 
