@@ -1,15 +1,5 @@
 ﻿@model IEnumerable<sxva_saqartvelo_back_end.Models.Freelancer>
 
-
-        @*@foreach (var item in Model)
-        {
-            <li><a href="#">@item.Name @item.Surname</a></li>
-            <a href="@Url.Action("Details", "Freelancer", new { id = item.ID})"><h3 class="candidat-name-fn">@item.Name @item.Surname</h3></a>
-        }*@
-
-<link href="~/Content/PagedList.css" rel="stylesheet" />
-<link href="~/css/mystyle.css" rel="stylesheet" />
-
 <div class="row">
     @foreach (var item in Model)
     {
@@ -39,7 +29,7 @@
                 </div>
             </div>
         </div>
-                            }
+     }
 </div>
 
 

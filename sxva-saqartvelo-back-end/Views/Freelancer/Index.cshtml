@@ -42,9 +42,6 @@
                         {
                             <div class="row">
                                 <label class="col-sm"><input class="ckbx" name="@s.Name" type="checkbox"><span><img src="/img/checkbox.svg" class="checkbox">@s.Name</span></label>
-                                
-                                @*@Html.CheckBox(s.Name)
-                                @Html.Label(s.Name)*@
                             </div>
                         }
                         <br>
@@ -94,7 +91,7 @@
             </div>
         </div>
 
-        <div class="col candidats-on-listing-page">
+        <div id="filterFreelancersBySkill" class="col candidats-on-listing-page">
             <div class="row">
                 @foreach (var item in Model)
                 {
@@ -134,8 +131,6 @@
         </div>
     </div>
 </div>
-
-
 
 <script src="~/Scripts/JS/printCandidats.js"></script>
 <script src="~/Scripts/JS/interaction.js"></script>

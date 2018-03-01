@@ -41,7 +41,7 @@ namespace sxva_saqartvelo_back_end.Controllers
 
             //result = result.OrderBy(x => Guid.NewGuid()).ToList();
 
-            return PartialView("_PartialSkilss", result);
+            return PartialView("_PartialSkilss", result.Distinct());
         }
 
         //Freelancer Profile Details
