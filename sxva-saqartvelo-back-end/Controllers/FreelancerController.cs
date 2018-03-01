@@ -29,9 +29,9 @@ namespace sxva_saqartvelo_back_end.Controllers
         {
             var result = new List<Freelancer>();
 
-            foreach(string skillNe in skills)
+            foreach(string skillName in skills)
             {
-                var SkillIds = _db.Skills.FirstOrDefault(x => x.Name.Equals(skillNe)).ID;
+                var SkillIds = _db.Skills.FirstOrDefault(x => x.Name.Equals(skillName)).ID;
                 var freelancers = _db.Freelancers.Where(x => x.Freelancer_Skill.Any(e=> e.SkillID == SkillIds)).ToList();
                 foreach(var f in freelancers)
                 {

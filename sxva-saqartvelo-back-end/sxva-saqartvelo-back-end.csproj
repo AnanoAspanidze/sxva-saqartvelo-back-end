@@ -227,7 +227,7 @@
     </Content>
     <Content Include="fonts\BPGNinoMtavruli-Regular.otf" />
     <Content Include="fonts\bpg_nino_mtavruli_normal.otf" />
-    <Content Include="Scripts\FilterDataByCheckBox.js" />
+    <Content Include="Scripts\FilterDataBySkills.js" />
     <Content Include="Scripts\formValidation.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
