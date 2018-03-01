@@ -25,9 +25,11 @@ namespace sxva_saqartvelo_back_end.Controllers
             return View(freelancers);
         }
 
-        public PartialViewResult FilterSkills(string[] skills)
+        public PartialViewResult FilterFreelancerData(string[] skills)
         {
             var result = new List<Freelancer>();
+
+            
 
             foreach(string skillName in skills)
             {
@@ -35,7 +37,11 @@ namespace sxva_saqartvelo_back_end.Controllers
                 var freelancers = _db.Freelancers.Where(x => x.Freelancer_Skill.Any(e=> e.SkillID == SkillIds)).ToList();
                 foreach(var f in freelancers)
                 {
-                    result.Add(f);
+                    result.Add(f);   
+                }
+                for(int i = 0; i<= freelancers.Count(); i++)
+                {
+                    ViewBag.CountFreelancers = i;
                 }
             }
 

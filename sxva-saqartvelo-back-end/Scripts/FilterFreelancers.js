@@ -1,9 +1,10 @@
 ﻿$(function () {
 
-    $('.possibilities-section .possibilities input[type=checkbox]').prop("checked", true);
+    //$('.possibilities-section .possibilities input[type=checkbox]').prop("checked", true);
 
     $('.possibilities-section .possibilities input[type=checkbox]').change(function () {
 
+        
         var checkedSkills = [];
 
         $('.possibilities-section .possibilities input[type=checkbox]').each(function () {
@@ -17,18 +18,18 @@
         $.ajax({
             async: true,
             method: "Get",
-            url: "/Freelancer/FilterSkills",
+            url: "/Freelancer/FilterFreelancerData",
             traditional: true,
             data: { 'skills': checkedSkills },
             success: function (data) {
-                $("#filterFreelancersBySkill").html(data);
+                $("#filterFreelancersData").html(data);
             },
             error: function () {
                 alert("error");
             }
         });
         //if ($('input[type=checkbox]').attr('checked', false)) {
-        //    $("#filterFreelancersBySkill").html('');
+        //    $("#filterFreelancersData").html('');
         //}
     });
 
