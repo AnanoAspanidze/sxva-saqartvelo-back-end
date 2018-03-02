@@ -102,7 +102,8 @@ document.getElementById('line').onmousedown=function(e){
 $('.clear-search').click(function(){
      
     $('#searchInput').val('');
-    console.log('test');
+    //$('#CountFreelancers').html('');
+    //console.log('test');
 
 })
 

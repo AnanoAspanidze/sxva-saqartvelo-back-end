@@ -12,6 +12,7 @@
             var skillName = $(this).attr("name");
             if ($(this).is(":checked")) {
                 checkedSkills.push(skillName);
+                
             }
         })
 

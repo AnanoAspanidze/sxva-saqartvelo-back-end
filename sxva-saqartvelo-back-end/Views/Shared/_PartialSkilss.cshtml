@@ -1,18 +1,11 @@
 ﻿@model IEnumerable<sxva_saqartvelo_back_end.Models.Freelancer>
 
-<div class="panel-heading">
-    <br>
-    <h3 class="panel-title">ძებნა</h3>
-    @*for (int i = 4; i <= Model.Count(); i++)
-    {
-        <p>ნაპოვნია @i ადამიანი</p>
-    }*@
-    @ViewBag.CountFreelancers
-</div>
+
+<input  name="hidenData" id="hidenData" value="@Model.Count()" />
+
 <div class="row">
     @foreach (var item in Model)
     {
-        <p>ნაპოვნია @ViewBag.CountFreelancers ადამიანი</p>
         <div class="candidat col-xl-4 col-sm-6 text-center">
             <div>
                 <div class="hover">

@@ -17,6 +17,7 @@ namespace sxva_saqartvelo_back_end.Controllers
 
         public ActionResult Index(int? page)
         {
+            ViewBag.CountFreelancers = _db.Freelancers.Count();
             //Mvc PagedList
             int pageSize = 9;
             int pageNumber = (page ?? 1);
@@ -38,10 +39,6 @@ namespace sxva_saqartvelo_back_end.Controllers
                 foreach(var f in freelancers)
                 {
                     result.Add(f);   
-                }
-                for(int i = 0; i<= freelancers.Count(); i++)
-                {
-                    ViewBag.CountFreelancers = i;
                 }
             }
 

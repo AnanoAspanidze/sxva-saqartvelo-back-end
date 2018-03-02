@@ -26,7 +26,15 @@
                 <div class="panel-heading">
                     <br>
                     <h3 class="panel-title">ძებნა</h3>
-                    <p>ნაპოვნია @Model.Count() ადამიანი</p>  
+                    <p>ნაპოვნია @Model.Count() ადამიანი</p>
+                    @*@Html.RenderPartial("_PartialSkill", "Freelancer", new { id = "hiddenData"});*@
+                    <script>
+                        $(document).ready(function () {
+                            var hidenData = $("#hidenData").val();
+                            alert("Value: " + $("#hidenData").val());
+                        });
+                        
+                    </script>
                 </div>
                 <div class="line"></div>
                 <br />
