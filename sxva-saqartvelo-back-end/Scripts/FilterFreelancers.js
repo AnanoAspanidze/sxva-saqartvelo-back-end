@@ -3,8 +3,6 @@
     //$('.possibilities-section .possibilities input[type=checkbox]').prop("checked", true);
 
     $('.possibilities-section .possibilities input[type=checkbox]').change(function () {
-
-        
         var checkedSkills = [];
 
         $('.possibilities-section .possibilities input[type=checkbox]').each(function () {
@@ -24,6 +22,7 @@
             data: { 'skills': checkedSkills },
             success: function (data) {
                 $("#filterFreelancersData").html(data);
+                $("#countedFreelancers").html($("#foundFreelancers").val()).html();
             },
             error: function () {
                 alert("error");

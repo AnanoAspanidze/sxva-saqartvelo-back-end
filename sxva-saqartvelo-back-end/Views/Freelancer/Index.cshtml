@@ -26,15 +26,7 @@
                 <div class="panel-heading">
                     <br>
                     <h3 class="panel-title">ძებნა</h3>
-                    <p>ნაპოვნია @Model.Count() ადამიანი</p>
-                    @*@Html.RenderPartial("_PartialSkill", "Freelancer", new { id = "hiddenData"});*@
-                    <script>
-                        $(document).ready(function () {
-                            var hidenData = $("#hidenData").val();
-                            alert("Value: " + $("#hidenData").val());
-                        });
-                        
-                    </script>
+                    <p>ნაპოვნია <span id="countedFreelancers">@ViewBag.CountFreelancers</span> ადამიანი</p>
                 </div>
                 <div class="line"></div>
                 <br />
@@ -100,7 +92,7 @@
         </div>
 
         <div id="filterFreelancersData" class="col candidats-on-listing-page">
-            <div class="row">
+            <div id="dataToload" class="row">
                 @foreach (var item in Model)
                 {
                     <div class="candidat col-xl-4 col-sm-6 text-center">
@@ -139,6 +131,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    $('.clear-search').click(function () {
+        var vb = @ViewBag.CountFreelancers; //გასუფთავებაზე კლიკის დროს ყველა ფრილასერის რაოდენობის გამოტანა
+        $("#filterFreelancersData").load("/Freelancer/Index #dataToload");
+        $('#searchInput').val('');
+        $("#countedFreelancers").html(vb);
+        
+    })
+</script>
 
 <script src="~/Scripts/JS/printCandidats.js"></script>
 <script src="~/Scripts/JS/interaction.js"></script>

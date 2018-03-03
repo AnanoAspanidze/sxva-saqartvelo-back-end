@@ -18,11 +18,14 @@ namespace sxva_saqartvelo_back_end.Controllers
         public ActionResult Index(int? page)
         {
             ViewBag.CountFreelancers = _db.Freelancers.Count();
+            ViewBag.frilanserebi = _db.Freelancers.ToList();
+
             //Mvc PagedList
             int pageSize = 9;
             int pageNumber = (page ?? 1);
 
             var freelancers = _db.Freelancers.OrderBy(x => Guid.NewGuid()).ToPagedList(pageNumber, pageSize);
+            
             return View(freelancers);
         }
 
@@ -41,8 +44,6 @@ namespace sxva_saqartvelo_back_end.Controllers
                     result.Add(f);   
                 }
             }
-
-            //result = result.OrderBy(x => Guid.NewGuid()).ToList();
 
             return PartialView("_PartialSkilss", result.Distinct());
         }

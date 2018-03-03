@@ -100,11 +100,7 @@ document.getElementById('line').onmousedown=function(e){
     }
 }
 $('.clear-search').click(function(){
-     
     $('#searchInput').val('');
-    //$('#CountFreelancers').html('');
-    //console.log('test');
-
 })
 
 
