@@ -354,7 +354,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Freelancer\Details.cshtml" />
     <Content Include="Views\Freelancer\FreelancerProfile.cshtml" />
-    <Content Include="Views\Shared\_PartialSkilss.cshtml" />
+    <Content Include="Views\Shared\_PartialFilterData.cshtml" />
     <Content Include="Views\Shared\_PartialSearch.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

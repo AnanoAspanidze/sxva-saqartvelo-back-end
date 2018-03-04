@@ -44,8 +44,61 @@ namespace sxva_saqartvelo_back_end.Controllers
             }
             
 
-            return PartialView("_PartialSkilss", result.Distinct());
+            return PartialView("_PartialFilterData", result.Distinct());
         }
+
+
+        //public PartialViewResult GetSearchRecord(string SearchResult)
+        //{
+
+        //    var resultOfSearch = _db.Freelancers.Where(x => x.Name.Contains(SearchResult) ||
+
+        //        x.Surname.Contains(SearchResult) ||
+
+        //            x.Freelancer_Skill.Any(e => e.Skill.Name.Contains(SearchResult) ||
+
+        //                x.Bio.Contains(SearchResult) ||
+
+        //                    x.Projects.Any(y => y.Name.Contains(SearchResult) ||
+
+        //                        y.Description.Contains(SearchResult) ||
+
+        //                            y.Company.Name.Contains(SearchResult))))
+
+        //                            .ToList()
+
+        //                            .Select(x => new Freelancer
+        //                            {
+        //                                ID = x.ID,
+        //                                Photo = x.Photo,
+        //                                Name = x.Name,
+        //                                Surname = x.Surname,
+        //                                Freelancer_Skill = x.Freelancer_Skill,
+        //                                Projects = x.Projects,
+        //                                Rating = x.Rating
+        //                            })
+        //                            .ToList();
+
+        //    //        var resultOfSearch = _db.Freelancers.Where(x => x.Name.Contains(SearchResult) ||
+
+        //    //x.Surname.Contains(SearchResult)).ToList()
+
+        //    //                    .Select(x => new Freelancer
+        //    //                    {
+        //    //                        ID = x.ID,
+        //    //                        Photo = x.Photo,
+        //    //                        Name = x.Name,
+        //    //                        Surname = x.Surname,
+        //    //                        Freelancer_Skill = x.Freelancer_Skill,
+        //    //                        Projects = x.Projects,
+        //    //                        Rating = x.Rating
+        //    //                    })
+        //    //                    .ToList();
+
+        //    return PartialView("_PartialFilterData", resultOfSearch);
+        //}
+
+        //Freelancer Profile Details
 
 
         public PartialViewResult GetSearchRecord(string SearchResult)
@@ -79,26 +132,9 @@ namespace sxva_saqartvelo_back_end.Controllers
                                     })
                                     .ToList();
 
-            //        var resultOfSearch = _db.Freelancers.Where(x => x.Name.Contains(SearchResult) ||
-
-            //x.Surname.Contains(SearchResult)).ToList()
-
-            //                    .Select(x => new Freelancer
-            //                    {
-            //                        ID = x.ID,
-            //                        Photo = x.Photo,
-            //                        Name = x.Name,
-            //                        Surname = x.Surname,
-            //                        Freelancer_Skill = x.Freelancer_Skill,
-            //                        Projects = x.Projects,
-            //                        Rating = x.Rating
-            //                    })
-            //                    .ToList();
-
-            return PartialView("_PartialSkilss", resultOfSearch);
+            return PartialView("_PartialFilterData", resultOfSearch);
         }
 
-        //Freelancer Profile Details
         public ActionResult Details(int id)
         {
             var freelancer = _db.Freelancers.FirstOrDefault(x => x.ID == id);

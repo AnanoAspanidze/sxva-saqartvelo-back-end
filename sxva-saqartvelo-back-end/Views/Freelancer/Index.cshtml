@@ -15,7 +15,7 @@
 <section id="hero-section">
     <form action="" class="form-group search-window">
         <input type="text" id="searchInput" class="searchInput" aria-describedby="emailHelp" placeholder="ძებნა">
-        <button id="srch" class="search-button"><img src="/img/search.svg" alt=""></button>
+        <button type="button" id="srch" class="search-button"><img src="/img/search.svg" alt=""></button>
         <img id="loaderGif" style="display:none" height="100" width="100" src="~/img/ajax-loader.gif" />
     </form>
 </section>
@@ -135,10 +135,13 @@
 
 <script>
     $('.clear-search').click(function () {
+        $('#searchInput').val(''); //clear search input
+        $("#filterFreelancersData").load("/Freelancer/Index #dataToload"); //გასუფთავებაზე კლიკის დროს ყველა ფრილანსერის გამოტანა
         var vb = @ViewBag.CountFreelancers; //გასუფთავებაზე კლიკის დროს ყველა ფრილასერის რაოდენობის გამოტანა
-        $("#filterFreelancersData").load("/Freelancer/Index #dataToload");
-        $('#searchInput').val('');
-        $("#countedFreelancers").html(vb); 
+        $("#countedFreelancers").html(vb); //გასუფთავებაზე კლიკის დროს ყველა ფრილასერის რაოდენობის გამოტანა
+    });
+    $('#srch').click(function(){
+        $('.possibilities-section .possibilities input[type=checkbox]').val('');
     });
 </script>
 
