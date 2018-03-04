@@ -40,8 +40,15 @@
 
 $(document).ready(function () {
     $("#srch").click(function () {
+        $('.ckbx').hide();
         $("#loaderGif").show();
         var SearchResult = $("#searchInput").val();
+
+        if (SearchResult == '') {
+            alert("ჩაწერეთ საძიებო სიტყვა");
+            $("#loaderGif").hide();
+            return false;
+        }
         
         $.ajax({
             async: true,
