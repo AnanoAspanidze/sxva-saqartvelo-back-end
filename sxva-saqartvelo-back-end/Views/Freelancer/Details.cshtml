@@ -80,7 +80,7 @@
             @foreach (var item in project)
             {
                 <div class="projects">
-                    <h3><b>@item.Name</b></h3>
+                    <h3><b id="projectName" name="@item.Name" value="@item.Name">@item.Name</b></h3>
                     <p class="pro1 col-12">@item.Description</p>
                     <p class="pro2 col-5">დამკვეთი: <span>@item.Company.Name</span></p>
                     <p class="pro2">პროექტის შეფასება: <span>10</span>/10</p>

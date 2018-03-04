@@ -18,8 +18,7 @@ namespace sxva_saqartvelo_back_end.Controllers
         public ActionResult Index(int? page)
         {
             ViewBag.CountFreelancers = _db.Freelancers.Count();
-            ViewBag.frilanserebi = _db.Freelancers.ToList();
-
+          
             //Mvc PagedList
             int pageSize = 9;
             int pageNumber = (page ?? 1);
@@ -32,10 +31,9 @@ namespace sxva_saqartvelo_back_end.Controllers
         public PartialViewResult FilterFreelancerData(string[] skills)
         {
             var result = new List<Freelancer>();
-
             
-
-            foreach(string skillName in skills)
+            
+            foreach (string skillName in skills)
             {
                 var SkillIds = _db.Skills.FirstOrDefault(x => x.Name.Equals(skillName)).ID;
                 var freelancers = _db.Freelancers.Where(x => x.Freelancer_Skill.Any(e=> e.SkillID == SkillIds)).ToList();
@@ -44,8 +42,60 @@ namespace sxva_saqartvelo_back_end.Controllers
                     result.Add(f);   
                 }
             }
+            
 
             return PartialView("_PartialSkilss", result.Distinct());
+        }
+
+
+        public PartialViewResult GetSearchRecord(string SearchResult)
+        {
+
+            var resultOfSearch = _db.Freelancers.Where(x => x.Name.Contains(SearchResult) ||
+
+                x.Surname.Contains(SearchResult) ||
+
+                    x.Freelancer_Skill.Any(e => e.Skill.Name.Contains(SearchResult) ||
+
+                        x.Bio.Contains(SearchResult) ||
+
+                            x.Projects.Any(y => y.Name.Contains(SearchResult) ||
+
+                                y.Description.Contains(SearchResult) ||
+
+                                    y.Company.Name.Contains(SearchResult))))
+
+                                    .ToList()
+
+                                    .Select(x => new Freelancer
+                                    {
+                                        ID = x.ID,
+                                        Photo = x.Photo,
+                                        Name = x.Name,
+                                        Surname = x.Surname,
+                                        Freelancer_Skill = x.Freelancer_Skill,
+                                        Projects = x.Projects,
+                                        Rating = x.Rating
+                                    })
+                                    .ToList();
+
+            //        var resultOfSearch = _db.Freelancers.Where(x => x.Name.Contains(SearchResult) ||
+
+            //x.Surname.Contains(SearchResult)).ToList()
+
+            //                    .Select(x => new Freelancer
+            //                    {
+            //                        ID = x.ID,
+            //                        Photo = x.Photo,
+            //                        Name = x.Name,
+            //                        Surname = x.Surname,
+            //                        Freelancer_Skill = x.Freelancer_Skill,
+            //                        Projects = x.Projects,
+            //                        Rating = x.Rating
+            //                    })
+            //                    .ToList();
+
+            return PartialView("_PartialSkilss", resultOfSearch);
         }
 
         //Freelancer Profile Details

@@ -140,6 +140,7 @@
     <Content Include="fonts\bpg-nino-mtavruli-bold-master\css\bpg-nino-mtavruli-bold.min.css" />
     <Content Include="fonts\bpg-nino-mtavruli-bold-master\fonts\bpg-nino-mtavruli-bold-webfont.svg" />
     <Content Include="Global.asax" />
+    <Content Include="img\ajax-loader.gif" />
     <Content Include="img\arrow-red.svg" />
     <Content Include="img\arrow-right.svg" />
     <Content Include="img\burger.svg" />
@@ -252,6 +253,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\SearchFreelancer.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -353,6 +355,7 @@
     <Content Include="Views\Freelancer\Details.cshtml" />
     <Content Include="Views\Freelancer\FreelancerProfile.cshtml" />
     <Content Include="Views\Shared\_PartialSkilss.cshtml" />
+    <Content Include="Views\Shared\_PartialSearch.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
