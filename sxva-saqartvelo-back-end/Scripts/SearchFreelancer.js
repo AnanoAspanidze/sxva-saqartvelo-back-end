@@ -41,11 +41,14 @@
 $(document).ready(function () {
     $("#srch").click(function () {
         
-        $("#loaderGif").show();
+        $("#srchImg").attr("src", "/img/searchSpin.svg");
+
+
         var SearchResult = $("#searchInput").val();
 
         if (SearchResult == '') {
             alert("ჩაწერეთ საძიებო სიტყვა");
+            $("#srchImg").attr("src", "/img/search.svg").show();
             $("#loaderGif").hide();
             return false;
         }
@@ -57,7 +60,7 @@ $(document).ready(function () {
             traditional: true,
             data: { "SearchResult": SearchResult },
             success: function (data) {
-                $("#loaderGif").hide();
+                $("#srchImg").attr("src", "/img/search.svg").show();
                 $("#filterFreelancersData").html(data);
                 $("#countedFreelancers").html($("#foundFreelancers").val()).html(); //არსებული ფრილანსერების რაოდენობის, ნაპოვნი ფრილანსერების რაოდენობით ჩანაცვლება.
             }

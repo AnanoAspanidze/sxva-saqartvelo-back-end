@@ -32,7 +32,7 @@ namespace sxva_saqartvelo_back_end.Controllers
         //FilterFreelancerByCheckBox
         public PartialViewResult FilterFreelancerByCheckBox(string[] skills)
         {
-            var result = new List<Freelancer>();
+            var checkboxResult = new List<Freelancer>();
             
             
             foreach (string skillName in skills)
@@ -41,12 +41,12 @@ namespace sxva_saqartvelo_back_end.Controllers
                 var freelancers = _db.Freelancers.Where(x => x.Freelancer_Skill.Any(e=> e.SkillID == SkillIds)).ToList();
                 foreach(var f in freelancers)
                 {
-                    result.Add(f);   
+                    checkboxResult.Add(f);   
                 }
             }
             
 
-            return PartialView("_PartialFilterData", result.Distinct());
+            return PartialView("_PartialFilterData", checkboxResult.Distinct());
         }
 
 
@@ -54,7 +54,7 @@ namespace sxva_saqartvelo_back_end.Controllers
         public PartialViewResult GetSearchRecord(string SearchResult)
         {
 
-            var resultOfSearch = _db.Freelancers.Where(x => x.Name.Contains(SearchResult) ||
+            var searchResult = _db.Freelancers.Where(x => x.Name.Contains(SearchResult) ||
 
                 x.Surname.Contains(SearchResult) ||
 
@@ -82,7 +82,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                                     })
                                     .ToList();
 
-            return PartialView("_PartialFilterData", resultOfSearch);
+            return PartialView("_PartialFilterData", searchResult);
         }
 
 

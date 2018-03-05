@@ -1,15 +1,18 @@
 ﻿$(function () {
 
     $('.possibilities-section .possibilities input[type=checkbox]').change(function () {
-        $("#loaderGif").show();
+        
         var checkedSkills = [];
 
         $('.possibilities-section .possibilities input[type=checkbox]').each(function () {
 
+            
+
             var skillName = $(this).attr("name");
             if ($(this).is(":checked")) {
-                checkedSkills.push(skillName);
                 
+                checkedSkills.push(skillName);
+                //$("#loaderGif").show();
             }
         })
 
@@ -20,7 +23,7 @@
             traditional: true,
             data: { 'skills': checkedSkills },
             success: function (data) {
-                $("#loaderGif").hide();
+                //$("#loaderGif").hide();
                 $("#filterFreelancersData").html(data);
                 $("#countedFreelancers").html($("#foundFreelancers").val()).html();
             },

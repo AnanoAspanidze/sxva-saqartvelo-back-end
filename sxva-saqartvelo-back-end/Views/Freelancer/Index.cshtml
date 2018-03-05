@@ -15,10 +15,14 @@
 <section id="hero-section">
     <form action="" class="form-group search-window">
         <input type="text" id="searchInput" class="searchInput" aria-describedby="emailHelp" placeholder="ძებნა">
-        <button type="button" id="srch" class="search-button"><img src="/img/search.svg" alt=""></button>
+        
+        <button type="button" id="srch" class="search-button">
+            @*<img id="loaderGif" style="display:none" height="100" width="100" src="~/img/Eclipse-1s-200px.svg" />*@
+            @*<img id="loaderGif" style="display:none" height="100" width="100" src="~/img/EclipseForSearch.svg" />*@
+            <img id="srchImg" src="/img/search.svg" alt="">
+        </button>
     </form>
 </section>
-
 <div class="container-fluid main-container" id="candidats-with-filter">
     <div class="row">
         <div class="col-xs-6 col-sm-3 filter">
@@ -26,7 +30,6 @@
                 <div class="panel-heading">
                     <br>
                     <h3 class="panel-title">ძებნა</h3>
-                    <img id="loaderGif" style="display:none; float:right" height="100" width="100" src="~/img/Eclipse-1s-200px.svg" />
                     <p>ნაპოვნია <span id="countedFreelancers">@ViewBag.CountFreelancers</span> ადამიანი</p>    
                 </div>
                 <div class="line"></div>
@@ -45,6 +48,7 @@
                                 <label class="col-sm"><input class="ckbx" name="@s.Name" type="checkbox"><span><img src="/img/checkbox.svg" class="checkbox">@s.Name</span></label>
                             </div>
                         }
+                        @*<img id="loaderGif" style="" height="150" width="300" src="~/img/searchSpin.svg" />*@
                         <br>
                     </form>
                 </section>
@@ -82,8 +86,8 @@
                 <br />
                 <div class="line col-xs-12 col-sm-12"></div>
                 <br />
-
-                <p class="clear-search">
+                @*<img id="loaderGif" style="float:left" height="100" width="100" src="~/img/searchSpin.svg" />*@
+                <p class="clear-search">       
                     <img src="/img/reset.svg" alt="clear search">
                     გასუფთავება
                 </p>
@@ -91,8 +95,10 @@
             </div>
         </div>
 
+        
         <div id="filterFreelancersData" class="col candidats-on-listing-page">
             <div id="dataToload" class="row">
+                
                 @foreach (var item in Model)
                 {
                     <div class="candidat col-xl-4 col-sm-6 text-center">

@@ -140,15 +140,16 @@
     <Content Include="fonts\bpg-nino-mtavruli-bold-master\css\bpg-nino-mtavruli-bold.min.css" />
     <Content Include="fonts\bpg-nino-mtavruli-bold-master\fonts\bpg-nino-mtavruli-bold-webfont.svg" />
     <Content Include="Global.asax" />
-    <Content Include="img\ajax-loader.gif" />
     <Content Include="img\arrow-red.svg" />
     <Content Include="img\arrow-right.svg" />
     <Content Include="img\burger.svg" />
     <Content Include="img\checkbox-before.svg" />
     <Content Include="img\checkbox.svg" />
     <Content Include="img\checked-box.svg" />
-    <Content Include="img\Eclipse-1s-200px.svg" />
+    <Content Include="img\EclipseForSearch.svg" />
     <Content Include="img\favicon.png" />
+    <Content Include="img\goldenlight.svg" />
+    <Content Include="img\goldenlight1.svg" />
     <Content Include="img\hero.jpg" />
     <Content Include="img\homepage-background.svg" />
     <Content Include="img\logo.svg" />
@@ -177,6 +178,7 @@
     <Content Include="img\soc-icons\fb.svg" />
     <Content Include="img\soc-icons\gPlus.svg" />
     <Content Include="img\soc-icons\you.svg" />
+    <Content Include="img\searchSpin.svg" />
     <Content Include="img\sublime.png" />
     <Content Include="Models\DataBase.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
