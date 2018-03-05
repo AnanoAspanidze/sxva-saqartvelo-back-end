@@ -147,6 +147,7 @@
     <Content Include="img\checkbox-before.svg" />
     <Content Include="img\checkbox.svg" />
     <Content Include="img\checked-box.svg" />
+    <Content Include="img\Eclipse-1s-200px.svg" />
     <Content Include="img\favicon.png" />
     <Content Include="img\hero.jpg" />
     <Content Include="img\homepage-background.svg" />
@@ -229,7 +230,7 @@
     <Content Include="fonts\BPGNinoMtavruli-Regular.otf" />
     <Content Include="fonts\bpg_nino_mtavruli_normal.otf" />
     <Content Include="Scripts\filterFreelancerByRating.js" />
-    <Content Include="Scripts\FilterFreelancers.js" />
+    <Content Include="Scripts\filterFreelancerByCheckBox.js" />
     <Content Include="Scripts\formValidation.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

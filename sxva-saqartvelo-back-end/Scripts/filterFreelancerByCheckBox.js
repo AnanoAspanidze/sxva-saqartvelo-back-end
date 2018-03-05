@@ -1,8 +1,7 @@
 ﻿$(function () {
 
-    //$('.possibilities-section .possibilities input[type=checkbox]').prop("checked", true);
-
     $('.possibilities-section .possibilities input[type=checkbox]').change(function () {
+        $("#loaderGif").show();
         var checkedSkills = [];
 
         $('.possibilities-section .possibilities input[type=checkbox]').each(function () {
@@ -17,10 +16,11 @@
         $.ajax({
             async: true,
             method: "Get",
-            url: "/Freelancer/FilterFreelancerData",
+            url: "/Freelancer/FilterFreelancerByCheckBox",
             traditional: true,
             data: { 'skills': checkedSkills },
             success: function (data) {
+                $("#loaderGif").hide();
                 $("#filterFreelancersData").html(data);
                 $("#countedFreelancers").html($("#foundFreelancers").val()).html();
             },
@@ -28,9 +28,6 @@
                 alert("error");
             }
         });
-        //if ($('input[type=checkbox]').attr('checked', false)) {
-        //    $("#filterFreelancersData").html('');
-        //}
     });
 
 });

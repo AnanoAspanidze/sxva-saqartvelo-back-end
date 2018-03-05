@@ -1,24 +1,39 @@
-﻿//$(function () {
-//    $('#rowRating input[type=text]').change(function () {
-//        var ratingLow = $('#rating_low').val();
-//        var ratingHight = $('#rating_hight').val();
-//        alert(ratingLow);
-//        alert(ratingHight);
-//    });
-//});
-
-//$(document).on('#button1', function () {
-//    alert($("#rating_low").val());
-//});
-
-//$(function () {
-//    $("buutonaut").on("click",function () {
-//        alert($("#rating_low").val());
-//    });
-//});
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
     $("#button1").click(function () {
-        alert($("#rating_low").val());
+
+        $("#loaderGif").show();
+        var ratingLow = $("#rating_low").val();
+
+        $.ajax({
+            async: true,
+            method: "Get",
+            url: "/Freelancer/filterFreelancerByRating",
+            traditional: true,
+            data: { "ratingLow": ratingLow },
+            success: function (data) {
+                $("#loaderGif").hide();
+                $("#filterFreelancersData").html(data);
+            }
+        });
     });
+
+    $("#button2").on("click", function () {
+
+        $("#loaderGif").show();
+
+        var ratingHight = $("#rating_hight").val();
+
+        $.ajax({
+            async: true,
+            method: "Get",
+            url: "/Freelancer/filterFreelancerByRating",
+            traditional: true,
+            data: { "ratingHight": ratingHight },
+            success: function (data) {
+                $("#loaderGif").hide();
+                $("#filterFreelancersData").html(data);
+            }
+        });
+    });
+
 });

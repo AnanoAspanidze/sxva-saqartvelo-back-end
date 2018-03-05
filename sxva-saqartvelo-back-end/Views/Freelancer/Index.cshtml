@@ -20,14 +20,14 @@
 </section>
 
 <div class="container-fluid main-container" id="candidats-with-filter">
-    <img id="loaderGif" style="display:none" height="100" width="100" src="~/img/ajax-loader.gif" />
     <div class="row">
         <div class="col-xs-6 col-sm-3 filter">
             <div id="filters" class="">
                 <div class="panel-heading">
                     <br>
                     <h3 class="panel-title">ძებნა</h3>
-                    <p>ნაპოვნია <span id="countedFreelancers">@ViewBag.CountFreelancers</span> ადამიანი</p>
+                    <img id="loaderGif" style="display:none; float:right" height="100" width="100" src="~/img/Eclipse-1s-200px.svg" />
+                    <p>ნაპოვნია <span id="countedFreelancers">@ViewBag.CountFreelancers</span> ადამიანი</p>    
                 </div>
                 <div class="line"></div>
                 <br />
@@ -63,7 +63,6 @@
                         <input type="text" placeholder="0" class="col min-rat" id="rating_low" value="0">
                         <input type="text" id="rating_hight" placeholder="10" class="col max-rat" value="10">
                         <br>
-
                         <div style="" id="line">
                             <div id="buutonaut">
                                 <div id="button1">
@@ -140,9 +139,6 @@
         var vb = @ViewBag.CountFreelancers; //გასუფთავებაზე კლიკის დროს ყველა ფრილასერის რაოდენობის გამოტანა
         $("#countedFreelancers").html(vb); //გასუფთავებაზე კლიკის დროს ყველა ფრილასერის რაოდენობის გამოტანა
     });
-    //function uncheckAllCheckbox(){
-    //    $('.possibilities-section .possibilities input[type="checkbox"]:checked').prop('checked',false);
-    //}
 </script>
 
 <script src="~/Scripts/JS/printCandidats.js"></script>

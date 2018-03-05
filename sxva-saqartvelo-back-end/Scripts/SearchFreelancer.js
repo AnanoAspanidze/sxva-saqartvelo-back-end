@@ -40,7 +40,7 @@
 
 $(document).ready(function () {
     $("#srch").click(function () {
-        $('.ckbx').hide();
+        
         $("#loaderGif").show();
         var SearchResult = $("#searchInput").val();
 
