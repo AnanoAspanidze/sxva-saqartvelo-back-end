@@ -38,35 +38,35 @@
 //    });
 //});
 
-$(document).ready(function () {
-    $("#srch").click(function () {
+//$(document).ready(function () {
+//    $("#srch").click(function () {
         
-        $("#srchImg").attr("src", "/img/searchSpin.svg");
+//        $("#srchImg").attr("src", "/img/searchSpin.svg");
 
 
-        var SearchResult = $("#searchInput").val();
+//        var SearchResult = $("#searchInput").val();
 
-        if (SearchResult == '') {
-            alert("ჩაწერეთ საძიებო სიტყვა");
-            $("#srchImg").attr("src", "/img/search.svg").show();
-            $("#loaderGif").hide();
-            return false;
-        }
+//        if (SearchResult == '') {
+//            alert("ჩაწერეთ საძიებო სიტყვა");
+//            $("#srchImg").attr("src", "/img/search.svg").show();
+//            $("#loaderGif").hide();
+//            return false;
+//        }
         
-        $.ajax({
-            async: true,
-            method: "Post",
-            url: "/Freelancer/GetSearchRecord",
-            traditional: true,
-            data: { "SearchResult": SearchResult },
-            success: function (data) {
-                $("#srchImg").attr("src", "/img/search.svg").show();
-                $("#filterFreelancersData").html(data);
-                $("#countedFreelancers").html($("#foundFreelancers").val()).html(); //არსებული ფრილანსერების რაოდენობის, ნაპოვნი ფრილანსერების რაოდენობით ჩანაცვლება.
-            }
-        });
-    });
-});
+//        $.ajax({
+//            async: true,
+//            method: "Post",
+//            url: "/Freelancer/GetSearchRecord",
+//            traditional: true,
+//            data: { "SearchResult": SearchResult },
+//            success: function (data) {
+//                $("#srchImg").attr("src", "/img/search.svg").show();
+//                $("#filterFreelancersData").html(data);
+//                $("#countedFreelancers").html($("#foundFreelancers").val()).html(); //არსებული ფრილანსერების რაოდენობის, ნაპოვნი ფრილანსერების რაოდენობით ჩანაცვლება.
+//            }
+//        });
+//    });
+//});
 
 
 
