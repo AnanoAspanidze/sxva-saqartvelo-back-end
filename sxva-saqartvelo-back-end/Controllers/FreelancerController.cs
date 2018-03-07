@@ -80,10 +80,33 @@ namespace sxva_saqartvelo_back_end.Controllers
                 {
                     var SkillIds = _db.Skills.FirstOrDefault(x => x.ID.Equals(skillName)).ID;
                     var result = _db.Freelancers.Where(x => x.Freelancer_Skill.Any(e => e.SkillID == SkillIds)).ToList();
-                    foreach (var f in result)
+                    //freelancers = freelancers.Where(x => x.Freelancer_Skill.Any(e => SkillIds == e.SkillID)).ToList();
+                    if (freelancers != null)
                     {
-                        freelancers.Add(f);
+                        foreach (var f in result)
+                        {
+                            freelancers.Add(f);
+                            
+                        }
                     }
+
+                    //if (freelancers.Count < 1)
+                    //{
+                    //    foreach (var f in result)
+                    //    {
+                    //        freelancers.Add(f);
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    freelancers = freelancers.Where(x => x.Freelancer_Skill.Any(e => e.SkillID != SkillIds)).ToList();
+                    //}
+
+                    
+                    
+
+                    
+                    
                 }
 
             }
