@@ -29,138 +29,21 @@ namespace sxva_saqartvelo_back_end.Controllers
         }
 
 
-        //FilterFreelancerByCheckBox
-        //public PartialViewResult FilterFreelancerByCheckBox(string[] skills)
-        //{
-        //    var checkboxResult = new List<Freelancer>();
-            
-            
-        //    foreach (string skillName in skills)
-        //    {
-        //        var SkillIds = _db.Skills.FirstOrDefault(x => x.Name.Equals(skillName)).ID;
-        //        var freelancers = _db.Freelancers.Where(x => x.Freelancer_Skill.Any(e=> e.SkillID == SkillIds)).ToList();
-        //        foreach(var f in freelancers)
-        //        {
-        //            checkboxResult.Add(f);   
-        //        }
-        //    }
 
-//                            foreach (int skillName in CheckedSkills)
-//                {
-//                    if (freelancers.Count< 1)
-//                    {
-//                        var SkillIds = _db.Skills.FirstOrDefault(x => x.ID.Equals(skillName)).ID;
-//        var result = _db.Freelancers.Where(x => x.Freelancer_Skill.Any(e => e.SkillID == SkillIds)).ToList();
-//                        foreach (var f in result)
-//                        {
-//                            freelancers.Add(f);
-//                        }
-//}
-//                }
-            
-
-        //    return PartialView("_PartialFilterData", checkboxResult.Distinct());
-        //}
-
-
-
-        public PartialViewResult FilterFreelancerData(int[] CheckedSkills, string RatingLow, string RatingHight, string SearchInput)
+        public PartialViewResult FilterFreelancerData(string SearchInput, int[] CheckedSkills, int RatingLow, int RatingHight)
         {
             List<Freelancer> freelancers = new List<Freelancer>();
 
             var parametersExist = false;
-
-
-            //For CheckBox
-            if (CheckedSkills != null && CheckedSkills.Count() > 0)
-            {
-                parametersExist = true;
-
-                foreach (int skillName in CheckedSkills)
-                {
-                    var SkillIds = _db.Skills.FirstOrDefault(x => x.ID.Equals(skillName)).ID;
-                    var result = _db.Freelancers.Where(x => x.Freelancer_Skill.Any(e => e.SkillID == SkillIds)).ToList();
-                    //freelancers = freelancers.Where(x => x.Freelancer_Skill.Any(e => SkillIds == e.SkillID)).ToList();
-                    if (freelancers != null)
-                    {
-                        foreach (var f in result)
-                        {
-                            freelancers.Add(f);
-                            
-                        }
-                    }
-
-                    //if (freelancers.Count < 1)
-                    //{
-                    //    foreach (var f in result)
-                    //    {
-                    //        freelancers.Add(f);
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    freelancers = freelancers.Where(x => x.Freelancer_Skill.Any(e => e.SkillID != SkillIds)).ToList();
-                    //}
-
-                    
-                    
-
-                    
-                    
-                }
-
-            }
-
-
-            if (RatingLow != null && RatingLow.Count() > 0 || RatingHight != null && RatingHight.Count() > 0)
-            {
-                parametersExist = true;
-                if (freelancers.Count < 1)
-                {
-                    freelancers.AddRange(_db.Freelancers.Where(x => x.Rating.ToString().Equals(RatingLow) || x.Rating.ToString().Equals(RatingHight)).ToList());
-                }
-                else
-                {
-                    freelancers = freelancers.Where(x => x.Rating.ToString().Equals(RatingLow) || x.Rating.ToString().Equals(RatingHight)).ToList();
-                }
-            }
-
-
-            //if (RatingLow > 0)
-            //{
-            //    parametersExist = true;
-            //    if (freelancers.Count < 1)
-            //    {
-            //        freelancers.AddRange(_db.Freelancers.Where(x => x.Rating == RatingLow).ToList());
-            //    }
-            //    else
-            //    {
-            //        freelancers = freelancers.Where(x => x.Rating == RatingLow).ToList();
-            //    }
-            //}
-
-            //if (RatingHight > 0)
-            //{
-            //    parametersExist = true;
-            //    if (freelancers.Count < 1)
-            //    {
-            //        freelancers.AddRange(_db.Freelancers.Where(x => x.Rating == RatingHight).ToList());
-            //    }
-            //    else
-            //    {
-            //        freelancers = freelancers.Where(x => x.Rating == RatingHight).ToList();
-            //    }
-            //}
-
-
 
             //For Search Filter
             if (SearchInput != null && SearchInput != "" && SearchInput != " ")
             {
                 parametersExist = true;
                 var searchWords = SearchInput.Split(' ');
-                foreach(var word in searchWords)
+                foreach (var word in searchWords)
                 {
+
                     if (freelancers.Count < 1)
                     {
                         freelancers.AddRange(_db.Freelancers.Where(x => x.Name.Contains(word) ||
@@ -182,6 +65,56 @@ namespace sxva_saqartvelo_back_end.Controllers
                 }
             }
             //
+
+
+
+            //For CheckBox Filter
+            if (CheckedSkills != null && CheckedSkills.Count() > 0)
+            {
+                parametersExist = true;
+
+                
+
+                foreach (int skills in CheckedSkills)
+                {
+                    var SkillIds = _db.Skills.FirstOrDefault(x => x.ID.Equals(skills)).ID;
+                    var result = _db.Freelancers.Where(x => x.Freelancer_Skill.Any(e => e.SkillID == SkillIds)).ToList();
+
+
+                    if (freelancers.Count < 1)
+                    {
+                        foreach (var f in result)
+                        {
+                            freelancers.Add(f);
+                        }
+                    }
+                    else
+                    {
+                        freelancers = freelancers.Where(x => x.Freelancer_Skill.Any(e => e.SkillID == SkillIds)).ToList();
+                    }
+                    
+                }
+
+            }
+            //
+
+
+            //For Range Slier Filter
+            if (RatingLow != 0 && RatingLow > 0 || RatingHight != 0 && RatingHight > 0)
+            {
+                parametersExist = true;
+                if (freelancers.Count < 1)
+                {
+                    freelancers.AddRange(freelancers.Where(x => x.Rating == RatingLow || x.Rating == RatingHight).ToList());
+                }
+                else
+                {
+                    freelancers = freelancers.Where(x => x.Rating == RatingLow || x.Rating == RatingHight).ToList();
+                }
+            }
+            //
+
+
 
 
             if (freelancers.Count() < 1 && parametersExist == false)
@@ -209,3 +142,27 @@ namespace sxva_saqartvelo_back_end.Controllers
         }
     }
 }
+
+
+
+
+
+
+//FilterFreelancerByCheckBox
+//public PartialViewResult FilterFreelancerByCheckBox(string[] skills)
+//{
+//    var checkboxResult = new List<Freelancer>();
+
+
+//    foreach (string skillName in skills)
+//    {
+//        var SkillIds = _db.Skills.FirstOrDefault(x => x.Name.Equals(skillName)).ID;
+//        var freelancers = _db.Freelancers.Where(x => x.Freelancer_Skill.Any(e=> e.SkillID == SkillIds)).ToList();
+//        foreach(var f in freelancers)
+//        {
+//            checkboxResult.Add(f);   
+//        }
+//    }
+
+//    return PartialView("_PartialFilterData", checkboxResult.Distinct());
+//}
