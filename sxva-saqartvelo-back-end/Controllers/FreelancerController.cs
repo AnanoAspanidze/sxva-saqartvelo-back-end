@@ -64,7 +64,7 @@ namespace sxva_saqartvelo_back_end.Controllers
 
 
 
-        public PartialViewResult FilterFreelancerData(int[] CheckedSkills, /*int RatingLow, int RatingHight,*/ string SearchInput)
+        public PartialViewResult FilterFreelancerData(int[] CheckedSkills, string RatingLow, string RatingHight, string SearchInput)
         {
             List<Freelancer> freelancers = new List<Freelancer>();
 
@@ -112,18 +112,18 @@ namespace sxva_saqartvelo_back_end.Controllers
             }
 
 
-            //if (RatingLow != null && RatingLow.Count() > 0 || RatingHight != null && RatingHight.Count() > 0)
-            //{
-            //    parametersExist = true;
-            //    if (freelancers.Count < 1)
-            //    {
-            //        freelancers.AddRange(_db.Freelancers.Where(x => x.Rating.Equals(RatingLow) || x.Rating.Equals(RatingHight)).ToList());
-            //    }
-            //    else
-            //    {
-            //        freelancers = freelancers.Where(x => x.Rating.Equals(RatingLow) || x.Rating.Equals(RatingHight)).ToList();
-            //    }
-            //}
+            if (RatingLow != null && RatingLow.Count() > 0 || RatingHight != null && RatingHight.Count() > 0)
+            {
+                parametersExist = true;
+                if (freelancers.Count < 1)
+                {
+                    freelancers.AddRange(_db.Freelancers.Where(x => x.Rating.ToString().Equals(RatingLow) || x.Rating.ToString().Equals(RatingHight)).ToList());
+                }
+                else
+                {
+                    freelancers = freelancers.Where(x => x.Rating.ToString().Equals(RatingLow) || x.Rating.ToString().Equals(RatingHight)).ToList();
+                }
+            }
 
 
             //if (RatingLow > 0)

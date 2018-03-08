@@ -7,13 +7,13 @@
     //
 
     //For Range Slider Filter
-    //$("#button1").click(function () {
-    //    getFiltersResult();
-    //});
+    $("#button1").click(function () {
+        getFiltersResult();
+    });
 
-    //$("#button2").on("click", function () {
-    //    getFiltersResult();
-    //});
+    $("#button2").on("click", function () {
+        getFiltersResult();
+    });
     //
 
 
@@ -48,8 +48,8 @@
         //
 
         ////For Range Slider Filter
-        //var ratingLow = $("#rating_low").val();
-        //var ratingHight = $("#rating_hight").val();
+        var ratingLow = $("#rating_low").val();
+        var ratingHight = $("#rating_hight").val();
         ////
         //alert(ratingLow);
         //alert(ratingHight);
@@ -69,8 +69,8 @@
             traditional: true,
             data: { 
                 CheckedSkills: checkedSkills,
-                //RatingLow: ratingLow,
-                //RatingHight: ratingHight,
+                RatingLow: ratingLow,
+                RatingHight: ratingHight,
                 SearchInput: searchInput
             },
             success: function (data) {
