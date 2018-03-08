@@ -76,6 +76,7 @@
             success: function (data) {
                 $("#srchImg").attr("src", "/img/search.svg").show();
                 $("#filterFreelancersData").html(data);
+                $("#countedFreelancers").html($("#foundFreelancers").val()).html();
             }
         });
     }

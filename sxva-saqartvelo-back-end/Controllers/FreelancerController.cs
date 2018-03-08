@@ -112,8 +112,6 @@ namespace sxva_saqartvelo_back_end.Controllers
             }
 
 
-
-
             //if (RatingLow != null && RatingLow.Count() > 0 || RatingHight != null && RatingHight.Count() > 0)
             //{
             //    parametersExist = true;
