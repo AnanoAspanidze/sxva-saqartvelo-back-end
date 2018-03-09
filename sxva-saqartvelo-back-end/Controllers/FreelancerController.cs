@@ -30,7 +30,7 @@ namespace sxva_saqartvelo_back_end.Controllers
 
 
 
-        public PartialViewResult FilterFreelancerData(string SearchInput, int[] CheckedSkills, int RatingLow, int RatingHight)
+        public PartialViewResult FilterFreelancerData(string SearchInput, int[] CheckedSkills, int RatingLow, int RatingHight, int RatingLowInput, int RatingHightInput)
         {
             List<Freelancer> freelancers = new List<Freelancer>();
 
@@ -80,14 +80,13 @@ namespace sxva_saqartvelo_back_end.Controllers
                     var SkillIds = _db.Skills.FirstOrDefault(x => x.ID.Equals(skills)).ID;
                     var result = _db.Freelancers.Where(x => x.Freelancer_Skill.Any(e => e.SkillID == SkillIds)).ToList();
 
-                    //foreach (var f in result)
-                    //{
-                    //    freelancers.Add(f);
-                    //}
 
                     if (freelancers.Count < 1)
                     {
-                        freelancers.AddRange(_db.Freelancers.Where(x => x.Freelancer_Skill.Any(e => e.SkillID == skills)).ToList());
+                        foreach (var f in result)
+                        {
+                            freelancers.Add(f);
+                        }
                     }
                     else
                     {
@@ -114,6 +113,36 @@ namespace sxva_saqartvelo_back_end.Controllers
                 }
             }
             //
+
+            //For Rating Input
+            if (RatingLowInput != 0 && RatingLowInput > 0 || RatingHightInput !=0 && RatingHightInput > 0)
+            {
+                parametersExist = true;
+                if (freelancers.Count < 1)
+                {
+                    freelancers.AddRange(_db.Freelancers.Where(x => x.Rating == RatingLowInput || x.Rating == RatingHightInput).ToList());
+                }
+                else
+                {
+                    freelancers = freelancers.Where(x => x.Rating == RatingLowInput || x.Rating == RatingHightInput).ToList();
+                }
+            }
+
+
+            ////For Range Slier Filter
+            //if (RatingLow != 0 && RatingLow > 0 || RatingHight != 0 && RatingHight > 0)
+            //{
+            //    parametersExist = true;
+            //    if (freelancers.Count < 1)
+            //    {
+            //        freelancers.AddRange(freelancers.Where(x => x.Rating == RatingLow || x.Rating == RatingHight).ToList());
+            //    }
+            //    else
+            //    {
+            //        freelancers = freelancers.Where(x => x.Rating == RatingLow || x.Rating == RatingHight).ToList();
+            //    }
+            //}
+            ////
 
 
 

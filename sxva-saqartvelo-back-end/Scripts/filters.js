@@ -30,6 +30,12 @@
     });
     //
 
+    $("#rating_low #rating_hight").keypress(function (e) {
+        if (e.which == "13") {
+            getFiltersResult();
+        }
+    });
+
 
 
 
@@ -61,9 +67,13 @@
         ////For Range Slider Filter
         var ratingLow = $("#rating_low").val();
         var ratingHight = $("#rating_hight").val();
+        var ratingLowInput = $("#rating_low").val();
+        var ratingHightInput = $("#rating_hight").val();
         ////
         //alert(ratingLow);
         //alert(ratingHight);
+        alert(ratingLowInput);
+        alert(ratingHightInput);
 
 
 
@@ -77,6 +87,8 @@
                 CheckedSkills: checkedSkills,
                 RatingLow: ratingLow,
                 RatingHight: ratingHight,
+                RatingLowInput: ratingLowInput,
+                RatingHightInput: ratingHightInput
             },
             success: function (data) {
                 $("#srchImg").attr("src", "/img/search.svg").show();
