@@ -80,13 +80,14 @@ namespace sxva_saqartvelo_back_end.Controllers
                     var SkillIds = _db.Skills.FirstOrDefault(x => x.ID.Equals(skills)).ID;
                     var result = _db.Freelancers.Where(x => x.Freelancer_Skill.Any(e => e.SkillID == SkillIds)).ToList();
 
+                    //foreach (var f in result)
+                    //{
+                    //    freelancers.Add(f);
+                    //}
 
                     if (freelancers.Count < 1)
                     {
-                        foreach (var f in result)
-                        {
-                            freelancers.Add(f);
-                        }
+                        freelancers.AddRange(_db.Freelancers.Where(x => x.Freelancer_Skill.Any(e => e.SkillID == skills)).ToList());
                     }
                     else
                     {
@@ -105,7 +106,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                 parametersExist = true;
                 if (freelancers.Count < 1)
                 {
-                    freelancers.AddRange(freelancers.Where(x => x.Rating == RatingLow || x.Rating == RatingHight).ToList());
+                    freelancers.AddRange(_db.Freelancers.Where(x => x.Rating == RatingLow || x.Rating == RatingHight).ToList());
                 }
                 else
                 {
