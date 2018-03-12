@@ -36,31 +36,51 @@ namespace sxva_saqartvelo_back_end.Controllers
 
             var parametersExist = false;
 
-            //For Search Filter
+            //For Search
+            //if (SearchInput != null && SearchInput != "" && SearchInput != " ")
+            //{
+            //    parametersExist = true;
+            //    var searchWords = SearchInput.Split(' ');
+            //    foreach (var word in searchWords)
+            //    {
+
+            //        if (freelancers.Count < 1)
+            //        {
+            //            freelancers.AddRange(_db.Freelancers.Where(x => x.Name.Contains(word) ||
+            //            x.Surname.Contains(word) ||
+            //                x.Freelancer_Skill.Any(e => e.Skill.Name.Contains(word) ||
+            //                    x.Bio.Contains(word) ||
+            //                        x.Projects.Any(y => y.Name.Contains(word) || y.Description.Contains(word) ||
+            //                            y.Company.Name.Contains(word)))).ToList());
+            //        }
+            //        else
+            //        {
+            //            freelancers = freelancers.Where(x => x.Name.Contains(word) ||
+            //            x.Surname.Contains(word) ||
+            //                x.Freelancer_Skill.Any(e => e.Skill.Name.Contains(word) ||
+            //                    x.Bio.Contains(word) ||
+            //                        x.Projects.Any(y => y.Name.Contains(word) || y.Description.Contains(word) ||
+            //                            y.Company.Name.Contains(word)))).ToList();
+            //        }
+            //    }
+            //}
+            //
+
+
+            //For Search
             if (SearchInput != null && SearchInput != "" && SearchInput != " ")
             {
                 parametersExist = true;
                 var searchWords = SearchInput.Split(' ');
                 foreach (var word in searchWords)
                 {
-
                     if (freelancers.Count < 1)
                     {
-                        freelancers.AddRange(_db.Freelancers.Where(x => x.Name.Contains(word) ||
-                        x.Surname.Contains(word) ||
-                            x.Freelancer_Skill.Any(e => e.Skill.Name.Contains(word) ||
-                                x.Bio.Contains(word) ||
-                                    x.Projects.Any(y => y.Name.Contains(word) || y.Description.Contains(word) ||
-                                        y.Company.Name.Contains(word)))).ToList());
+                        freelancers.AddRange(_db.Freelancers.Where(x => x.Name.Contains(word) || x.Surname.Contains(word) || x.Freelancer_Skill.Any(e => e.Skill.Name.Contains(word)) || x.Bio.Contains(word) || x.Projects.Any(y => y.Name.Contains(word) || y.Description.Contains(word) || y.Company.Name.Contains(word))).ToList());
                     }
                     else
                     {
-                        freelancers = freelancers.Where(x => x.Name.Contains(word) ||
-                        x.Surname.Contains(word) ||
-                            x.Freelancer_Skill.Any(e => e.Skill.Name.Contains(word) ||
-                                x.Bio.Contains(word) ||
-                                    x.Projects.Any(y => y.Name.Contains(word) || y.Description.Contains(word) ||
-                                        y.Company.Name.Contains(word)))).ToList();
+                        freelancers = freelancers.Where(x => x.Name.Contains(word) || x.Surname.Contains(word) || x.Freelancer_Skill.Any(e => e.Skill.Name.Contains(word)) || x.Bio.Contains(word) || x.Projects.Any(y => y.Name.Contains(word) || y.Description.Contains(word) || y.Company.Name.Contains(word))).ToList();
                     }
                 }
             }
