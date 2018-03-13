@@ -61,8 +61,8 @@
                         </span>
                     </span>
                     <form id="rowRating" class="row rating-from-to">
-                        <input type="text" placeholder="0" class="col min-rat" id="rating_low" value="0">
-                        <input type="text" id="rating_hight" placeholder="10" class="col max-rat" value="0">
+                        <input placeholder="0" class="col min-rat" id="rating_low" onkeyup="numbersOnly(this)" value="0">
+                        <input placeholder="10" class="col max-rat" id="rating_hight" onkeyup="numbersOnly(this)" value="10">
                         <br>
                         <div style="" id="line">
                             <div id="buutonaut">
@@ -141,6 +141,14 @@
         var vb = @ViewBag.CountFreelancers; //გასუფთავებაზე კლიკის დროს ყველა ფრილასერის რაოდენობის გამოტანა
         $("#countedFreelancers").html(vb); //გასუფთავებაზე კლიკის დროს ყველა ფრილასერის რაოდენობის გამოტანა
     });
+
+    var ratingLow = $("#rating_low").attr("id");
+    var ratingHight = $("#rating_hight").attr("id");
+    function numbersOnly(ratingLow, ratingHight){
+        var nums = /[^0-9]/gi;
+        ratingLow.Value = ratingLow.value.replace(nums, "");
+        ratingHight.Value = ratingHight.value.replace(nums, "");
+    }
 </script>
 
 <script src="~/Scripts/JS/printCandidats.js"></script>

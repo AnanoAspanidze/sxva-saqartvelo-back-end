@@ -8,6 +8,10 @@
         }
     });
 
+    $("#searchInput").blur(function () {
+        getFiltersResult();
+    });
+
 
     $("#srch").click(function () {
         getFiltersResult();
@@ -34,6 +38,10 @@
         if (e.which == "13") {
             getFiltersResult();
         }
+    });
+
+    $("#rating_low, #rating_hight").blur(function () {
+        getFiltersResult();
     });
 
 
