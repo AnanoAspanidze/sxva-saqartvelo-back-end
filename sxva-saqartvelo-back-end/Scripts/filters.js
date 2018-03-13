@@ -30,7 +30,7 @@
     });
     //
 
-    $("#rating_low #rating_hight").keypress(function (e) {
+    $("#rating_low, #rating_hight").keypress(function (e) {
         if (e.which == "13") {
             getFiltersResult();
         }
@@ -47,10 +47,12 @@
     function getFiltersResult() {
 
 
+        //alert("გამოძახებულია ფილტრის ფუნქცია");
+
         //For Search Input
         $("#srchImg").attr("src", "/img/searchSpin.svg");
         var searchInput = $("#searchInput").val();
-        alert(searchInput);
+       
         //
 
 
@@ -67,15 +69,19 @@
         ////For Range Slider Filter
         var ratingLow = $("#rating_low").val();
         var ratingHight = $("#rating_hight").val();
-        var ratingLowInput = $("#rating_low").val();
-        var ratingHightInput = $("#rating_hight").val();
+        //var ratingLowInput = $("#rating_low").val();
+        //var ratingHightInput = $("#rating_hight").val();
         ////
+   
+        //alert(ratingLowInput);
+        //alert(ratingHightInput);
+
+
+
+        //alert(searchInput);
+        //alert(checkedSkills);
         //alert(ratingLow);
         //alert(ratingHight);
-        alert(ratingLowInput);
-        alert(ratingHightInput);
-
-
 
 
         $.ajax({
@@ -87,8 +93,8 @@
                 CheckedSkills: checkedSkills,
                 RatingLow: ratingLow,
                 RatingHight: ratingHight,
-                RatingLowInput: ratingLowInput,
-                RatingHightInput: ratingHightInput
+                //RatingLowInput: ratingLowInput,
+                //RatingHightInput: ratingHightInput
             },
             success: function (data) {
                 $("#srchImg").attr("src", "/img/search.svg").show();
@@ -96,6 +102,10 @@
                 $("#countedFreelancers").html($("#foundFreelancers").val()).html();
             }
         });
+
+
+
+
     }
 });
 
