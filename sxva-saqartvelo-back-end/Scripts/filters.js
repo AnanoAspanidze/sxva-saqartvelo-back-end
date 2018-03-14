@@ -11,18 +11,21 @@
     $("#searchInput").blur(function () {
         getFiltersResult();
     });
-
-
+    
     $("#srch").click(function () {
         getFiltersResult();
     });
     //
+
+
 
     //For CheckBox
     $('.possibilities-section .possibilities input[type=checkbox]').change(function () {
         getFiltersResult();
     });
     //
+
+
 
     //For Range Slider Filter
     $("#button1").click(function () {
@@ -32,7 +35,7 @@
     $("#button2").on("click", function () {
         getFiltersResult();
     });
-    //
+
 
     $("#rating_low, #rating_hight").keypress(function (e) {
         if (e.which == "13") {
@@ -43,19 +46,11 @@
     $("#rating_low, #rating_hight").blur(function () {
         getFiltersResult();
     });
-
-
-
-
-    //$(".clear-search").click(function () {
-    //    getFiltersResult();
-    //});
+    //
 
 
     function getFiltersResult() {
 
-
-        //alert("გამოძახებულია ფილტრის ფუნქცია");
 
         //For Search Input
         $("#srchImg").attr("src", "/img/searchSpin.svg");
@@ -74,22 +69,11 @@
         });
         //
 
-        ////For Range Slider Filter
+        //For Range Slider Filter
         var ratingLow = $("#rating_low").val();
         var ratingHight = $("#rating_hight").val();
-        //var ratingLowInput = $("#rating_low").val();
-        //var ratingHightInput = $("#rating_hight").val();
-        ////
-   
-        //alert(ratingLowInput);
-        //alert(ratingHightInput);
+        //
 
-
-
-        //alert(searchInput);
-        //alert(checkedSkills);
-        //alert(ratingLow);
-        //alert(ratingHight);
 
 
         $.ajax({
@@ -100,9 +84,7 @@
                 SearchInput: searchInput,
                 CheckedSkills: checkedSkills,
                 RatingLow: ratingLow,
-                RatingHight: ratingHight,
-                //RatingLowInput: ratingLowInput,
-                //RatingHightInput: ratingHightInput
+                RatingHight: ratingHight
             },
             success: function (data) {
                 $("#srchImg").attr("src", "/img/search.svg").show();
@@ -110,9 +92,6 @@
                 $("#countedFreelancers").html($("#foundFreelancers").val()).html();
             }
         });
-
-
-
 
     }
 });
