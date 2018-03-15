@@ -30,42 +30,12 @@ namespace sxva_saqartvelo_back_end.Controllers
 
 
 
-        public PartialViewResult FilterFreelancerData(string SearchInput, int[] CheckedSkills, int RatingLow, int RatingHight/*, int RatingLowInput, int RatingHightInput*/)
+        public PartialViewResult FilterFreelancerData(string SearchInput, int[] CheckedSkills, int? RatingLow, int? RatingHight)
         {
             List<Freelancer> freelancers = new List<Freelancer>();
 
             var parametersExist = false;
        
-
-            //For Search
-            //if (SearchInput != null && SearchInput != "" && SearchInput != " ")
-            //{
-            //    parametersExist = true;
-            //    var searchWords = SearchInput.Split(' ');
-            //    foreach (var word in searchWords)
-            //    {
-
-            //        if (freelancers.Count < 1)
-            //        {
-            //            freelancers.AddRange(_db.Freelancers.Where(x => x.Name.Contains(word) ||
-            //            x.Surname.Contains(word) ||
-            //                x.Freelancer_Skill.Any(e => e.Skill.Name.Contains(word) ||
-            //                    x.Bio.Contains(word) ||
-            //                        x.Projects.Any(y => y.Name.Contains(word) || y.Description.Contains(word) ||
-            //                            y.Company.Name.Contains(word)))).ToList());
-            //        }
-            //        else
-            //        {
-            //            freelancers = freelancers.Where(x => x.Name.Contains(word) ||
-            //            x.Surname.Contains(word) ||
-            //                x.Freelancer_Skill.Any(e => e.Skill.Name.Contains(word) ||
-            //                    x.Bio.Contains(word) ||
-            //                        x.Projects.Any(y => y.Name.Contains(word) || y.Description.Contains(word) ||
-            //                            y.Company.Name.Contains(word)))).ToList();
-            //        }
-            //    }
-            //}
-            //
 
 
             //For Search
@@ -141,37 +111,6 @@ namespace sxva_saqartvelo_back_end.Controllers
                 if (freelancers.Count < 1) return PartialView("_PartialFilterData", freelancers.Distinct());
             }
             //
-
-            //For Rating Input
-            //if (RatingLowInput != 0 && RatingLowInput > 0 || RatingHightInput !=0 && RatingHightInput > 0)
-            //{
-            //    parametersExist = true;
-            //    if (freelancers.Count < 1)
-            //    {
-            //        freelancers.AddRange(_db.Freelancers.Where(x => x.Rating == RatingLowInput || x.Rating == RatingHightInput).ToList());
-            //    }
-            //    else
-            //    {
-            //        freelancers = freelancers.Where(x => x.Rating == RatingLowInput || x.Rating == RatingHightInput).ToList();
-            //    }
-            //}
-
-
-            ////For Range Slier Filter
-            //if (RatingLow != 0 && RatingLow > 0 || RatingHight != 0 && RatingHight > 0)
-            //{
-            //    parametersExist = true;
-            //    if (freelancers.Count < 1)
-            //    {
-            //        freelancers.AddRange(freelancers.Where(x => x.Rating == RatingLow || x.Rating == RatingHight).ToList());
-            //    }
-            //    else
-            //    {
-            //        freelancers = freelancers.Where(x => x.Rating == RatingLow || x.Rating == RatingHight).ToList();
-            //    }
-            //}
-            ////
-
 
 
 

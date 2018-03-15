@@ -61,8 +61,8 @@
                         </span>
                     </span>
                     <form id="rowRating" class="row rating-from-to">
-                        <input placeholder="0" maxlength="2" class="col min-rat" id="rating_low" value="0">
-                        <input placeholder="10" maxlength="2" class="col max-rat" id="rating_hight" value="10">
+                        <input maxlength="2" class="col min-rat" id="rating_low" value="0">
+                        <input maxlength="2" class="col max-rat" id="rating_hight" value="10">
                         <br>
                         <div style="" id="line">
                             <div id="buutonaut">
@@ -173,14 +173,56 @@
             e.preventDefault();
             $(this).val(10);
         }
+    });
+    //
+
+
+
+    //Rating Inputs Validation
+ 
+    $("#rating_low, #rating_hight").blur(function(){
+
+        var ratingLow = $("#rating_low").val();
+        var ratingHight = $("#rating_hight").val();
+
+        if(ratingLow == ""){
+            $("#rating_low").css("border-color", "#e80c4d");
+            return false;
+
+        }
+        if(ratingHight == ""){
+            $("#rating_hight").css("border-color", "#e80c4d");
+            return false;
+        }
+    });
+
+    if($("#rating_low").val() !=null || $("#rating_hight").val() != null){
+        $("#rating_low, #rating_hight").keyup(function(){
+            var $this = $(this);
+            var insertedVal = $this.val();
+            if (insertedVal != null) {
+                $this.css("border-color", "");
+            }
+        });
+    }
+
+    $("#rating_low, #rating_hight").keyup(function(e){
 
         var ratingLow = $("#rating_low").val();
         var ratingHight = $("#rating_hight").val();
 
         if (ratingHight < ratingLow) {
             $("#rating_hight").val(10);
-            //$("#rating_hight").html($("#rating_hight").val(10)).html();
+
+            if(e.keyCode == 8){ // keycode for backspace.
+                $("#rating_hight").val("");
+            }
+            if(ratingLow != null){
+                $("#rating_hight").css("border-color", "");
+            }
         }
+      
+        
     });
     //
 
