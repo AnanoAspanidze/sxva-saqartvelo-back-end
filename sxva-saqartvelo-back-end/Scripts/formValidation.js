@@ -1,5 +1,25 @@
 ﻿function validateForm() {
 
+    //Validate Login
+    if ($("#Email").val() == "" || $("#Password").val() == "") {
+
+        $("#Email").css("border-color", "#e80c4d");
+        $("#Password").css("border-color", "#e80c4d");
+    }
+
+    if ($("#Email").val() != null || $("#Password").val() != null) {
+        $("#Email, #Password").keyup(function () {
+            var $this = $(this);
+            var insertedVal = $this.val();
+            if (insertedVal != null) {
+                $this.css("border-color", "");
+            }
+        });
+    }
+    //
+
+
+    //Validate Registration
     if ($("#Name").val() == ""
          || $("#Surname").val() == ""
           || $("#Field").val() == ""
@@ -17,8 +37,6 @@
         $("#Mobile").css("border-color", "#e80c4d");
     }
 
-
-
     if ($("#Name").val() != null ||
         $("#Surname").val() != null ||
          $("#Field").val() != null ||
@@ -35,4 +53,16 @@
             }
         });
     }
+    //
 }
+
+
+//if (e.keyCode == 8) {
+//    $("input").keyup(function () {
+//        var $this = $(this);
+//        var insertedVal = $this.val();
+//        if (insertedVal == null) {
+//            $this.css("border-color", "#e80c4d");
+//        }
+//    });
+//}

@@ -138,6 +138,8 @@
 
     $('.clear-search').click(function () {
         $('#searchInput').val(''); //clear search input
+        $("#rating_low, #rating_hight").css("border-color", "");
+        //$("#rating_hight").css("border-color", "");
         $("#filterFreelancersData").load("/Freelancer/Index #dataToload"); //გასუფთავებაზე კლიკის დროს ყველა ფრილანსერის გამოტანა
         var vb = @ViewBag.CountFreelancers; //გასუფთავებაზე კლიკის დროს ყველა ფრილასერის რაოდენობის გამოტანა
         $("#countedFreelancers").html(vb); //გასუფთავებაზე კლიკის დროს ყველა ფრილასერის რაოდენობის გამოტანა
@@ -187,12 +189,9 @@
 
         if(ratingLow == ""){
             $("#rating_low").css("border-color", "#e80c4d");
-            return false;
-
         }
         if(ratingHight == ""){
             $("#rating_hight").css("border-color", "#e80c4d");
-            return false;
         }
     });
 
@@ -206,18 +205,20 @@
         });
     }
 
-    $("#rating_low, #rating_hight").keyup(function(e){
+    $("#rating_low, #rating_hight").on("keydown keyup", function(e){
 
-        var ratingLow = $("#rating_low").val();
-        var ratingHight = $("#rating_hight").val();
-
-        if (ratingHight < ratingLow) {
+        if($("#rating_low").val() == 10){
             $("#rating_hight").val(10);
+        }
 
+
+        if ($("#rating_low").val() > $("#rating_hight").val()) {
+            $("#rating_hight").val(10);
+            
             if(e.keyCode == 8){ // keycode for backspace.
                 $("#rating_hight").val("");
             }
-            if(ratingLow != null){
+            if($("#rating_low").val() != null){
                 $("#rating_hight").css("border-color", "");
             }
         }
