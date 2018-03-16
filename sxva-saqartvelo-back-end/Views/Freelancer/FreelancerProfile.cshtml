@@ -4,30 +4,16 @@
 @using sxva_saqartvelo_back_end.Helpers;
 
 @{ 
-    //Freelancer freelancer = (Freelancer)Session["freelancer"];
     var freelancer = LoginHelper.freelancer();
 }
 
-@if (freelancer != null)
-{
-    <script>
-        $(document).ready(function () {
-            $('#header-nav').hide(); //დალოგინების დროს header-nav-ის, ავტორიზაცია, რეგისტრაციის დამალვა
-        });
-    </script>
-}
+
 
 @if(freelancer != null)
 {
-    
     <div style="padding-top:200px; text-align:center" class="freelancer">
         <p>გამარჯობა</p> @freelancer.Name @freelancer.Surname 
     </div>
-    <div style="text-align:center; padding:10px" class="logOut">
-        <a href="/Account/Logout" class="logOut">გამოსვლა</a>
-    </div>
-
-
 }
 
 

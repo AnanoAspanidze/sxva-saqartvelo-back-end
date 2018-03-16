@@ -24,9 +24,87 @@
     <script src="~/Scripts/formValidation.js"></script>
     <script src="~/Scripts/filters.js"></script>
 </head>
+@*@model sxva_saqartvelo_back_end.Models.Freelancer*@
+
+@using sxva_saqartvelo_back_end.Models;
+@using sxva_saqartvelo_back_end.Helpers;
+
+@{
+    var freelancer = LoginHelper.freelancer();
+}
 <body>
     <header class="main-blue">
-
+        <div class="main-container">
+            <a href="/Home/Index">
+                <div id="logo">
+                </div>
+            </a>
+            <nav id="header-nav">
+                @if (freelancer == null)
+                {
+                    <a href="/Account/Login"><button class="hvr-back-pulse btn-font">ავტორიზაცია</button></a>
+                    <a href="/Account/Register"><button class="btn-font button-active hvr-back-pulse">რეგისტრაცია</button></a>
+                }
+                else
+                {
+                    <div class="drpdwnMenu">
+                        <a href="@Url.Action("FreelancerProfile", "Freelancer", new { id = freelancer.ID})" class="image-a" style="background-image: url(/img/pp/@freelancer.Photo);">
+                            <img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="~/img/pp/@freelancer.Photo" alt="profile picture">
+                        </a>
+                        @*დასამატებილი იქნება id*@
+                        <a class="loggedUser" href="/Freelancer/FreelancerProfile" style="color:white; cursor:pointer; text-decoration:none">@freelancer.Name @freelancer.Surname</a>
+                        <div class="dropdown-content">
+                            <a class="edit" href=""><button class="hvr-back-pulse btn-font">რედაქტირება</button></a>
+                            <a class="logout" href="/Account/Logout"><button class="hvr-back-pulse btn-font">გამოსვლა</button></a>
+                           
+                        </div>
+                    </div>
+                }
+                <style>
+                    .drpdwnMenu{
+                        position: relative;
+                        display: inline-block;
+                    }
+                    .dropdown-content{
+                        display: none;
+                        position: absolute;
+                        background-color: rgba(17, 76, 108, 0.82);
+                        min-width: 160px;
+                        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                        padding: 12px 16px;
+                        z-index: 1;
+                    }
+                    .drpdwnMenu:hover .dropdown-content{
+                        display: block;
+                    }
+                </style>
+                <div id="myNav" class="overlay">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <div class="overlay-content">
+                        <a href="/Home/Index">მთავარი</a>
+                        <a href="/Home/About">ჩვენ შესახებ</a>
+                        <a href="/Freelancer/Index">დეველოპერები</a>
+                        <a href="/Home/Contact">კონტაქტი</a>
+                        <div class="contact-info-in-nav">
+                            <p>+995 577 67 04 04</p>
+                            <p>info@geolab.edu.ge</p>
+                        </div>
+                        <div class="social-icons-in-nav">
+                            <a class="no-padding" href="https://plus.google.com/109260799805558176797" target="_blank">
+                                <img src="/img/soc-icons/gPlus.svg" alt="google plus" class="soc_for_burger">
+                            </a>
+                            <a class="no-padding" href="https://www.facebook.com/GeoLabEdu/?ref=br_rs" target="_blank">
+                                <img src="/img/soc-icons/fb.svg" alt="facebook" class="soc_for_burger">
+                            </a>
+                            <a class="no-padding" href="https://www.youtube.com/channel/UCGv7kAqQbpP6H0cpNid0afw" target="_blank">
+                                <img src="/img/soc-icons/you.svg" alt="youtube" class="soc_for_burger">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <img src="/img/burger.svg" alt="navigation" id="burger-icon" onclick="openNav()">
+            </nav>
+        </div>
     </header>
 
     @RenderBody()
