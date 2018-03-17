@@ -14,8 +14,15 @@ namespace sxva_saqartvelo_back_end.Models
         public string Bio { get; set; }
         public string Field { get; set; }  //Freelancer Position
         public string Mobile { get; set; }
+
+        [DataType(DataType.Password)]
         public string oldPassword { get; set; }
+
+        [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "პაროლები არ ემთხვევა")]
         public string RepeatPassword { get; set; }
     }
 }

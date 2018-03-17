@@ -36,7 +36,7 @@ namespace sxva_saqartvelo_back_end.Controllers
             List<Freelancer> freelancers = new List<Freelancer>();
 
             var parametersExist = false;
-       
+
 
 
             //For Search
@@ -58,7 +58,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                     }
                 }
 
-                if(freelancers.Count < 1) return PartialView("_PartialFilterData", freelancers.Distinct());
+                if (freelancers.Count < 1) return PartialView("_PartialFilterData", freelancers.Distinct());
 
             }
             //
@@ -131,16 +131,28 @@ namespace sxva_saqartvelo_back_end.Controllers
         [LoginFilter]
         public ActionResult EditFreelancer(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Freelancer freelancerTbl = _db.Freelancers.Find(id);
-            if(freelancerTbl == null)
+
+            var editFreelancerViewModel = new EditFreelancerViewModel
+            {
+                freelancer = _db.Freelancers.Find(id)
+            };
+            if (editFreelancerViewModel == null)
             {
                 return HttpNotFound();
             }
-            return View(freelancerTbl);
+            return View(editFreelancerViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditFreelancer([Bind(Include = "Photo, Name, Surname, Field, Mobile, oldPassword, Password, RepeatPassword, Bio")] EditFreelancerViewModel model)
+        {
+            
+            return View();
         }
     }
 }
