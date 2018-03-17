@@ -311,6 +311,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataBase.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\EditFreelancerModel.cs" />
     <Compile Include="Models\Freelancer.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
@@ -360,6 +361,7 @@
     <Content Include="Views\Freelancer\Details.cshtml" />
     <Content Include="Views\Freelancer\FreelancerProfile.cshtml" />
     <Content Include="Views\Shared\_PartialFilterData.cshtml" />
+    <Content Include="Views\Freelancer\EditFreelancer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

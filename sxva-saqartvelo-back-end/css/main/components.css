@@ -3,7 +3,7 @@ button{
     /* height: 4.4vh; */
     min-height: 25px;
     /* width: 18vh; */
-    min-width: 103px;
+    min-width: 105px;
     background: rgba(255, 255, 255, 0);
     border: 1px solid white;
     padding-top: 5px;
@@ -144,3 +144,21 @@ button{
       border-radius: 400px;
       position: relative;
 }
+
+.drpdwnMenu{
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content{
+    display: none;
+    position: absolute;
+    background-color: rgba(17, 76, 108, 0.82);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 11px;
+    z-index: 1;
+}
+.drpdwnMenu:hover .dropdown-content{
+    display: block;
+}
+                    

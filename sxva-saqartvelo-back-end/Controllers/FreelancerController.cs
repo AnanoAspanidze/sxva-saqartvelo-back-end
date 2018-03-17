@@ -7,6 +7,7 @@ using sxva_saqartvelo_back_end.Models;
 using sxva_saqartvelo_back_end.Filters;
 using PagedList.Mvc;
 using PagedList;
+using System.Net;
 
 namespace sxva_saqartvelo_back_end.Controllers
 {
@@ -71,16 +72,9 @@ namespace sxva_saqartvelo_back_end.Controllers
 
                 foreach (int skillID in CheckedSkills)
                 {
-                    //var SkillIds = _db.Skills.FirstOrDefault(x => x.ID.Equals(skills)).ID;
-                    //var result = _db.Freelancers.Where(x => x.Freelancer_Skill.Any(e => e.SkillID == SkillIds)).ToList();
-
 
                     if (freelancers.Count < 1)
                     {
-                        //foreach (var f in result)
-                        //{
-                        //    freelancers.Add(f);
-                        //}
                         freelancers.AddRange(_db.Freelancers.Where(x => x.Freelancer_Skill.Any(e => e.SkillID == skillID)).ToList());
                     }
                     else
@@ -112,14 +106,10 @@ namespace sxva_saqartvelo_back_end.Controllers
             }
             //
 
-
-
             if (parametersExist == false)
             {
                 freelancers = _db.Freelancers.ToList();
             }
-
-
 
             return PartialView("_PartialFilterData", freelancers.Distinct());
         }
@@ -136,6 +126,21 @@ namespace sxva_saqartvelo_back_end.Controllers
         public ActionResult FreelancerProfile()
         {
             return View();
+        }
+
+        [LoginFilter]
+        public ActionResult EditFreelancer(int? id)
+        {
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Freelancer freelancerTbl = _db.Freelancers.Find(id);
+            if(freelancerTbl == null)
+            {
+                return HttpNotFound();
+            }
+            return View(freelancerTbl);
         }
     }
 }
