@@ -8,6 +8,7 @@ using sxva_saqartvelo_back_end.Filters;
 using PagedList.Mvc;
 using PagedList;
 using System.Net;
+using sxva_saqartvelo_back_end.Helpers;
 
 namespace sxva_saqartvelo_back_end.Controllers
 {
@@ -15,6 +16,8 @@ namespace sxva_saqartvelo_back_end.Controllers
     {
 
         OtherGeorgiaEntities _db = new OtherGeorgiaEntities();
+
+        string randomSecret = "4b47a904bc5e81234a754f552355bf44"; //პაროლის დასაჰეშად
 
         public ActionResult Index(int? page)
         {
@@ -149,10 +152,58 @@ namespace sxva_saqartvelo_back_end.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditFreelancer([Bind(Include = "Photo, Name, Surname, Field, Mobile, oldPassword, Password, RepeatPassword, Bio")] EditFreelancerViewModel model)
+        public ActionResult EditFreelancer([Bind(Include = "ID, Name, Surname, Field, Mobile, oldPassword, Password, RepeatPassword")] Freelancer editFreelancer, EditFreelancerViewModel model, HttpPostedFileBase file)
         {
-            
-            return View();
+            if (ModelState.IsValid)
+            {
+                var freelancerToEdit = _db.Freelancers.Find(editFreelancer.ID);
+                
+                if (freelancerToEdit == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                
+
+                if (model.freelancer.Name == null || model.freelancer.Surname == null || model.freelancer.Field == null || model.freelancer.Mobile == null || model.editFreelancerModel.oldPassword == null || model.editFreelancerModel.Password == null || model.editFreelancerModel.RepeatPassword == null)
+                {
+                    freelancerToEdit.Name = freelancerToEdit.Name;
+                    freelancerToEdit.Surname = freelancerToEdit.Surname;
+                    freelancerToEdit.Field = freelancerToEdit.Field;
+                    freelancerToEdit.Mobile = freelancerToEdit.Mobile;
+                    freelancerToEdit.Password = freelancerToEdit.Password;
+                    freelancerToEdit.Bio = freelancerToEdit.Bio;
+                    _db.SaveChanges();
+                    return View(model);
+                }
+                if (model.freelancer.Name != null || model.freelancer.Surname != null || model.freelancer.Field != null || model.freelancer.Mobile != null || model.editFreelancerModel.oldPassword != null || model.editFreelancerModel.Password != null || model.editFreelancerModel.RepeatPassword != null)
+                {
+                    freelancerToEdit.Name = model.freelancer.Name.Trim();
+                    freelancerToEdit.Surname = model.freelancer.Surname.Trim();
+                    freelancerToEdit.Field = model.freelancer.Field.Trim();
+                    freelancerToEdit.Mobile = model.freelancer.Mobile.Trim();
+                    freelancerToEdit.Password = PasswordHashHelper.MD5Hash(randomSecret + model.editFreelancerModel.Password.Trim());
+                    _db.SaveChanges();
+                }
+                if (freelancerToEdit.Password != PasswordHashHelper.MD5Hash(randomSecret + model.editFreelancerModel.oldPassword.Trim()))
+                {
+                    ViewBag.PasswordsDoNotMatch = "ძველი პაროლი არ ემთხვევა";
+                    return View(model);
+                }
+                //else
+                //{
+                //    freelancerToEdit.Name = model.freelancer.Name.Trim();
+                //    freelancerToEdit.Surname = model.freelancer.Surname.Trim();
+                //    freelancerToEdit.Field = model.freelancer.Field.Trim();
+                //    freelancerToEdit.Mobile = model.freelancer.Mobile.Trim();
+                //    freelancerToEdit.Password = PasswordHashHelper.MD5Hash(randomSecret + model.editFreelancerModel.Password.Trim());
+                //    //freelancerToEdit.Bio = model.freelancer.Bio.Trim();
+                //    _db.SaveChanges();
+                //}
+
+                
+            }
+            return View(model);
         }
     }
 }

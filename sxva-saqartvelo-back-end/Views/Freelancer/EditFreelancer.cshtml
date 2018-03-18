@@ -66,12 +66,12 @@
                 @Html.EditorFor(model => model.editFreelancerModel.RepeatPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "გაიმეორეთ პაროლი" } })
                 @Html.ValidationMessageFor(model => model.editFreelancerModel.RepeatPassword, "", new { @class = "text-danger" })
             </div>
+            <div class="cont3 col-12 col-sm-6 form-group">
+                <p style="color:red" class="PasswordsDoNotMatch">@ViewBag.PasswordsDoNotMatch</p>
+                <p style="color:green" class="PasswordIsChanged">@ViewBag.PasswordIsChanged</p>
+            </div>
             <div class="ckeditorTextArea">
                 <textarea class="ckeditor" id="freelancerBio" name="freelancerBio" rows="10" cols="80">@Model.freelancer.Bio</textarea>
-            </div>
-
-            <div class="cont3 col-12 col-sm-6 form-group">
-                <p style="color:green" class="RegistrationSuccedeed">@ViewBag.RegistrationSuccess</p>
             </div>
             <div class="send container">
                 <button onClick="CKupdate()" class="submit">რედაქტირება</button>
