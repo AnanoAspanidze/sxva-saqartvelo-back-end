@@ -163,28 +163,61 @@ namespace sxva_saqartvelo_back_end.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
-                
+                var existingFreelancer = _db.Freelancers.FirstOrDefault(x => x.ID == editFreelancer.ID);
 
-                if (model.freelancer.Name == null || model.freelancer.Surname == null || model.freelancer.Field == null || model.freelancer.Mobile == null || model.editFreelancerModel.oldPassword == null || model.editFreelancerModel.Password == null || model.editFreelancerModel.RepeatPassword == null)
+
+
+                //if (model.freelancer.Name == null || model.freelancer.Surname == null || model.freelancer.Field == null || model.freelancer.Mobile == null || model.editFreelancerModel.Password == null)
+                if(existingFreelancer == null)
                 {
-                    freelancerToEdit.Name = freelancerToEdit.Name;
-                    freelancerToEdit.Surname = freelancerToEdit.Surname;
-                    freelancerToEdit.Field = freelancerToEdit.Field;
-                    freelancerToEdit.Mobile = freelancerToEdit.Mobile;
-                    freelancerToEdit.Password = freelancerToEdit.Password;
-                    freelancerToEdit.Bio = freelancerToEdit.Bio;
+                    //existingFreelancer.Name = existingFreelancer.Name;
+                    //existingFreelancer.Surname = existingFreelancer.Surname;
+                    //existingFreelancer.Field = existingFreelancer.Field;
+                    //existingFreelancer.Mobile = existingFreelancer.Mobile;
+                    //existingFreelancer.Password = existingFreelancer.Password;
+
+                    //_db.SaveChanges();
+                    //return View(model);
+                    existingFreelancer.Name = editFreelancer.Name;
+                    existingFreelancer.Surname = editFreelancer.Surname;
+                    existingFreelancer.Field = editFreelancer.Field;
+                    existingFreelancer.Mobile = editFreelancer.Mobile;
+                    _db.SaveChanges();
+                    
+                }
+                else
+                {
+                    existingFreelancer.Name = model.freelancer.Name.Trim();
+                    existingFreelancer.Surname = model.freelancer.Surname.Trim();
+                    existingFreelancer.Field = model.freelancer.Field.Trim();
+                    existingFreelancer.Mobile = model.freelancer.Mobile.Trim();
+                    existingFreelancer.Password = PasswordHashHelper.MD5Hash(randomSecret + model.editFreelancerModel.Password.Trim());
                     _db.SaveChanges();
                     return View(model);
                 }
-                if (model.freelancer.Name != null || model.freelancer.Surname != null || model.freelancer.Field != null || model.freelancer.Mobile != null || model.editFreelancerModel.oldPassword != null || model.editFreelancerModel.Password != null || model.editFreelancerModel.RepeatPassword != null)
-                {
-                    freelancerToEdit.Name = model.freelancer.Name.Trim();
-                    freelancerToEdit.Surname = model.freelancer.Surname.Trim();
-                    freelancerToEdit.Field = model.freelancer.Field.Trim();
-                    freelancerToEdit.Mobile = model.freelancer.Mobile.Trim();
-                    freelancerToEdit.Password = PasswordHashHelper.MD5Hash(randomSecret + model.editFreelancerModel.Password.Trim());
-                    _db.SaveChanges();
-                }
+                
+
+
+                //if (model.freelancer.Name == null || model.freelancer.Surname == null || model.freelancer.Field == null || model.freelancer.Mobile == null || model.editFreelancerModel.oldPassword == null || model.editFreelancerModel.Password == null || model.editFreelancerModel.RepeatPassword == null)
+                //{
+                //    freelancerToEdit.Name = freelancerToEdit.Name;
+                //    freelancerToEdit.Surname = freelancerToEdit.Surname;
+                //    freelancerToEdit.Field = freelancerToEdit.Field;
+                //    freelancerToEdit.Mobile = freelancerToEdit.Mobile;
+                //    freelancerToEdit.Password = freelancerToEdit.Password;
+                //    freelancerToEdit.Bio = freelancerToEdit.Bio;
+                //    _db.SaveChanges();
+                //    return View(model);
+                //}
+                //if (model.freelancer.Name != null || model.freelancer.Surname != null || model.freelancer.Field != null || model.freelancer.Mobile != null || model.editFreelancerModel.oldPassword != null || model.editFreelancerModel.Password != null || model.editFreelancerModel.RepeatPassword != null)
+                //{
+                //    freelancerToEdit.Name = model.freelancer.Name.Trim();
+                //    freelancerToEdit.Surname = model.freelancer.Surname.Trim();
+                //    freelancerToEdit.Field = model.freelancer.Field.Trim();
+                //    freelancerToEdit.Mobile = model.freelancer.Mobile.Trim();
+                //    freelancerToEdit.Password = PasswordHashHelper.MD5Hash(randomSecret + model.editFreelancerModel.Password.Trim());
+                //    _db.SaveChanges();
+                //}
                 if (freelancerToEdit.Password != PasswordHashHelper.MD5Hash(randomSecret + model.editFreelancerModel.oldPassword.Trim()))
                 {
                     ViewBag.PasswordsDoNotMatch = "ძველი პაროლი არ ემთხვევა";
