@@ -150,9 +150,10 @@ namespace sxva_saqartvelo_back_end.Controllers
             return View(editFreelancerViewModel);
         }
 
+        [ValidateInput(false)] //რამდენათ დასაშვებია?
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditFreelancer([Bind(Include = "ID, Name, Surname, Field, Mobile, oldPassword, Password, RepeatPassword")] Freelancer editFreelancer, EditFreelancerViewModel model, HttpPostedFileBase file)
+        public ActionResult EditFreelancer([Bind(Include = "ID, Name, Surname, Field, Mobile, Bio, oldPassword, Password, RepeatPassword")] Freelancer editFreelancer, EditFreelancerViewModel model, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
@@ -161,6 +162,17 @@ namespace sxva_saqartvelo_back_end.Controllers
                 if (freelancerToEdit == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+
+                var hashedPassword = PasswordHashHelper.MD5Hash(randomSecret + model.editFreelancerModel.oldPassword);
+
+                Freelancer freelancer = _db.Freelancers.FirstOrDefault(x => x.Password == hashedPassword);
+
+                if(freelancer == null)
+                {
+                    ViewBag.error = "არსებული პაროლი არ არის სწორი";
+                    return View(model);
                 }
 
                 var existingFreelancer = _db.Freelancers.FirstOrDefault(x => x.ID == editFreelancer.ID);
@@ -172,21 +184,9 @@ namespace sxva_saqartvelo_back_end.Controllers
                     existingFreelancer.Password = PasswordHashHelper.MD5Hash(randomSecret + model.editFreelancerModel.Password.Trim());
                     _db.SaveChanges();
 
-                    //if (existingFreelancer.Password != PasswordHashHelper.MD5Hash(randomSecret + model.editFreelancerModel.oldPassword.Trim()))
-                    //{
-                    //    ViewBag.PasswordDoNotMatch = "არსებული პაროლი არ არის სწორი";
-                    //}
-                    //else
-                    //{
-                    //    ViewBag.PasswordIsChanged = "პაროლი წარმატებით შეიცვალა";
-                    //}
                     return View(model);
                 }
-
-                if (existingFreelancer.Password == PasswordHashHelper.MD5Hash(randomSecret + model.editFreelancerModel.oldPassword.Trim()))
-                {
-                    ViewBag.PasswordIsChanged = "პაროლი წარმატებით შეიცვალა";
-                }
+               
 
                 if (model.freelancer.Name != null)
                 {
@@ -194,6 +194,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                     existingFreelancer.Surname = model.freelancer.Surname.Trim();
                     existingFreelancer.Field = model.freelancer.Field.Trim();
                     existingFreelancer.Mobile = model.freelancer.Mobile.Trim();
+                    existingFreelancer.Bio = model.freelancer.Bio;
                     _db.SaveChanges();
                     return View(model);
                 }
