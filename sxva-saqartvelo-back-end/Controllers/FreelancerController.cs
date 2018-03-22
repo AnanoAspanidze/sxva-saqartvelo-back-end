@@ -9,6 +9,9 @@ using PagedList.Mvc;
 using PagedList;
 using System.Net;
 using sxva_saqartvelo_back_end.Helpers;
+using System.IO;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 
 namespace sxva_saqartvelo_back_end.Controllers
 {
@@ -18,6 +21,12 @@ namespace sxva_saqartvelo_back_end.Controllers
         OtherGeorgiaEntities _db = new OtherGeorgiaEntities();
 
         string randomSecret = "4b47a904bc5e81234a754f552355bf44"; //პაროლის დასაჰეშად
+
+        //public string Random10()
+        //{
+            
+        //    return Guid.NewGuid().ToString("N");
+        //}
 
         public ActionResult Index(int? page)
         {
@@ -174,6 +183,10 @@ namespace sxva_saqartvelo_back_end.Controllers
                     ViewBag.error = "არსებული პაროლი არ არის სწორი";
                     return View(model);
                 }
+                else
+                {
+                    ViewBag.success = "პაროლი წარმატებით შეიცვალა";
+                }
 
                 var existingFreelancer = _db.Freelancers.FirstOrDefault(x => x.ID == editFreelancer.ID);
 
@@ -190,6 +203,50 @@ namespace sxva_saqartvelo_back_end.Controllers
 
                 if (model.freelancer.Name != null)
                 {
+                    var allowedExtensions = new[] {
+                    ".Jpg", ".png", ".jpg", ".jpeg"
+                    };
+
+                    
+
+                    try
+                    {
+                        if (file != null)
+                        {
+                            var fileName = Path.GetFileName(file.FileName);
+                            var ext = Path.GetExtension(file.FileName); //სურათის extension
+
+                            var randomString = Guid.NewGuid().ToString("N").Substring(0, 10); //რენდომ სტრინგი სურათისთვის
+                            fileName = randomString + "ID" + existingFreelancer.ID;
+                            //db.ImageTbl.Remove(db.ImageTbl.Where(x => x.Id == Id).FirstOrDefault());
+
+
+                            if (allowedExtensions.Contains(ext))
+                            {
+                                string name = Path.GetFileNameWithoutExtension(fileName);
+                                var path = Path.Combine(Server.MapPath("~/img/pp"), name + ext);
+                                existingFreelancer.Photo =  name + ext;
+                                _db.SaveChanges();
+                                file.SaveAs(path);
+                                return View(model);
+                            }
+                        }
+                    }
+                    catch (DbEntityValidationException dbEx)
+                    {
+                        foreach (var validationErrors in dbEx.EntityValidationErrors)
+                        {
+                            foreach (var validationError in validationErrors.ValidationErrors)
+                            {
+                                Trace.TraceInformation("Property: {0} Error: {1}",
+                                                        validationError.PropertyName,
+                                                        validationError.ErrorMessage);
+                            }
+                        }
+                    }
+                    
+                    
+
                     existingFreelancer.Name = model.freelancer.Name.Trim();
                     existingFreelancer.Surname = model.freelancer.Surname.Trim();
                     existingFreelancer.Field = model.freelancer.Field.Trim();
@@ -197,36 +254,10 @@ namespace sxva_saqartvelo_back_end.Controllers
                     existingFreelancer.Bio = model.freelancer.Bio;
                     _db.SaveChanges();
                     return View(model);
-                }
-
-
+                } 
 
             }
             return View(model);
         }
     }
 }
-
-
-
-
-
-
-//FilterFreelancerByCheckBox
-//public PartialViewResult FilterFreelancerByCheckBox(string[] skills)
-//{
-//    var checkboxResult = new List<Freelancer>();
-
-
-//    foreach (string skillName in skills)
-//    {
-//        var SkillIds = _db.Skills.FirstOrDefault(x => x.Name.Equals(skillName)).ID;
-//        var freelancers = _db.Freelancers.Where(x => x.Freelancer_Skill.Any(e=> e.SkillID == SkillIds)).ToList();
-//        foreach(var f in freelancers)
-//        {
-//            checkboxResult.Add(f);   
-//        }
-//    }
-
-//    return PartialView("_PartialFilterData", checkboxResult.Distinct());
-//}

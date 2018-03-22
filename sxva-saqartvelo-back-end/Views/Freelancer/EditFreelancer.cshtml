@@ -22,7 +22,7 @@
 </script>
 <section class="container-fluid">
     <div class="row col-9 cont">
-        @using (Html.BeginForm("EditFreelancer", "Freelancer", FormMethod.Post, new { @class = "cont1 container" }))
+        @using (Html.BeginForm("EditFreelancer", "Freelancer", FormMethod.Post, new { @class = "cont1 container", enctype = "multipart/form-data"}))
         {
             @Html.AntiForgeryToken()
 
@@ -67,18 +67,18 @@
                 @Html.EditorFor(model => model.editFreelancerModel.RepeatPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "გაიმეორეთ პაროლი" } })
                 @Html.ValidationMessageFor(model => model.editFreelancerModel.RepeatPassword, "", new { @class = "text-danger" })
             </div>
+            <div class="cont3 col-12 col-sm-6 form-group">
+                <p style="color:red" class="error">@ViewBag.error</p>
+                <p style="color:green" class="success">@ViewBag.success</p>
+            </div>
             <div ass="cont3 col-12 col-sm-6 form-group">
                 @Html.TextAreaFor(model => model.freelancer.Bio, new { @id = "FreelancerBio", @class = "form-control", @rows = "200" }) 
                 @Html.ValidationMessageFor(model => model.editFreelancerModel.Bio, "", new { @class = "text-danger" })
             </div>
-                <div class="cont3 col-12 col-sm-6 form-group">
-                    <p style="color:red" class="PasswordDoNotMatch">@ViewBag.error</p>
-                    <p style="color:green" class="PasswordIsChanged">@ViewBag.PasswordIsChanged</p>
-                </div>
-                <div class="send container">
-                    <button onClick="CKupdate()" class="submit">რედაქტირება</button>
-                </div>
-                }
+            <div class="send container">
+                <button onClick="CKupdate()" class="submit">რედაქტირება</button>
+            </div>
+        }
 
             </div>
 </section>
