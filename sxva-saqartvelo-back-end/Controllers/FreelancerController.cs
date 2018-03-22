@@ -207,45 +207,40 @@ namespace sxva_saqartvelo_back_end.Controllers
                     ".Jpg", ".png", ".jpg", ".jpeg"
                     };
 
-                    
+                    //if(existingFreelancer.Photo != model.freelancer.Photo)
+                    //{
 
-                    try
+                    //}
+
+                    if (file != null)
                     {
-                        if (file != null)
+                        var fileName = Path.GetFileName(file.FileName); //სურათის სახელი
+                        var ext = Path.GetExtension(file.FileName); //სურათის extension
+                        var randomString = Guid.NewGuid().ToString("N").Substring(0, 10); //რენდომ სტრინგი სურათის უნიკალურობისთვის
+                        fileName = randomString + "ID" + existingFreelancer.ID; //სურათზე რენდომ სტრინგის და ფრილანსერის ID-ის დამატება უნიკალურობისთვის
+                        //db.ImageTbl.Remove(db.ImageTbl.Where(x => x.Id == Id).FirstOrDefault());
+
+                        //if (existingFreelancer.Photo != "default-freelancer-pic.png")
+                        //{
+                        //    System.IO.File.Delete(path);
+                        //}
+
+
+                        if (allowedExtensions.Contains(ext))
                         {
-                            var fileName = Path.GetFileName(file.FileName);
-                            var ext = Path.GetExtension(file.FileName); //სურათის extension
-
-                            var randomString = Guid.NewGuid().ToString("N").Substring(0, 10); //რენდომ სტრინგი სურათისთვის
-                            fileName = randomString + "ID" + existingFreelancer.ID;
-                            //db.ImageTbl.Remove(db.ImageTbl.Where(x => x.Id == Id).FirstOrDefault());
-
-
-                            if (allowedExtensions.Contains(ext))
+                            string name = Path.GetFileNameWithoutExtension(fileName); //სურათი extension-ის გარეშე
+                            var path = Path.Combine(Server.MapPath("~/img/pp"), name + ext); //ფოლდერი ატვირთული სურათების შესანახად
+                            if(existingFreelancer.Photo != "default-freelancer-pic.png")
                             {
-                                string name = Path.GetFileNameWithoutExtension(fileName);
-                                var path = Path.Combine(Server.MapPath("~/img/pp"), name + ext);
-                                existingFreelancer.Photo =  name + ext;
+                                System.IO.File.Delete(path);
+                                existingFreelancer.Photo = name + ext; //სურათის ჩაწერა ბაზაში
                                 _db.SaveChanges();
                                 file.SaveAs(path);
                                 return View(model);
                             }
                         }
                     }
-                    catch (DbEntityValidationException dbEx)
-                    {
-                        foreach (var validationErrors in dbEx.EntityValidationErrors)
-                        {
-                            foreach (var validationError in validationErrors.ValidationErrors)
-                            {
-                                Trace.TraceInformation("Property: {0} Error: {1}",
-                                                        validationError.PropertyName,
-                                                        validationError.ErrorMessage);
-                            }
-                        }
-                    }
-                    
-                    
+
 
                     existingFreelancer.Name = model.freelancer.Name.Trim();
                     existingFreelancer.Surname = model.freelancer.Surname.Trim();
