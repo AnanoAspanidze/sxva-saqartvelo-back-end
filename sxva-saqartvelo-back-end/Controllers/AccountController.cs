@@ -21,7 +21,7 @@ namespace sxva_saqartvelo_back_end.Controllers
         OtherGeorgiaEntities _db = new OtherGeorgiaEntities();
 
 
-        //[LoginFilterForLoggedInUser]
+        
         public ActionResult Login()
         {
             //freelancer session
@@ -130,7 +130,89 @@ namespace sxva_saqartvelo_back_end.Controllers
                 }
             }
             return View();
+        }
 
+
+        public ActionResult CompanyLogin()
+        {
+            //company session
+            var company = LoginHelperForCompany.company();
+
+
+            if (company != null)
+            {
+                return RedirectToAction("CompanyProfile", "Company");
+            }
+
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompanyLogin(CompanyLoginModel login)
+        {
+            var hashedPassword = PasswordHashHelper.MD5Hash(randomSecret + login.Password);
+
+            Company company = _db.Companies.FirstOrDefault(x => x.Email == login.Email && x.Password == hashedPassword);
+
+            if (company == null)
+            {
+                ViewBag.message = "ელ.ფოსტა ან პაროლი არასწორია";
+                return View();
+            }
+            else
+            {
+                Session["company"] = company;
+
+                return RedirectToAction("CompanyProfile", "Company");
+            }
+
+        }
+
+        //კომპანიის რეგისტრაცია
+        public ActionResult RegisterCompany()
+        {
+            var company = LoginHelperForCompany.company();
+
+            if (company != null)
+            {
+                return RedirectToAction("CompanyProfile", "Company");
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RegisterCompany([Bind(Include = "CompanyName, Email, Mobile, Password, RepeatPassword")] CompanyModel company)
+        {
+
+            if (ModelState.IsValid)
+            {
+                if (_db.Companies.Where(x => x.Email == company.Email).Count() > 0)
+                {
+                    ViewBag.RegistrationFailed = "ასეთი ელ.ფოსტით ორგანიზაცია ან ფიზიკური პირი დარეგისტრირებულია";
+                    return View();
+                }
+                else
+                {
+                    Company companyTbl = new Company();
+                    companyTbl.Name = company.CompanyName.Trim();
+                    companyTbl.Logo = "default-logo-forCompany";
+                    companyTbl.Email = company.Email.Trim();
+                    companyTbl.Mobile = company.Mobile.Trim();
+                    companyTbl.Password = PasswordHashHelper.MD5Hash(randomSecret + company.Password.Trim());
+                    companyTbl.Date = DateTime.Now;
+                    _db.Companies.Add(companyTbl);
+                    _db.SaveChanges();
+
+
+                    ViewBag.RegistrationSuccess = "თქვენ წარმატებით დარეგისტრირდით, გთხოვთ გაიაროთ ავტორიზაცია";
+                    return View();
+                }
+            }
+            return View();
         }
     }
 }

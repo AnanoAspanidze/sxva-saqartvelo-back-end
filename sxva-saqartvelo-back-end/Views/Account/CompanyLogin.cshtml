@@ -1,4 +1,4 @@
-﻿@model sxva_saqartvelo_back_end.Models.LoginModel
+﻿@model sxva_saqartvelo_back_end.Models.CompanyLoginModel
 
 <link href="~/css/pagesNcomponents/homepage.css" rel="stylesheet" />
 <link href="~/css/profile/style.css" rel="stylesheet" />
@@ -10,13 +10,13 @@
 
 <section class="container-fluid">
     <div class="row col-9 cont">
-        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "cont1 container", onsubmit = "return validateForm()" }))
+        @using (Html.BeginForm("CompanyLogin", "Account", FormMethod.Post, new { @class = "cont1 container", onsubmit = "return validateForm()" }))
         {
             @Html.AntiForgeryToken()
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="send container">
-                <button onclick="window.location.href='@Url.Action("CompanyLogin", "Account")'" id="loginButton" class="submit">დამსაქმებელი</button>
+                <button onclick="window.location.href='@Url.Action("Login", "Account")'" id="loginButton" class="submit">ფრილანსერი</button>
             </div>
             <div class="cont2 col-12 col-sm-6 form-group">
                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "ელ.ფოსტა" } })
@@ -38,9 +38,9 @@
 
 
 @*<script>
-    $("#loginButton").click(function () {
-        if ($("#Email").attr("name") != null) {
-            $("#Email").removeClass("border-color", "");
-        }
-    });
-</script>*@
+        $("#loginButton").click(function () {
+            if ($("#Email").attr("name") != null) {
+                $("#Email").removeClass("border-color", "");
+            }
+        });
+    </script>*@

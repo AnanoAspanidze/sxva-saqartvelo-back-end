@@ -456,6 +456,7 @@
     <Content Include="img\hero.jpg" />
     <Content Include="img\homepage-background.svg" />
     <Content Include="img\logo.svg" />
+    <Content Include="img\logos\default-logo-forCompany.jpg" />
     <Content Include="img\logos\geocell.jpg" />
     <Content Include="img\logos\geolab.png" />
     <Content Include="img\logos\gita.png" />
@@ -463,17 +464,19 @@
     <Content Include="img\logos\if_visibility_password.svg" />
     <Content Include="img\logos\VisibilityForPassword.png" />
     <Content Include="img\logos\leavingstone.png" />
+    <Content Include="img\pp\872ac98dd0ID44.jpg" />
     <Content Include="img\pp\ana-kekua.jpg" />
     <Content Include="img\pp\avtandil-gachechiladze.jpg" />
     <Content Include="img\pp\aza.jpg" />
     <Content Include="img\pp\c1.jpg" />
     <Content Include="img\pp\c2.jpg" />
-    <Content Include="img\pp\c3.jpg" />
     <Content Include="img\pp\c4.jpg" />
+    <Content Include="img\pp\cbc0ed048eID41.jpg" />
     <Content Include="img\pp\default-freelancer-pic.png" />
     <Content Include="img\pp\giga-lafanashvili.jpg" />
     <Content Include="img\pp\giorgi-qochiashvili.jpg" />
     <Content Include="img\pp\tsotne-guchua.jpg" />
+    <Content Include="img\pp\tsotne-gvajaia.jpg" />
     <Content Include="img\pp\zviad-tchanturia.jpg" />
     <Content Include="img\reset.svg" />
     <Content Include="img\search.svg" />
@@ -594,6 +597,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\FreelancerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\AdminFilter.cs" />
@@ -603,6 +607,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\LoginHelper.cs" />
+    <Compile Include="Helpers\LoginHelperForCompany.cs" />
     <Compile Include="Helpers\PasswordHashHelper.cs" />
     <Compile Include="Models\Admin.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
@@ -610,6 +615,8 @@
     <Compile Include="Models\Company.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CompanyLoginModel.cs" />
+    <Compile Include="Models\CompanyModel.cs" />
     <Compile Include="Models\ContactForm.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
@@ -680,6 +687,9 @@
     <Content Include="Views\Freelancer\FreelancerProfile.cshtml" />
     <Content Include="Views\Shared\_PartialFilterData.cshtml" />
     <Content Include="Views\Freelancer\EditFreelancer.cshtml" />
+    <Content Include="Views\Account\RegisterCompany.cshtml" />
+    <Content Include="Views\Company\CompanyProfile.cshtml" />
+    <Content Include="Views\Account\CompanyLogin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

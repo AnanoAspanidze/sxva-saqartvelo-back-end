@@ -22,11 +22,7 @@ namespace sxva_saqartvelo_back_end.Controllers
 
         string randomSecret = "4b47a904bc5e81234a754f552355bf44"; //პაროლის დასაჰეშად
 
-        //public string Random10()
-        //{
-            
-        //    return Guid.NewGuid().ToString("N");
-        //}
+
 
         public ActionResult Index(int? page)
         {
@@ -100,7 +96,7 @@ namespace sxva_saqartvelo_back_end.Controllers
             //
 
 
-            //For Range Slier Filter
+            //For Range Slider Filter
             if (RatingLow >= 0 && RatingHight >= 0 && RatingLow <= RatingHight)
             {
                 parametersExist = true;
@@ -216,8 +212,8 @@ namespace sxva_saqartvelo_back_end.Controllers
                     {
                         var fileName = Path.GetFileName(file.FileName); //სურათის სახელი
                         var ext = Path.GetExtension(file.FileName); //სურათის extension
-                        //var randomString = Guid.NewGuid().ToString("N").Substring(0, 10); //რენდომ სტრინგი სურათის უნიკალურობისთვის
-                        //fileName = randomString + "ID" + existingFreelancer.ID; //სურათზე რენდომ სტრინგის და ფრილანსერის ID-ის დამატება უნიკალურობისთვის
+                        var randomString = Guid.NewGuid().ToString("N").Substring(0, 10); //რენდომ სტრინგი სურათის უნიკალურობისთვის
+                        fileName = randomString + "ID" + existingFreelancer.ID; //სურათზე რენდომ სტრინგის და ფრილანსერის ID-ის დამატება უნიკალურობისთვის
 
 
                         if (allowedExtensions.Contains(ext))
@@ -225,19 +221,20 @@ namespace sxva_saqartvelo_back_end.Controllers
 
                             string name = Path.GetFileNameWithoutExtension(fileName); //სურათი extension-ის გარეშე
                             var path = Path.Combine(Server.MapPath("~/img/pp"), name + ext); //ფოლდერი ატვირთული სურათების შესანახად
-                            if (existingFreelancer.Photo != "default-freelancer-pic.png")
+                            if (existingFreelancer.Photo != "default-freelancer-pic.png") //არსებული სურათი თუ არ არის ფრილასნერის default სურათი, "default-freelancer-pic.png", 
                             {
-                                string fullPath = Request.MapPath("~/img/pp/" + fileName);
-                                System.IO.File.Delete(fullPath);
+                                string existingFreelancerPhoto = Request.MapPath("~/img/pp/" + existingFreelancer.Photo); //არსებული ფრილასნერის სურათი
+                                System.IO.File.Delete(existingFreelancerPhoto); //არსებული ფრილასნერის სურათის წაშლა თუ არსებული არ არის "default-freelancer-pic.png"
                                 existingFreelancer.Photo = name + ext; //სურათის ჩაწერა ბაზაში
+                                file.SaveAs(path); //სურათის შენახვა ფოლდერში
+                                _db.SaveChanges();
                                 return View(model);
                             }
                             else
                             {
-                                file.SaveAs(path);
                                 existingFreelancer.Photo = name + ext; //სურათის ჩაწერა ბაზაში
+                                file.SaveAs(path); //სურათის შენახვა ფოლდერში
                                 _db.SaveChanges();
-                                file.SaveAs(path);
                                 return View(model);
                             }
                               
@@ -248,9 +245,9 @@ namespace sxva_saqartvelo_back_end.Controllers
 
                     existingFreelancer.Name = model.freelancer.Name.Trim();
                     existingFreelancer.Surname = model.freelancer.Surname.Trim();
-                    existingFreelancer.Field = model.freelancer.Field.Trim();
+                    existingFreelancer.Field = model.freelancer.Field.Trim(); //ფრილანსერის პოზიცია, მაგ: ASP .NET MVC დეველოპერი
                     existingFreelancer.Mobile = model.freelancer.Mobile.Trim();
-                    existingFreelancer.Bio = model.freelancer.Bio;
+                    existingFreelancer.Bio = model.freelancer.Bio; //ფრილანსერის ბიოგრაფია
                     _db.SaveChanges();
                     return View(model);
                 } 

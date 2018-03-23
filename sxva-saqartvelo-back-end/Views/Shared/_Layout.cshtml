@@ -42,8 +42,8 @@
             <nav id="header-nav">
                 @if (freelancer == null)
                 {
-                    <a href="/Account/Login"><button class="hvr-back-pulse btn-font">ავტორიზაცია</button></a>
-                    <a href="/Account/Register"><button class="btn-font button-active hvr-back-pulse">რეგისტრაცია</button></a>
+                    <button onclick="window.location.href='@Url.Action("Login", "Account")'" class="hvr-back-pulse btn-font">ავტორიზაცია</button>
+                    <button onclick="window.location.href='@Url.Action("Register", "Account")'" class="btn-font button-active hvr-back-pulse">რეგისტრაცია</button>
                 }
                 else
                 {
