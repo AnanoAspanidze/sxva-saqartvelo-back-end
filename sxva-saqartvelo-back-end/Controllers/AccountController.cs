@@ -199,7 +199,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                 {
                     Company companyTbl = new Company();
                     companyTbl.Name = company.CompanyName.Trim();
-                    companyTbl.Logo = "default-logo-forCompany";
+                    companyTbl.Logo = "default-logo-forCompany.jpg";
                     companyTbl.Email = company.Email.Trim();
                     companyTbl.Mobile = company.Mobile.Trim();
                     companyTbl.Password = PasswordHashHelper.MD5Hash(randomSecret + company.Password.Trim());

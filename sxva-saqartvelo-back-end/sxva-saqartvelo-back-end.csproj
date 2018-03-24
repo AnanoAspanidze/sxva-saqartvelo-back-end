@@ -635,6 +635,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataBase.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\EditCompanyModel.cs" />
+    <Compile Include="Models\EditCompanyViewModel.cs" />
     <Compile Include="Models\EditFreelancerModel.cs" />
     <Compile Include="Models\EditFreelancerViewModel.cs" />
     <Compile Include="Models\Freelancer.cs">
@@ -690,6 +692,7 @@
     <Content Include="Views\Account\RegisterCompany.cshtml" />
     <Content Include="Views\Company\CompanyProfile.cshtml" />
     <Content Include="Views\Account\CompanyLogin.cshtml" />
+    <Content Include="Views\Company\EditCompany.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

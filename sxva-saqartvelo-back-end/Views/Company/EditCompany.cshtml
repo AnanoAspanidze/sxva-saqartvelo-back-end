@@ -1,0 +1,81 @@
+﻿@model sxva_saqartvelo_back_end.Models.EditCompanyViewModel
+
+<link href="~/Content/InputErrorValidation.css" rel="stylesheet" />
+<link href="~/css/pagesNcomponents/homepage.css" rel="stylesheet" />
+<link href="~/css/profile/style.css" rel="stylesheet" />
+<link href="~/css/mystyle.css" rel="stylesheet" />
+
+<section id="hero-section">
+    <h1 class="nino-mtavruli color-while">რედაქტირება</h1>
+</section>
+<script>
+    //ატვირთული სურათის არჩეულით ჩანაცვლება
+    function show(input) {
+        if (input.files && input.files[0]) {
+            var filerdr = new FileReader();
+            filerdr.onload = function (e) {
+                $(".companyImage").attr('src', e.target.result);
+            }
+            filerdr.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+<section class="container-fluid">
+    <div class="row col-9 cont">
+        @using (Html.BeginForm("EditCompany", "Company", FormMethod.Post, new { @class = "cont1 container", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.company.ID)
+
+            <div style="float:right" class="cyImg">
+                <img class="companyImage" style="width:250px; height:250px" src='@Url.Action("pp" ,"logos", new { id = Model.company.Logo})' />
+            </div>
+            <div style="float:right" class="choose-file">
+                <input type="file" value="choose file" id="file" name="file" onchange="show(this)" />
+            </div>
+            <div class="cont2 col-12 col-sm-6 form-group">
+                @Html.EditorFor(model => model.company.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "სახელი: ორგანიზაციის ან ფიზიკური პირის" } })
+                @Html.ValidationMessageFor(model => model.company.Name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="cont3 col-12 col-sm-6 form-group">
+                @Html.EditorFor(model => model.company.Mobile, new { htmlAttributes = new { @class = "form-control", placeholder = "ტელეფონი" } })
+                @Html.ValidationMessageFor(model => model.company.Mobile, "", new { @class = "text-danger" })
+            </div>
+            <div class="cont3 col-12 col-sm-6 form-group">
+                <img class="showHidePd" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" />
+                @Html.EditorFor(model => model.editCompanyModel.oldPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "ძველი პაროლი" } })
+                @Html.ValidationMessageFor(model => model.editCompanyModel.oldPassword, "", new { @class = "text-danger" })
+            </div>
+            <div class="cont3 col-12 col-sm-6 form-group">
+                <img class="showHidePd" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" />
+                @Html.EditorFor(model => model.editCompanyModel.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "ახალი პაროლი" } })
+                @Html.ValidationMessageFor(model => model.editCompanyModel.Password, "", new { @class = "text-danger" })
+            </div>
+            <div class="cont3 col-12 col-sm-6 form-group">
+                <img class="showHideRePd" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverHover();" onmouseout="mouseoutHover();" />
+                @Html.EditorFor(model => model.editCompanyModel.RepeatPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "გაიმეორეთ პაროლი" } })
+                @Html.ValidationMessageFor(model => model.editCompanyModel.RepeatPassword, "", new { @class = "text-danger" })
+            </div>
+            <div class="cont3 col-12 col-sm-6 form-group">
+                <p style="color:red" class="error">@ViewBag.error</p>
+                <p style="color:green" class="success">@ViewBag.success</p>
+            </div>
+            <div ass="cont3 col-12 col-sm-6 form-group">
+                @Html.TextAreaFor(model => model.company.Description, new { @id = "CompanyDescription", @class = "form-control", @rows = "200" })
+                @Html.ValidationMessageFor(model => model.company.Description, "", new { @class = "text-danger" })
+            </div>
+            <div class="send container">
+                <button onClick="CKupdate()" class="submit">რედაქტირება</button>
+            </div>
+        }
+
+    </div>
+</section>
+
+
+<script>
+    CKEDITOR.replace("CompanyDescription");
+</script>
