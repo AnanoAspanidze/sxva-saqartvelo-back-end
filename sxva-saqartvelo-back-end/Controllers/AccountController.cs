@@ -62,6 +62,7 @@ namespace sxva_saqartvelo_back_end.Controllers
         public ActionResult Logout()
         {
             LoginHelper.Logout();
+            LoginHelperForCompany.Logout();
             return RedirectToAction("Index", "Home");
         }
 
@@ -137,7 +138,6 @@ namespace sxva_saqartvelo_back_end.Controllers
         {
             //company session
             var company = LoginHelperForCompany.company();
-
 
             if (company != null)
             {
