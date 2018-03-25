@@ -18,8 +18,27 @@
             }
             filerdr.readAsDataURL(input.files[0]);
         }
+
+        if (input.files && input.files[0]) {
+            var filerdr = new FileReader();
+            filerdr.onload = function (e) {
+                $(".uploadedImage").attr('src', e.target.result);
+            }
+            filerdr.readAsDataURL(input.files[0]);
+        }
     }
+
+    //if (window.location.href = "/Company/EditCompany") {
+    //    $(".companyImage").show();
+    //}
 </script>
+
+@using sxva_saqartvelo_back_end.Models;
+@using sxva_saqartvelo_back_end.Helpers;
+
+@{
+    var company = LoginHelperForCompany.company();
+}
 <section class="container-fluid">
     <div class="row col-9 cont">
         @using (Html.BeginForm("EditCompany", "Company", FormMethod.Post, new { @class = "cont1 container", enctype = "multipart/form-data" }))
@@ -30,7 +49,20 @@
             @Html.HiddenFor(model => model.company.ID)
 
             <div style="float:right" class="cyImg">
-                <img class="companyImage" style="width:250px; height:250px" src='@Url.Action("pp" ,"logos", new { id = Model.company.Logo})' />
+                @if (company != null)
+                {
+                    <img class="companyImage" style="width:250px; height:250px" src='@Url.Action("logos", "img", new { id = company.Logo})' />
+                }
+                @if(ViewBag.uploadedImg != null) //ატვირთვის შემდეგ სურათის გამოჩენა
+                {
+                    <script>
+                        $(document).ready(function () {
+                            $(".companyImage").hide(); //ახალი სურათის ატვირთვის შემდეგ არსებულის დამალვა
+                        });
+                    </script>
+                    <img class="uploadedImage" style="width:250px; height:250px" src='@Url.Action("logos", "img", new { id = ViewBag.uploadedimg})' />
+                }
+
             </div>
             <div style="float:right" class="choose-file">
                 <input type="file" value="choose file" id="file" name="file" onchange="show(this)" />

@@ -29,11 +29,9 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model=> model.freelancer.ID)
 
-            @*<div class="send container">
-                <button class="submit">დამსაქმებელი</button>
-            </div>*@
+
             <div style="float:right" class="frlncrImg">
-                <img class="freelancerImage" style="width:250px; height:250px" src='@Url.Action("pp" ,"img", new { id = Model.freelancer.Photo})' />
+                <img class="freelancerImage" style="width:250px; height:250px" src='@Url.Action("pp", "img", new { id = Model.freelancer.Photo})' />
             </div>
             <div style="float:right" class="choose-file">
                 <input type="file" value="choose file" id="file" name="file" onchange="show(this)" />

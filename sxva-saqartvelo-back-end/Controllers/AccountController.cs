@@ -67,7 +67,7 @@ namespace sxva_saqartvelo_back_end.Controllers
         }
 
 
-        //[LoginFilterForLoggedInUser]
+        
         public ActionResult Register()
         {
             var freelancer = LoginHelper.freelancer();

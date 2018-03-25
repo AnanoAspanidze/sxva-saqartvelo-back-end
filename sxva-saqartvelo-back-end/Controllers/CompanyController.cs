@@ -21,23 +21,23 @@ namespace sxva_saqartvelo_back_end.Controllers
 
 
         // GET: Company
-        [LoginFilterForLoggedInUser]
+        [LoginFilterForCompany]
         public ActionResult CompanyProfile()
         {
             return View();
         }
 
-        [LoginFilterForLoggedInUser]
-        public ActionResult EditCompany(int? ID)
+        [LoginFilterForCompany]
+        public ActionResult EditCompany(int? id)
         {
-            if(ID == null)
+            if(id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             var editCompanyViewModel = new EditCompanyViewModel
             {
-                company = _db.Companies.Find(ID)
+                company = _db.Companies.Find(id)
             };
             if(editCompanyViewModel == null)
             {
@@ -60,25 +60,29 @@ namespace sxva_saqartvelo_back_end.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
-                var hashedPassword = PasswordHashHelper.MD5Hash(randomSecret + model.editCompanyModel.oldPassword);
-
-                Company company = _db.Companies.FirstOrDefault(x => x.Password == hashedPassword);
-
-
-                if(company == null)
-                {
-                    ViewBag.error = "არსებული პაროლი არ არის სწორი";
-                    return View(model);
-                }
-                else
-                {
-                    ViewBag.success = "პაროლი წარმატებით შეიცვალა";
-                }
-
+                
                 var existingCompany = _db.Companies.FirstOrDefault(x => x.ID == editCompany.ID);
 
                 if(model.editCompanyModel.Password != null)
                 {
+
+
+                    var hashedPassword = PasswordHashHelper.MD5Hash(randomSecret + model.editCompanyModel.oldPassword);
+
+                    Company Company = _db.Companies.FirstOrDefault(x => x.Password == hashedPassword);
+
+                    if (Company == null)
+                    {
+                        ViewBag.error = "არსებული პაროლი არ არის სწორი";
+                        return View(model);
+                    }
+                    else
+                    {
+                        ViewBag.success = "პაროლი წარმატებით შეიცვალა";
+                    }
+
+
+
                     existingCompany.Password = PasswordHashHelper.MD5Hash(randomSecret + model.editCompanyModel.Password.Trim());
                     _db.SaveChanges();
 
@@ -92,31 +96,29 @@ namespace sxva_saqartvelo_back_end.Controllers
                     ".Jpg", ".png", ".jpg", ".jpeg"
                     };
 
-                    //if(existingFreelancer.Photo != model.freelancer.Photo)
-                    //{
-
-                    //}
 
                     if (file != null)
                     {
                         var fileName = Path.GetFileName(file.FileName); //სურათის სახელი
                         var ext = Path.GetExtension(file.FileName); //სურათის extension
                         var randomString = Guid.NewGuid().ToString("N").Substring(0, 10); //რენდომ სტრინგი სურათის უნიკალურობისთვის
-                        fileName = randomString + "ID" + existingCompany.ID; //სურათზე რენდომ სტრინგის და ფრილანსერის ID-ის დამატება უნიკალურობისთვის
+                        fileName = randomString + "ID" + existingCompany.ID; //სურათზე რენდომ სტრინგის და კომპანიის ID-ის დამატება უნიკალურობისთვის
 
 
                         if (allowedExtensions.Contains(ext))
                         {
 
                             string name = Path.GetFileNameWithoutExtension(fileName); //სურათი extension-ის გარეშე
-                            var path = Path.Combine(Server.MapPath("~/img/pp"), name + ext); //ფოლდერი ატვირთული სურათების შესანახად
-                            if (existingCompany.Logo != "default-logo-forCompany.jpg") //არსებული სურათი თუ არ არის ფრილასნერის default სურათი, "default-freelancer-pic.png", 
+                            var path = Path.Combine(Server.MapPath("~/img/logos"), name + ext); //ფოლდერი ატვირთული სურათების შესანახად
+                            if (existingCompany.Logo != "default-logo-forCompany.jpg") //არსებული სურათი თუ არ არის კომპანიის default სურათი, "default-logo-forCompany.jpg", 
                             {
-                                string existingCompanyPhoto = Request.MapPath("~/img/logos/" + existingCompany.Logo); //არსებული ფრილასნერის სურათი
-                                System.IO.File.Delete(existingCompanyPhoto); //არსებული ფრილასნერის სურათის წაშლა თუ არსებული არ არის "default-freelancer-pic.png"
-                                existingCompany.Logo= name + ext; //სურათის ჩაწერა ბაზაში
+                                
+                                string existingCompanyPhoto = Request.MapPath("~/img/logos/" + existingCompany.Logo); //არსებული კომპანიის სურათი
+                                System.IO.File.Delete(existingCompanyPhoto); //არსებული კომპანიის სურათის წაშლა თუ არსებული არ არის "default-logo-forCompany.jpg"
+                                existingCompany.Logo = name + ext; //სურათის ჩაწერა ბაზაში
                                 file.SaveAs(path); //სურათის შენახვა ფოლდერში
                                 _db.SaveChanges();
+                                ViewBag.uploadedImg = name + ext; //ატვირთული სურათის ჩვენება layout-ის header-ისთვის და EditCompany view-ისთვის
                                 return View(model);
                             }
                             else
@@ -138,6 +140,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                     _db.SaveChanges();
                     return View(model);
                 }
+
 
             }
             return View(model);
