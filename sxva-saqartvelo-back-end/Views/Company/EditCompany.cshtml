@@ -1,5 +1,10 @@
 ﻿@model sxva_saqartvelo_back_end.Models.EditCompanyViewModel
+@using sxva_saqartvelo_back_end.Models;
+@using sxva_saqartvelo_back_end.Helpers;
 
+@{
+    var company = LoginHelperForCompany.company();
+}
 <link href="~/Content/InputErrorValidation.css" rel="stylesheet" />
 <link href="~/css/pagesNcomponents/homepage.css" rel="stylesheet" />
 <link href="~/css/profile/style.css" rel="stylesheet" />
@@ -28,17 +33,13 @@
         }
     }
 
-    //if (window.location.href = "/Company/EditCompany") {
-    //    $(".companyImage").show();
-    //}
+    
+    @*if (window.location.reload = "@Url.Action("EditCompany","Company", new { id = company.ID})" ) {
+        $(".companyImage").show();
+    }*@
 </script>
 
-@using sxva_saqartvelo_back_end.Models;
-@using sxva_saqartvelo_back_end.Helpers;
 
-@{
-    var company = LoginHelperForCompany.company();
-}
 <section class="container-fluid">
     <div class="row col-9 cont">
         @using (Html.BeginForm("EditCompany", "Company", FormMethod.Post, new { @class = "cont1 container", enctype = "multipart/form-data" }))
@@ -48,7 +49,7 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.company.ID)
 
-            <div style="float:right" class="cyImg">
+            <div style="float:right; position: relative" class="cyImg">
                 @if (company != null)
                 {
                     <img class="companyImage" style="width:250px; height:250px" src='@Url.Action("logos", "img", new { id = company.Logo})' />
@@ -62,11 +63,12 @@
                     </script>
                     <img class="uploadedImage" style="width:250px; height:250px" src='@Url.Action("logos", "img", new { id = ViewBag.uploadedimg})' />
                 }
+                <br /><br />
+                <div style="float:right; position:absolute" class="choose-file">
+                    <input type="file" value="choose file" id="file" name="file" onchange="show(this)" />
+                </div>
+            </div>
 
-            </div>
-            <div style="float:right" class="choose-file">
-                <input type="file" value="choose file" id="file" name="file" onchange="show(this)" />
-            </div>
             <div class="cont2 col-12 col-sm-6 form-group">
                 @Html.EditorFor(model => model.company.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "სახელი: ორგანიზაციის ან ფიზიკური პირის" } })
                 @Html.ValidationMessageFor(model => model.company.Name, "", new { @class = "text-danger" })
@@ -77,7 +79,7 @@
                 @Html.ValidationMessageFor(model => model.company.Mobile, "", new { @class = "text-danger" })
             </div>
             <div class="cont3 col-12 col-sm-6 form-group">
-                <img class="showHidePd" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" />
+                <img class="showHideOldPd" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverPassOldPsw();" onmouseout="mouseoutPassOldPsw();" />
                 @Html.EditorFor(model => model.editCompanyModel.oldPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "ძველი პაროლი" } })
                 @Html.ValidationMessageFor(model => model.editCompanyModel.oldPassword, "", new { @class = "text-danger" })
             </div>
@@ -99,6 +101,7 @@
                 @Html.TextAreaFor(model => model.company.Description, new { @id = "CompanyDescription", @class = "form-control", @rows = "200" })
                 @Html.ValidationMessageFor(model => model.company.Description, "", new { @class = "text-danger" })
             </div>
+            <br />
             <div class="send container">
                 <button onClick="CKupdate()" class="submit">რედაქტირება</button>
             </div>
@@ -109,5 +112,64 @@
 
 
 <script>
+
     CKEDITOR.replace("CompanyDescription");
+
+
+
+    function mouseoverPassOldPsw(obj) {
+        var obj = document.getElementById('editCompanyModel_oldPassword');
+        obj.type = "text";
+    }
+    function mouseoutPassOldPsw(obj) {
+        var obj = document.getElementById('editCompanyModel_oldPassword');
+        obj.type = "password";
+    }
+
+    function mouseoverPass(obj) {
+        var obj = document.getElementById('editCompanyModel_Password');
+        obj.type = "text";
+    }
+    function mouseoutPass(obj) {
+        var obj = document.getElementById('editCompanyModel_Password');
+        obj.type = "password";
+    }
+
+    function mouseoverHover(obj) {
+        var obj = document.getElementById('editCompanyModel_RepeatPassword');
+        obj.type = "text";
+    }
+    function mouseoutHover(obj) {
+        var obj = document.getElementById('editCompanyModel_RepeatPassword');
+        obj.type = "password";
+    }
+
+
+    //show hide icon
+    $(function () {
+        $('.showHideOldPd').hover(function () {
+            $('.showHideOldPd').attr('src', '/img/logos/if_visibility_password.svg');
+        },
+        function () {
+            $('.showHideOldPd').attr('src', '/img/logos/if_visibility-off.svg');
+        })
+    });
+
+    $(function () {
+        $('.showHidePd').hover(function () {
+            $('.showHidePd').attr('src', '/img/logos/if_visibility_password.svg');
+        },
+        function () {
+            $('.showHidePd').attr('src', '/img/logos/if_visibility-off.svg');
+        })
+    });
+
+    $(function () {
+        $('.showHideRePd').hover(function () {
+            $('.showHideRePd').attr('src', '/img/logos/if_visibility_password.svg');
+        },
+        function () {
+            $('.showHideRePd').attr('src', '/img/logos/if_visibility-off.svg');
+        })
+    });
 </script>

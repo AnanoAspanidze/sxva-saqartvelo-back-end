@@ -181,7 +181,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                 }
                 else
                 {
-                    ViewBag.success = "პაროლი წარმატებით შეიცვალა";
+                    ViewBag.success = "მონაცემები წარმატებით შეიცვალა";
                 }
 
                 var existingFreelancer = _db.Freelancers.FirstOrDefault(x => x.ID == editFreelancer.ID);
@@ -228,6 +228,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                                 existingFreelancer.Photo = name + ext; //სურათის ჩაწერა ბაზაში
                                 file.SaveAs(path); //სურათის შენახვა ფოლდერში
                                 _db.SaveChanges();
+                                ViewBag.uploadedFreelancerImg = name + ext; //ატვირთული სურათის ჩვენება layout-ის header-ისთვის და EditCompany view-ისთვის
                                 return View(model);
                             }
                             else

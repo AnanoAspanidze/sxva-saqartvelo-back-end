@@ -62,6 +62,7 @@ namespace sxva_saqartvelo_back_end.Controllers
 
                 
                 var existingCompany = _db.Companies.FirstOrDefault(x => x.ID == editCompany.ID);
+                ViewBag.ExistingCompanyID = existingCompany.ID;
 
                 if(model.editCompanyModel.Password != null)
                 {
@@ -78,7 +79,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                     }
                     else
                     {
-                        ViewBag.success = "პაროლი წარმატებით შეიცვალა";
+                        ViewBag.success = "მონაცემები წარმატებით შეიცვალა";
                     }
 
 

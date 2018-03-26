@@ -1,5 +1,10 @@
 ﻿@model sxva_saqartvelo_back_end.Models.EditFreelancerViewModel
+@using sxva_saqartvelo_back_end.Models;
+@using sxva_saqartvelo_back_end.Helpers;
 
+@{
+    var freelancer = LoginHelper.freelancer();
+}
 <link href="~/Content/InputErrorValidation.css" rel="stylesheet" />
 <link href="~/css/pagesNcomponents/homepage.css" rel="stylesheet" />
 <link href="~/css/profile/style.css" rel="stylesheet" />
@@ -30,12 +35,27 @@
             @Html.HiddenFor(model=> model.freelancer.ID)
 
 
-            <div style="float:right" class="frlncrImg">
-                <img class="freelancerImage" style="width:250px; height:250px" src='@Url.Action("pp", "img", new { id = Model.freelancer.Photo})' />
+            <div style="float: right; position: relative" class="frlncrImg">
+
+                @if (freelancer != null)
+                {
+                   <img class="freelancerImage" style="width:250px; height:250px" src='@Url.Action("pp", "img", new { id = freelancer.Photo})' />
+                }
+                @if (ViewBag.uploadedFreelancerImg != null) //ატვირთვის შემდეგ სურათის გამოჩენა
+                {
+                    <script>
+                        $(document).ready(function () {
+                            $(".freelancerImage").hide(); //ახალი სურათის ატვირთვის შემდეგ არსებულის დამალვა
+                        });
+                    </script>
+                    <img class="uploadedImage" style="width:250px; height:250px" src='@Url.Action("pp", "img", new { id = ViewBag.uploadedFreelancerImg})' />
+                }
+                <br /><br />
+                <div style="float: right; position: absolute" class="choose-file">
+                    <input type="file" value="choose file" id="file" name="file" onchange="show(this)" />
+                </div>
             </div>
-            <div style="float:right" class="choose-file">
-                <input type="file" value="choose file" id="file" name="file" onchange="show(this)" />
-            </div>
+
             <div class="cont2 col-12 col-sm-6 form-group">
                 @Html.EditorFor(model => model.freelancer.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "სახელი" } })
                 @Html.ValidationMessageFor(model => model.editFreelancerModel.Name, "", new { @class = "text-danger" })
@@ -54,7 +74,7 @@
                 @Html.ValidationMessageFor(model => model.editFreelancerModel.Mobile, "", new { @class = "text-danger" })
             </div>
             <div class="cont3 col-12 col-sm-6 form-group">
-                <img class="showHidePd" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" />
+                <img class="showHideOldPd" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverPassOldPsw();" onmouseout="mouseoutPassOldPsw();" />
                 @Html.EditorFor(model => model.editFreelancerModel.oldPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "ძველი პაროლი" } })
                 @Html.ValidationMessageFor(model => model.editFreelancerModel.oldPassword, "", new { @class = "text-danger" })
             </div>
@@ -76,6 +96,7 @@
                 @Html.TextAreaFor(model => model.freelancer.Bio, new { @id = "FreelancerBio", @class = "form-control", @rows = "200" }) 
                 @Html.ValidationMessageFor(model => model.editFreelancerModel.Bio, "", new { @class = "text-danger" })
             </div>
+            <br />
             <div class="send container">
                 <button onClick="CKupdate()" class="submit">რედაქტირება</button>
             </div>
@@ -87,4 +108,60 @@
 
 <script>
     CKEDITOR.replace("FreelancerBio");
+
+    function mouseoverPassOldPsw(obj) {
+        var obj = document.getElementById('editFreelancerModel_oldPassword');
+        obj.type = "text";
+    }
+    function mouseoutPassOldPsw(obj) {
+        var obj = document.getElementById('editFreelancerModel_oldPassword');
+        obj.type = "password";
+    }
+
+    function mouseoverPass(obj) {
+        var obj = document.getElementById('editFreelancerModel_Password');
+        obj.type = "text";
+    }
+    function mouseoutPass(obj) {
+        var obj = document.getElementById('editFreelancerModel_Password');
+        obj.type = "password";
+    }
+
+    function mouseoverHover(obj) {
+        var obj = document.getElementById('editFreelancerModel_RepeatPassword');
+        obj.type = "text";
+    }
+    function mouseoutHover(obj) {
+        var obj = document.getElementById('editFreelancerModel_RepeatPassword');
+        obj.type = "password";
+    }
+
+
+    //show hide icon
+    $(function () {
+        $('.showHideOldPd').hover(function () {
+            $('.showHideOldPd').attr('src', '/img/logos/if_visibility_password.svg');
+        },
+        function () {
+            $('.showHideOldPd').attr('src', '/img/logos/if_visibility-off.svg');
+        })
+    });
+
+    $(function () {
+        $('.showHidePd').hover(function () {
+            $('.showHidePd').attr('src', '/img/logos/if_visibility_password.svg');
+        },
+        function () {
+            $('.showHidePd').attr('src', '/img/logos/if_visibility-off.svg');
+        })
+    });
+
+    $(function () {
+        $('.showHideRePd').hover(function () {
+            $('.showHideRePd').attr('src', '/img/logos/if_visibility_password.svg');
+        },
+        function () {
+            $('.showHideRePd').attr('src', '/img/logos/if_visibility-off.svg');
+        })
+    });
 </script>

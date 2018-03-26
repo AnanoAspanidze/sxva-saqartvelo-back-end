@@ -48,7 +48,7 @@
                 }
                 else
                 {
-                    <a href="@Url.Action("FreelancerProfile", "Freelancer", new { id = freelancer.ID })" class="image-a" style="background-image: url(/img/pp/@freelancer.Photo);">
+                    <a id="freelancerImg" href="@Url.Action("FreelancerProfile", "Freelancer", new { id = freelancer.ID })" class="image-a" style="background-image: url(/img/pp/@freelancer.Photo);">
                         <img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="~/img/pp/@freelancer.Photo" alt="profile picture">
                     </a> 
                     <div class="drpdwnMenu">
@@ -63,7 +63,7 @@
                 @if (company != null)
                 {
                     
-                    <a id="profileImg" href="@Url.Action("CompanyProfile", "Company", new { id = company.ID })" class="image-a" style="background-image: @Url.Action("logos", "img", new { id = company.Logo})">
+                    <a id="companyProfileImg" href="@Url.Action("CompanyProfile", "Company", new { id = company.ID })" class="image-a" style="background-image: @Url.Action("logos", "img", new { id = company.Logo})">
                         <img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="@Url.Action("logos", "img", new { id = company.Logo})" alt="profile picture">
                     </a>
                     <div class="drpdwnMenu">
@@ -87,11 +87,23 @@
                 {
                     <script>
                         $(document).ready(function () {
-                            $("#profileImg").hide(); //ახალი სურათის ატვირთვის შემდეგ არსებულის დამალვა
+                            $("#companyProfileImg").hide(); //ახალი სურათის ატვირთვის შემდეგ არსებულის დამალვა
                         });
                     </script>
                     <a id="uploadedImg" href="@Url.Action("CompanyProfile", "Company", new { id = company.ID })" class="image-a" style="background-image: @Url.Action("logos", "img", new { id = ViewBag.uploadedimg })">
                         <img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="@Url.Action("logos", "img", new { id = ViewBag.uploadedimg })" alt="profile picture">
+                    </a>
+                }
+
+                @if (ViewBag.uploadedFreelancerImg != null)
+                {
+                    <script>
+                        $(document).ready(function () {
+                            $("#freelancerImg").hide(); //ახალი სურათის ატვირთვის შემდეგ არსებულის დამალვა
+                        });
+                    </script>
+                    <a id="freelancerUploadedImg" href="@Url.Action("FreelancerProfile", "Freelancer", new { id = freelancer.ID })" class="image-a" style="background-image: @Url.Action("pp", "img", new { id = ViewBag.uploadedFreelancerImg })">
+                        <img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="@Url.Action("pp", "img", new { id = ViewBag.uploadedFreelancerImg })" alt="profile picture">
                     </a>
                 }
                 <div id="myNav" class="overlay">

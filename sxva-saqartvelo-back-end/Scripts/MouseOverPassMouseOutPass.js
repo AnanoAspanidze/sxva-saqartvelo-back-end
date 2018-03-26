@@ -1,4 +1,13 @@
-﻿function mouseoverPass(obj) {
+﻿function mouseoverPassOldPsw(obj) {
+    var obj = document.getElementById('oldPassword');
+    obj.type = "text";
+}
+function mouseoutPassOldPsw(obj) {
+    var obj = document.getElementById('oldPassword');
+    obj.type = "password";
+}
+
+function mouseoverPass(obj) {
     var obj = document.getElementById('Password');
     obj.type = "text";
 }
@@ -18,6 +27,15 @@ function mouseoutHover(obj) {
 
 
 //show hide icon
+$(function () {
+    $('.showHideOldPd').hover(function () {
+        $('.showHideOldPd').attr('src', '/img/logos/if_visibility_password.svg');
+    },
+    function () {
+        $('.showHideOldPd').attr('src', '/img/logos/if_visibility-off.svg');
+    })
+});
+
 $(function () {
     $('.showHidePd').hover(function () {
         $('.showHidePd').attr('src', '/img/logos/if_visibility_password.svg');

@@ -456,6 +456,8 @@
     <Content Include="img\hero.jpg" />
     <Content Include="img\homepage-background.svg" />
     <Content Include="img\logo.svg" />
+    <Content Include="img\logos\10facb5754ID4.jpg" />
+    <Content Include="img\logos\9d556d7612ID3.png" />
     <Content Include="img\logos\default-logo-forCompany.jpg" />
     <Content Include="img\logos\geocell.jpg" />
     <Content Include="img\logos\geolab.png" />
