@@ -246,7 +246,7 @@ namespace sxva_saqartvelo_back_end.Controllers
 
                     existingFreelancer.Name = model.freelancer.Name.Trim();
                     existingFreelancer.Surname = model.freelancer.Surname.Trim();
-                    existingFreelancer.Field = model.freelancer.Field.Trim(); //ფრილანსერის პოზიცია, მაგ: ASP .NET MVC დეველოპერი
+                    existingFreelancer.Field = model.freelancer.Field.Trim(); //ფრილანსერის პროფესია, მაგ: ASP .NET MVC დეველოპერი
                     existingFreelancer.Mobile = model.freelancer.Mobile.Trim();
                     existingFreelancer.Bio = model.freelancer.Bio; //ფრილანსერის ბიოგრაფია
                     _db.SaveChanges();
