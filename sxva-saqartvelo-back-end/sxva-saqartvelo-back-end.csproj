@@ -612,6 +612,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\LoginHelper.cs" />
+    <Compile Include="Helpers\LoginHelperForAdmin.cs" />
     <Compile Include="Helpers\LoginHelperForCompany.cs" />
     <Compile Include="Helpers\PasswordHashHelper.cs" />
     <Compile Include="Models\Admin.cs">
@@ -700,6 +701,7 @@
     <Content Include="Views\Account\CompanyLogin.cshtml" />
     <Content Include="Views\Company\EditCompany.cshtml" />
     <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

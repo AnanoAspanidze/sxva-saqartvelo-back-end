@@ -61,8 +61,8 @@ namespace sxva_saqartvelo_back_end.Controllers
 
         public ActionResult Logout()
         {
-            LoginHelper.Logout();
-            LoginHelperForCompany.Logout();
+            LoginHelper.Logout(); //ფრილანსერის logout-ი
+            LoginHelperForCompany.Logout(); //დამსაქმებლის logout-ი
             return RedirectToAction("Index", "Home");
         }
 

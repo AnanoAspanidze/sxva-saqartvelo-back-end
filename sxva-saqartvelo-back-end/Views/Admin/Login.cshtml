@@ -29,6 +29,7 @@
 
                 @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "პაროლი", @class = "Password" } })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                <p style="color:#e80c4d">@ViewBag.message</p>
                 <button type="submit">შესვლა</button>
             </div>
         }
