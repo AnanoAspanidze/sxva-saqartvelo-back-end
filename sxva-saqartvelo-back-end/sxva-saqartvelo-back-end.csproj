@@ -433,6 +433,7 @@
     <Content Include="css\main\components.css" />
     <Content Include="css\main\interaction.css" />
     <Content Include="css\main\layout.css" />
+    <Content Include="css\main\LoginForm.css" />
     <Content Include="css\main\master.css" />
     <Content Include="css\main\reset.css" />
     <Content Include="css\mystyle.css" />
@@ -616,6 +617,7 @@
     <Compile Include="Models\Admin.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminLoginModel.cs" />
     <Compile Include="Models\Company.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
@@ -697,6 +699,7 @@
     <Content Include="Views\Company\CompanyProfile.cshtml" />
     <Content Include="Views\Account\CompanyLogin.cshtml" />
     <Content Include="Views\Company\EditCompany.cshtml" />
+    <Content Include="Views\Admin\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -706,7 +709,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

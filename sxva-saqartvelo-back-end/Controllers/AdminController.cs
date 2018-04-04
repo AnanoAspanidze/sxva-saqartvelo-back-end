@@ -9,7 +9,7 @@ using sxva_saqartvelo_back_end.Filters;
 
 namespace sxva_saqartvelo_back_end.Controllers
 {
-    [AdminFilter]
+    //[AdminFilter]
     public class AdminController : Controller
     {
         // GET: Admin

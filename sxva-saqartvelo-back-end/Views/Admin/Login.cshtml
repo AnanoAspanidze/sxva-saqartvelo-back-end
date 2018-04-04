@@ -1,0 +1,42 @@
+﻿@model sxva_saqartvelo_back_end.Models.AdminLoginModel
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <link rel=icon href=/img/favicon.png>
+    <title>@ViewBag.Title სხვა საქართველო</title>
+    <link href="~/css/main/LoginForm.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</head>
+<body>
+    <div id="loginForm" class="loginForm">
+        @using (Html.BeginForm("Login", "Admin", FormMethod.Post, new { @class = "loginForm-content animate" }))
+        {
+            <div class="container">
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = "ელ.ფოსტა", @class = "Email" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "პაროლი", @class = "Password" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                <button type="submit">შესვლა</button>
+            </div>
+        }
+    </div>
+
+</body>
+</html>
+
+@{ 
+    Layout = null;
+}
