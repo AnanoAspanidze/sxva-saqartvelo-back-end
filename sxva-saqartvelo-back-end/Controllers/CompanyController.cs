@@ -11,6 +11,7 @@ using System.IO;
 
 namespace sxva_saqartvelo_back_end.Controllers
 {
+    [LoginFilterForCompany]
     public class CompanyController : Controller
     {
 
@@ -21,13 +22,13 @@ namespace sxva_saqartvelo_back_end.Controllers
 
 
         // GET: Company
-        [LoginFilterForCompany]
+        //[LoginFilterForCompany]
         public ActionResult CompanyProfile()
         {
             return View();
         }
 
-        [LoginFilterForCompany]
+        //[LoginFilterForCompany]
         public ActionResult EditCompany(int? id)
         {
             if(id == null)

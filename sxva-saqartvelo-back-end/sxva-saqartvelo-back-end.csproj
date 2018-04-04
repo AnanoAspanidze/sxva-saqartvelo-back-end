@@ -429,6 +429,7 @@
     <Content Include="Content\InputErrorValidation.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="css\main\AdminPanel.css" />
     <Content Include="css\main\colorsNfonts.css" />
     <Content Include="css\main\components.css" />
     <Content Include="css\main\interaction.css" />
@@ -627,6 +628,7 @@
     <Compile Include="Models\ContactForm.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CreateProjectModel.cs" />
     <Compile Include="Models\DataBase.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -649,6 +651,7 @@
     <Compile Include="Models\Freelancer.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FreelancerCompanyModel.cs" />
     <Compile Include="Models\Freelancer_Project_Model.cs" />
     <Compile Include="Models\Freelancer_Skill.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
@@ -701,7 +704,9 @@
     <Content Include="Views\Account\CompanyLogin.cshtml" />
     <Content Include="Views\Company\EditCompany.cshtml" />
     <Content Include="Views\Admin\Login.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\AdminPanel.cshtml" />
+    <Content Include="Views\Shared\_AdminPanelLayout.cshtml" />
+    <Content Include="Views\Admin\CreateProject.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,56 @@
+﻿@model sxva_saqartvelo_back_end.Models.FreelancerCompanyModel
+
+@{
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="cont3 col-12 col-sm-6 form-group">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="cont3 col-12 col-sm-6 form-group">
+                @Html.TextAreaFor(model => model.Description, new { @id = "Description", @class = "form-control", @rows = "200" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="cont3 col-12 col-sm-6 form-group">
+               @Html.DropDownList("Freelancers", new SelectList(ViewBag.freelancers, "Id", "Name", ViewBag.selectedFreelancer), new { @class = "form-control"})
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="cont3 col-12 col-sm-6 form-group">
+                @Html.DropDownList("Companies", new SelectList(ViewBag.companies, "Id", "Name", ViewBag.selectedCompany), new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input onClick="CKupdate()" type="submit" value="შექმნა" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script>
+    CKEDITOR.replace("Description");
+</script>

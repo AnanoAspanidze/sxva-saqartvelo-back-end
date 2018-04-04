@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <link rel=icon href=/img/favicon.png>
+    <title>@ViewBag.Title სხვა საქართველო</title>
+    <link href="~/css/main/AdminPanel.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Ckeditor/ckeditor.js"></script>
+</head>
+
+
+<body>
+    <header class="main-header">
+        <div class="adminNav">
+            <a href="/Admin/AdminPanel" class="createProject">მთავარი</a>
+            <a href="/Admin/CreateProject" class="createProject">პროექტის შექმნა</a>
+            <a class="editProject">პროექტის რედაქტირება</a>
+            <a class="deleteProject">პროექტის წაშლა</a>
+            <a href="/Admin/Logout" style="float:right;" class="">გამოსვლა</a>
+        </div>
+    </header>
+
+    @RenderBody()
+
+    <footer id="footer" class="main-footer">
+
+    </footer>
+
+</body>
+</html>

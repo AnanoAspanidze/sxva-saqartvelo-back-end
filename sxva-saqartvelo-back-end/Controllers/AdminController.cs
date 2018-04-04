@@ -9,17 +9,19 @@ using sxva_saqartvelo_back_end.Filters;
 
 namespace sxva_saqartvelo_back_end.Controllers
 {
-    //[AdminFilter]
+    
     public class AdminController : Controller
     {
         OtherGeorgiaEntities _db = new OtherGeorgiaEntities();
+
+
         // GET: Admin
-        
-        public ActionResult Index()
+        [AdminFilter]
+        public ActionResult AdminPanel()
         {
             return View();
         }
-
+        
         public ActionResult Login()
         {
             //admin session
@@ -27,7 +29,7 @@ namespace sxva_saqartvelo_back_end.Controllers
 
             if(admin != null)
             {
-                return RedirectToAction("Index", "Admin");
+                return RedirectToAction("AdminPanel", "Admin");
             }
             return View();
         }
@@ -46,18 +48,36 @@ namespace sxva_saqartvelo_back_end.Controllers
             else
             {
                 Session["admin"] = admin;
-                return RedirectToAction("Index", "Admin");
+                return RedirectToAction("AdminPanel", "Admin");
             }
         }
 
         public ActionResult Logout()
         {
             LoginHelperForAdmin.Logout();
-            return RedirectToAction("Login","Admin");
+            return RedirectToAction("Login", "Admin");
         }
 
-        public ActionResult Admin()
+        [AdminFilter]
+        public ActionResult CreateProject()
         {
+            var freelancers = _db.Freelancers.ToList();
+            freelancers.Insert(0, new Freelancer { ID = 0, Name = "აირჩიეთ ფრილანსერი" });
+            ViewBag.freelancers = freelancers;
+            ViewBag.selectedFreelancer = freelancers.FirstOrDefault(x=> x.ID == 0).ID;
+
+
+            var companies = _db.Companies.ToList();
+            companies.Insert(0, new Company { ID = 0, Name = "აირჩიეთ კომპანია" });
+            ViewBag.companies = companies;
+            ViewBag.selectedCompany = companies.FirstOrDefault(x => x.ID == 0).ID;
+
+            //var result = new FreelancerCompanyModel
+            //{
+            //    listFreelancer = _db.Freelancers.ToList(),
+            //    listCompany = _db.Companies.ToList()
+            //};
+
             return View();
         }
     }
