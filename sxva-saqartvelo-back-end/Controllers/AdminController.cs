@@ -64,19 +64,14 @@ namespace sxva_saqartvelo_back_end.Controllers
             var freelancers = _db.Freelancers.ToList();
             freelancers.Insert(0, new Freelancer { ID = 0, Name = "აირჩიეთ ფრილანსერი" });
             ViewBag.freelancers = freelancers;
-            ViewBag.selectedFreelancer = freelancers.FirstOrDefault(x=> x.ID == 0).ID;
+            ViewBag.selectedFreelancer = freelancers.FirstOrDefault(x => x.ID == 0).ID;
 
+            //ViewBag.Freelancers = new SelectList(_db.Freelancers, "ID", "Name", "Surname");
 
             var companies = _db.Companies.ToList();
             companies.Insert(0, new Company { ID = 0, Name = "აირჩიეთ კომპანია" });
             ViewBag.companies = companies;
             ViewBag.selectedCompany = companies.FirstOrDefault(x => x.ID == 0).ID;
-
-            //var result = new FreelancerCompanyModel
-            //{
-            //    listFreelancer = _db.Freelancers.ToList(),
-            //    listCompany = _db.Companies.ToList()
-            //};
 
             return View();
         }

@@ -1,4 +1,4 @@
-﻿@model sxva_saqartvelo_back_end.Models.FreelancerCompanyModel
+﻿@model sxva_saqartvelo_back_end.Models.CreateProjectModel
 
 @{
     Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
@@ -32,6 +32,7 @@
         <div class="form-group">
             <div class="cont3 col-12 col-sm-6 form-group">
                @Html.DropDownList("Freelancers", new SelectList(ViewBag.freelancers, "Id", "Name", ViewBag.selectedFreelancer), new { @class = "form-control"})
+               @*@Html.DropDownList("Freelancers", "აირჩიეთ ფრილანსერი")*@
             </div>
         </div>
         <div class="form-group">
