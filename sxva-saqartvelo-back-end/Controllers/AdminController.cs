@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using sxva_saqartvelo_back_end.Models;
 using sxva_saqartvelo_back_end.Helpers;
 using sxva_saqartvelo_back_end.Filters;
+using System.Net;
+using System.Data.Entity;
 
 namespace sxva_saqartvelo_back_end.Controllers
 {
@@ -19,7 +21,8 @@ namespace sxva_saqartvelo_back_end.Controllers
         [AdminFilter]
         public ActionResult AdminPanel()
         {
-            return View();
+            var projects = _db.Projects.ToList();
+            return View(projects);
         }
         
         public ActionResult Login()
@@ -61,19 +64,86 @@ namespace sxva_saqartvelo_back_end.Controllers
         [AdminFilter]
         public ActionResult CreateProject()
         {
-            var freelancers = _db.Freelancers.ToList();
-            freelancers.Insert(0, new Freelancer { ID = 0, Name = "აირჩიეთ ფრილანსერი" });
-            ViewBag.freelancers = freelancers;
-            ViewBag.selectedFreelancer = freelancers.FirstOrDefault(x => x.ID == 0).ID;
-
-            //ViewBag.Freelancers = new SelectList(_db.Freelancers, "ID", "Name", "Surname");
-
-            var companies = _db.Companies.ToList();
-            companies.Insert(0, new Company { ID = 0, Name = "აირჩიეთ კომპანია" });
-            ViewBag.companies = companies;
-            ViewBag.selectedCompany = companies.FirstOrDefault(x => x.ID == 0).ID;
+            var freelancers = new SelectList(_db.Freelancers.ToList(), "ID", "Name");
+            ViewData["DBFreelancers"] = freelancers;
+            
+            var companies = new SelectList(_db.Companies.ToList(), "ID", "Name");
+            ViewData["DBCompanies"] = companies;
 
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult CreateProject(CreateProjectModel model, string CompanyID, string FreelancerID)
+        {
+            var freelancers = new SelectList(_db.Freelancers.ToList(), "ID", "Name");
+            ViewData["DBFreelancers"] = freelancers;
+
+            var companies = new SelectList(_db.Companies.ToList(), "ID", "Name");
+            ViewData["DBCompanies"] = companies;
+
+
+            if (ModelState.IsValid)
+            {
+                Project project = new Project();
+                project.Name = model.Name;
+                project.Description = model.Description;
+                project.CompanyID = Convert.ToInt32(CompanyID);
+                project.FreelancerID = Convert.ToInt32(FreelancerID);
+                project.StartDate = DateTime.Now;
+                project.DateAdded = DateTime.Now;
+                _db.Projects.Add(project);
+                _db.SaveChanges();
+            }
+            return View();
+        }
+
+
+        public ActionResult EditProject(int? id)
+        {
+
+            var freelancers = new SelectList(_db.Freelancers.ToList(), "ID", "Name");
+            ViewData["DBFreelancers"] = freelancers;
+
+            var companies = new SelectList(_db.Companies.ToList(), "ID", "Name");
+            ViewData["DBCompanies"] = companies;
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var project = _db.Projects.Find(id);
+
+            if(project == null)
+            {
+                return HttpNotFound();
+            }
+            return View(project);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult EditProject(Project project)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Entry(project).State = EntityState.Modified;
+                _db.SaveChanges();
+                return RedirectToAction("AdminPanel");
+            }
+            return View(project);
+        }
+
+        [HttpPost]
+        public JsonResult DeleteProject(int id)
+        {
+            _db.Projects.Remove(_db.Projects.Where(x => x.ID == id).FirstOrDefault());
+            _db.SaveChanges();
+            return Json("DeleteSucceeded", JsonRequestBehavior.AllowGet);
         }
     }
 }

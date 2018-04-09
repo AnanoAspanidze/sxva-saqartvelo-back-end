@@ -1,4 +1,168 @@
-﻿@{
+﻿@model IEnumerable<sxva_saqartvelo_back_end.Models.Project>
+
+@{
+    ViewBag.Title = "AdminPanel";
     Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
 }
 
+
+
+<script>
+$(document).ready(function(){
+    $("#searchInput").on("keyup", function () {
+    var searchValue = $(this).val().toLowerCase();
+    $("#projectTable tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1)
+    });
+  });
+});
+</script>
+
+<br /><br />
+
+
+
+<input class="searchInput" id="searchInput" type="text" placeholder="ძებნა..">
+<br />
+<table class="table-striped">
+    <thead>
+        <tr>
+            <th>
+                პროექტი
+            </th>
+            <th>
+                პროექტის აღწერა
+            </th>
+            <th>
+                პროექტის დაწყების თარიღი
+            </th>
+            <th>
+                პროექტის დასრულების თარიღი
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.FreelancerRating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyRating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FreelancerEvaluation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyEvaluation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Progress)
+            </th>*@
+            <th>
+                პროექტის დამატების თარიღი
+            </th>
+            <th>
+                კომპანია
+            </th>
+            <th>
+                ფრილანსერის სახელი
+            </th>
+            <th>
+                ფრილანსერის გვარი
+            </th>
+            <th></th>
+           
+</thead>
+    <tbody id="projectTable">
+            @foreach (var item in Model)
+            {
+                <tr class="displayedProjects">
+                    <td style="display:none">
+                        @item.ID
+                    </td>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @Html.Raw(item.Description)
+                    </td>
+                    <td>
+                        @item.StartDate
+                    </td>
+                    <td>
+                        @item.EndDate
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.FreelancerRating)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompanyRating)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FreelancerEvaluation)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompanyEvaluation)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Progress)
+                        </td>*@
+                    <td>
+                        @item.DateAdded
+                    </td>
+                    <td>
+                        @item.Company.Name
+                    </td>
+                    <td>
+                        @item.Freelancer.Name
+                    </td>
+                    <td>
+                        @item.Freelancer.Surname
+                    </td>
+                    <td>
+                        @*@Html.ActionLink("Edit", "EditProject", new { id = item.ID }) |*@
+                        <a style="text-decoration:none" href="@Url.Action("EditProject","Admin", new { id = item.ID})">Edit</a>
+                        <a style="cursor:pointer; color:#007bff" class="delete" data-toggle="modal" data-target="#myModal" id="@item.ID">Delete</a>
+                    </td>
+                </tr>
+            }
+    </tbody>
+</table>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div style="width:30%" class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p><strong style="color:red; font-size:16px; margin-left:3px; color:#e80c4d;">ჩანაწერის გაუქმება! დარწმუნებული ხართ?</strong></p>
+                <br />
+                <input id="confirmDelete" type="button" data-toggle="modal" data-target="#myModal" class="confirmDelete" value="წაშლა" title="წაშლა">
+                <input style="float:right; position:absolute" id="dismiss" class="dismissBtn" type="button" data-dismiss="modal" value="გაუქმება" title="გაუქმება">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        var tr;
+        var id;
+
+        $(".delete").click(function () {
+            
+            tr = $(this).closest('tr');
+            id = tr.find('td:first').html();
+
+            $('#confirmDelete').on("click", function () {
+
+                $.ajax({
+                    url: '/Admin/DeleteProject',
+                    method: 'POST',
+                    data: { 'id': id },
+                    success: function (response) {
+                        if (response == "DeleteSucceeded") {
+                            $('.displayedProjects').trigger('click');
+                            window.location.href = "/Admin/AdminPanel";
+                        }
+                    }
+                });
+            });
+        });
+    });
+</script>

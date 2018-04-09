@@ -6,10 +6,10 @@
 
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         
         <hr />
@@ -31,13 +31,12 @@
         </div>
         <div class="form-group">
             <div class="cont3 col-12 col-sm-6 form-group">
-               @Html.DropDownList("Freelancers", new SelectList(ViewBag.freelancers, "Id", "Name", ViewBag.selectedFreelancer), new { @class = "form-control"})
-               @*@Html.DropDownList("Freelancers", "აირჩიეთ ფრილანსერი")*@
+                @Html.DropDownList("CompanyID", (IEnumerable<SelectListItem>)ViewData["DBCompanies"] as IEnumerable<SelectListItem>, "აირჩიეთ კომპანია", new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">
             <div class="cont3 col-12 col-sm-6 form-group">
-                @Html.DropDownList("Companies", new SelectList(ViewBag.companies, "Id", "Name", ViewBag.selectedCompany), new { @class = "form-control" })
+                @Html.DropDownList("FreelancerID", (IEnumerable<SelectListItem>)ViewData["DBFreelancers"] as IEnumerable<SelectListItem>, "აირჩიეთ ფრილანსერი", new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">
