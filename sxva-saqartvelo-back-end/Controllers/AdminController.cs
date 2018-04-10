@@ -101,6 +101,7 @@ namespace sxva_saqartvelo_back_end.Controllers
         }
 
 
+        [AdminFilter]
         public ActionResult EditProject(int? id)
         {
 
@@ -127,11 +128,16 @@ namespace sxva_saqartvelo_back_end.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult EditProject(Project project)
+        public ActionResult EditProject(Project project, string CompanyID, string FreelancerID)
         {
+            
             if (ModelState.IsValid)
             {
-                _db.Entry(project).State = EntityState.Modified;
+                var projectToUpdate = _db.Projects.FirstOrDefault(x => x.ID == project.ID);
+                projectToUpdate.Name = project.Name.Trim();
+                projectToUpdate.Description = project.Description;
+                projectToUpdate.CompanyID = Convert.ToInt32(CompanyID);
+                projectToUpdate.FreelancerID = Convert.ToInt32(FreelancerID);
                 _db.SaveChanges();
                 return RedirectToAction("AdminPanel");
             }
@@ -141,8 +147,15 @@ namespace sxva_saqartvelo_back_end.Controllers
         [HttpPost]
         public JsonResult DeleteProject(int id)
         {
-            _db.Projects.Remove(_db.Projects.Where(x => x.ID == id).FirstOrDefault());
+            var del = _db.Projects.Find(id);
+
+            Project project = _db.Projects.Find(del.ID);
+            _db.Projects.Remove(project);
             _db.SaveChanges();
+
+            //_db.Projects.Remove(_db.Projects.Where(x => x.ID == id).FirstOrDefault());
+            //_db.SaveChanges();
+            
             return Json("DeleteSucceeded", JsonRequestBehavior.AllowGet);
         }
     }
