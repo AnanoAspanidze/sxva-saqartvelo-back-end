@@ -88,6 +88,7 @@ namespace sxva_saqartvelo_back_end.Controllers
             if (ModelState.IsValid)
             {
                 Project project = new Project();
+                Project_Status projectStatus = new Project_Status();
                 project.Name = model.Name;
                 project.Description = model.Description;
                 project.CompanyID = Convert.ToInt32(CompanyID);
@@ -96,13 +97,19 @@ namespace sxva_saqartvelo_back_end.Controllers
                 project.DateAdded = DateTime.Now;
                 _db.Projects.Add(project);
                 _db.SaveChanges();
+                projectStatus.StatusID = 2;
+                projectStatus.ProjectID = project.ID;
+                projectStatus.Date = DateTime.Now;
+                _db.Project_Status.Add(projectStatus);
+                _db.SaveChanges();
+               
             }
             return View();
         }
 
 
         [AdminFilter]
-        public ActionResult EditProject(int? id)
+        public ActionResult EditProject(int? id, string StatusID)
         {
 
             var freelancers = new SelectList(_db.Freelancers.ToList(), "ID", "Name");
@@ -110,6 +117,11 @@ namespace sxva_saqartvelo_back_end.Controllers
 
             var companies = new SelectList(_db.Companies.ToList(), "ID", "Name");
             ViewData["DBCompanies"] = companies;
+
+            //var status = new SelectList(_db.Project_Status.FirstOrDefault(x => x.ProjectID == id).Status.Name, "ID", "Name");
+
+            var status = new SelectList(_db.Project_Status.Where(x=> x.StatusID == Convert.ToInt32(StatusID)).ToList(), "ID", "Name");
+            ViewData["DBStatus"] = status;
 
             if (id == null)
             {
@@ -128,16 +140,20 @@ namespace sxva_saqartvelo_back_end.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult EditProject(Project project, string CompanyID, string FreelancerID)
+        public ActionResult EditProject(Project project, string CompanyID, string FreelancerID, string StatusID)
         {
+
             
             if (ModelState.IsValid)
             {
+                Project_Status projectStatus = new Project_Status();
                 var projectToUpdate = _db.Projects.FirstOrDefault(x => x.ID == project.ID);
+                var statusToUpdate = _db.Project_Status.FirstOrDefault(x => x.ProjectID == project.ID);
                 projectToUpdate.Name = project.Name.Trim();
                 projectToUpdate.Description = project.Description;
                 projectToUpdate.CompanyID = Convert.ToInt32(CompanyID);
                 projectToUpdate.FreelancerID = Convert.ToInt32(FreelancerID);
+                statusToUpdate.StatusID = Convert.ToInt32(StatusID);
                 _db.SaveChanges();
                 return RedirectToAction("AdminPanel");
             }
@@ -145,17 +161,12 @@ namespace sxva_saqartvelo_back_end.Controllers
         }
 
         [HttpPost]
-        public JsonResult DeleteProject(int id)
+        public JsonResult DeleteProject(int? id)
         {
-            var del = _db.Projects.Find(id);
-
-            Project project = _db.Projects.Find(del.ID);
-            _db.Projects.Remove(project);
+            _db.Projects.Remove(_db.Projects.Where(x => x.ID == id).FirstOrDefault());
+            _db.Project_Status.Remove(_db.Project_Status.Where(x => x.ProjectID == id).FirstOrDefault());
             _db.SaveChanges();
 
-            //_db.Projects.Remove(_db.Projects.Where(x => x.ID == id).FirstOrDefault());
-            //_db.SaveChanges();
-            
             return Json("DeleteSucceeded", JsonRequestBehavior.AllowGet);
         }
     }

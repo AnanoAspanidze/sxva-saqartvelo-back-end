@@ -669,6 +669,7 @@
     <Compile Include="Models\Project.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProjectStatus.cs" />
     <Compile Include="Models\Project_Status.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
