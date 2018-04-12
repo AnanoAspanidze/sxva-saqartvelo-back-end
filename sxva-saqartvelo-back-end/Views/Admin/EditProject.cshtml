@@ -73,13 +73,28 @@
         </div>
 
         <div class="form-group">
-            @*@Html.LabelFor(model => model.FreelancerID, "FreelancerID", htmlAttributes: new { @class = "control-label col-md-2" })*@
-            <label class="control-label col-md-2" for="StatusID">პროექტის სტატუსი</label>
-            <div class="col-md-10">
-                @Html.DropDownList("StatusID", (IEnumerable<SelectListItem>)ViewData["DBStatus"] as IEnumerable<SelectListItem>, "აირჩიეთ პროექტის სტატუსი", new { @class = "form-control" })
-                @*@Html.ValidationMessageFor(model => model.FreelancerID, "", new { @class = "text-danger" })*@
-            </div>
+            @if (ViewBag.currentStatus == "მიმდინარე")
+            {
+                <label class="projectStatus" for="StatusID">პროექტის სტატუსი: <span style="color:blue">@ViewBag.currentStatus</span></label>
+                <div class="col-md-10">
+                    @Html.DropDownList("StatusID", (IEnumerable<SelectListItem>)ViewData["DBStatus"] as IEnumerable<SelectListItem>, "სტატუსის რედაქტირება", new { @class = "form-control" })
+                </div>
+            }
+            else
+            {
+                <label class="projectStatus" for="StatusID">პროექტის სტატუსი: <span style="color:green">@ViewBag.currentStatus</span></label>
+                <div class="col-md-10">
+                    <a href="@Url.Action("FreelancerEvaluation", "Admin", new { id = Model.FreelancerID})">ფრილანსერის შეფასება,</a>
+                    <a href="@Url.Action("CompanyEvaluation", "Admin", new { id = Model.CompanyID})">კომპანიის შეფასება</a>
+                </div>
+                
+                <div class="col-md-10">
+                    @Html.DropDownList("StatusID", (IEnumerable<SelectListItem>)ViewData["DBStatus"] as IEnumerable<SelectListItem>, "სტატუსის რედაქტირება", new { @class = "form-control", @disabled = "disabled" })
+                </div>
+            }
+            
         </div>
+        
 
         @*<div class="form-group">
             @Html.LabelFor(model => model.FreelancerRating, htmlAttributes: new { @class = "control-label col-md-2" })

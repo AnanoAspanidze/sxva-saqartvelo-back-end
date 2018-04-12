@@ -119,11 +119,11 @@ namespace sxva_saqartvelo_back_end.Controllers
             ViewData["DBCompanies"] = companies;
 
             //var status = new SelectList(_db.Project_Status.FirstOrDefault(x => x.ProjectID == id).Status.Name, "ID", "Name");
-
-            var status = new SelectList(_db.Project_Status.Where(x=> x.StatusID == Convert.ToInt32(StatusID)).ToList(), "ID", "Name");
+            ViewBag.currentStatus = _db.Project_Status.FirstOrDefault(x => x.ProjectID == id).Status.Name;
+            var status = new SelectList(_db.Status.ToList(), "ID", "Name");
             ViewData["DBStatus"] = status;
 
-            if (id == null)
+            if(id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -142,19 +142,48 @@ namespace sxva_saqartvelo_back_end.Controllers
         [ValidateInput(false)]
         public ActionResult EditProject(Project project, string CompanyID, string FreelancerID, string StatusID)
         {
+            //Project_Status projectStatus = new Project_Status();
+            //var projectToUpdate = _db.Projects.FirstOrDefault(x => x.ID == project.ID);
+            //var statusToUpdate = _db.Project_Status.FirstOrDefault(x => x.ProjectID == project.ID);
+            //projectToUpdate.Name = project.Name.Trim();
+            //projectToUpdate.Description = project.Description;
+            //projectToUpdate.CompanyID = Convert.ToInt32(CompanyID);
+            //projectToUpdate.FreelancerID = Convert.ToInt32(FreelancerID);
+            //statusToUpdate.StatusID = Convert.ToInt32(StatusID);
+            //_db.SaveChanges();
+            //return RedirectToAction("AdminPanel");
 
-            
             if (ModelState.IsValid)
             {
-                Project_Status projectStatus = new Project_Status();
-                var projectToUpdate = _db.Projects.FirstOrDefault(x => x.ID == project.ID);
-                var statusToUpdate = _db.Project_Status.FirstOrDefault(x => x.ProjectID == project.ID);
+                //Project_Status projectStatus = new Project_Status();
+                var projectToUpdate = _db.Projects.FirstOrDefault(x => x.ID == project.ID); //ვპოულობ პროექტს დასარედაქტირებლად
+                var statusToUpdate = _db.Project_Status.FirstOrDefault(x => x.ProjectID == project.ID); //ვპოულობ პროექტის სტატუსის დასარედაქტირებლად
                 projectToUpdate.Name = project.Name.Trim();
                 projectToUpdate.Description = project.Description;
                 projectToUpdate.CompanyID = Convert.ToInt32(CompanyID);
                 projectToUpdate.FreelancerID = Convert.ToInt32(FreelancerID);
-                statusToUpdate.StatusID = Convert.ToInt32(StatusID);
-                _db.SaveChanges();
+
+                if(StatusID == "" || StatusID == null) //თუ პროექტის სტატუსი იქნება ცარიელი და სხვა ველები იქნება შევსებული edit-ის დროს, პროექტის სტატუსი რჩება იგივე.
+                {
+                    statusToUpdate.StatusID = statusToUpdate.StatusID;
+                    _db.SaveChanges();
+                    return RedirectToAction("AdminPanel");
+                }
+                
+
+
+                if(Convert.ToInt32(StatusID) == 2) //თუ პროექტის სტატუსი არის 2 ანუ სტატუს ცხრილში 2 ნიშნავს მიმდინარეს, მაშინ პროექტის სტატუსი რჩება მიმდინარეთ და პროექტის დასრულების თარიღი ხდება null.
+                {
+                    statusToUpdate.StatusID = Convert.ToInt32(StatusID);
+                    projectToUpdate.EndDate = null;
+                    _db.SaveChanges();
+                }
+                else
+                {
+                    statusToUpdate.StatusID = Convert.ToInt32(StatusID); //თუ პროექტის სტატუსი არის 3 ანუ სტატუს ცხრილში 3 ნიშნავს დასრულებულს, მაშნ პროქტის სტატუსი ხდება დასრულებული.
+                    projectToUpdate.EndDate = DateTime.Now;
+                    _db.SaveChanges();
+                }
                 return RedirectToAction("AdminPanel");
             }
             return View(project);
@@ -168,6 +197,78 @@ namespace sxva_saqartvelo_back_end.Controllers
             _db.SaveChanges();
 
             return Json("DeleteSucceeded", JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        [AdminFilter]
+        public ActionResult FreelancerEvaluation(int? id)
+        {
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var result = new FreelancerEvaluationModel
+            {
+                freelancer = _db.Freelancers.Find(id)
+            };
+
+            if (result == null)
+            {
+                return HttpNotFound();
+            }
+            return View(result);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult FreelancerEvaluation(FreelancerEvaluationModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var freelancerToEvaluate = _db.Projects.FirstOrDefault(x => x.FreelancerID == model.freelancer.ID);
+                freelancerToEvaluate.FreelancerRating = model.FreelancerRating;
+                freelancerToEvaluate.FreelancerEvaluation = model.FreelancerEvaluation;
+                _db.SaveChanges();
+            }
+            return View();
+        }
+
+        [AdminFilter]
+        public ActionResult CompanyEvaluation(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var result = new CompanyEvaluationModel
+            {
+                company = _db.Companies.Find(id)
+            };
+
+            if(result == null)
+            {
+                return HttpNotFound();
+            }
+            return View(result);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult CompanyEvaluation(CompanyEvaluationModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var companyToEvaluate = _db.Projects.FirstOrDefault(x => x.CompanyID == model.company.ID);
+                companyToEvaluate.CompanyRating = model.CompanyRating;
+                companyToEvaluate.CompanyEvaluation = model.CompanyEvaluation;
+                _db.SaveChanges();
+            }
+            return View();
         }
     }
 }

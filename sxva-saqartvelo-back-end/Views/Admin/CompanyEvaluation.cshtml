@@ -1,0 +1,58 @@
+﻿@model sxva_saqartvelo_back_end.Models.CompanyEvaluationModel
+
+@{
+    ViewBag.Title = "CompanyEvaluation";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<h2>CompanyEvaluation</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>CompanyEvaluationModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.company.ID)
+        <div class="form-group">
+            @Html.LabelFor(model => model.company.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.company.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.company.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.CompanyRating, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CompanyRating, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CompanyRating, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CompanyEvaluation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.CompanyEvaluation, new { @id = "CompanyEvaluation", @class = "form-control", @rows = "200" })
+                @Html.ValidationMessageFor(model => model.CompanyEvaluation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="შეფასება" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    CKEDITOR.replace("CompanyEvaluation");
+</script>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

@@ -627,6 +627,7 @@
     <Compile Include="Models\Company.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CompanyEvaluationModel.cs" />
     <Compile Include="Models\CompanyLoginModel.cs" />
     <Compile Include="Models\CompanyModel.cs" />
     <Compile Include="Models\ContactForm.cs">
@@ -669,7 +670,7 @@
     <Compile Include="Models\Project.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProjectStatus.cs" />
+    <Compile Include="Models\FreelancerEvaluationModel.cs" />
     <Compile Include="Models\Project_Status.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
@@ -712,6 +713,8 @@
     <Content Include="Views\Shared\_AdminPanelLayout.cshtml" />
     <Content Include="Views\Admin\CreateProject.cshtml" />
     <Content Include="Views\Admin\EditProject.cshtml" />
+    <Content Include="Views\Admin\FreelancerEvaluation.cshtml" />
+    <Content Include="Views\Admin\CompanyEvaluation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

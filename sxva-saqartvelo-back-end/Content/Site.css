@@ -86,3 +86,19 @@ background-color: #dddddd;
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+
+.projectStatus{
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 16.666667%;
+    flex: 0 0 16.666667%;
+    max-width: 23.666667%;
+    padding-left: 15px;
+}
+
+.freelancerEvaluation{
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 16.666667%;
+    flex: 0 0 16.666667%;
+    max-width: 17.666667%;
+    padding-left: 15px;
+}
