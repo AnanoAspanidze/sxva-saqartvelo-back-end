@@ -15,7 +15,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="Name">პროექტის სახელი</label>
             <div class="cont3 col-12 col-sm-6 form-group">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
@@ -23,7 +23,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="Description">პროექტის აღწერა</label>
             <div class="cont3 col-12 col-sm-6 form-group">
                 @Html.TextAreaFor(model => model.Description, new { @id = "Description", @class = "form-control", @rows = "200" })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
@@ -31,17 +31,20 @@
         </div>
         <div class="form-group">
             <div class="cont3 col-12 col-sm-6 form-group">
-                @Html.DropDownList("CompanyID", (IEnumerable<SelectListItem>)ViewData["DBCompanies"] as IEnumerable<SelectListItem>, "აირჩიეთ კომპანია", new { @class = "form-control" })
+                @Html.DropDownList("CompanyID", (IEnumerable<SelectListItem>)ViewData["DBCompanies"] as IEnumerable<SelectListItem>, "კომპანიის დამატება პროექტზე", new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">
             <div class="cont3 col-12 col-sm-6 form-group">
-                @Html.DropDownList("FreelancerID", (IEnumerable<SelectListItem>)ViewData["DBFreelancers"] as IEnumerable<SelectListItem>, "აირჩიეთ ფრილანსერი", new { @class = "form-control" })
+                @Html.DropDownList("FreelancerID", (IEnumerable<SelectListItem>)ViewData["DBFreelancers"] as IEnumerable<SelectListItem>, "ფრილანსერის დამატება პროექტზე", new { @class = "form-control" })
             </div>
-        </div>
+        </div>     
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input onClick="CKupdate()" type="submit" value="შექმნა" class="btn btn-default" />
+                <p style="color:red">@ViewBag.validateCompany</p>
+                <p style="color:red">@ViewBag.validateFreelancer</p>
+                <p style="color:green">@ViewBag.Success</p>
+                <input onClick="CKupdate()" type="submit" value="დამატება" class="btn btn-success" />
             </div>
         </div>
     </div>

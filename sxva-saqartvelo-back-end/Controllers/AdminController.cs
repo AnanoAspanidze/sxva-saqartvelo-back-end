@@ -64,9 +64,22 @@ namespace sxva_saqartvelo_back_end.Controllers
         [AdminFilter]
         public ActionResult CreateProject()
         {
-            var freelancers = new SelectList(_db.Freelancers.ToList(), "ID", "Name");
-            ViewData["DBFreelancers"] = freelancers;
-            
+            //var freelancers = new SelectList(_db.Freelancers.ToList(), "ID", "Name");
+            //ViewData["DBFreelancers"] = freelancers;
+
+
+            var freelancers = _db.Freelancers.ToList();
+            List<object> freelancerList = new List<object>();
+            foreach (var f in freelancers)
+            {
+                freelancerList.Add(new
+                {
+                    ID = f.ID,
+                    Name = f.Name + " " + f.Surname
+                });
+                this.ViewData["DBFreelancers"] = new SelectList(freelancerList, "ID", "Name");
+            }
+
             var companies = new SelectList(_db.Companies.ToList(), "ID", "Name");
             ViewData["DBCompanies"] = companies;
 
@@ -78,11 +91,34 @@ namespace sxva_saqartvelo_back_end.Controllers
         [ValidateInput(false)]
         public ActionResult CreateProject(CreateProjectModel model, string CompanyID, string FreelancerID)
         {
-            var freelancers = new SelectList(_db.Freelancers.ToList(), "ID", "Name");
-            ViewData["DBFreelancers"] = freelancers;
+            //var freelancers = new SelectList(_db.Freelancers.ToList(), "ID", "Name");
+            //ViewData["DBFreelancers"] = freelancers;
+
+            var freelancers = _db.Freelancers.ToList();
+            List<object> freelancerList = new List<object>();
+            foreach (var f in freelancers)
+            {
+                freelancerList.Add(new
+                {
+                    ID = f.ID,
+                    Name = f.Name + " " + f.Surname
+                });
+                this.ViewData["DBFreelancers"] = new SelectList(freelancerList, "ID", "Name");
+            }
 
             var companies = new SelectList(_db.Companies.ToList(), "ID", "Name");
             ViewData["DBCompanies"] = companies;
+
+            if(CompanyID == "")
+            {
+                ViewBag.validateCompany = "აირჩიეთ კომპანია";
+                return View();
+            }
+            if(FreelancerID == "")
+            {
+                ViewBag.validateFreelancer = "აირჩიეთ ფრილანსერი";
+                return View();
+            }
 
 
             if (ModelState.IsValid)
@@ -102,6 +138,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                 projectStatus.Date = DateTime.Now;
                 _db.Project_Status.Add(projectStatus);
                 _db.SaveChanges();
+                ViewBag.Success = "პროექტი დაემატა წარმატებით";
                
             }
             return View();
@@ -112,13 +149,26 @@ namespace sxva_saqartvelo_back_end.Controllers
         public ActionResult EditProject(int? id, string StatusID)
         {
 
-            var freelancers = new SelectList(_db.Freelancers.ToList(), "ID", "Name");
-            ViewData["DBFreelancers"] = freelancers;
+            var freelancers = _db.Freelancers.ToList();
+            List<object> freelancerList = new List<object>();
+            foreach(var f in freelancers)
+            {
+                freelancerList.Add(new {
+                    ID = f.ID,
+                    Name = f.Name + " " + f.Surname
+                });
+                this.ViewData["DBFreelancers"] = new SelectList(freelancerList, "ID", "Name");
+            }
+
+
+            //var freelancers = new SelectList(_db.Freelancers.ToList(), "ID", "Name");
+            //ViewData["DBFreelancers"] = freelancers;
 
             var companies = new SelectList(_db.Companies.ToList(), "ID", "Name");
             ViewData["DBCompanies"] = companies;
 
-            //var status = new SelectList(_db.Project_Status.FirstOrDefault(x => x.ProjectID == id).Status.Name, "ID", "Name");
+
+
             ViewBag.currentStatus = _db.Project_Status.FirstOrDefault(x => x.ProjectID == id).Status.Name;
             var status = new SelectList(_db.Status.ToList(), "ID", "Name");
             ViewData["DBStatus"] = status;
@@ -142,22 +192,48 @@ namespace sxva_saqartvelo_back_end.Controllers
         [ValidateInput(false)]
         public ActionResult EditProject(Project project, string CompanyID, string FreelancerID, string StatusID)
         {
-            //Project_Status projectStatus = new Project_Status();
-            //var projectToUpdate = _db.Projects.FirstOrDefault(x => x.ID == project.ID);
-            //var statusToUpdate = _db.Project_Status.FirstOrDefault(x => x.ProjectID == project.ID);
-            //projectToUpdate.Name = project.Name.Trim();
-            //projectToUpdate.Description = project.Description;
-            //projectToUpdate.CompanyID = Convert.ToInt32(CompanyID);
-            //projectToUpdate.FreelancerID = Convert.ToInt32(FreelancerID);
-            //statusToUpdate.StatusID = Convert.ToInt32(StatusID);
-            //_db.SaveChanges();
-            //return RedirectToAction("AdminPanel");
+
+            var freelancers = _db.Freelancers.ToList();
+            List<object> freelancerList = new List<object>();
+            foreach (var f in freelancers)
+            {
+                freelancerList.Add(new
+                {
+                    ID = f.ID,
+                    Name = f.Name + " " + f.Surname
+                });
+                this.ViewData["DBFreelancers"] = new SelectList(freelancerList, "ID", "Name");
+            }
+
+
+            var companies = new SelectList(_db.Companies.ToList(), "ID", "Name");
+            ViewData["DBCompanies"] = companies;
+
+            ViewBag.currentStatus = _db.Project_Status.FirstOrDefault(x => x.ProjectID == project.ID).Status.Name;
+            var status = new SelectList(_db.Status.ToList(), "ID", "Name");
+            ViewData["DBStatus"] = status;
+
+
 
             if (ModelState.IsValid)
             {
-                //Project_Status projectStatus = new Project_Status();
                 var projectToUpdate = _db.Projects.FirstOrDefault(x => x.ID == project.ID); //ვპოულობ პროექტს დასარედაქტირებლად
                 var statusToUpdate = _db.Project_Status.FirstOrDefault(x => x.ProjectID == project.ID); //ვპოულობ პროექტის სტატუსის დასარედაქტირებლად
+
+
+                if (project.Name == "" || project.Name == null)
+                {
+                    projectToUpdate.Name = projectToUpdate.Name;
+                    projectToUpdate.Description = projectToUpdate.Description;
+                    projectToUpdate.CompanyID = projectToUpdate.CompanyID;
+                    projectToUpdate.FreelancerID = projectToUpdate.FreelancerID;
+                    _db.SaveChanges();
+                    return View();
+
+                }
+
+
+               
                 projectToUpdate.Name = project.Name.Trim();
                 projectToUpdate.Description = project.Description;
                 projectToUpdate.CompanyID = Convert.ToInt32(CompanyID);
@@ -184,7 +260,10 @@ namespace sxva_saqartvelo_back_end.Controllers
                     projectToUpdate.EndDate = DateTime.Now;
                     _db.SaveChanges();
                 }
-                return RedirectToAction("AdminPanel");
+
+
+                //return RedirectToAction("EditProject");
+                return Redirect(Url.Action("EditProject", "Admin", new { id = project.ID }));
             }
             return View(project);
         }
@@ -233,7 +312,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                 freelancerToEvaluate.FreelancerEvaluation = model.FreelancerEvaluation;
                 _db.SaveChanges();
             }
-            return View();
+            return RedirectToAction("AdminPanel", "Admin");
         }
 
         [AdminFilter]
@@ -268,7 +347,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                 companyToEvaluate.CompanyEvaluation = model.CompanyEvaluation;
                 _db.SaveChanges();
             }
-            return View();
+            return RedirectToAction("AdminPanel", "Admin");
         }
     }
 }

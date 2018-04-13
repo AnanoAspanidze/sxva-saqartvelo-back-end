@@ -14,7 +14,7 @@
     
     <div class="form-horizontal">
         <br />
-        <h4>ფრილანსერის შეფასება</h4>
+        <h4 style="padding-left:5px">ფრილანსერის შეფასება</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.freelancer.ID)
@@ -43,8 +43,8 @@
         <div class="form-group">
             <label class="freelancerEvaluation" for="FreelancerRating">ფრილანსერის შეფასება</label>
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.FreelancerEvaluation, new { @id = "FreelancerEvaluation", @class = "form-control", @rows = "200" })
                 @Html.ValidationMessageFor(model => model.FreelancerEvaluation, "", new { @class = "text-danger" })
+                @Html.TextAreaFor(model => model.FreelancerEvaluation, new { @id = "FreelancerEvaluation", @class = "form-control", @rows = "200" })
             </div>
         </div>
 
@@ -59,7 +59,3 @@
 <script>
     CKEDITOR.replace("FreelancerEvaluation");
 </script>
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
