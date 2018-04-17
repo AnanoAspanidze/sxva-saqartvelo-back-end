@@ -675,6 +675,7 @@
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\SendMailModel.cs" />
     <Compile Include="Models\Skill.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
