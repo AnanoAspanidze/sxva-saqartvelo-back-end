@@ -24,7 +24,7 @@
                 @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
             </div>
             <div class="cont4 container form-group">
-                @Html.TextAreaFor(model => model.Body, new { @id = "Body", @class = "form-control", @rows = "200", @placeholder = "მოგვწერეთ" })
+                @Html.TextAreaFor(model => model.Body, new { @class = "form-control", @placeholder = "მოგვწერეთ" })
                 @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
             </div>
             <div class="cont3 col-12 col-sm-6 form-group">
@@ -41,9 +41,9 @@
 
 
 
-<script>
+@*<script>
     CKEDITOR.replace("Body");
-</script>
+</script>*@
 
 
 

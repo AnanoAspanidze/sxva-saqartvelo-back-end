@@ -22,6 +22,7 @@ namespace sxva_saqartvelo_back_end.Models
         public string Subject { get; set; }
 
         [Required(ErrorMessage = "ჩაწერეთ ტექსტი")]
+        [DataType(DataType.MultilineText)]
         public string Body { get; set; }
     }
 }
