@@ -349,5 +349,22 @@ namespace sxva_saqartvelo_back_end.Controllers
             }
             return RedirectToAction("AdminPanel", "Admin");
         }
+
+
+        public ActionResult AddTaskToProject()
+        {
+            return View();
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult AddTaskToProject(AddTaskToProjectModel Task)
+        {
+            
+            return View();
+        }
     }
 }

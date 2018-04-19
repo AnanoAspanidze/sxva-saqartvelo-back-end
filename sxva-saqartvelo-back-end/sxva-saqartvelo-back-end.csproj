@@ -620,6 +620,7 @@
     <Compile Include="Helpers\LoginHelperForAdmin.cs" />
     <Compile Include="Helpers\LoginHelperForCompany.cs" />
     <Compile Include="Helpers\PasswordHashHelper.cs" />
+    <Compile Include="Models\AddTaskToProjectModel.cs" />
     <Compile Include="Models\Admin.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
@@ -716,6 +717,7 @@
     <Content Include="Views\Admin\EditProject.cshtml" />
     <Content Include="Views\Admin\FreelancerEvaluation.cshtml" />
     <Content Include="Views\Admin\CompanyEvaluation.cshtml" />
+    <Content Include="Views\Admin\AddTaskToProject.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

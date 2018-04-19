@@ -1,0 +1,54 @@
+﻿@model sxva_saqartvelo_back_end.Models.AddTaskToProjectModel
+
+@{
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <br /> <br />
+        <h4 style="padding-left:5px">ამოცანის დამატება პროექტზე</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Name">ამოცანის სახელი</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Body">ამოცანის აღწერა</label>
+            <div class="col-md-10">
+                @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+                @Html.TextAreaFor(model => model.Body, new { @id = "Body", @class = "form-control", @rows = "200" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="DueDate">შესრულების თარიღი</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DueDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="დამატება" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+    CKEDITOR.replace("Body");
+</script>
