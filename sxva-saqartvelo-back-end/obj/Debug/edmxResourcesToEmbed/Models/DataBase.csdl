@@ -19,7 +19,7 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Logo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Logo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="Rating" Type="Int32" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -45,9 +45,9 @@
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Field" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Rating" Type="Int32" Nullable="false" />
-    <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Bio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Rating" Type="Int32" />
+    <Property Name="Photo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Bio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -71,8 +71,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Body" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="AdminID" Type="Int32" Nullable="false" />
     <Property Name="isCompleted" Type="Boolean" Nullable="false" />
     <Property Name="ProjectID" Type="Int32" Nullable="false" />
@@ -109,7 +109,7 @@
     <Property Name="FreelancerEvaluation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CompanyEvaluation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Progress" Type="Int32" />
-    <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateAdded" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Company" Relationship="Self.FK_Project_Company" FromRole="Project" ToRole="Company" />
     <NavigationProperty Name="Freelancer" Relationship="Self.FK_Project_Freelancer" FromRole="Project" ToRole="Freelancer" />
     <NavigationProperty Name="Issues" Relationship="Self.FK_Issue_Project" FromRole="Project" ToRole="Issue" />

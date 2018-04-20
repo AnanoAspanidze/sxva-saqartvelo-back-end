@@ -143,7 +143,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                 mailMessage.To.Add("giorgi.khutsishvili04@geolab.edu.ge");
                 mailMessage.Subject = SendEmail.Subject;
                 mailMessage.IsBodyHtml = true;
-                mailMessage.Body = "გამომგზავნის ელ.ფოსტა " + " " +  SendEmail.Email + ", " +"<br>"+ SendEmail.Body;
+                mailMessage.Body = "გამომგზავნის ელ.ფოსტა " + " " + SendEmail.Email + ", " + "<br>" + SendEmail.Body;
                 client.Send(mailMessage);
 
                 ViewBag.SendSucceeded = "თქვენი შეტყობინება გაიგზავნა წარმატებით";

@@ -383,6 +383,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                     issue.DateCreated = DateTime.Now;
                     _db.Issues.Add(issue);
                     _db.SaveChanges();
+                    ViewBag.TaskAdded = "ამოცანა დაემატა წარმატებით";
                 }
             }
             catch (DbEntityValidationException dbEx)

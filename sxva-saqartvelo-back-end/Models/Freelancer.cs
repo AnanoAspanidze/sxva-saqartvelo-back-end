@@ -25,7 +25,7 @@ namespace sxva_saqartvelo_back_end.Models
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Field { get; set; }
-        public int Rating { get; set; }
+        public Nullable<int> Rating { get; set; }
         public string Photo { get; set; }
         public string Bio { get; set; }
         public string Email { get; set; }

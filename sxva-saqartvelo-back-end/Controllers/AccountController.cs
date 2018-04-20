@@ -54,7 +54,7 @@ namespace sxva_saqartvelo_back_end.Controllers
             {
                 Session["freelancer"] = freelancer;
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("FreelancerProfile", "Freelancer");
             }
             
         }

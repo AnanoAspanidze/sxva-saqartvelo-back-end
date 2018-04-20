@@ -11,7 +11,8 @@ namespace sxva_saqartvelo_back_end.Models
         [Required(ErrorMessage = "ჩაწერეთ ამოცანის სახელი")]
         public string Name { get; set; }
 
-
+        //[DataType(DataType.MultilineText)]
+        [Required(ErrorMessage = "ჩაწერეთ პროექტის აღწერა")]
         public string Body { get; set; }
 
         [DataType(DataType.Date)]

@@ -133,7 +133,10 @@ namespace sxva_saqartvelo_back_end.Controllers
         [LoginFilter]
         public ActionResult FreelancerProfile()
         {
-            return View();
+            var freelancer = LoginHelper.freelancer();
+            
+            var issues = _db.Issues.Where(x=> x.Project.FreelancerID == freelancer.ID).ToList(); //ვიპოვე ფრილანსერი რომელიც დამატებულია კონკრეტულ პრექტზე და ამ პროექტს გაწერილი აქვს ამოცანა რომელსაც ხედავს კონკრეტული ფრილანსერი.
+            return View(issues);
         }
 
         [LoginFilter]
@@ -258,3 +261,34 @@ namespace sxva_saqartvelo_back_end.Controllers
         }
     }
 }
+
+
+
+
+
+
+//@using sxva_saqartvelo_back_end.Models;
+//@using sxva_saqartvelo_back_end.Helpers;
+
+//@{ 
+//    var freelancer = LoginHelper.freelancer();
+//}
+
+
+
+//@if(freelancer != null)
+//{
+//    < div style = "padding-top:200px; text-align:center" class="freelancer">
+//        <p>გამარჯობა</p> @freelancer.Name @freelancer.Surname
+//    </div>
+//}
+
+
+
+
+//<script>
+//    $(document).ready(function ()
+//{
+//        $('#footer').hide();
+//});
+//</script>

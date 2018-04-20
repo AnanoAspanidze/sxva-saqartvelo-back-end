@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OtherGeorgiaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="OtherGeorgiaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="ID" />
@@ -23,7 +23,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="Logo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Logo" Type="nvarchar" MaxLength="200" />
           <Property Name="Rating" Type="int" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
@@ -48,9 +48,9 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Field" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Rating" Type="int" Nullable="false" />
-          <Property Name="Photo" Type="nvarchar" MaxLength="50" />
-          <Property Name="Bio" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Rating" Type="int" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="200" />
+          <Property Name="Bio" Type="nvarchar(max)" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
           <Property Name="Mobile" Type="varchar" MaxLength="50" />
@@ -70,8 +70,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Body" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
           <Property Name="AdminID" Type="int" Nullable="false" />
           <Property Name="isCompleted" Type="bit" Nullable="false" />
           <Property Name="ProjectID" Type="int" Nullable="false" />
@@ -103,7 +103,7 @@
           <Property Name="FreelancerEvaluation" Type="nvarchar(max)" />
           <Property Name="CompanyEvaluation" Type="nvarchar(max)" />
           <Property Name="Progress" Type="int" />
-          <Property Name="DateAdded" Type="datetime" Nullable="false" />
+          <Property Name="DateAdded" Type="datetime" />
         </EntityType>
         <EntityType Name="Project_Status">
           <Key>
@@ -314,8 +314,7 @@
             <End Role="Project_Status" EntitySet="Project_Status" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OtherGeorgiaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -338,7 +337,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Logo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Logo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Rating" Type="Int32" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -364,9 +363,9 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Field" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Rating" Type="Int32" Nullable="false" />
-          <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Bio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Rating" Type="Int32" />
+          <Property Name="Photo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Bio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -390,8 +389,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Body" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AdminID" Type="Int32" Nullable="false" />
           <Property Name="isCompleted" Type="Boolean" Nullable="false" />
           <Property Name="ProjectID" Type="Int32" Nullable="false" />
@@ -428,7 +427,7 @@
           <Property Name="FreelancerEvaluation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CompanyEvaluation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Progress" Type="Int32" />
-          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateAdded" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Company" Relationship="Self.FK_Project_Company" FromRole="Project" ToRole="Company" />
           <NavigationProperty Name="Freelancer" Relationship="Self.FK_Project_Freelancer" FromRole="Project" ToRole="Freelancer" />
           <NavigationProperty Name="Issues" Relationship="Self.FK_Issue_Project" FromRole="Project" ToRole="Issue" />

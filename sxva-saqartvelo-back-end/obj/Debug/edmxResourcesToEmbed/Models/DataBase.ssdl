@@ -18,7 +18,7 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" />
-    <Property Name="Logo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Logo" Type="nvarchar" MaxLength="200" />
     <Property Name="Rating" Type="int" />
     <Property Name="Email" Type="varchar" MaxLength="50" />
     <Property Name="Password" Type="nvarchar" MaxLength="50" />
@@ -43,9 +43,9 @@
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Field" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Rating" Type="int" Nullable="false" />
-    <Property Name="Photo" Type="nvarchar" MaxLength="50" />
-    <Property Name="Bio" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Rating" Type="int" />
+    <Property Name="Photo" Type="nvarchar" MaxLength="200" />
+    <Property Name="Bio" Type="nvarchar(max)" />
     <Property Name="Email" Type="varchar" MaxLength="50" />
     <Property Name="Password" Type="nvarchar" MaxLength="50" />
     <Property Name="Mobile" Type="varchar" MaxLength="50" />
@@ -65,8 +65,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Body" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
     <Property Name="AdminID" Type="int" Nullable="false" />
     <Property Name="isCompleted" Type="bit" Nullable="false" />
     <Property Name="ProjectID" Type="int" Nullable="false" />
@@ -98,7 +98,7 @@
     <Property Name="FreelancerEvaluation" Type="nvarchar(max)" />
     <Property Name="CompanyEvaluation" Type="nvarchar(max)" />
     <Property Name="Progress" Type="int" />
-    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" />
   </EntityType>
   <EntityType Name="Project_Status">
     <Key>

@@ -33,7 +33,7 @@ namespace sxva_saqartvelo_back_end.Models
         public string FreelancerEvaluation { get; set; }
         public string CompanyEvaluation { get; set; }
         public Nullable<int> Progress { get; set; }
-        public System.DateTime DateAdded { get; set; }
+        public Nullable<System.DateTime> DateAdded { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual Freelancer Freelancer { get; set; }
