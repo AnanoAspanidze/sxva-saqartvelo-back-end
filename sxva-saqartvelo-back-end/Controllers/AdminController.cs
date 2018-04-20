@@ -366,7 +366,7 @@ namespace sxva_saqartvelo_back_end.Controllers
         [ValidateInput(false)]
         public ActionResult AddTaskToProject(AddTaskToProjectModel Task, int? id)
         {
-            ViewBag.HiddenProjectID = id;
+            
             var admin = LoginHelperForAdmin.admin();
 
             try
