@@ -8,6 +8,8 @@ using sxva_saqartvelo_back_end.Helpers;
 using sxva_saqartvelo_back_end.Filters;
 using System.Net;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 
 namespace sxva_saqartvelo_back_end.Controllers
 {
@@ -351,8 +353,9 @@ namespace sxva_saqartvelo_back_end.Controllers
         }
 
 
-        public ActionResult AddTaskToProject()
+        public ActionResult AddTaskToProject(int? id)
         {
+            ViewBag.HiddenProjectID = id;
             return View();
         }
 
@@ -361,9 +364,41 @@ namespace sxva_saqartvelo_back_end.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult AddTaskToProject(AddTaskToProjectModel Task)
+        public ActionResult AddTaskToProject(AddTaskToProjectModel Task, int? id)
         {
-            
+            ViewBag.HiddenProjectID = id;
+            var admin = LoginHelperForAdmin.admin();
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Issue issue = new Issue();
+                    issue.Name = Task.Name;
+                    issue.Body = Task.Body;
+                    issue.AdminID = admin.ID;
+                    issue.isCompleted = false;
+                    issue.ProjectID = id.Value;
+                    issue.DueDate = Task.DueDate;
+                    issue.DateCreated = DateTime.Now;
+                    _db.Issues.Add(issue);
+                    _db.SaveChanges();
+                }
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Trace.TraceInformation("Property: {0} Error: {1}",
+                                                validationError.PropertyName,
+                                                validationError.ErrorMessage);
+                    }
+                }
+            }
+
+
             return View();
         }
     }

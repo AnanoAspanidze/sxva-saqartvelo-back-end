@@ -139,8 +139,8 @@ $(document).ready(function(){
                     @item.Freelancer.Surname
                 </td>
                 <td>
-                    <a style="text-decoration:none" href="@Url.Action("EditProject","Admin", new { id = item.ID})">Edit</a>
-                    <a style="cursor:pointer; color:#007bff" class="delete" data-toggle="modal" data-target="#myModal" id="@item.ID">Delete</a>
+                    <a style="text-decoration:none" href="@Url.Action("EditProject","Admin", new { id = item.ID})">Edit</a> |
+                    <a style="cursor:pointer; color:#007bff" class="delete" data-toggle="modal" data-target="#myModal" id="@item.ID">Delete</a> |
                     <a style="display:inline-block" href="@Url.Action("AddTaskToProject", "Admin", new { id = item.ID })">ამოცანის დამატება</a>
                 </td>
             </tr>
