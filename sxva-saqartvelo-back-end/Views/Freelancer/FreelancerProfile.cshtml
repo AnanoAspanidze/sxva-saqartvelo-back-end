@@ -9,9 +9,6 @@
     <table class="table">
         <tr>
             <th>
-                დასრულება
-            </th>
-            <th>
                 პროექტი
             </th>
             <th>
@@ -23,13 +20,15 @@
             <th>
                 თარიღი შესასრულებლად
             </th>
+            <th></th>
+            
         </tr>
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    <input type="checkbox" />
+            <tr class="displayedIssues">
+                <td style="display:none">
+                    @item.ID
                 </td>
                 <td>
                     @item.Project.Name
@@ -43,12 +42,66 @@
                 <td>
                     @item.DueDate.ToShortDateString()
                 </td>
+                @if (item.isCompleted == true)
+                {
+                    <td>
+                        <button id="@item.ID" disabled class="btn btn-success">შესრულებული</button>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <button id="@item.ID" data-toggle="modal" data-target="#myModal" class="btn btn-info">შესრულება</button>
+                    </td>
+                }
             </tr>
         }
 
     </table>
 </div>
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div style="width:33%" class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p><strong style="color:red; font-size:16px; margin-left:3px; color:#e80c4d;">ამოცანის შესრულება, დარწმუნებული ხართ?</strong></p>
+                <br />
+                <input id="confirmTask" type="button" data-toggle="modal" data-target="#myModal" class="confirmTask" value="შესრულება" title="შესრულება">
+                <input style="float:right; position:absolute" id="cancelTask" class="cancelTask" type="button" data-dismiss="modal" value="გაუქმება" title="გაუქმება">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        var tr;
+        var id;
+
+        $(".btn-info").click(function () {
+            tr = $(this).closest('tr');
+            id = tr.find('td:first').html();
+
+            $('#confirmTask').on('click', function () {
+
+                $.ajax({
+                    url: '/Freelancer/TaskCompleted',
+                    method: 'POST',
+                    data: { 'id': id },
+                    success: function (response) {
+                        if (response == 'TaskCompletedSuccessfully') {
+                            $('.displayedIssues').trigger('click');
+                            window.location.href = "/Freelancer/FreelancerProfile";
+                        }
+                    }
+                });
+            });
+
+        });
+    });
+</script>
 
 
 

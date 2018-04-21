@@ -1,0 +1,107 @@
+﻿@model IEnumerable<sxva_saqartvelo_back_end.Models.Issue>
+
+@{
+    ViewBag.Title = "AllTask";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<h2>AllTask</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            პროექტი
+        </th>
+        <th>
+            ამოცანის სახელი
+        </th>
+        <th>
+            ამოცანის აღწერა
+        </th>
+        <th>
+            თარიღი შესასრულებლად
+        </th>
+        <th>
+            შექმნის თარიღი
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr id="displayedIssues">
+            <td style="display:none">
+                @item.ID
+            </td>
+            <td>
+                @item.Project.Name
+            </td>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @Html.Raw(item.Body)
+            </td>
+            <td>
+                @item.DueDate.ToShortDateString()
+            </td>
+            <td>
+                @item.DateCreated.ToShortDateString()
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditTask", new { id = item.ID }) |
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+                <a style="cursor:pointer; color:#007bff" class="delete" data-toggle="modal" data-target="#myModal" id="@item.ID">Delete</a> |
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div style="width:33%" class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p><strong style="color:red; font-size:16px; margin-left:3px; color:#e80c4d;">ჩანაწერის გაუქმება! დარწმუნებული ხართ?</strong></p>
+                <br />
+                <input id="confirmDelete" type="button" data-toggle="modal" data-target="#myModal" class="confirmDelete" value="წაშლა" title="წაშლა">
+                <input style="float:right; position:absolute" id="dismiss" class="dismissBtn" type="button" data-dismiss="modal" value="გაუქმება" title="გაუქმება">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        var tr;
+        var id;
+
+        $(".delete").click(function () {
+
+            tr = $(this).closest('tr');
+            id = tr.find('td:first').html();
+
+            $('#confirmDelete').on("click", function () {
+
+                $.ajax({
+                    method: 'POST',
+                    url: '/Admin/DeleteTask',
+                    traditional: true,
+                    data: { 'id': id },
+                    success: function (response) {
+                        if (response == "DeleteSucceeded") {
+                            $('.displayedProjects').trigger('click');
+                            //window.location.href = "/Admin/AdminPanel";
+                            $("#displayedIssues").html(data);
+                        }
+                    }
+                });
+            });
+        });
+    });
+</script>

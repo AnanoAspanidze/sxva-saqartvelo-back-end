@@ -1,0 +1,61 @@
+﻿@model IEnumerable<sxva_saqartvelo_back_end.Models.Issue>
+
+@*@{
+    ViewBag.Title = "AllTask";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+<h2>AllTask</h2>*@
+
+
+@*<table class="table">
+    <tr>
+        <th>
+            პროექტი
+        </th>
+        <th>
+            ამოცანის სახელი
+        </th>
+        <th>
+            ამოცანის აღწერა
+        </th>
+        <th>
+            თარიღი შესასრულებლად
+        </th>
+        <th>
+            შექმნის თარიღი
+        </th>
+        <th></th>
+    </tr>
+
+
+
+</table>*@
+
+@foreach (var item in Model)
+{
+    <tr id="displayedIssues">
+        <td style="display:none">
+            @item.ID
+        </td>
+        <td>
+            @item.Project.Name
+        </td>
+        <td>
+            @item.Name
+        </td>
+        <td>
+            @Html.Raw(item.Body)
+        </td>
+        <td>
+            @item.DueDate.ToShortDateString()
+        </td>
+        <td>
+            @item.DateCreated.ToShortDateString()
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditTask", new { id = item.ID }) |
+            <a style="cursor:pointer; color:#007bff" class="delete" data-toggle="modal" data-target="#myModal" id="@item.ID">Delete</a> |
+        </td>
+    </tr>
+}

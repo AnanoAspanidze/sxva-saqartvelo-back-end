@@ -12,6 +12,7 @@ using sxva_saqartvelo_back_end.Helpers;
 using System.IO;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
+using System.Data.Entity;
 
 namespace sxva_saqartvelo_back_end.Controllers
 {
@@ -137,6 +138,19 @@ namespace sxva_saqartvelo_back_end.Controllers
             
             var issues = _db.Issues.Where(x=> x.Project.FreelancerID == freelancer.ID).ToList(); //ვიპოვე ფრილანსერი რომელიც დამატებულია კონკრეტულ პრექტზე და ამ პროექტს გაწერილი აქვს ამოცანა რომელსაც ხედავს კონკრეტული ფრილანსერი.
             return View(issues);
+        }
+
+
+        [HttpPost]
+        public JsonResult TaskCompleted(int id)
+        {
+            Issue issue = _db.Issues.Find(id);
+            var issueStatus = _db.Issue_Status.FirstOrDefault(x => x.IssueID == issue.ID); //ვიპოვე ამოცანის სტატუსი.
+            issue.isCompleted = true;
+            issueStatus.StatusID = 3; //თუ ფრილანსერი ამოცანას შეასრულებს, ამოცანის სტატუსი გახდება დასრულებული.
+            _db.Entry(issue).State = EntityState.Modified;
+            _db.SaveChanges();
+            return Json("TaskCompletedSuccessfully", JsonRequestBehavior.AllowGet);
         }
 
         [LoginFilter]

@@ -57,17 +57,17 @@ background-color: #dddddd;
 }
 
 .dismissBtn{
-  background-color: #555;
-  border: none;
-  color: white;
-  padding: 15px 29px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  width: 165px;
+    background-color: #555;
+    border: none;
+    color: white;
+    padding: 15px 29px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 69px;
+    cursor: pointer;
+    width: 165px;
 }
 
 
@@ -95,10 +95,55 @@ background-color: #dddddd;
     padding-left: 15px;
 }
 
+.taskDueDate{
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 16.666667%;
+    flex: 0 0 16.666667%;
+    max-width: 23.666667%;
+    padding-left: 15px;
+}
+
+.issueStatus{
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 16.666667%;
+    flex: 0 0 16.666667%;
+    max-width: 23.666667%;
+    padding-left: 15px;
+}
+
 .freelancerEvaluation{
     -webkit-box-flex: 0;
     -ms-flex: 0 0 16.666667%;
     flex: 0 0 16.666667%;
     max-width: 17.666667%;
     padding-left: 15px;
+}
+
+
+.confirmTask{
+    background-color: #28a745;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    width: 165px;
+}
+
+.cancelTask{
+      background-color: #555;
+      border: none;
+      color: white;
+      padding: 15px 33px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 83px;
+      cursor: pointer;
+      width: 165px;
 }

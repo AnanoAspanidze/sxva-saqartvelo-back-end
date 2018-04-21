@@ -275,6 +275,7 @@ namespace sxva_saqartvelo_back_end.Controllers
         {
             _db.Projects.Remove(_db.Projects.Where(x => x.ID == id).FirstOrDefault());
             _db.Project_Status.Remove(_db.Project_Status.Where(x => x.ProjectID == id).FirstOrDefault());
+            //_db.Issues.Remove(_db.Issues.Where(x => x.ProjectID == id).FirstOrDefault());
             _db.SaveChanges();
 
             return Json("DeleteSucceeded", JsonRequestBehavior.AllowGet);
@@ -320,6 +321,9 @@ namespace sxva_saqartvelo_back_end.Controllers
         [AdminFilter]
         public ActionResult CompanyEvaluation(int? id)
         {
+
+            
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -374,6 +378,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                 if (ModelState.IsValid)
                 {
                     Issue issue = new Issue();
+                    Issue_Status issueStatus = new Issue_Status();
                     issue.Name = Task.Name;
                     issue.Body = Task.Body;
                     issue.AdminID = admin.ID;
@@ -382,6 +387,11 @@ namespace sxva_saqartvelo_back_end.Controllers
                     issue.DueDate = Task.DueDate;
                     issue.DateCreated = DateTime.Now;
                     _db.Issues.Add(issue);
+                    _db.SaveChanges();
+                    issueStatus.StatusID = 2;
+                    issueStatus.IssueID = issue.ID;
+                    issueStatus.Date = DateTime.Now;
+                    _db.Issue_Status.Add(issueStatus);
                     _db.SaveChanges();
                     ViewBag.TaskAdded = "ამოცანა დაემატა წარმატებით";
                 }
@@ -401,6 +411,95 @@ namespace sxva_saqartvelo_back_end.Controllers
 
 
             return View();
+        }
+
+        public ActionResult AllTask()
+        {
+            var issues = _db.Issues.ToList();  
+            return View(issues);
+        }
+
+
+        public ActionResult EditTask(int? id)
+        {
+
+
+            ViewBag.currentStatus = _db.Issue_Status.FirstOrDefault(x => x.IssueID == id).Status.Name;
+            var status = new SelectList(_db.Status.ToList(), "ID", "Name");
+            ViewData["DBStatus"] = status;
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var issue = _db.Issues.Find(id);
+
+            if (issue == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(issue);
+        }
+
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult EditTask(Issue issue, string StatusID)
+        {
+
+            var issueToUpdate = _db.Issues.FirstOrDefault(x => x.ID == issue.ID); //ვპოულობ ამოცანას დასარედაქტირებლად
+            var statusToUpdate = _db.Issue_Status.FirstOrDefault(x => x.IssueID == issue.ID); //ვპოულობ ამოცანის სტატუსს დასარედაქტირებლად
+
+            ViewBag.currentStatus = _db.Issue_Status.FirstOrDefault(x => x.IssueID == issue.ID).Status.Name;
+            var status = new SelectList(_db.Status.ToList(), "ID", "Name");
+            ViewData["DBStatus"] = status;
+
+          
+
+            if (ModelState.IsValid)
+            {
+                issueToUpdate.Name = issue.Name;
+                issueToUpdate.Body = issue.Body;
+                issueToUpdate.DueDate = issue.DueDate;
+                _db.SaveChanges();
+
+
+                if (StatusID == "" || StatusID == null) //თუ ამოცანის სტატუსი იქნება ცარიელი და სხვა ველები იქნება შევსებული edit-ის დროს, ამოცანის სტატუსი რჩება იგივე.
+                {
+                    statusToUpdate.StatusID = statusToUpdate.StatusID;
+                    _db.SaveChanges();
+                    return RedirectToAction("AllTask");
+                }
+
+                if (Convert.ToInt32(StatusID) == 2)  //თუ ადმინისტრატორმა ამოცანა აირჩია როგორც მინდინარე, მაშინ ამოცანა ხდება შესასრულებელი.
+                {
+                    statusToUpdate.StatusID = Convert.ToInt32(StatusID);
+                    issueToUpdate.isCompleted = false;
+                    _db.SaveChanges();
+                }
+                else
+                {
+                    statusToUpdate.StatusID = Convert.ToInt32(StatusID); //თუ ადმინისტრატორმა ამოცანა აირჩია როგორც დასრულებული, მაშინ ამოცანა შესრულებული.
+                    issueToUpdate.isCompleted = true;
+                    _db.SaveChanges();
+                }
+                return Redirect(Url.Action("EditTask", "Admin", new { id = issue.ID }));
+
+
+            }
+            return View(issue);
+        }
+
+        [HttpPost]
+        public PartialViewResult DeleteTask(int id)
+        {
+            _db.Issues.Remove(_db.Issues.Where(x => x.ID == id).FirstOrDefault());
+            _db.Issue_Status.Remove(_db.Issue_Status.Where(x => x.IssueID == id).FirstOrDefault());
+            _db.SaveChanges();
+            return PartialView("_PartialDeleteTask", _db.Issues.ToList());
         }
     }
 }
