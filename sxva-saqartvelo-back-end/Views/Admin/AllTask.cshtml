@@ -9,52 +9,57 @@
 
 
 <table class="table">
-    <tr>
-        <th>
-            პროექტი
-        </th>
-        <th>
-            ამოცანის სახელი
-        </th>
-        <th>
-            ამოცანის აღწერა
-        </th>
-        <th>
-            თარიღი შესასრულებლად
-        </th>
-        <th>
-            შექმნის თარიღი
-        </th>
-        <th></th>
-    </tr>
+    <thead>
+        <tr>
+            <th>
+                პროექტი
+            </th>
+            <th>
+                ამოცანის სახელი
+            </th>
+            <th>
+                ამოცანის აღწერა
+            </th>
+            <th>
+                თარიღი შესასრულებლად
+            </th>
+            <th>
+                შექმნის თარიღი
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
     @foreach (var item in Model)
     {
-        <tr id="displayedIssues">
-            <td style="display:none">
-                @item.ID
-            </td>
-            <td>
-                @item.Project.Name
-            </td>
-            <td>
-                @item.Name
-            </td>
-            <td>
-                @Html.Raw(item.Body)
-            </td>
-            <td>
-                @item.DueDate.ToShortDateString()
-            </td>
-            <td>
-                @item.DateCreated.ToShortDateString()
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "EditTask", new { id = item.ID }) |
-                @*@Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
-                <a style="cursor:pointer; color:#007bff" class="delete" data-toggle="modal" data-target="#myModal" id="@item.ID">Delete</a> |
-            </td>
-        </tr>
+        <tbody id="displayedIssues">
+            <tr>
+                <td style="display:none">
+                    @item.ID
+                </td>
+                <td>
+                    @item.Project.Name
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @Html.Raw(item.Body)
+                </td>
+                <td>
+                    @item.DueDate.ToShortDateString()
+                </td>
+                <td>
+                    @item.DateCreated.ToShortDateString()
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditTask", new { id = item.ID }) |
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+                    <a style="cursor:pointer; color:#007bff" class="delete" data-toggle="modal" data-target="#myModal" id="@item.ID">Delete</a> |
+                </td>
+            </tr>
+        </tbody>
+       
     }
 
 </table>
@@ -93,12 +98,13 @@
                     url: '/Admin/DeleteTask',
                     traditional: true,
                     data: { 'id': id },
-                    success: function (response) {
-                        if (response == "DeleteSucceeded") {
-                            $('.displayedProjects').trigger('click');
-                            //window.location.href = "/Admin/AdminPanel";
-                            $("#displayedIssues").html(data);
-                        }
+                    success: function (data) {
+                        //if (response == "DeleteSucceeded") {
+                        //    //$('.displayedProjects').trigger('click');
+                        //    //window.location.href = "/Admin/AdminPanel";
+                            
+                        //}
+                        $("#displayedIssues").html(data);
                     }
                 });
             });
