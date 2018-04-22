@@ -1,65 +1,60 @@
 ﻿@model IEnumerable<sxva_saqartvelo_back_end.Models.Issue>
 
 @{
-    ViewBag.Title = "AllTask";
     Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
 }
 
-<h2>AllTask</h2>
+<br /> <br />
+<h2>პროექტის ამოცანები</h2>
 
 
 <table class="table">
-    <thead>
-        <tr>
-            <th>
-                პროექტი
-            </th>
-            <th>
-                ამოცანის სახელი
-            </th>
-            <th>
-                ამოცანის აღწერა
-            </th>
-            <th>
-                თარიღი შესასრულებლად
-            </th>
-            <th>
-                შექმნის თარიღი
-            </th>
-            <th></th>
-        </tr>
-    </thead>
+
+    <tr>
+        <th>
+            პროექტი
+        </th>
+        <th>
+            ამოცანის სახელი
+        </th>
+        <th>
+            ამოცანის აღწერა
+        </th>
+        <th>
+            თარიღი შესასრულებლად
+        </th>
+        <th>
+            შექმნის თარიღი
+        </th>
+        <th></th>
+    </tr>
 
     @foreach (var item in Model)
     {
-        <tbody id="displayedIssues">
-            <tr>
-                <td style="display:none">
-                    @item.ID
-                </td>
-                <td>
-                    @item.Project.Name
-                </td>
-                <td>
-                    @item.Name
-                </td>
-                <td>
-                    @Html.Raw(item.Body)
-                </td>
-                <td>
-                    @item.DueDate.ToShortDateString()
-                </td>
-                <td>
-                    @item.DateCreated.ToShortDateString()
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "EditTask", new { id = item.ID }) |
-                    @*@Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
-                    <a style="cursor:pointer; color:#007bff" class="delete" data-toggle="modal" data-target="#myModal" id="@item.ID">Delete</a> |
-                </td>
-            </tr>
-        </tbody>
-       
+        <tr class="displayedIssues">
+            <td style="display:none">
+                @item.ID
+            </td>
+            <td>
+                @item.Project.Name
+            </td>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @Html.Raw(item.Body)
+            </td>
+            <td>
+                @item.DueDate.ToShortDateString()
+            </td>
+            <td>
+                @item.DateCreated.ToShortDateString()
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditTask", new { id = item.ID }) |
+                <a style="cursor:pointer; color:#007bff" class="delete" data-toggle="modal" data-target="#myModal" id="@item.ID">Delete</a> |
+            </td>
+        </tr>
     }
 
 </table>
@@ -94,17 +89,15 @@
             $('#confirmDelete').on("click", function () {
 
                 $.ajax({
-                    method: 'POST',
                     url: '/Admin/DeleteTask',
-                    traditional: true,
+                    method: 'POST',
                     data: { 'id': id },
-                    success: function (data) {
-                        //if (response == "DeleteSucceeded") {
-                        //    //$('.displayedProjects').trigger('click');
-                        //    //window.location.href = "/Admin/AdminPanel";
+                    success: function (response) {
+                        if (response == "DeleteSucceeded") {
+                            $('.displayedIssues').trigger('click');
+                            window.location.href = "/Admin/AllTask";
                             
-                        //}
-                        $("#displayedIssues").html(data);
+                        }    
                     }
                 });
             });

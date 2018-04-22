@@ -275,7 +275,8 @@ namespace sxva_saqartvelo_back_end.Controllers
         {
             _db.Projects.Remove(_db.Projects.Where(x => x.ID == id).FirstOrDefault());
             _db.Project_Status.Remove(_db.Project_Status.Where(x => x.ProjectID == id).FirstOrDefault());
-            //_db.Issues.Remove(_db.Issues.Where(x => x.ProjectID == id).FirstOrDefault());
+            _db.Issues.RemoveRange(_db.Issues.Where(x => x.ProjectID == id)); 
+            _db.Issue_Status.RemoveRange(_db.Issue_Status.Where(x => x.Issue.ProjectID == id));
             _db.SaveChanges();
 
             return Json("DeleteSucceeded", JsonRequestBehavior.AllowGet);
@@ -494,12 +495,12 @@ namespace sxva_saqartvelo_back_end.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult DeleteTask(int id)
+        public JsonResult DeleteTask(int id)
         {
             _db.Issues.Remove(_db.Issues.Where(x => x.ID == id).FirstOrDefault());
             _db.Issue_Status.Remove(_db.Issue_Status.Where(x => x.IssueID == id).FirstOrDefault());
             _db.SaveChanges();
-            return PartialView("_PartialDeleteTask", _db.Issues.ToList());
+            return Json("DeleteSucceeded", JsonRequestBehavior.AllowGet);
         }
     }
 }
