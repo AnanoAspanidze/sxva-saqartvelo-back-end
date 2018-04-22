@@ -273,10 +273,10 @@ namespace sxva_saqartvelo_back_end.Controllers
         [HttpPost]
         public JsonResult DeleteProject(int? id)
         {
-            _db.Projects.Remove(_db.Projects.Where(x => x.ID == id).FirstOrDefault());
-            _db.Project_Status.Remove(_db.Project_Status.Where(x => x.ProjectID == id).FirstOrDefault());
-            _db.Issues.RemoveRange(_db.Issues.Where(x => x.ProjectID == id)); 
-            _db.Issue_Status.RemoveRange(_db.Issue_Status.Where(x => x.Issue.ProjectID == id));
+            _db.Projects.Remove(_db.Projects.Where(x => x.ID == id).FirstOrDefault()); //პროექტის წაშლა.
+            _db.Project_Status.Remove(_db.Project_Status.Where(x => x.ProjectID == id).FirstOrDefault()); //პროექტის სტატუსის წაშლა.
+            _db.Issues.RemoveRange(_db.Issues.Where(x => x.ProjectID == id)); //პროექტის წაშლის შემდეგ, კონკრეტულ პროექტზე დამატებული ამოცანების წაშლა.
+            _db.Issue_Status.RemoveRange(_db.Issue_Status.Where(x => x.Issue.ProjectID == id)); //კონკრეტული პროექტის წაშლის შემდეგ, იმ პროექტის ამოცანების სტატუსების წაშლა რომელ პროექტზეც ეს ამოცანებია დამატებული.
             _db.SaveChanges();
 
             return Json("DeleteSucceeded", JsonRequestBehavior.AllowGet);
