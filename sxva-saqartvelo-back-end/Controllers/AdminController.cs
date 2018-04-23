@@ -454,7 +454,7 @@ namespace sxva_saqartvelo_back_end.Controllers
             var issueToUpdate = _db.Issues.FirstOrDefault(x => x.ID == issue.ID); //ვპოულობ ამოცანას დასარედაქტირებლად
             var statusToUpdate = _db.Issue_Status.FirstOrDefault(x => x.IssueID == issue.ID); //ვპოულობ ამოცანის სტატუსს დასარედაქტირებლად
 
-            ViewBag.currentStatus = _db.Issue_Status.FirstOrDefault(x => x.IssueID == issue.ID).Status.Name;
+            ViewBag.currentStatus = _db.Issue_Status.FirstOrDefault(x => x.IssueID == issue.ID).Status.Name; //ამოცანის სტატუსი
             var status = new SelectList(_db.Status.ToList(), "ID", "Name");
             ViewData["DBStatus"] = status;
 

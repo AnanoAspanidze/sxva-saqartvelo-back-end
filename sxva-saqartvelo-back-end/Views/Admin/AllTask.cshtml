@@ -51,8 +51,8 @@
                 @item.DateCreated.ToShortDateString()
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditTask", new { id = item.ID }) |
-                <a style="cursor:pointer; color:#007bff" class="delete" data-toggle="modal" data-target="#myModal" id="@item.ID">Delete</a> |
+                @Html.ActionLink("რედაქტირება", "EditTask", new { id = item.ID }) |
+                <a style="cursor:pointer; color:#007bff" class="delete" data-toggle="modal" data-target="#myModal" id="@item.ID">წაშლა</a>
             </td>
         </tr>
     }
@@ -60,7 +60,7 @@
 </table>
 
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+@*<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
     <div style="width:33%" class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -70,6 +70,25 @@
                 <input style="float:right; position:absolute" id="dismiss" class="dismissBtn" type="button" data-dismiss="modal" value="გაუქმება" title="გაუქმება">
             </div>
         </div>
+    </div>
+</div>*@
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <p><strong style="color:red; font-size:16px; margin-left:3px; color:#e80c4d;">მონაცემის წაშლა! დარწმუნებული ხართ?</strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="confirmDelete" data-toggle="modal" data-target="#myModal" value="წაშლა" class="btn btn-danger">წაშლა</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">გაუქმება</button>
+            </div>
+        </div>
+
     </div>
 </div>
 

@@ -42,7 +42,7 @@ background-color: #dddddd;
 }
 
 
-.confirmDelete{
+/*.confirmDelete{
     background-color: #e80c4d;
     border: none;
     color: white;
@@ -54,7 +54,7 @@ background-color: #dddddd;
     margin: 4px 2px;
     cursor: pointer;
     width: 165px;
-}
+}*/
 
 .dismissBtn{
     background-color: #555;
