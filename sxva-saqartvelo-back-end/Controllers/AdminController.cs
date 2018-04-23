@@ -435,13 +435,20 @@ namespace sxva_saqartvelo_back_end.Controllers
             }
 
             var issue = _db.Issues.Find(id);
+            var result = new EditIssueModel
+            {
+                ID = issue.ID,
+                Name = issue.Name,
+                Body = issue.Body,
+                DueDate = issue.DueDate
+            };
 
-            if (issue == null)
+            if (result == null)
             {
                 return HttpNotFound();
             }
 
-            return View(issue);
+            return View(result);
         }
 
         
