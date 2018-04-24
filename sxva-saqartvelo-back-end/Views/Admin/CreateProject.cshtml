@@ -30,6 +30,21 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="control-label col-md-2" for="StartDate">პროექტის დაწყების თარიღი</label>
+            <div class="cont3 col-12 col-sm-6 form-group">
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="EndDate">პროექტის დამთავრების თარიღი</label>
+            <div class="cont3 col-12 col-sm-6 form-group">
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
             <div class="cont3 col-12 col-sm-6 form-group">
                 @Html.DropDownList("CompanyID", (IEnumerable<SelectListItem>)ViewData["DBCompanies"] as IEnumerable<SelectListItem>, "კომპანიის დამატება პროექტზე", new { @class = "form-control" })
             </div>

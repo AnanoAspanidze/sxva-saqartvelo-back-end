@@ -66,9 +66,6 @@ namespace sxva_saqartvelo_back_end.Controllers
         [AdminFilter]
         public ActionResult CreateProject()
         {
-            //var freelancers = new SelectList(_db.Freelancers.ToList(), "ID", "Name");
-            //ViewData["DBFreelancers"] = freelancers;
-
 
             var freelancers = _db.Freelancers.ToList();
             List<object> freelancerList = new List<object>();
@@ -129,7 +126,8 @@ namespace sxva_saqartvelo_back_end.Controllers
                 project.Description = model.Description;
                 project.CompanyID = Convert.ToInt32(CompanyID);
                 project.FreelancerID = Convert.ToInt32(FreelancerID);
-                project.StartDate = DateTime.Now;
+                project.StartDate = model.StartDate;
+                project.EndDate = model.EndDate;
                 project.DateAdded = DateTime.Now;
                 _db.Projects.Add(project);
                 _db.SaveChanges();
@@ -183,7 +181,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                 Name = project.Name,
                 Description = project.Description,
                 StartDate = project.StartDate,
-                //EndDate = project.EndDate,
+                EndDate = project.EndDate,
                 CompanyID = project.CompanyID,
                 FreelancerID = project.FreelancerID.Value
             };
@@ -226,7 +224,7 @@ namespace sxva_saqartvelo_back_end.Controllers
             if (ModelState.IsValid)
             {
                 var projectToUpdate = _db.Projects.FirstOrDefault(x => x.ID == project.ID); //ვპოულობ პროექტს დასარედაქტირებლად
-                var statusToUpdate = _db.Project_Status.FirstOrDefault(x => x.ProjectID == project.ID); //ვპოულობ პროექტის სტატუსის დასარედაქტირებლად
+                var statusToUpdate = _db.Project_Status.FirstOrDefault(x => x.ProjectID == project.ID); //ვპოულობ პროექტის სტატუსს დასარედაქტირებლად
 
 
                 //if (project.Name == "" || project.Name == null)
@@ -246,6 +244,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                 projectToUpdate.StartDate = project.StartDate;
                 projectToUpdate.CompanyID = Convert.ToInt32(CompanyID);
                 projectToUpdate.FreelancerID = Convert.ToInt32(FreelancerID);
+                _db.SaveChanges();
 
                 if(StatusID == "" || StatusID == null) //თუ პროექტის სტატუსი იქნება ცარიელი და სხვა ველები იქნება შევსებული edit-ის დროს, პროექტის სტატუსი რჩება იგივე.
                 {

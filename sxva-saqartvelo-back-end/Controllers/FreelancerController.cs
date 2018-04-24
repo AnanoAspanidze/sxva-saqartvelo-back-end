@@ -153,6 +153,18 @@ namespace sxva_saqartvelo_back_end.Controllers
             return Json("TaskCompletedSuccessfully", JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult TaskMarkedAsOngoing(int id)
+        {
+            Issue issue = _db.Issues.Find(id);
+            var issueStatus = _db.Issue_Status.FirstOrDefault(x => x.IssueID == issue.ID); //ვიპოვე ამოცანის სტატუსი.
+            issue.isCompleted = false;
+            issueStatus.StatusID = 2; //თუ ფრილანსერი ამოცანას შეასრულებს, ამოცანის სტატუსი გახდება დასრულებული.
+            _db.Entry(issue).State = EntityState.Modified;
+            _db.SaveChanges();
+            return Json("TaskMarkedAsOngoing", JsonRequestBehavior.AllowGet);
+        }
+
         [LoginFilter]
         public ActionResult EditFreelancer(int? id)
         {

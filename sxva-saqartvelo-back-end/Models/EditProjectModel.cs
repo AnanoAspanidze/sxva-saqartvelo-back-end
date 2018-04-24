@@ -17,16 +17,16 @@ namespace sxva_saqartvelo_back_end.Models
         public string Description { get; set; }
 
         [DataType(DataType.Date)]
-        [Required(ErrorMessage = "აირჩიეთ პროექტის დაწყების თარიღი თარიღი")]
+        [Required(ErrorMessage = "აირჩიეთ პროექტის დაწყების თარიღი")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         //public DateTime StartDate { get; set; }
         public Nullable<System.DateTime> StartDate { get; set; }
 
 
-        //[DataType(DataType.Date)]
-        //[Required(ErrorMessage = "აირჩიეთ პროექტის დამთავრების თარიღი")]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        //public Nullable<System.DateTime> EndDate { get; set; }
+        [DataType(DataType.Date)]
+        [Required(ErrorMessage = "აირჩიეთ პროექტის დამთავრების თარიღი")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        public Nullable<System.DateTime> EndDate { get; set; }
 
 
         [Required(ErrorMessage = "აირჩიეთ კომპანია")]
