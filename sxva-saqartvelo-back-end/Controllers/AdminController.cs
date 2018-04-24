@@ -181,12 +181,24 @@ namespace sxva_saqartvelo_back_end.Controllers
             }
 
             var project = _db.Projects.Find(id);
+            var result = new EditProjectModel
+            {
+                ID = project.ID,
+                Name = project.Name,
+                Description = project.Description,
+                StartDate = project.StartDate.Value,
+                EndDate = project.EndDate.Value,
+                CompanyID = project.CompanyID,
+                FreelancerID = project.FreelancerID.Value
+                
 
-            if(project == null)
+            };
+
+            if(result == null)
             {
                 return HttpNotFound();
             }
-            return View(project);
+            return View(result);
         }
 
         [HttpPost]
@@ -455,7 +467,7 @@ namespace sxva_saqartvelo_back_end.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult EditTask(Issue issue, string StatusID)
+        public ActionResult EditTask(EditIssueModel issue, string StatusID)
         {
 
             var issueToUpdate = _db.Issues.FirstOrDefault(x => x.ID == issue.ID); //ვპოულობ ამოცანას დასარედაქტირებლად

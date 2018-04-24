@@ -655,6 +655,7 @@
     <Compile Include="Models\EditFreelancerModel.cs" />
     <Compile Include="Models\EditFreelancerViewModel.cs" />
     <Compile Include="Models\EditIssueModel.cs" />
+    <Compile Include="Models\EditProjectModel.cs" />
     <Compile Include="Models\Freelancer.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>

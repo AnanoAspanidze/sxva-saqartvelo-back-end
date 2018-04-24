@@ -1,4 +1,144 @@
-﻿@model sxva_saqartvelo_back_end.Models.Project
+﻿@model sxva_saqartvelo_back_end.Models.EditProjectModel
+
+@{
+    ViewBag.Title = "EditProject";
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+}
+
+
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <br /> <br />
+        <h4 style="padding-left:5px">პროექტის რედაქტირება</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Name">პროექტის სახელი</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Description">პროექტის აღწერა</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { @id = "Description", @class = "form-control", @rows = "200" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="StartDate">პროექტის დაწყების თარიღი</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control"} })
+                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="EndDate">პროექტის დაწყების თარიღი</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="CompanyID">კომპანია</label>
+            <div class="col-md-10">
+                @Html.DropDownList("CompanyID", (IEnumerable<SelectListItem>)ViewData["DBCompanies"] as IEnumerable<SelectListItem>, "აირჩიეთ კომპანია", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CompanyID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="FreelancerID">ფრილანსერი</label>
+            <div class="col-md-10">
+                @Html.DropDownList("FreelancerID", (IEnumerable<SelectListItem>)ViewData["DBFreelancers"] as IEnumerable<SelectListItem>, "აირჩიეთ ფრილანსერი", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FreelancerID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @if (ViewBag.currentStatus == "მიმდინარე")
+            {
+                <label class="projectStatus" for="StatusID">პროექტის სტატუსი: <span style="color:blue">@ViewBag.currentStatus</span></label>
+                <div class="col-md-10">
+                    @Html.DropDownList("StatusID", (IEnumerable<SelectListItem>)ViewData["DBStatus"] as IEnumerable<SelectListItem>, "სტატუსის რედაქტირება", new { @class = "form-control" })
+                </div>
+            }
+            else
+            {
+                <label class="projectStatus" for="StatusID">პროექტის სტატუსი: <span style="color:green">@ViewBag.currentStatus</span></label>
+                <div class="col-md-10">
+                    <a href="@Url.Action("FreelancerEvaluation", "Admin", new { id = Model.FreelancerID})">ფრილანსერის შეფასება,</a>
+                    <a href="@Url.Action("CompanyEvaluation", "Admin", new { id = Model.CompanyID})">კომპანიის შეფასება</a>
+                </div>
+
+                <div class="col-md-10">
+                    @Html.DropDownList("StatusID", (IEnumerable<SelectListItem>)ViewData["DBStatus"] as IEnumerable<SelectListItem>, "სტატუსის რედაქტირება", new { @class = "form-control", @disabled = "disabled" })
+                </div>
+            }
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <p style="color:red">@ViewBag.validateEditInputs</p>
+                <input type="submit" value="შენახვა" class="btn btn-success" />
+            </div>
+
+        </div>
+    </div>
+}
+
+<script>
+    CKEDITOR.replace("Description");
+</script>
+
+
+<div style="margin-bottom: 20px" class="col-md-10">
+    @Html.ActionLink("უკან დაბრუნება", "AdminPanel")
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@model sxva_saqartvelo_back_end.Models.Project
 
 @{
     ViewBag.Title = "EditProject";
@@ -93,7 +233,7 @@
 
 <div style="margin-bottom: 20px" class="col-md-10">
     @Html.ActionLink("უკან დაბრუნება", "AdminPanel")
-</div>
+</div>*@
 
 
 

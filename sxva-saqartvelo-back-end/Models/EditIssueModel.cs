@@ -18,7 +18,6 @@ namespace sxva_saqartvelo_back_end.Models
 
         [DataType(DataType.Date)]
         [Required(ErrorMessage = "აირჩიეთ თარიღი")]
-        //[DisplayFormat(DataFormatString = "{MM-dd-yyyy}", ApplyFormatInEditMode = true)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime DueDate { get; set; }
     }
