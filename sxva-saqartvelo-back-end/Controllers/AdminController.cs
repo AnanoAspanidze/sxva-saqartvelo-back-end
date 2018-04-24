@@ -93,9 +93,7 @@ namespace sxva_saqartvelo_back_end.Controllers
         [ValidateInput(false)]
         public ActionResult CreateProject(CreateProjectModel model, string CompanyID, string FreelancerID)
         {
-            //var freelancers = new SelectList(_db.Freelancers.ToList(), "ID", "Name");
-            //ViewData["DBFreelancers"] = freelancers;
-
+           
             var freelancers = _db.Freelancers.ToList();
             List<object> freelancerList = new List<object>();
             foreach (var f in freelancers)
@@ -163,8 +161,6 @@ namespace sxva_saqartvelo_back_end.Controllers
             }
 
 
-            //var freelancers = new SelectList(_db.Freelancers.ToList(), "ID", "Name");
-            //ViewData["DBFreelancers"] = freelancers;
 
             var companies = new SelectList(_db.Companies.ToList(), "ID", "Name");
             ViewData["DBCompanies"] = companies;
@@ -186,12 +182,10 @@ namespace sxva_saqartvelo_back_end.Controllers
                 ID = project.ID,
                 Name = project.Name,
                 Description = project.Description,
-                StartDate = project.StartDate.Value,
-                EndDate = project.EndDate.Value,
+                StartDate = project.StartDate,
+                //EndDate = project.EndDate,
                 CompanyID = project.CompanyID,
                 FreelancerID = project.FreelancerID.Value
-                
-
             };
 
             if(result == null)
@@ -204,7 +198,7 @@ namespace sxva_saqartvelo_back_end.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult EditProject(Project project, string CompanyID, string FreelancerID, string StatusID)
+        public ActionResult EditProject(EditProjectModel project, string CompanyID, string FreelancerID, string StatusID)
         {
 
             var freelancers = _db.Freelancers.ToList();
@@ -235,21 +229,21 @@ namespace sxva_saqartvelo_back_end.Controllers
                 var statusToUpdate = _db.Project_Status.FirstOrDefault(x => x.ProjectID == project.ID); //ვპოულობ პროექტის სტატუსის დასარედაქტირებლად
 
 
-                if (project.Name == "" || project.Name == null)
-                {
-                    projectToUpdate.Name = projectToUpdate.Name;
-                    projectToUpdate.Description = projectToUpdate.Description;
-                    projectToUpdate.CompanyID = projectToUpdate.CompanyID;
-                    projectToUpdate.FreelancerID = projectToUpdate.FreelancerID;
-                    _db.SaveChanges();
-                    return View();
-
-                }
+                //if (project.Name == "" || project.Name == null)
+                //{
+                //    projectToUpdate.Name = projectToUpdate.Name;
+                //    projectToUpdate.Description = projectToUpdate.Description;
+                //    projectToUpdate.CompanyID = projectToUpdate.CompanyID;
+                //    projectToUpdate.FreelancerID = projectToUpdate.FreelancerID;
+                //    _db.SaveChanges();
+                //    return View();
+                //}
 
 
                
                 projectToUpdate.Name = project.Name.Trim();
                 projectToUpdate.Description = project.Description;
+                projectToUpdate.StartDate = project.StartDate;
                 projectToUpdate.CompanyID = Convert.ToInt32(CompanyID);
                 projectToUpdate.FreelancerID = Convert.ToInt32(FreelancerID);
 
