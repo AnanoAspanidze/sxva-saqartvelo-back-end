@@ -131,6 +131,9 @@ namespace sxva_saqartvelo_back_end.Controllers
         }
 
 
+
+
+
         [LoginFilter]
         public ActionResult FreelancerProfile()
         {
@@ -147,11 +150,12 @@ namespace sxva_saqartvelo_back_end.Controllers
             Issue issue = _db.Issues.Find(id);
             var issueStatus = _db.Issue_Status.FirstOrDefault(x => x.IssueID == issue.ID); //ვიპოვე ამოცანის სტატუსი.
             issue.isCompleted = true;
-            issueStatus.StatusID = 3; //თუ ფრილანსერი ამოცანას შეასრულებს, ამოცანის სტატუსი გახდება დასრულებული.
+            issueStatus.StatusID = 3; //შესრულება button-ზე კლიკის დროს ამოცანის სტატუსი ხდება 3 ანუ დასრულებული. (3 ნიშნავს Status Table-ში დასრულებულს)
             _db.Entry(issue).State = EntityState.Modified;
             _db.SaveChanges();
             return Json("TaskCompletedSuccessfully", JsonRequestBehavior.AllowGet);
         }
+
 
         [HttpPost]
         public JsonResult TaskMarkedAsOngoing(int id)
@@ -159,7 +163,7 @@ namespace sxva_saqartvelo_back_end.Controllers
             Issue issue = _db.Issues.Find(id);
             var issueStatus = _db.Issue_Status.FirstOrDefault(x => x.IssueID == issue.ID); //ვიპოვე ამოცანის სტატუსი.
             issue.isCompleted = false;
-            issueStatus.StatusID = 2; //თუ ფრილანსერი ამოცანას შეასრულებს, ამოცანის სტატუსი გახდება დასრულებული.
+            issueStatus.StatusID = 2; //შესრულებულ button-ზე კლიკის დროს ამოცანის სტატუსი ხდება 2 ანუ მიმდინარე, ფრილანსერს შეუძლია დააბრუნოს ამოცანა როგორც შესასრულებელი. (2 ნიშნავს Status Table-ში მიმდინარეს)
             _db.Entry(issue).State = EntityState.Modified;
             _db.SaveChanges();
             return Json("TaskMarkedAsOngoing", JsonRequestBehavior.AllowGet);

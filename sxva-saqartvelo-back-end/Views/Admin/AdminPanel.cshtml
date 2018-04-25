@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<sxva_saqartvelo_back_end.Models.Project>
 
 @{
-    ViewBag.Title = "AdminPanel";
     Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
 }
 
@@ -9,7 +8,7 @@
 
 <script>
 $(document).ready(function(){
-    $("#searchInput").on("keyup", function () {
+    $("#searchInput-search").on("keyup", function () {
     var searchValue = $(this).val().toLowerCase();
     $("#projectTable tr").filter(function () {
         $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1)
@@ -20,39 +19,13 @@ $(document).ready(function(){
 
 <br /><br />
 
-
-
-<input class="searchInput" id="searchInput" type="text" placeholder="ძებნა..">
+<input class="searchInput-search" id="searchInput-search" type="text" placeholder="ძებნა..">
 <br />
 <table class="table-striped">
     <thead>
         <tr>
             <th>
                 პროექტი
-            </th>
-            <th>
-                პროექტის აღწერა
-            </th>
-            <th>
-               დაწყების თარიღი
-            </th>
-            <th>
-               დასრულების თარიღი
-            </th>
-            @*<th>
-                ფრილანსერის რეიტინგი
-            </th>
-            <th>
-                ფრილანსერის შეფასება
-            </th>
-            <th>
-                კომპანიის რეიტინგი
-            </th>
-            <th>
-                კომპანიის შეფასება
-            </th>*@
-            <th>
-               დამატების თარიღი
             </th>
             <th>
                 კომპანია
@@ -74,59 +47,6 @@ $(document).ready(function(){
                     @item.Name
                 </td>
                 <td>
-                    @Html.Raw(item.Description)
-                </td>
-                <td> 
-                    @item.StartDate.Value.ToShortDateString()
-                </td>
-
-                <td>
-                    @item.EndDate
-                </td>
-                @*@if (item.FreelancerRating == null && item.FreelancerEvaluation == null)
-                {
-                    <td style="display:none">
-                        @item.FreelancerRating
-                    </td>
-                    
-                    <td style="display:none">
-                        @Html.Raw(item.FreelancerEvaluation)
-                    </td>
-                }
-                else
-                {
-                    <td>
-                        @item.FreelancerRating
-                    </td>
-
-                    <td>
-                        @Html.Raw(item.FreelancerEvaluation)
-                    </td>
-                }
-
-                @if (item.CompanyRating == null && item.CompanyEvaluation == null)
-                {
-                    <td style="display:none">
-                        @item.CompanyRating
-                    </td>
-                    <td style="display:none">
-                        @Html.Raw(item.CompanyEvaluation)
-                    </td>
-                }
-                else
-                {
-                    <td>
-                        @item.CompanyRating
-                    </td>
-                    <td>
-                        @Html.Raw(item.CompanyEvaluation)
-                    </td>
-                }*@
-
-                <td>
-                    @item.DateAdded.Value.ToShortDateString()
-                </td>
-                <td>
                     @item.Company.Name 
                 </td>
                 <td>
@@ -134,6 +54,7 @@ $(document).ready(function(){
                 </td>
                 <td>
                     <a style="text-decoration:none" href="@Url.Action("EditProject","Admin", new { id = item.ID})">რედაქტირება</a> |
+                    @Html.ActionLink("დეტალურად", "ProjectDetails", new { id = item.ID }) |
                     <a style="cursor:pointer; color:#007bff" class="delete" data-toggle="modal" data-target="#myModal" id="@item.ID">წაშლა</a> |
                     <a style="display:inline-block" href="@Url.Action("AddTaskToProject", "Admin", new { id = item.ID })">ამოცანის დამატება</a>
                 </td>
@@ -141,19 +62,6 @@ $(document).ready(function(){
         </tbody>
     }
 </table>
-
-@*<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
-    <div style="width:33%" class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <p><strong style="color:red; font-size:16px; margin-left:3px; color:#e80c4d;">ჩანაწერის გაუქმება! დარწმუნებული ხართ?</strong></p>
-                <br />
-                <input id="confirmDelete" type="button" data-toggle="modal" data-target="#myModal" class="confirmDelete" value="წაშლა" title="წაშლა">
-                <input style="float:right; position:absolute" id="dismiss" class="dismissBtn" type="button" data-dismiss="modal" value="გაუქმება" title="გაუქმება">
-            </div>
-        </div>
-    </div>
-</div>*@
 
 
 <div class="modal fade" id="myModal" role="dialog">

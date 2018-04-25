@@ -4,64 +4,84 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="~/Content/Site.css" rel="stylesheet" />
+
+
+
+<script>
+$(document).ready(function(){
+    $("#searchInput-search").on("keyup", function () {
+    var searchValue = $(this).val().toLowerCase();
+    $("#freelancerIssueTable tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1)
+    });
+  });
+});
+</script>
+
 
 <div style="padding-top:150px" class="issuesTable">
-    <table class="table">
-        <tr>
-            <th>
-                პროექტი
-            </th>
-            <th>
-                ამოცანის სახელი
-            </th>
-            <th>
-                ამოცანის აღწერა
-            </th>
-            <th>
-                თარიღი შესასრულებლად
-            </th>
-            <th></th>
-            
-        </tr>
+    <input class="searchInput-search" id="searchInput-search" type="text" placeholder="ძებნა..">
+    <br />
+    <table class="table-striped">
+        <thead>
+            <tr>
+                <th>
+                    პროექტი
+                </th>
+                <th>
+                    ამოცანის სახელი
+                </th>
+                <th>
+                    ამოცანის აღწერა
+                </th>
+                <th>
+                    თარიღი შესასრულებლად
+                </th>
+                <th></th>
+
+            </tr>
+        </thead>
 
         @foreach (var item in Model)
         {
-            <tr class="displayedIssues">
-                <td style="display:none">
-                    @item.ID
-                </td>
-                <td>
-                    @item.Project.Name
-                </td>
-                <td>
-                    @item.Name
-                </td>
-                <td>
-                    @Html.Raw(item.Body)
-                </td>
-                <td>
-                    @item.DueDate.ToShortDateString()
-                </td>
-                @if (item.isCompleted == true)
-                {
-                    <td>
-                        <button id="@item.ID" data-toggle="modal" data-target="#forOngoingTask" class="btn btn-success">შესრულებული</button>
+            <tbody id="freelancerIssueTable">
+                <tr class="displayedIssues">
+                    <td style="display:none">
+                        @item.ID
                     </td>
-                }
-                else
-                {
                     <td>
-                        <button id="@item.ID" data-toggle="modal" data-target="#myModal" class="btn btn-info">შესრულება</button>
+                        @item.Project.Name
                     </td>
-                }
-            </tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @Html.Raw(item.Body)
+                    </td>
+                    <td>
+                        @item.DueDate.ToShortDateString()
+                    </td>
+                    @if (item.isCompleted == true)
+                    {
+                        <td>
+                            <button id="@item.ID" @*data-toggle="modal" data-target="#forOngoingTask"*@ class="btn btn-success">შესრულებული</button>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <button id="@item.ID" @*data-toggle="modal" data-target="#myModal"*@ class="btn btn-info">შესრულება</button>
+                        </td>
+                    }
+                </tr>
+            </tbody>
         }
 
     </table>
 </div>
 
-
-
+@*<!--ამოცანის შესრულების modal-->
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -79,8 +99,10 @@
         </div>
     </div>
 </div>
+<!--ამოცანის შესრულების modal-->
 
 
+<!--ამოცანის დაბრუნება შესასრულებლად modal-->
 <div class="modal fade" id="forOngoingTask" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -92,12 +114,13 @@
                 <p><strong style="color:red; font-size:16px; margin-left:3px; color:#e80c4d;">ამოცანის დაბრუნება შესასრულებლად, დარწმუნებული ხართ?</strong></p>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success" type="button" id="confirmTaskAsOngoing" @*data-toggle="modal" data-target="#myModal"*@ value="შესრულება">შესრულება</button>
+                <button class="btn btn-outline-success" type="button" id="confirmTaskAsOngoing" data-toggle="modal" data-target="#forOngoingTask">დიახ</button>
                 <button type="button" class="btn btn-info" data-dismiss="modal">გაუქმება</button>
             </div>
         </div>
     </div>
 </div>
+<!--ამოცანის დაბრუნება შესასრულებლად modal-->*@
 
 
 
@@ -110,27 +133,79 @@
             tr = $(this).closest('tr');
             id = tr.find('td:first').html();
 
-            $('#confirmTask').on('click', function () {
-
-                $.ajax({
-                    url: '/Freelancer/TaskCompleted',
-                    method: 'POST',
-                    data: { 'id': id },
-                    success: function (response) {
-                        if (response == 'TaskCompletedSuccessfully') {
-                            $('.displayedIssues').trigger('click');
-                            window.location.href = "/Freelancer/FreelancerProfile";
-                        }
+            $.ajax({
+                url: '/Freelancer/TaskCompleted',
+                method: 'POST',
+                data: { 'id': id },
+                success: function (response) {
+                    if (response == 'TaskCompletedSuccessfully') {
+                        $('.displayedIssues').trigger('click');
+                        window.location.href = "/Freelancer/FreelancerProfile";
                     }
-                });
+                }
             });
-
         });
     });
 </script>
 
 
 <script>
+    $(document).ready(function () {
+        var tr;
+        var id;
+
+        $(".btn-success").click(function () {
+            tr = $(this).closest('tr');
+            id = tr.find('td:first').html();
+
+            $.ajax({
+                url: '/Freelancer/TaskMarkedAsOngoing',
+                method: 'POST',
+                data: { 'id': id },
+                success: function (response) {
+                    if (response == 'TaskMarkedAsOngoing') {
+                        $('.displayedIssues').trigger('click');
+                        window.location.href = "/Freelancer/FreelancerProfile";
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+
+
+
+@*<script>
+        $(document).ready(function () {
+            var tr;
+            var id;
+
+            $(".btn-info").click(function () {
+                tr = $(this).closest('tr');
+                id = tr.find('td:first').html();
+
+                $('#confirmTask').on('click', function () {
+
+                    $.ajax({
+                        url: '/Freelancer/TaskCompleted',
+                        method: 'POST',
+                        data: { 'id': id },
+                        success: function (response) {
+                            if (response == 'TaskCompletedSuccessfully') {
+                                $('.displayedIssues').trigger('click');
+                                window.location.href = "/Freelancer/FreelancerProfile";
+                            }
+                        }
+                    });
+                });
+
+            });
+        });
+    </script>*@
+
+
+@*<script>
     $(document).ready(function () {
         var tr;
         var id;
@@ -156,7 +231,7 @@
 
         });
     });
-</script>
+</script>*@
 
 
 

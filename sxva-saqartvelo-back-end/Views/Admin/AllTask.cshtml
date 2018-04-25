@@ -4,57 +4,69 @@
     Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
 }
 
-<br /> <br />
-<h2>პროექტის ამოცანები</h2>
 
 
-<table class="table">
+<script>
+$(document).ready(function(){
+    $("#searchInput-search").on("keyup", function () {
+    var searchValue = $(this).val().toLowerCase();
+    $("#isseTable tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1)
+    });
+  });
+});
+</script>
 
-    <tr>
-        <th>
-            პროექტი
-        </th>
-        <th>
-            ამოცანის სახელი
-        </th>
-        <th>
-            ამოცანის აღწერა
-        </th>
-        <th>
-            თარიღი შესასრულებლად
-        </th>
-        <th>
-            შექმნის თარიღი
-        </th>
-        <th></th>
-    </tr>
+<br /><br />
+
+<input class="searchInput-search" id="searchInput-search" type="text" placeholder="ძებნა..">
+<br />
+
+<table class="table-striped">
+    <thead>
+        <tr>
+            <th>
+                პროექტი
+            </th>
+            <th>
+                ამოცანის სახელი
+            </th>
+            <th>
+                თარიღი შესასრულებლად
+            </th>
+            <th>
+                შექმნის თარიღი
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
     @foreach (var item in Model)
     {
-        <tr class="displayedIssues">
-            <td style="display:none">
-                @item.ID
-            </td>
-            <td>
-                @item.Project.Name
-            </td>
-            <td>
-                @item.Name
-            </td>
-            <td>
-                @Html.Raw(item.Body)
-            </td>
-            <td>
-                @item.DueDate.ToShortDateString()
-            </td>
-            <td>
-                @item.DateCreated.ToShortDateString()
-            </td>
-            <td>
-                @Html.ActionLink("რედაქტირება", "EditTask", new { id = item.ID }) |
-                <a style="cursor:pointer; color:#007bff" class="delete" data-toggle="modal" data-target="#myModal" id="@item.ID">წაშლა</a>
-            </td>
-        </tr>
+        <tbody id="isseTable">
+            <tr class="displayedIssues">
+                <td style="display:none">
+                    @item.ID
+                </td>
+                <td>
+                    @item.Project.Name
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.DueDate.ToShortDateString()
+                </td>
+                <td>
+                    @item.DateCreated.ToShortDateString()
+                </td>
+                <td>
+                    @Html.ActionLink("რედაქტირება", "EditTask", new { id = item.ID }) |
+                    @Html.ActionLink("დეტალურად", "TaskDetails", new { id = item.ID }) |
+                    <a style="cursor:pointer; color:#007bff" class="delete" data-toggle="modal" data-target="#myModal" id="@item.ID">წაშლა</a> 
+                </td>
+            </tr>
+        </tbody>
     }
 
 </table>

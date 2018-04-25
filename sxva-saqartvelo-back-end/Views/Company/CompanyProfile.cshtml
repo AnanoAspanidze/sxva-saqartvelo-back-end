@@ -1,27 +1,136 @@
-﻿@model sxva_saqartvelo_back_end.Models.Company
+﻿@model IEnumerable<sxva_saqartvelo_back_end.Models.Project>
+@*@using sxva_saqartvelo_back_end.Models;
+    
+@{ 
+    OtherGeorgiaEntities _db = new OtherGeorgiaEntities();
+}*@
 
-@using sxva_saqartvelo_back_end.Models;
-@using sxva_saqartvelo_back_end.Helpers;
 
 @{
-    var company = LoginHelperForCompany.company();
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
-@if (company != null)
-{
-    <div style="padding-top:200px; text-align:center" class="freelancer">
-        <p>გამარჯობა</p> @company.Name
-    </div>
-}
-
-
-
+<link href="~/Content/Site.css" rel="stylesheet" />
 
 <script>
-    $(document).ready(function () {
-        $('#footer').hide();
+$(document).ready(function(){
+    $("#searchInput-search").on("keyup", function () {
+    var searchValue = $(this).val().toLowerCase();
+    $("#companyProjectTable tr").filter(function () {
+        $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1)
     });
+  });
+});
 </script>
 
+
+<div style="padding-top:150px" class="companyProjects">
+    <input class="searchInput-search" id="searchInput-search" type="text" placeholder="ძებნა..">
+    <br />
+    <table class="table-striped">
+        <thead>
+            <tr>
+                <th>
+                    პროექტი
+                </th>
+                <th>
+                    პროექტის აღწერა
+                </th>
+                <th>
+                    პროექტის დაწყების თარიღი
+                </th>
+                <th>
+                    პროექტის დასრულების თარიღი
+                </th>
+                <th>
+                    ფრილანსერის რეიტინგი
+                </th>
+                <th>
+                    კომპანიის რიეტინგი
+                </th>
+                @*<th>
+                    @Html.DisplayNameFor(model => model.FreelancerEvaluation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CompanyEvaluation)
+                </th>*@
+                @*<th>
+                    @Html.DisplayNameFor(model => model.Progress)
+                </th>*@
+                <th>
+                    პროექტის დამატების თარიღი
+                </th>
+                <th>
+                    კომპანია
+                </th>
+                <th>
+                    ფრილანსერი
+                </th>
+                <th>პროექტის სტატუსი</th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            var ProjectStatus = item.Project_Status.FirstOrDefault(x => x.ProjectID == item.ID).Status.Name; //ვპოულობ პროექტის სტატუსს მიმდინარეა თუ დასრულებული
+            <tbody id="companyProjectTable">
+                <tr>
+                    <td id="@item.ID" style="display:none"></td>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @Html.Raw(item.Description)
+                    </td>
+                    <td>
+                        @item.StartDate.Value.ToShortDateString()
+                    </td>
+                    <td>
+                        @item.EndDate
+                    </td>
+                    <td>
+                        @item.FreelancerRating
+                    </td>
+                    <td>
+                        @item.CompanyRating
+                    </td>
+                    @*<td>
+                        @item.FreelancerEvaluation
+                    </td>
+                    <td>
+                        @item.CompanyEvaluation
+                    </td>*@
+                    @*<td>
+                        @item.Progress
+                    </td>*@
+                    <td>
+                        @item.DateAdded.Value.ToShortDateString()
+                    </td>
+                    <td>
+                        @item.Company.Name
+                    </td>
+                    <td>
+                        @item.Freelancer.Name @item.Freelancer.Surname
+                    </td>
+                    <td>
+                        @ProjectStatus
+                    </td>
+                    @*<td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            </td>*@
+                </tr>
+            </tbody>
+        }
+
+    </table>
+</div>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $('#footer').hide();
+        });
+    </script>

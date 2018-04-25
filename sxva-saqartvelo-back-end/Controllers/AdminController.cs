@@ -275,6 +275,20 @@ namespace sxva_saqartvelo_back_end.Controllers
             return View(project);
         }
 
+        public ActionResult ProjectDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Project project = _db.Projects.Find(id);
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+            return View(project);
+        }
+
         [HttpPost]
         public JsonResult DeleteProject(int? id)
         {
@@ -506,6 +520,20 @@ namespace sxva_saqartvelo_back_end.Controllers
             return View(issue);
         }
 
+        public ActionResult TaskDetails(int? id)
+        {
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Issue issue = _db.Issues.Find(id);
+            if(issue == null)
+            {
+                return HttpNotFound();
+            }
+            return View(issue);
+        }
+
         [HttpPost]
         public JsonResult DeleteTask(int id)
         {
@@ -514,5 +542,21 @@ namespace sxva_saqartvelo_back_end.Controllers
             _db.SaveChanges();
             return Json("DeleteSucceeded", JsonRequestBehavior.AllowGet);
         }
+
+
+        [HttpPost]
+        public JsonResult TaskCompleted(int id)
+        {
+            Issue issue = _db.Issues.Find(id);
+            var issueStatus = _db.Issue_Status.FirstOrDefault(x => x.IssueID == issue.ID); //ვიპოვე ამოცანის სტატუსი.
+            issue.isCompleted = true;
+            issueStatus.StatusID = 3; //შესრულება button-ზე კლიკის დროს ამოცანის სტატუსი ხდება 3 ანუ დასრულებული. (3 ნიშნავს Status Table-ში დასრულებულს)
+            _db.Entry(issue).State = EntityState.Modified;
+            _db.SaveChanges();
+            ViewBag.TaskCompletedSuccessfully = "ამოცანა დასრულდა წარმატებით";
+            return Json("TaskCompletedSuccessfully", JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

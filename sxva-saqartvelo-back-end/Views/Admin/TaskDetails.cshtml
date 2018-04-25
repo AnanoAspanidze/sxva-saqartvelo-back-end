@@ -1,0 +1,103 @@
+﻿@model sxva_saqartvelo_back_end.Models.Issue
+
+@{
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+    var IssueStatus = Model.Issue_Status.FirstOrDefault(x => x.IssueID == Model.ID).Status.Name; //ვიპოვე კონკრეტული ამოცანის სტატუსი
+}
+
+<br /><br />
+
+<div style="display:flex; justify-content: space-between" class="detailsTextProjectStatus">
+    <h2 style="padding-left:10px">ამოცანა დეტალურად</h2>
+    <h2 style="padding-right:10px;">ამოცანის სტატუსი: @IssueStatus</h2>
+</div>
+
+<div style="padding-left:10px">
+    <hr />
+    <dl id="taskID" class="d-lg-table">
+        <dt style="display:none">
+            @Model.ID
+        </dt>
+        <dt>
+            პროექტი
+        </dt>
+
+        <dd>
+            @Model.Project.Name
+            <hr />
+        </dd>
+
+        <dt>
+           ამოცანის სახელი
+        </dt>
+
+        <dd>
+            @Model.Name
+            <hr />
+        </dd>
+
+        <dt>
+            ამოცანის აღწერა
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.Body)
+            <hr />
+        </dd>
+
+
+        <dt>
+           თარიღი შესასრულებლად
+        </dt>
+
+        <dd>
+            @Model.DueDate.ToShortDateString()
+            <hr />
+        </dd>
+
+        <dt>
+            შექმნის თარიღი
+        </dt>
+
+        <dd>
+            @Model.DateCreated.ToShortDateString()
+            <hr />
+        </dd>
+    </dl>
+    @if (Model.isCompleted == true)
+    {
+        <button disabled class="btn btn-success">დასრულებული</button>
+    }
+    else
+    {
+        <button class="btn btn-outline-success">დასრულება</button>
+    }
+    
+    <p style="background-color:green">@ViewBag.TaskCompletedSuccessfully</p>
+    <br /><br />
+</div>
+<p style="padding-left:10px">
+    @Html.ActionLink("რედაქტირება", "EditTask", new { id = Model.ID }) |
+    @Html.ActionLink("უკან დაბრუნება", "AllTask")
+</p>
+
+
+<script>
+    $(document).ready(function () {
+
+        var id = $("#taskID dt:first").html();
+        
+        $(".btn-outline-success").click(function () {
+            $.ajax({
+                url: '/Admin/TaskCompleted',
+                method: 'POST',
+                data: { 'id': id },
+                success: function (response) {
+                    if (response == "TaskCompletedSuccessfully") {
+                        window.location.reload();
+                    }
+                }
+            });
+        });
+    });
+</script>

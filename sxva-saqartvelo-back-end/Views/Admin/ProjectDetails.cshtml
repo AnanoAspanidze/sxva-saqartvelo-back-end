@@ -1,0 +1,124 @@
+﻿@model sxva_saqartvelo_back_end.Models.Project
+
+@{
+    Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
+    var ProjectStatus = Model.Project_Status.FirstOrDefault(x => x.ProjectID == Model.ID).Status.Name; //ვიპოვე კონკრეტული პროექტის სტატუსი სტატუსი
+}
+
+<br /><br />
+
+<div style="display:flex; justify-content: space-between" class="detailsTextProjectStatus">
+    <h2 style="padding-left:10px">პროექტი დეტალურად</h2>
+    <h2 style="padding-right:10px;">პროექტის სტატუსი: @ProjectStatus</h2>
+</div>
+
+
+
+<div style="padding-left:10px">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            პროექტი
+        </dt>
+
+        <dd>
+            @Model.Name
+            <hr />
+        </dd>
+
+        <dt>
+            პროექტის არწერა
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.Description)
+            <hr />
+        </dd>
+
+        <dt>
+            პროექტის დაწყების თარიღი
+        </dt>
+
+        <dd>
+            @Model.StartDate.Value.ToShortDateString()
+            <hr />
+        </dd>
+
+        <dt>
+            პროექტის დასრულების თარიღი
+        </dt>
+
+        <dd>
+            @Model.EndDate.Value.ToShortDateString()
+            <hr />
+        </dd>
+
+        <dt>
+            ფრილანსერის რეიტინგი
+        </dt>
+
+        <dd>
+            @Model.FreelancerRating
+            <hr />
+        </dd>
+
+        <dt>
+            კომპანიის რეიტინგი
+        </dt>
+
+        <dd>
+            @Model.CompanyRating
+            <hr />
+        </dd>
+
+        <dt>
+            ფრილანსერის შეფასება ტექსტური
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.FreelancerEvaluation)
+            <hr />
+        </dd>
+
+        <dt>
+            კომპანიის შეფასება ტექსტური
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.CompanyEvaluation)
+            <hr />
+        </dd>
+
+        <dt>
+            დამატების თარიღი
+        </dt>
+
+        <dd>
+            @Model.DateAdded.Value.ToShortDateString()
+            <hr />
+        </dd>
+
+        <dt>
+            კომპანიის სახელი (დამკვეთი)
+        </dt>
+
+        <dd>
+            @Model.Company.Name
+            <hr />
+        </dd>
+
+        <dt>
+            ფრილანსერის სახელი
+        </dt>
+
+        <dd>
+            @Model.Freelancer.Name @Model.Freelancer.Surname
+            <hr />
+        </dd>
+
+    </dl>
+</div>
+<p style="padding-left:10px">
+    @Html.ActionLink("რედაქტირება", "EditProject", new { id = Model.ID }) |
+    @Html.ActionLink("უკან დაბრუნება", "AdminPanel")
+</p>

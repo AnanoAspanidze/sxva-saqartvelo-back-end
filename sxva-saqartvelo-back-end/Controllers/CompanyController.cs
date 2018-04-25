@@ -25,7 +25,12 @@ namespace sxva_saqartvelo_back_end.Controllers
         //[LoginFilterForCompany]
         public ActionResult CompanyProfile()
         {
-            return View();
+            var company = LoginHelperForCompany.company();
+            var project = _db.Projects.Where(x => x.CompanyID == company.ID).ToList();
+            //ViewBag.currentStatus = _db.Project_Status.FirstOrDefault(x => x.ProjectID == project.ID).Status.Name;
+            //_db.Issue_Status.RemoveRange(_db.Issue_Status.Where(x => x.Issue.ProjectID == id));
+            //ViewBag.ProjectStatus = _db.Project_Status.FirstOrDefault(x => x.ProjectID == x.);
+            return View(project);
         }
 
         //[LoginFilterForCompany]
