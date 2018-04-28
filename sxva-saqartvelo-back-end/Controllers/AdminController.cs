@@ -275,6 +275,7 @@ namespace sxva_saqartvelo_back_end.Controllers
             return View(project);
         }
 
+        [AdminFilter]
         public ActionResult ProjectDetails(int? id)
         {
             if (id == null)
@@ -433,6 +434,7 @@ namespace sxva_saqartvelo_back_end.Controllers
             return View();
         }
 
+        [AdminFilter]
         public ActionResult AllTask()
         {
             var issues = _db.Issues.ToList();  
@@ -440,6 +442,7 @@ namespace sxva_saqartvelo_back_end.Controllers
         }
 
 
+        [AdminFilter]
         public ActionResult EditTask(int? id)
         {
 
@@ -520,6 +523,7 @@ namespace sxva_saqartvelo_back_end.Controllers
             return View(issue);
         }
 
+        [AdminFilter]
         public ActionResult TaskDetails(int? id)
         {
             if(id == null)
@@ -556,6 +560,20 @@ namespace sxva_saqartvelo_back_end.Controllers
             ViewBag.TaskCompletedSuccessfully = "ამოცანა დასრულდა წარმატებით";
             return Json("TaskCompletedSuccessfully", JsonRequestBehavior.AllowGet);
         }
+
+
+        [HttpPost]
+        public JsonResult TaskMarkedAsOngoing(int id)
+        {
+            Issue issue = _db.Issues.Find(id);
+            var issueStatus = _db.Issue_Status.FirstOrDefault(x => x.IssueID == issue.ID); //ვიპოვე ამოცანის სტატუსი.
+            issue.isCompleted = false;
+            issueStatus.StatusID = 2; //შესრულებულ button-ზე კლიკის დროს ამოცანის სტატუსი ხდება 2 ანუ მიმდინარე, ფრილანსერს შეუძლია დააბრუნოს ამოცანა როგორც შესასრულებელი. (2 ნიშნავს Status Table-ში მიმდინარეს)
+            _db.Entry(issue).State = EntityState.Modified;
+            _db.SaveChanges();
+            return Json("TaskMarkedAsOngoing", JsonRequestBehavior.AllowGet);
+        }
+
 
 
     }

@@ -66,7 +66,7 @@
     </dl>
     @if (Model.isCompleted == true)
     {
-        <button disabled class="btn btn-success">დასრულებული</button>
+        <button class="btn btn-success">დასრულებული</button>
     }
     else
     {
@@ -94,6 +94,29 @@
                 data: { 'id': id },
                 success: function (response) {
                     if (response == "TaskCompletedSuccessfully") {
+                        window.location.reload();
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+
+        var id = $("#taskID dt:first").html();
+
+
+        $(".btn-success").click(function () {
+
+            $.ajax({
+                url: '/Admin/TaskMarkedAsOngoing',
+                method: 'POST',
+                data: { 'id': id },
+                success: function (response) {
+                    if (response == 'TaskMarkedAsOngoing') {
                         window.location.reload();
                     }
                 }
