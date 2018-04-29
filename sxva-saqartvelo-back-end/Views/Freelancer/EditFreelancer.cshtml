@@ -1,4 +1,4 @@
-﻿@model sxva_saqartvelo_back_end.Models.EditFreelancerViewModel
+﻿@model sxva_saqartvelo_back_end.Models.EditFreelancerModel
 @using sxva_saqartvelo_back_end.Models;
 @using sxva_saqartvelo_back_end.Helpers;
 
@@ -27,19 +27,19 @@
 </script>
 <section class="container-fluid">
     <div class="row col-9 cont">
-        @using (Html.BeginForm("EditFreelancer", "Freelancer", FormMethod.Post, new { @class = "cont1 container", enctype = "multipart/form-data"}))
+        @using (Html.BeginForm("EditFreelancer", "Freelancer", FormMethod.Post, new { @class = "cont1 container", enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model=> model.freelancer.ID)
+            @Html.HiddenFor(model => model.ID)
 
 
             <div style="float: right; position: relative" class="frlncrImg">
 
                 @if (freelancer != null)
                 {
-                   <img class="freelancerImage" style="width:250px; height:250px" src='@Url.Action("pp", "img", new { id = freelancer.Photo})' />
+                    <img class="freelancerImage" style="width:250px; height:250px" src='@Url.Action("pp", "img", new { id = freelancer.Photo})' />
                 }
                 @if (ViewBag.uploadedFreelancerImg != null) //ატვირთვის შემდეგ სურათის გამოჩენა
                 {
@@ -57,44 +57,44 @@
             </div>
 
             <div class="cont2 col-12 col-sm-6 form-group">
-                @Html.EditorFor(model => model.freelancer.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "სახელი" } })
-                @Html.ValidationMessageFor(model => model.editFreelancerModel.Name, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "სახელი" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
-            
+
             <div class="cont3 col-12 col-sm-6 form-group">
-                @Html.EditorFor(model => model.freelancer.Surname, new { htmlAttributes = new { @class = "form-control", placeholder = "გვარი" } })
-                @Html.ValidationMessageFor(model => model.editFreelancerModel.Surname, "", new { @class = "text-danger" })
-            </div>
-            <div class="cont3 col-12 col-sm-6 form-group">
-                @Html.EditorFor(model => model.freelancer.Field, new { htmlAttributes = new { @class = "form-control", placeholder = "პროფესია" } })
-                @Html.ValidationMessageFor(model => model.editFreelancerModel.Field, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control", placeholder = "გვარი" } })
+                @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
             </div>
             <div class="cont3 col-12 col-sm-6 form-group">
-                @Html.EditorFor(model => model.freelancer.Mobile, new { htmlAttributes = new { @class = "form-control", placeholder = "ტელეფონი" } })
-                @Html.ValidationMessageFor(model => model.editFreelancerModel.Mobile, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Field, new { htmlAttributes = new { @class = "form-control", placeholder = "პროფესია" } })
+                @Html.ValidationMessageFor(model => model.Field, "", new { @class = "text-danger" })
+            </div>
+            <div class="cont3 col-12 col-sm-6 form-group">
+                @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control", placeholder = "ტელეფონი" } })
+                @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
             </div>
             <div class="cont3 col-12 col-sm-6 form-group">
                 <img class="showHideOldPd" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverPassOldPsw();" onmouseout="mouseoutPassOldPsw();" />
-                @Html.EditorFor(model => model.editFreelancerModel.oldPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "ძველი პაროლი" } })
-                @Html.ValidationMessageFor(model => model.editFreelancerModel.oldPassword, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "ძველი პაროლი" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
             <div class="cont3 col-12 col-sm-6 form-group">
                 <img class="showHidePd" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" />
-                @Html.EditorFor(model => model.editFreelancerModel.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "ახალი პაროლი" } })
-                @Html.ValidationMessageFor(model => model.editFreelancerModel.Password, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.NewPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "ახალი პაროლი" } })
+                @Html.ValidationMessageFor(model => model.NewPassword, "", new { @class = "text-danger" })
             </div>
             <div class="cont3 col-12 col-sm-6 form-group">
                 <img class="showHideRePd" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverHover();" onmouseout="mouseoutHover();" />
-                @Html.EditorFor(model => model.editFreelancerModel.RepeatPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "გაიმეორეთ პაროლი" } })
-                @Html.ValidationMessageFor(model => model.editFreelancerModel.RepeatPassword, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.RepeatPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "გაიმეორეთ პაროლი" } })
+                @Html.ValidationMessageFor(model => model.RepeatPassword, "", new { @class = "text-danger" })
             </div>
             <div class="cont3 col-12 col-sm-6 form-group">
                 <p style="color:red" class="error">@ViewBag.error</p>
                 <p style="color:green" class="success">@ViewBag.success</p>
             </div>
             <div ass="cont3 col-12 col-sm-6 form-group">
-                @Html.TextAreaFor(model => model.freelancer.Bio, new { @id = "FreelancerBio", @class = "form-control", @rows = "200" }) 
-                @Html.ValidationMessageFor(model => model.editFreelancerModel.Bio, "", new { @class = "text-danger" })
+                @Html.TextAreaFor(model => model.Bio, new { @id = "FreelancerBio", @class = "form-control", @rows = "200" })
+                @Html.ValidationMessageFor(model => model.Bio, "", new { @class = "text-danger" })
             </div>
             <br />
             <div class="send container">
@@ -102,7 +102,7 @@
             </div>
         }
 
-            </div>
+    </div>
 </section>
 
 
@@ -165,3 +165,191 @@
         })
     });
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@model sxva_saqartvelo_back_end.Models.EditFreelancerViewModel
+    @using sxva_saqartvelo_back_end.Models;
+    @using sxva_saqartvelo_back_end.Helpers;
+
+    @{
+        var freelancer = LoginHelper.freelancer();
+    }
+    <link href="~/Content/InputErrorValidation.css" rel="stylesheet" />
+    <link href="~/css/pagesNcomponents/homepage.css" rel="stylesheet" />
+    <link href="~/css/profile/style.css" rel="stylesheet" />
+    <link href="~/css/mystyle.css" rel="stylesheet" />
+
+    <section id="hero-section">
+        <h1 class="nino-mtavruli color-while">რეგისტრაცია</h1>
+    </section>
+    <script>
+        //ატვირთული სურათის არჩეულით ჩანაცვლება
+        function show(input) {
+            if (input.files && input.files[0]) {
+                var filerdr = new FileReader();
+                filerdr.onload = function (e) {
+                    $(".freelancerImage").attr('src', e.target.result);
+                }
+                filerdr.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+    <section class="container-fluid">
+        <div class="row col-9 cont">
+            @using (Html.BeginForm("EditFreelancer", "Freelancer", FormMethod.Post, new { @class = "cont1 container", enctype = "multipart/form-data"}))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model=> model.freelancer.ID)
+
+
+                <div style="float: right; position: relative" class="frlncrImg">
+
+                    @if (freelancer != null)
+                    {
+                       <img class="freelancerImage" style="width:250px; height:250px" src='@Url.Action("pp", "img", new { id = freelancer.Photo})' />
+                    }
+                    @if (ViewBag.uploadedFreelancerImg != null) //ატვირთვის შემდეგ სურათის გამოჩენა
+                    {
+                        <script>
+                            $(document).ready(function () {
+                                $(".freelancerImage").hide(); //ახალი სურათის ატვირთვის შემდეგ არსებულის დამალვა
+                            });
+                        </script>
+                        <img class="uploadedImage" style="width:250px; height:250px" src='@Url.Action("pp", "img", new { id = ViewBag.uploadedFreelancerImg})' />
+                    }
+                    <br /><br />
+                    <div style="float: right; position: absolute" class="choose-file">
+                        <input type="file" value="choose file" id="file" name="file" onchange="show(this)" />
+                    </div>
+                </div>
+
+                <div class="cont2 col-12 col-sm-6 form-group">
+                    @Html.EditorFor(model => model.freelancer.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "სახელი" } })
+                    @Html.ValidationMessageFor(model => model.editFreelancerModel.Name, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="cont3 col-12 col-sm-6 form-group">
+                    @Html.EditorFor(model => model.freelancer.Surname, new { htmlAttributes = new { @class = "form-control", placeholder = "გვარი" } })
+                    @Html.ValidationMessageFor(model => model.editFreelancerModel.Surname, "", new { @class = "text-danger" })
+                </div>
+                <div class="cont3 col-12 col-sm-6 form-group">
+                    @Html.EditorFor(model => model.freelancer.Field, new { htmlAttributes = new { @class = "form-control", placeholder = "პროფესია" } })
+                    @Html.ValidationMessageFor(model => model.editFreelancerModel.Field, "", new { @class = "text-danger" })
+                </div>
+                <div class="cont3 col-12 col-sm-6 form-group">
+                    @Html.EditorFor(model => model.freelancer.Mobile, new { htmlAttributes = new { @class = "form-control", placeholder = "ტელეფონი" } })
+                    @Html.ValidationMessageFor(model => model.editFreelancerModel.Mobile, "", new { @class = "text-danger" })
+                </div>
+                <div class="cont3 col-12 col-sm-6 form-group">
+                    <img class="showHideOldPd" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverPassOldPsw();" onmouseout="mouseoutPassOldPsw();" />
+                    @Html.EditorFor(model => model.editFreelancerModel.oldPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "ძველი პაროლი" } })
+                    @Html.ValidationMessageFor(model => model.editFreelancerModel.oldPassword, "", new { @class = "text-danger" })
+                </div>
+                <div class="cont3 col-12 col-sm-6 form-group">
+                    <img class="showHidePd" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" />
+                    @Html.EditorFor(model => model.editFreelancerModel.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "ახალი პაროლი" } })
+                    @Html.ValidationMessageFor(model => model.editFreelancerModel.Password, "", new { @class = "text-danger" })
+                </div>
+                <div class="cont3 col-12 col-sm-6 form-group">
+                    <img class="showHideRePd" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverHover();" onmouseout="mouseoutHover();" />
+                    @Html.EditorFor(model => model.editFreelancerModel.RepeatPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "გაიმეორეთ პაროლი" } })
+                    @Html.ValidationMessageFor(model => model.editFreelancerModel.RepeatPassword, "", new { @class = "text-danger" })
+                </div>
+                <div class="cont3 col-12 col-sm-6 form-group">
+                    <p style="color:red" class="error">@ViewBag.error</p>
+                    <p style="color:green" class="success">@ViewBag.success</p>
+                </div>
+                <div ass="cont3 col-12 col-sm-6 form-group">
+                    @Html.TextAreaFor(model => model.freelancer.Bio, new { @id = "FreelancerBio", @class = "form-control", @rows = "200" })
+                    @Html.ValidationMessageFor(model => model.editFreelancerModel.Bio, "", new { @class = "text-danger" })
+                </div>
+                <br />
+                <div class="send container">
+                    <button onClick="CKupdate()" class="submit">რედაქტირება</button>
+                </div>
+            }
+
+                </div>
+    </section>
+
+
+    <script>
+        CKEDITOR.replace("FreelancerBio");
+
+        function mouseoverPassOldPsw(obj) {
+            var obj = document.getElementById('editFreelancerModel_oldPassword');
+            obj.type = "text";
+        }
+        function mouseoutPassOldPsw(obj) {
+            var obj = document.getElementById('editFreelancerModel_oldPassword');
+            obj.type = "password";
+        }
+
+        function mouseoverPass(obj) {
+            var obj = document.getElementById('editFreelancerModel_Password');
+            obj.type = "text";
+        }
+        function mouseoutPass(obj) {
+            var obj = document.getElementById('editFreelancerModel_Password');
+            obj.type = "password";
+        }
+
+        function mouseoverHover(obj) {
+            var obj = document.getElementById('editFreelancerModel_RepeatPassword');
+            obj.type = "text";
+        }
+        function mouseoutHover(obj) {
+            var obj = document.getElementById('editFreelancerModel_RepeatPassword');
+            obj.type = "password";
+        }
+
+
+        //show hide icon
+        $(function () {
+            $('.showHideOldPd').hover(function () {
+                $('.showHideOldPd').attr('src', '/img/logos/if_visibility_password.svg');
+            },
+            function () {
+                $('.showHideOldPd').attr('src', '/img/logos/if_visibility-off.svg');
+            })
+        });
+
+        $(function () {
+            $('.showHidePd').hover(function () {
+                $('.showHidePd').attr('src', '/img/logos/if_visibility_password.svg');
+            },
+            function () {
+                $('.showHidePd').attr('src', '/img/logos/if_visibility-off.svg');
+            })
+        });
+
+        $(function () {
+            $('.showHideRePd').hover(function () {
+                $('.showHideRePd').attr('src', '/img/logos/if_visibility_password.svg');
+            },
+            function () {
+                $('.showHideRePd').attr('src', '/img/logos/if_visibility-off.svg');
+            })
+        });
+    </script>*@
