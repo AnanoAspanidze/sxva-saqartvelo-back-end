@@ -183,7 +183,8 @@ namespace sxva_saqartvelo_back_end.Controllers
                 StartDate = project.StartDate,
                 EndDate = project.EndDate,
                 CompanyID = project.CompanyID,
-                FreelancerID = project.FreelancerID.Value
+                FreelancerID = project.FreelancerID.Value,
+                StatusID = project.Project_Status.FirstOrDefault(x => x.ProjectID == id).StatusID
             };
 
             if(result == null)
@@ -196,7 +197,7 @@ namespace sxva_saqartvelo_back_end.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult EditProject(EditProjectModel project, string CompanyID, string FreelancerID, string StatusID)
+        public ActionResult EditProject(EditProjectModel project)
         {
 
             var freelancers = _db.Freelancers.ToList();
@@ -227,47 +228,29 @@ namespace sxva_saqartvelo_back_end.Controllers
                 var statusToUpdate = _db.Project_Status.FirstOrDefault(x => x.ProjectID == project.ID); //ვპოულობ პროექტის სტატუსს დასარედაქტირებლად
 
 
-                //if (project.Name == "" || project.Name == null)
-                //{
-                //    projectToUpdate.Name = projectToUpdate.Name;
-                //    projectToUpdate.Description = projectToUpdate.Description;
-                //    projectToUpdate.CompanyID = projectToUpdate.CompanyID;
-                //    projectToUpdate.FreelancerID = projectToUpdate.FreelancerID;
-                //    _db.SaveChanges();
-                //    return View();
-                //}
-
-
-               
                 projectToUpdate.Name = project.Name.Trim();
                 projectToUpdate.Description = project.Description;
                 projectToUpdate.StartDate = project.StartDate;
-                projectToUpdate.CompanyID = Convert.ToInt32(CompanyID);
-                projectToUpdate.FreelancerID = Convert.ToInt32(FreelancerID);
+                projectToUpdate.CompanyID = project.CompanyID;
+                projectToUpdate.FreelancerID = project.FreelancerID;
+                projectToUpdate.Project_Status.FirstOrDefault(x => x.ProjectID == project.ID).StatusID = project.StatusID;
                 _db.SaveChanges();
 
-                if(StatusID == "" || StatusID == null) //თუ პროექტის სტატუსი იქნება ცარიელი და სხვა ველები იქნება შევსებული edit-ის დროს, პროექტის სტატუსი რჩება იგივე.
-                {
-                    statusToUpdate.StatusID = statusToUpdate.StatusID;
-                    _db.SaveChanges();
-                    return RedirectToAction("AdminPanel");
-                }
-                
 
 
-                if(Convert.ToInt32(StatusID) == 2) //თუ პროექტის სტატუსი არის 2 ანუ სტატუს ცხრილში 2 ნიშნავს მიმდინარეს, მაშინ პროექტის სტატუსი რჩება მიმდინარეთ და პროექტის დასრულების თარიღი ხდება null.
+
+                if (project.StatusID == 2) //თუ პროექტის სტატუსი არის 2 ანუ სტატუს ცხრილში 2 ნიშნავს მიმდინარეს, მაშინ პროექტის სტატუსი რჩება მიმდინარეთ და პროექტის დასრულების თარიღი ხდება null.
                 {
-                    statusToUpdate.StatusID = Convert.ToInt32(StatusID);
+                    statusToUpdate.StatusID = project.StatusID;
                     projectToUpdate.EndDate = null;
                     _db.SaveChanges();
                 }
                 else
                 {
-                    statusToUpdate.StatusID = Convert.ToInt32(StatusID); //თუ პროექტის სტატუსი არის 3 ანუ სტატუს ცხრილში 3 ნიშნავს დასრულებულს, მაშნ პროქტის სტატუსი ხდება დასრულებული.
+                    statusToUpdate.StatusID = project.StatusID; //თუ პროექტის სტატუსი არის 3 ანუ სტატუს ცხრილში 3 ნიშნავს დასრულებულს, მაშნ პროქტის სტატუსი ხდება დასრულებული.
                     projectToUpdate.EndDate = DateTime.Now;
                     _db.SaveChanges();
                 }
-
 
                 //return RedirectToAction("EditProject");
                 return Redirect(Url.Action("EditProject", "Admin", new { id = project.ID }));
@@ -462,7 +445,11 @@ namespace sxva_saqartvelo_back_end.Controllers
                 ID = issue.ID,
                 Name = issue.Name,
                 Body = issue.Body,
+                //StatusID = project.Project_Status.FirstOrDefault(x => x.ProjectID == id).StatusID
+                StatusID = issue.Issue_Status.FirstOrDefault(x=> x.IssueID == id).StatusID,
                 DueDate = issue.DueDate
+
+
             };
 
             if (result == null)
@@ -477,7 +464,7 @@ namespace sxva_saqartvelo_back_end.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult EditTask(EditIssueModel issue, string StatusID)
+        public ActionResult EditTask(EditIssueModel issue)
         {
 
             var issueToUpdate = _db.Issues.FirstOrDefault(x => x.ID == issue.ID); //ვპოულობ ამოცანას დასარედაქტირებლად
@@ -497,22 +484,16 @@ namespace sxva_saqartvelo_back_end.Controllers
                 _db.SaveChanges();
 
 
-                if (StatusID == "" || StatusID == null) //თუ ამოცანის სტატუსი იქნება ცარიელი და სხვა ველები იქნება შევსებული edit-ის დროს, ამოცანის სტატუსი რჩება იგივე.
-                {
-                    statusToUpdate.StatusID = statusToUpdate.StatusID;
-                    _db.SaveChanges();
-                    return RedirectToAction("AllTask");
-                }
 
-                if (Convert.ToInt32(StatusID) == 2)  //თუ ადმინისტრატორმა ამოცანა აირჩია როგორც მინდინარე, მაშინ ამოცანა ხდება შესასრულებელი.
+                if (issue.StatusID == 2)  //თუ ადმინისტრატორმა ამოცანა აირჩია როგორც მინდინარე, მაშინ ამოცანა ხდება შესასრულებელი.
                 {
-                    statusToUpdate.StatusID = Convert.ToInt32(StatusID);
+                    statusToUpdate.StatusID = issue.StatusID;
                     issueToUpdate.isCompleted = false;
                     _db.SaveChanges();
                 }
                 else
                 {
-                    statusToUpdate.StatusID = Convert.ToInt32(StatusID); //თუ ადმინისტრატორმა ამოცანა აირჩია როგორც დასრულებული, მაშინ ამოცანა შესრულებული.
+                    statusToUpdate.StatusID = issue.StatusID; //თუ ადმინისტრატორმა ამოცანა აირჩია როგორც დასრულებული, მაშინ ამოცანა შესრულებული.
                     issueToUpdate.isCompleted = true;
                     _db.SaveChanges();
                 }

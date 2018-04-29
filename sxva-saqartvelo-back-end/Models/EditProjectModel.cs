@@ -24,7 +24,7 @@ namespace sxva_saqartvelo_back_end.Models
 
 
         [DataType(DataType.Date)]
-        [Required(ErrorMessage = "აირჩიეთ პროექტის დამთავრების თარიღი")]
+        //[Required(ErrorMessage = "აირჩიეთ პროექტის დამთავრების თარიღი")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public Nullable<System.DateTime> EndDate { get; set; }
 
@@ -34,6 +34,11 @@ namespace sxva_saqartvelo_back_end.Models
 
         [Required(ErrorMessage = "აირჩიეთ ფრილანსერი")]
         public int FreelancerID { get; set; }
+
+
+        [Required(ErrorMessage = "აირჩიეთ პროექტის სტატუსი")]
+        public int StatusID { get; set; }
+
 
 
     }

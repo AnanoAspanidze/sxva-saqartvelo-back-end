@@ -20,5 +20,8 @@ namespace sxva_saqartvelo_back_end.Models
         [Required(ErrorMessage = "აირჩიეთ თარიღი")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime DueDate { get; set; }
+
+        [Required(ErrorMessage = "აირჩიეთ ამოცანის სტატუსი")]
+        public int StatusID { get; set; }
     }
 }
