@@ -152,7 +152,17 @@ namespace sxva_saqartvelo_back_end.Controllers
 
         public ActionResult CompanyDetails(int? id)
         {
+           
             var company = _db.Companies.FirstOrDefault(x => x.ID == id);
+            ViewBag.rating = _db.Projects
+               .Where(r => r.ID == id)
+               .GroupBy(g => g.ID, r => r.CompanyRating)
+               .Select(g => new
+               {
+                   ID = g.Key,
+                   Rating = g.Average()
+               });
+
             return View(company);
         }
     }
