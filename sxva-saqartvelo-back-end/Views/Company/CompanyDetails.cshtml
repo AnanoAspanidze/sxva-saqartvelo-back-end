@@ -1,11 +1,16 @@
-﻿@model sxva_saqartvelo_back_end.Models.Freelancer
+﻿@model sxva_saqartvelo_back_end.Models.Company
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
 
 <!--C# Code-->
 @{
-    var skills = Model.Freelancer_Skill.ToList(); //ფრილანსერის სქილები
-    var implementedProjects = Model.Projects.Count(); //ფრილანსერის განხორციელებული პროექტების რაოდენობა
+    var implementedProjects = Model.Projects.Count(); //კომპანიის მიერ დაკვეთილი პროექტების რაოდენობა
     var project = Model.Projects.ToList(); //პროექტების თეიბლი ლისტად
-    var ongoingProjects = Model.Projects.Where(x => x.Project_Status.Any(e => e.StatusID == 2)).Count(); //კონკრეტული ფრილანსერის მიმდინარე პროექტების რაოდენობა
+    var ongoingProjects = Model.Projects.Where(x => x.Project_Status.Any(e => e.StatusID == 2)).Count(); //კომპანიის მიმდინარე პროექტების რაოდენობა
 }
 <!---->
 <!--CSS-->
@@ -16,28 +21,21 @@
 
 <section id="hero-section"></section>
 <section class="container-fluid">
-    <h1 class="my">ჩემი პროფილი</h1>
+    <h1 class="my">კომპანიის პროფილი</h1>
     <div class="row justify-content-between col-9 blue">
         <div class="col-xl-6 col-md-12 profile">
             <div class="person row">
-                <div class="img-background" style="background-image: url(&quot;/img/pp/@Model.Photo&quot;);">
-                    <img class="developerImage" src="/img/pp/@Model.Photo" alt="profile picture">
+                <div class="img-background" style="background-image: url(&quot;/img/logos/@Model.Logo&quot;);">
+                    <img class="developerImage" src="/img/logos/@Model.Logo" alt="profile picture">
                 </div>
                 <div class="info align-items-end">
-                    <h3 class="name-surname">@Model.Name @Model.Surname</h3>
-                    <p class="rank position">@Model.Field</p>
+                    <h3 class="name-surname">@Model.Name</h3>
+                   
 
                 </div>
             </div>
             <div class="ინფო">
                 <ul class="sia">
-                    <li class="skills">
-                        უნარები:
-                        @foreach (var i in skills)
-                        {
-                            @i.Skill.Name <span> </span>
-                        }
-                    </li>
                     <li>
                         პროექტების რაოდენობა: <span class="projectQuantity">@implementedProjects</span>
                     </li>
@@ -54,9 +52,9 @@
         <div class="col-xl-6 col-md-12 des1 hidden-md">
             <button class="kon col  hidden-sm ">კონტაქტი</button>
             <article class="bio">
-                <h2>ბიორგრაფია</h2>
+                <h2>კომპანიის აღწერა</h2>
                 <div class="biography">
-                    @Html.Raw(Model.Bio)
+                    @Html.Raw(Model.Description)
                 </div>
             </article>
         </div>

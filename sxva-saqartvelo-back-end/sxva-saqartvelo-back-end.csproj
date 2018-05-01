@@ -724,6 +724,7 @@
     <Content Include="Views\Admin\EditTask.cshtml" />
     <Content Include="Views\Admin\TaskDetails.cshtml" />
     <Content Include="Views\Admin\ProjectDetails.cshtml" />
+    <Content Include="Views\Company\CompanyDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
