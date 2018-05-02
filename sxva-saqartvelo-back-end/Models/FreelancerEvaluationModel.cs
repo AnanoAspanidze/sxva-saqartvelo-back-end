@@ -8,11 +8,16 @@ namespace sxva_saqartvelo_back_end.Models
 {
     public class FreelancerEvaluationModel
     {
-        public Freelancer freelancer { get; set; }
+        //public Freelancer freelancer { get; set; }
+
+        public int ID { get; set; }
+
+        public string Name { get; set; }
         
         [Required(ErrorMessage = "ჩაწერეთ რეიტინგი")]
         [Range(0, 10, ErrorMessage = "ჩაწერეთ რეიტინგი, 0-დან 10-ის ჩათვლით")]
         public int FreelancerRating { get; set; }
+
 
         [Required(ErrorMessage = "ჩაწერეთ შეფასება")]
         public string FreelancerEvaluation { get; set; }

@@ -1,7 +1,6 @@
 ﻿@model sxva_saqartvelo_back_end.Models.EditProjectModel
 
 @{
-    ViewBag.Title = "EditProject";
     Layout = "~/Views/Shared/_AdminPanelLayout.cshtml";
 }
 
@@ -81,8 +80,8 @@
             {
                 <label class="projectStatus" for="StatusID">პროექტის სტატუსი: <span style="color:green">@ViewBag.currentStatus</span></label>
                 <div class="col-md-10">
-                    <a href="@Url.Action("FreelancerEvaluation", "Admin", new { id = Model.FreelancerID})">ფრილანსერის შეფასება,</a>
-                    <a href="@Url.Action("CompanyEvaluation", "Admin", new { id = Model.CompanyID})">კომპანიის შეფასება</a>
+                    <a href="@Url.Action("FreelancerEvaluation", "Admin", new { id = Model.ID})">ფრილანსერის შეფასება,</a>
+                    <a href="@Url.Action("CompanyEvaluation", "Admin", new { id = Model.ID})">კომპანიის შეფასება</a>
                 </div>
 
                 <div class="col-md-10">

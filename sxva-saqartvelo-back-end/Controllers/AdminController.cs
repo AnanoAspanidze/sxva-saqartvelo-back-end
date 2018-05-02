@@ -126,6 +126,10 @@ namespace sxva_saqartvelo_back_end.Controllers
                 project.Description = model.Description;
                 project.CompanyID = Convert.ToInt32(CompanyID);
                 project.FreelancerID = Convert.ToInt32(FreelancerID);
+                project.FreelancerRating = 0;
+                project.CompanyRating = 0;
+                project.FreelancerEvaluation = "";
+                project.CompanyEvaluation = "";
                 project.StartDate = model.StartDate;
                 project.EndDate = model.EndDate;
                 project.DateAdded = DateTime.Now;
@@ -295,11 +299,16 @@ namespace sxva_saqartvelo_back_end.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            var freelancer = _db.Projects.FirstOrDefault(x => x.ID == id);
             var result = new FreelancerEvaluationModel
             {
-                freelancer = _db.Freelancers.Find(id)
+               ID = freelancer.FreelancerID.Value,
+               Name = freelancer.Freelancer.Name + " " + freelancer.Freelancer.Surname,
+               FreelancerRating = freelancer.FreelancerRating.Value,
+               FreelancerEvaluation = freelancer.FreelancerEvaluation
             };
 
+            //ViewBag.freelancerRating = freelancer.FreelancerRating;
             if (result == null)
             {
                 return HttpNotFound();
@@ -314,7 +323,7 @@ namespace sxva_saqartvelo_back_end.Controllers
         {
             if (ModelState.IsValid)
             {
-                var freelancerToEvaluate = _db.Projects.FirstOrDefault(x => x.FreelancerID == model.freelancer.ID);
+                var freelancerToEvaluate = _db.Projects.FirstOrDefault(x => x.ID == model.ID);
                 freelancerToEvaluate.FreelancerRating = model.FreelancerRating;
                 freelancerToEvaluate.FreelancerEvaluation = model.FreelancerEvaluation;
                 _db.SaveChanges();
@@ -325,17 +334,18 @@ namespace sxva_saqartvelo_back_end.Controllers
         [AdminFilter]
         public ActionResult CompanyEvaluation(int? id)
         {
-
-            
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            var company = _db.Projects.FirstOrDefault(x=> x.ID == id);
             var result = new CompanyEvaluationModel
             {
-                company = _db.Companies.Find(id)
+                ID = company.CompanyID,
+                Name = company.Company.Name,
+                CompanyRating = company.CompanyRating.Value,
+                CompanyEvaluation = company.CompanyEvaluation
             };
 
             if(result == null)
@@ -352,12 +362,13 @@ namespace sxva_saqartvelo_back_end.Controllers
         {
             if (ModelState.IsValid)
             {
-                var companyToEvaluate = _db.Projects.FirstOrDefault(x => x.CompanyID == model.company.ID);
+                var companyToEvaluate = _db.Projects.FirstOrDefault(x => x.ID == model.ID);
                 companyToEvaluate.CompanyRating = model.CompanyRating;
                 companyToEvaluate.CompanyEvaluation = model.CompanyEvaluation;
                 _db.SaveChanges();
             }
             return RedirectToAction("AdminPanel", "Admin");
+
         }
 
 

@@ -3,8 +3,8 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     OtherGeorgiaEntities db = new OtherGeorgiaEntities();
-
 }
+
 
 
 
@@ -13,6 +13,10 @@
     var implementedProjects = Model.Projects.Count(); //კომპანიის მიერ დაკვეთილი პროექტების რაოდენობა
     var project = Model.Projects.ToList(); //პროექტების თეიბლი ლისტად
     var ongoingProjects = Model.Projects.Where(x => x.Project_Status.Any(e => e.StatusID == 2)).Count(); //კომპანიის მიმდინარე პროექტების რაოდენობა
+    var prj = Model.Projects.Where(x=> x.CompanyID == Model.ID).Select(x=> x.CompanyRating);
+    var pr = Model.Projects.Where(x => x.CompanyID == Model.ID).Count();
+
+    var sum = prj.Average();
 }
 <!---->
 <!--CSS-->
@@ -43,7 +47,7 @@
                         მიმდინარე პროექტების რაოდენობა: <span class="projectsInProgressQuantity">@ongoingProjects</span>
                     </li>
                     <li>
-                        რეიტინგი: <span class="rating">@ViewBag.rating</span>/10
+                        რეიტინგი: <span class="rating">@sum</span>/10
                     </li>
 
                 </ul>
