@@ -126,6 +126,8 @@ namespace sxva_saqartvelo_back_end.Controllers
 
         public ActionResult Details(int id)
         {
+            //var RatingAverage = _db.Freelancers.Where(x => x.ID == id).Select(x=> x.Rating);
+            //ViewBag.freelancerRatingAverage = RatingAverage.Average();
             var freelancer = _db.Freelancers.FirstOrDefault(x => x.ID == id);
             return View(freelancer);
         }

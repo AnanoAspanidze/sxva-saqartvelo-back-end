@@ -13,10 +13,10 @@
     var implementedProjects = Model.Projects.Count(); //კომპანიის მიერ დაკვეთილი პროექტების რაოდენობა
     var project = Model.Projects.ToList(); //პროექტების თეიბლი ლისტად
     var ongoingProjects = Model.Projects.Where(x => x.Project_Status.Any(e => e.StatusID == 2)).Count(); //კომპანიის მიმდინარე პროექტების რაოდენობა
-    var prj = Model.Projects.Where(x=> x.CompanyID == Model.ID).Select(x=> x.CompanyRating);
-    var pr = Model.Projects.Where(x => x.CompanyID == Model.ID).Count();
+    var ratingAverage = Model.Projects.Where(x=> x.CompanyID == Model.ID).Select(x=> x.CompanyRating); //კომპანიის რეიტინგის საშუალო არითმეტიკული
 
-    var sum = prj.Average();
+    var CompanyRatingAverage = ratingAverage.Average();  //კომპანიის რეიტინგის საშუალო არითმეტიკული
+    
 }
 <!---->
 <!--CSS-->
@@ -47,7 +47,7 @@
                         მიმდინარე პროექტების რაოდენობა: <span class="projectsInProgressQuantity">@ongoingProjects</span>
                     </li>
                     <li>
-                        რეიტინგი: <span class="rating">@sum</span>/10
+                        რეიტინგი: <span class="rating">@CompanyRatingAverage</span>/10
                     </li>
 
                 </ul>
@@ -84,8 +84,9 @@
                 <div class="projects">
                     <h3><b id="projectName" name="@item.Name" value="@item.Name">@item.Name</b></h3>
                     <p class="pro1 col-12">@Html.Raw(item.Description)</p>
-                    <p class="pro2 col-5">დამკვეთი: <span><a href="@Url.Action("CompanyDetails", "Company", new { id = item.Company.ID})">@item.Company.Name</a></span></p>
-                    <p class="pro2">პროექტის შეფასება: <span>10</span>/10</p>
+                    <p class="pro2 col-5">ფრილანსერი: <span><a href="@Url.Action("Details", "Freelancer", new { id = item.Freelancer.ID, freelancer = item.Freelancer.Name + "-" + item.Freelancer.Surname })">@item.Freelancer.Name @item.Freelancer.Surname</a></span></p>
+                    <p class="pro2">პროექტის შეფასება: <span>@item.CompanyRating</span>/10</p>
+                    <p class="pro1 col-12">@Html.Raw(item.CompanyEvaluation)</p>
                 </div>
             }
         </div>

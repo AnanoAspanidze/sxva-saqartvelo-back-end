@@ -6,6 +6,7 @@
     var implementedProjects = Model.Projects.Count(); //ფრილანსერის განხორციელებული პროექტების რაოდენობა
     var project = Model.Projects.ToList(); //პროექტების თეიბლი ლისტად
     var ongoingProjects = Model.Projects.Where(x => x.Project_Status.Any(e => e.StatusID == 2)).Count(); //კონკრეტული ფრილანსერის მიმდინარე პროექტების რაოდენობა
+    var freelancerRatingAverage = Model.Projects.Where(x => x.FreelancerID == Model.ID).Select(x => x.FreelancerRating);
 }
 <!---->
 <!--CSS-->
@@ -45,7 +46,7 @@
                         მიმდინარე პროექტების რაოდენობა: <span class="projectsInProgressQuantity">@ongoingProjects</span>
                     </li>
                     <li>
-                        რეიტინგი: <span class="rating">@Model.Rating</span>/10
+                        რეიტინგი: <span class="rating">@freelancerRatingAverage.Average()</span>/10
                     </li>
 
                 </ul>
@@ -79,11 +80,13 @@
         <div class="allProjects">
             @foreach (var item in project)
             {
+                
                 <div class="projects">
                     <h3><b id="projectName" name="@item.Name" value="@item.Name">@item.Name</b></h3>
                     <p class="pro1 col-12">@Html.Raw(item.Description)</p>
-                    <p class="pro2 col-5">დამკვეთი: <span><a href="@Url.Action("CompanyDetails", "Company", new { id = item.Company.ID})">@item.Company.Name</a></span></p>
-                    <p class="pro2">პროექტის შეფასება: <span>10</span>/10</p>
+                    <p class="pro2 col-5">დამკვეთი: <span><a href="@Url.Action("CompanyDetails", "Company", new { id = item.Company.ID, company = item.Company.Name.Replace(" ","-")})">@item.Company.Name</a></span></p>
+                    <p class="pro2">პროექტის შეფასება: <span>@item.FreelancerRating</span>/10</p>
+                    <p class="pro1 col-12">@Html.Raw(item.FreelancerEvaluation)</p>
                 </div>
             }
         </div>

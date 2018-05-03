@@ -152,7 +152,6 @@ namespace sxva_saqartvelo_back_end.Controllers
 
         public ActionResult CompanyDetails(int? id)
         {
-           
             var company = _db.Companies.FirstOrDefault(x => x.ID == id);
             return View(company);
         }
