@@ -14,7 +14,6 @@
     var project = Model.Projects.ToList(); //პროექტების თეიბლი ლისტად
     var ongoingProjects = Model.Projects.Where(x => x.Project_Status.Any(e => e.StatusID == 2)).Count(); //კომპანიის მიმდინარე პროექტების რაოდენობა
     var ratingAverage = Model.Projects.Where(x=> x.CompanyID == Model.ID).Select(x=> x.CompanyRating); //კომპანიის რეიტინგის საშუალო არითმეტიკული
-
     var CompanyRatingAverage = ratingAverage.Average();  //კომპანიის რეიტინგის საშუალო არითმეტიკული
     
 }

@@ -74,17 +74,17 @@
                 @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
             </div>
             <div class="cont3 col-12 col-sm-6 form-group">
-                <img class="showHideOldPd" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverPassOldPsw();" onmouseout="mouseoutPassOldPsw();" />
+                <img class="showHidePassword" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverPassOldPsw();" onmouseout="mouseoutPassOldPsw();" />
                 @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "ძველი პაროლი" } })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
             <div class="cont3 col-12 col-sm-6 form-group">
-                <img class="showHidePd" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" />
+                <img class="showHideNewPassword" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" />
                 @Html.EditorFor(model => model.NewPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "ახალი პაროლი" } })
                 @Html.ValidationMessageFor(model => model.NewPassword, "", new { @class = "text-danger" })
             </div>
             <div class="cont3 col-12 col-sm-6 form-group">
-                <img class="showHideRePd" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverHover();" onmouseout="mouseoutHover();" />
+                <img class="showHideRepeatPassword" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverHover();" onmouseout="mouseoutHover();" />
                 @Html.EditorFor(model => model.RepeatPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "გაიმეორეთ პაროლი" } })
                 @Html.ValidationMessageFor(model => model.RepeatPassword, "", new { @class = "text-danger" })
             </div>
@@ -110,58 +110,58 @@
     CKEDITOR.replace("FreelancerBio");
 
     function mouseoverPassOldPsw(obj) {
-        var obj = document.getElementById('editFreelancerModel_oldPassword');
+        var obj = document.getElementById('Password');
         obj.type = "text";
     }
     function mouseoutPassOldPsw(obj) {
-        var obj = document.getElementById('editFreelancerModel_oldPassword');
+        var obj = document.getElementById('Password');
         obj.type = "password";
     }
 
     function mouseoverPass(obj) {
-        var obj = document.getElementById('editFreelancerModel_Password');
+        var obj = document.getElementById('NewPassword');
         obj.type = "text";
     }
     function mouseoutPass(obj) {
-        var obj = document.getElementById('editFreelancerModel_Password');
+        var obj = document.getElementById('NewPassword');
         obj.type = "password";
     }
 
     function mouseoverHover(obj) {
-        var obj = document.getElementById('editFreelancerModel_RepeatPassword');
+        var obj = document.getElementById('RepeatPassword');
         obj.type = "text";
     }
     function mouseoutHover(obj) {
-        var obj = document.getElementById('editFreelancerModel_RepeatPassword');
+        var obj = document.getElementById('RepeatPassword');
         obj.type = "password";
     }
 
 
     //show hide icon
     $(function () {
-        $('.showHideOldPd').hover(function () {
-            $('.showHideOldPd').attr('src', '/img/logos/if_visibility_password.svg');
+        $('.showHidePassword').hover(function () {
+            $('.showHidePassword').attr('src', '/img/logos/if_visibility_password.svg');
         },
         function () {
-            $('.showHideOldPd').attr('src', '/img/logos/if_visibility-off.svg');
+            $('.showHidePassword').attr('src', '/img/logos/if_visibility-off.svg');
         })
     });
 
     $(function () {
-        $('.showHidePd').hover(function () {
-            $('.showHidePd').attr('src', '/img/logos/if_visibility_password.svg');
+        $('.showHideNewPassword').hover(function () {
+            $('.showHideNewPassword').attr('src', '/img/logos/if_visibility_password.svg');
         },
         function () {
-            $('.showHidePd').attr('src', '/img/logos/if_visibility-off.svg');
+            $('.showHideNewPassword').attr('src', '/img/logos/if_visibility-off.svg');
         })
     });
 
     $(function () {
-        $('.showHideRePd').hover(function () {
-            $('.showHideRePd').attr('src', '/img/logos/if_visibility_password.svg');
+        $('.showHideRepeatPassword').hover(function () {
+            $('.showHideRepeatPassword').attr('src', '/img/logos/if_visibility_password.svg');
         },
         function () {
-            $('.showHideRePd').attr('src', '/img/logos/if_visibility-off.svg');
+            $('.showHideRepeatPassword').attr('src', '/img/logos/if_visibility-off.svg');
         })
     });
 </script>

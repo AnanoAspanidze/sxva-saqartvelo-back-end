@@ -1,4 +1,4 @@
-﻿.showHideOldPd{
+﻿.showHidePassword{
     position: absolute;
     top: 11px;
     right: 24px;
@@ -6,7 +6,7 @@
     height: 24px;
     cursor: pointer;
 }
-.showHidePd{
+.showHideNewPassword{
     position: absolute;
     top: 11px;
     right: 24px;
@@ -15,7 +15,7 @@
     cursor: pointer;
 }
 
-.showHideRePd{
+.showHideRepeatPassword{
     position: absolute;
     top: 11px;
     right: 24px;

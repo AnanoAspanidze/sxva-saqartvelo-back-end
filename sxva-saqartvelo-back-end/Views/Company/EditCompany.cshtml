@@ -1,4 +1,4 @@
-﻿@model sxva_saqartvelo_back_end.Models.EditCompanyViewModel
+﻿@model sxva_saqartvelo_back_end.Models.EditCompanyModel
 @using sxva_saqartvelo_back_end.Models;
 @using sxva_saqartvelo_back_end.Helpers;
 
@@ -47,7 +47,7 @@
             @Html.AntiForgeryToken()
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.company.ID)
+            @Html.HiddenFor(model => model.ID)
 
             <div style="float:right; position: relative" class="cyImg">
                 @if (company != null)
@@ -70,36 +70,36 @@
             </div>
 
             <div class="cont2 col-12 col-sm-6 form-group">
-                @Html.EditorFor(model => model.company.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "სახელი: ორგანიზაციის ან ფიზიკური პირის" } })
-                @Html.ValidationMessageFor(model => model.company.Name, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "სახელი: ორგანიზაციის ან ფიზიკური პირის" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
 
             <div class="cont3 col-12 col-sm-6 form-group">
-                @Html.EditorFor(model => model.company.Mobile, new { htmlAttributes = new { @class = "form-control", placeholder = "ტელეფონი" } })
-                @Html.ValidationMessageFor(model => model.company.Mobile, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control", placeholder = "ტელეფონი" } })
+                @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
             </div>
             <div class="cont3 col-12 col-sm-6 form-group">
                 <img class="showHideOldPd" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverPassOldPsw();" onmouseout="mouseoutPassOldPsw();" />
-                @Html.EditorFor(model => model.editCompanyModel.oldPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "ძველი პაროლი" } })
-                @Html.ValidationMessageFor(model => model.editCompanyModel.oldPassword, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "ძველი პაროლი" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
             <div class="cont3 col-12 col-sm-6 form-group">
                 <img class="showHidePd" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" />
-                @Html.EditorFor(model => model.editCompanyModel.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "ახალი პაროლი" } })
-                @Html.ValidationMessageFor(model => model.editCompanyModel.Password, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.NewPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "ახალი პაროლი" } })
+                @Html.ValidationMessageFor(model => model.NewPassword, "", new { @class = "text-danger" })
             </div>
             <div class="cont3 col-12 col-sm-6 form-group">
                 <img class="showHideRePd" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverHover();" onmouseout="mouseoutHover();" />
-                @Html.EditorFor(model => model.editCompanyModel.RepeatPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "გაიმეორეთ პაროლი" } })
-                @Html.ValidationMessageFor(model => model.editCompanyModel.RepeatPassword, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.RepeatPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "გაიმეორეთ პაროლი" } })
+                @Html.ValidationMessageFor(model => model.RepeatPassword, "", new { @class = "text-danger" })
             </div>
             <div class="cont3 col-12 col-sm-6 form-group">
                 <p style="color:red" class="error">@ViewBag.error</p>
                 <p style="color:green" class="success">@ViewBag.success</p>
             </div>
             <div ass="cont3 col-12 col-sm-6 form-group">
-                @Html.TextAreaFor(model => model.company.Description, new { @id = "CompanyDescription", @class = "form-control", @rows = "200" })
-                @Html.ValidationMessageFor(model => model.company.Description, "", new { @class = "text-danger" })
+                @Html.TextAreaFor(model => model.Description, new { @id = "CompanyDescription", @class = "form-control", @rows = "200" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
             <br />
             <div class="send container">

@@ -1,18 +1,18 @@
 ﻿function mouseoverPassOldPsw(obj) {
-    var obj = document.getElementById('oldPassword');
+    var obj = document.getElementById('Password');
     obj.type = "text";
 }
 function mouseoutPassOldPsw(obj) {
-    var obj = document.getElementById('oldPassword');
+    var obj = document.getElementById('Password');
     obj.type = "password";
 }
 
 function mouseoverPass(obj) {
-    var obj = document.getElementById('Password');
+    var obj = document.getElementById('NewPassword');
     obj.type = "text";
 }
 function mouseoutPass(obj) {
-    var obj = document.getElementById('Password');
+    var obj = document.getElementById('NewPassword');
     obj.type = "password";
 }
 
@@ -28,28 +28,28 @@ function mouseoutHover(obj) {
 
 //show hide icon
 $(function () {
-    $('.showHideOldPd').hover(function () {
-        $('.showHideOldPd').attr('src', '/img/logos/if_visibility_password.svg');
+    $('.showHidePassword').hover(function () {
+        $('.showHidePassword').attr('src', '/img/logos/if_visibility_password.svg');
     },
     function () {
-        $('.showHideOldPd').attr('src', '/img/logos/if_visibility-off.svg');
+        $('.showHidePassword').attr('src', '/img/logos/if_visibility-off.svg');
     })
 });
 
 $(function () {
-    $('.showHidePd').hover(function () {
-        $('.showHidePd').attr('src', '/img/logos/if_visibility_password.svg');
+    $('.showHideNewPassword').hover(function () {
+        $('.showHideNewPassword').attr('src', '/img/logos/if_visibility_password.svg');
     },
     function () {
-        $('.showHidePd').attr('src', '/img/logos/if_visibility-off.svg');
+        $('.showHideNewPassword').attr('src', '/img/logos/if_visibility-off.svg');
     })
 });
 
 $(function () {
-    $('.showHideRePd').hover(function () {
-        $('.showHideRePd').attr('src', '/img/logos/if_visibility_password.svg');
+    $('.showHideRepeatPassword').hover(function () {
+        $('.showHideRepeatPassword').attr('src', '/img/logos/if_visibility_password.svg');
     },
     function () {
-        $('.showHideRePd').attr('src', '/img/logos/if_visibility-off.svg');
+        $('.showHideRepeatPassword').attr('src', '/img/logos/if_visibility-off.svg');
     })
 });

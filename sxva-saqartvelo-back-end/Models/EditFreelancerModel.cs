@@ -17,7 +17,7 @@ namespace sxva_saqartvelo_back_end.Models
         public string Bio { get; set; }
         [Required(ErrorMessage = "ჩაწერეთ პოზიცია")]
         public string Field { get; set; }  //Freelancer Position
-        [Required(ErrorMessage = "ჩაწერეთ მობილური")]
+        [Required(ErrorMessage = "ჩაწერეთ ტელეფონის ნომერი")]
         public string Mobile { get; set; }
 
         [DataType(DataType.Password)]

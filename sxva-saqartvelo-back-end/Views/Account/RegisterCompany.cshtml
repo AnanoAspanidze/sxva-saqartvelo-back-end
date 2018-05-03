@@ -36,12 +36,12 @@
                 @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })
             </div>
             <div class="cont3 col-12 col-sm-6 form-group">
-                <img class="showHidePd" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" />
+                <img class="showHidePassword" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" />
                 @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "პაროლი" } })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
             <div class="cont3 col-12 col-sm-6 form-group">
-                <img class="showHideRePd" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverHover();" onmouseout="mouseoutHover();" />
+                <img class="showHideRepeatPassword" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverHover();" onmouseout="mouseoutHover();" />
                 @Html.EditorFor(model => model.RepeatPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "გაიმეორეთ პაროლი" } })
                 @Html.ValidationMessageFor(model => model.RepeatPassword, "", new { @class = "text-danger" })
             </div>
