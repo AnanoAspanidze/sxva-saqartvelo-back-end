@@ -194,7 +194,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                 {
                     companyToUpdate.Password = PasswordHashHelper.MD5Hash(randomSecret + model.NewPassword.Trim());
                     _db.SaveChanges();
-                    return View();
+                    //return View();
                 }
 
                 if (companyToUpdate == null)
@@ -216,7 +216,7 @@ namespace sxva_saqartvelo_back_end.Controllers
 
                 var allowedExtensions = new[] {
                     ".Jpg", ".png", ".jpg", ".jpeg"
-                    };
+                };
 
 
                 if (file != null)
