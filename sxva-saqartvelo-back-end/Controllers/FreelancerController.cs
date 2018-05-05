@@ -336,13 +336,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                 //freelancerToUpdate.Password = PasswordHashHelper.MD5Hash(randomSecret + freelancerModel.NewPassword.Trim());
                 _db.SaveChanges();
 
-                if (freelancerModel.NewPassword != null)
-                {
-                    freelancerToUpdate.Password = PasswordHashHelper.MD5Hash(randomSecret + freelancerModel.NewPassword.Trim());
-                    _db.SaveChanges();
 
-                    return View();
-                }
 
 
                 if (freelancerToUpdate == null)
@@ -361,6 +355,14 @@ namespace sxva_saqartvelo_back_end.Controllers
                 else
                 {
                     ViewBag.success = "მონაცემები წარმატებით შეიცვალა";
+                }
+
+                if (freelancerModel.NewPassword != null)
+                {
+                    freelancerToUpdate.Password = PasswordHashHelper.MD5Hash(randomSecret + freelancerModel.NewPassword.Trim());
+                    _db.SaveChanges();
+
+                    //return View();
                 }
 
 

@@ -26,6 +26,9 @@ namespace sxva_saqartvelo_back_end.Models
         [Required(ErrorMessage = "ჩაწერეთ ტელეფონის ნომერი")]
         public string Mobile { get; set; }
 
+
+        public string Logo { get; set; }
+
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

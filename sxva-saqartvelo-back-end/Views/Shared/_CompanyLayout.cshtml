@@ -41,7 +41,7 @@
                 </div>
             </a>
             <nav id="header-nav">
-                @if (freelancer == null)
+                @*if (freelancer == null)
                 {
                     <a class="auth" href="/Account/Login"><button class="hvr-back-pulse btn-font">ავტორიზაცია</button></a>
                     <a class="register" href="/Account/Register"><button class="btn-font button-active hvr-back-pulse">რეგისტრაცია</button></a>
@@ -52,26 +52,30 @@
                         <img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="~/img/pp/@freelancer.Photo" alt="profile picture">
                     </a> 
                     <div class="drpdwnMenu">
-                        @*დასამატებილი იქნება id*@
+                        დასამატებილი იქნება id
                         <a class="loggedUser" href="/Freelancer/FreelancerProfile" style="color:white; cursor:pointer; text-decoration:none">@freelancer.Name @freelancer.Surname</a>
                         <div class="dropdown-content">
                             <a class="edit" href="@Url.Action("EditFreelancer", "Freelancer", new { id = freelancer.ID })"><button class="hvr-back-pulse btn-font">რედაქტირება</button></a>
                             <a class="logout" href="/Account/Logout"><button class="hvr-back-pulse btn-font">გამოსვლა</button></a>
                         </div>
                     </div>
-                }
-                @*if (company != null)
+                }*@
+                @if (company == null)
                 {
-                    
+                    <a class="auth" href="/Account/Login"><button class="hvr-back-pulse btn-font">ავტორიზაცია</button></a>
+                    <a class="register" href="/Account/Register"><button class="btn-font button-active hvr-back-pulse">რეგისტრაცია</button></a>
+                }
+                else
+                {
                     <a id="companyProfileImg" href="@Url.Action("CompanyProfile", "Company", new { id = company.ID })" class="image-a" style="background-image: @Url.Action("logos", "img", new { id = company.Logo})">
                         <img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="@Url.Action("logos", "img", new { id = company.Logo})" alt="profile picture">
                     </a>
                     <div class="drpdwnMenu">
-                        დასამატებილი იქნება id
+                        @*დასამატებილი იქნება id*@
                         <a class="loggedCompany" href="/Company/CompanyProfile" style="color:white; cursor:pointer; text-decoration:none">@company.Name</a>
                         <div class="dropdown-content">
                             <a class="editCompany" href="@Url.Action("EditCompany", "Company", new { id = company.ID })"><button class="hvr-back-pulse btn-font">რედაქტირება</button></a>
-                            <a class="logout" href="/Account/Logout"><button class="hvr-back-pulse btn-font">გამოსვლა</button></a>
+                            <a class="logout" href="/Account/CompanyLogout"><button class="hvr-back-pulse btn-font">გამოსვლა</button></a>
                         </div>
                     </div>
 
@@ -80,10 +84,10 @@
                             $(".auth, .register").hide();
                         });
                     </script>
-                }*@
+                }
 
                 @*ატვირთული სურათის გამოჩენა header-ში*@
-                @*if (ViewBag.uploadedImg != null)
+                @if (ViewBag.uploadedImg != null)
                 {
                     <script>
                         $(document).ready(function () {
@@ -93,9 +97,9 @@
                     <a id="uploadedImg" href="@Url.Action("CompanyProfile", "Company", new { id = company.ID })" class="image-a" style="background-image: @Url.Action("logos", "img", new { id = ViewBag.uploadedimg })">
                         <img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="@Url.Action("logos", "img", new { id = ViewBag.uploadedimg })" alt="profile picture">
                     </a>
-                }*@
+                }
 
-                @if (ViewBag.uploadedFreelancerImg != null)
+                @*@if (ViewBag.uploadedFreelancerImg != null)
                 {
                     <script>
                         $(document).ready(function () {
@@ -105,7 +109,7 @@
                     <a id="freelancerUploadedImg" href="@Url.Action("FreelancerProfile", "Freelancer", new { id = freelancer.ID })" class="image-a" style="background-image: @Url.Action("pp", "img", new { id = ViewBag.uploadedFreelancerImg })">
                         <img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="@Url.Action("pp", "img", new { id = ViewBag.uploadedFreelancerImg })" alt="profile picture">
                     </a>
-                }
+                }*@
                 <div id="myNav" class="overlay">
                     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                     <div class="overlay-content">

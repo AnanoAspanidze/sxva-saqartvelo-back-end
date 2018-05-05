@@ -164,7 +164,9 @@ namespace sxva_saqartvelo_back_end.Controllers
                ID = company.ID,
                Name = company.Name,
                Mobile = company.Mobile,
-               Description = company.Description
+               Description = company.Description,
+               Logo = company.Logo
+               
             };
             if (result == null)
             {
@@ -182,7 +184,7 @@ namespace sxva_saqartvelo_back_end.Controllers
             {
                 var companyToUpdate = _db.Companies.FirstOrDefault(x=> x.ID == model.ID);
                 var hashedPassword = PasswordHashHelper.MD5Hash(randomSecret + model.Password);
-                Company company = _db.Companies.FirstOrDefault(x => x.Password == hashedPassword);
+                var company = _db.Companies.FirstOrDefault(x => x.Password == hashedPassword);
 
 
                 companyToUpdate.Name = model.Name.Trim();
@@ -190,12 +192,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                 companyToUpdate.Description = model.Description.Trim();
                 _db.SaveChanges();
                 
-                if(model.NewPassword != null)
-                {
-                    companyToUpdate.Password = PasswordHashHelper.MD5Hash(randomSecret + model.NewPassword.Trim());
-                    _db.SaveChanges();
-                    //return View();
-                }
+               
 
                 if (companyToUpdate == null)
                 {
@@ -203,24 +200,34 @@ namespace sxva_saqartvelo_back_end.Controllers
                 }
 
 
-                if (company == null)
+                
+
+                if(company != null)
                 {
-                    ViewBag.error = "არსებული პაროლი არ არის სწორი";
-                    return View();
-                }
-                else
-                {
+                    companyToUpdate.Password = PasswordHashHelper.MD5Hash(randomSecret + model.NewPassword.Trim());
+                    _db.SaveChanges();
                     ViewBag.success = "მონაცემები წარმატებით შეიცვალა";
+                    model.Password = string.Empty;
+                    model.NewPassword = string.Empty;
+                    model.RepeatPassword = string.Empty;
+                    return View(model);
                 }
 
 
-                var allowedExtensions = new[] {
-                    ".Jpg", ".png", ".jpg", ".jpeg"
-                };
+                //if (model.NewPassword != null)
+                //{
+                //    companyToUpdate.Password = PasswordHashHelper.MD5Hash(randomSecret + model.NewPassword.Trim());
+                //    _db.SaveChanges();
+                //    //return View();
+                //}
 
 
                 if (file != null)
                 {
+                    var allowedExtensions = new[] {
+                    ".Jpg", ".png", ".jpg", ".jpeg"
+                    };
+
                     var fileName = Path.GetFileName(file.FileName); //სურათის სახელი
                     var ext = Path.GetExtension(file.FileName); //სურათის extension
                     var randomString = Guid.NewGuid().ToString("N").Substring(0, 10); //რენდომ სტრინგი სურათის უნიკალურობისთვის
@@ -252,6 +259,15 @@ namespace sxva_saqartvelo_back_end.Controllers
                         }
 
                     }
+                }
+
+                if (company == null)
+                {
+                    ViewBag.error = "არსებული პაროლი არ არის სწორი";
+                    model.Password = string.Empty;
+                    model.NewPassword = string.Empty;
+                    model.RepeatPassword = string.Empty;
+                    return View(model);
                 }
                 return View();
             }

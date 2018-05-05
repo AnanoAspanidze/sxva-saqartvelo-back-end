@@ -4,6 +4,7 @@
 
 @{
     var company = LoginHelperForCompany.company();
+    Layout = "~/Views/Shared/_CompanyLayout.cshtml";
 }
 <link href="~/Content/InputErrorValidation.css" rel="stylesheet" />
 <link href="~/css/pagesNcomponents/homepage.css" rel="stylesheet" />
@@ -54,6 +55,8 @@
                 {
                     <img class="companyImage" style="width:250px; height:250px" src='@Url.Action("logos", "img", new { id = company.Logo})' />
                 }
+
+                @*<img class="companyImage" style="width:250px; height:250px" src='@Url.Action("logos", "img", new { id = Model.Logo})' />*@
                 @if(ViewBag.uploadedImg != null) //ატვირთვის შემდეგ სურათის გამოჩენა
                 {
                     <script>

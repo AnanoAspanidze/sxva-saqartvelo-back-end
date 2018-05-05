@@ -67,6 +67,7 @@
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Activities" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -727,6 +728,7 @@
     <Content Include="Views\Admin\TaskDetails.cshtml" />
     <Content Include="Views\Admin\ProjectDetails.cshtml" />
     <Content Include="Views\Company\CompanyDetails.cshtml" />
+    <Content Include="Views\Shared\_CompanyLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
