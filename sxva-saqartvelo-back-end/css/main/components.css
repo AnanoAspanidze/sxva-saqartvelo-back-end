@@ -145,7 +145,7 @@ button{
       position: relative;
 }
 
-.drpdwnMenu{
+/*.drpdwnMenu{
     position: relative;
     display: inline-block;
 }
@@ -168,5 +168,52 @@ button{
 
 .drpdwnMenu:hover .dropdown-content{
     display: block;
-}
+}*/
                     
+
+
+.drpdwnMenu{
+    float: left;
+    overflow: hidden;
+}
+
+.drpdwnMenu .loggedUser {
+    font-size: 16px;    
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+}
+
+.drpdwnMenu:hover .dropbtn {
+    background-color: red;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /*background-color: rgba(17, 76, 108, 0.82);*/
+    min-width: 160px;
+    /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
+    z-index: 1;
+}
+
+.dropdown-content .edit .logout {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    /*background-color: #ddd;*/
+}
+
+.drpdwnMenu:hover .dropdown-content {
+    display: block;
+}

@@ -38,7 +38,7 @@
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
             <div class="cont3 col-12 col-sm-6 form-group">
-                <img class="showHidePassword" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverPass();" onmouseout="mouseoutPass();" />
+                <img class="showHidePassword" src="~/img/logos/if_visibility-off.svg" onmouseover="mouseoverPassOldPsw();" onmouseout="mouseoutPassOldPsw();" />
                 @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "პაროლი"} })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })  
             </div>

@@ -7,6 +7,7 @@
     var project = Model.Projects.ToList(); //პროექტების თეიბლი ლისტად
     var ongoingProjects = Model.Projects.Where(x => x.Project_Status.Any(e => e.StatusID == 2)).Count(); //კონკრეტული ფრილანსერის მიმდინარე პროექტების რაოდენობა
     var freelancerRatingAverage = Model.Projects.Where(x => x.FreelancerID == Model.ID).Select(x => x.FreelancerRating);
+    
 }
 <!---->
 <!--CSS-->

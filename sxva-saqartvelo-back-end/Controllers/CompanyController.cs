@@ -210,7 +210,7 @@ namespace sxva_saqartvelo_back_end.Controllers
                     model.Password = string.Empty;
                     model.NewPassword = string.Empty;
                     model.RepeatPassword = string.Empty;
-                    return View(model);
+                    //return View(model);
                 }
 
 

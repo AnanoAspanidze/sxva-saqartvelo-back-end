@@ -46,17 +46,32 @@
                     <a class="auth" href="/Account/Login"><button class="hvr-back-pulse btn-font">ავტორიზაცია</button></a>
                     <a class="register" href="/Account/Register"><button class="btn-font button-active hvr-back-pulse">რეგისტრაცია</button></a>
                 }
-                else
+                @*else
                 {
                     <a id="freelancerImg" href="@Url.Action("FreelancerProfile", "Freelancer", new { id = freelancer.ID })" class="image-a" style="background-image: url(/img/pp/@freelancer.Photo);">
                         <img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="~/img/pp/@freelancer.Photo" alt="profile picture">
                     </a> 
                     <div class="drpdwnMenu">
-                        @*დასამატებილი იქნება id*@
+                        დასამატებილი იქნება id*
                         <a class="loggedUser" href="/Freelancer/FreelancerProfile" style="color:white; cursor:pointer; text-decoration:none">@freelancer.Name @freelancer.Surname</a>
+                        <a class="loggedUser"  href="@Url.Action("FreelancerProfile", "Freelancer", new { id = freelancer.ID })" style="color:white; cursor:pointer; text-decoration:none">@freelancer.Name @freelancer.Surname</a>
                         <div class="dropdown-content">
                             <a class="edit" href="@Url.Action("EditFreelancer", "Freelancer", new { id = freelancer.ID })"><button class="hvr-back-pulse btn-font">რედაქტირება</button></a>
                             <a class="logout" href="/Account/Logout"><button class="hvr-back-pulse btn-font">გამოსვლა</button></a>
+                        </div>
+                    </div>
+                }*@
+
+                else
+                {
+                    <a id="freelancerImg" href="@Url.Action("FreelancerProfile", "Freelancer", new { id = freelancer.ID })" class="image-a" style="background-image: url(/img/pp/@freelancer.Photo);">
+                        <img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="~/img/pp/@freelancer.Photo" alt="profile picture">
+                    </a>
+                    <div class="drpdwnMenu">
+                        <a class="loggedUser" href="@Url.Action("FreelancerProfile", "Freelancer", new { id = freelancer.ID })" style="color:white; cursor:pointer; text-decoration:none">@freelancer.Name @freelancer.Surname</a>
+                        <div class="dropdown-content">
+                            <a class="edit" href="@Url.Action("EditFreelancer", "Freelancer", new { id = freelancer.ID })"><button class="hvr-back-pulse btn-font">რედაქტირება</button></a>
+                            <a class="logout" style="float:right" href="/Account/Logout"><button class="hvr-back-pulse btn-font">გამოსვლა</button></a>
                         </div>
                     </div>
                 }

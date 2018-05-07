@@ -16,7 +16,8 @@
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="send container">
-                <a href="/Account/CompanyLogin"><button type="button" id="companyLoginButton" class="submit">დამსაქმებელი</button>    </a>
+                @*<a href="/Account/CompanyLogin"><button type="button" id="companyLoginButton" class="submit">დამსაქმებელი</button></a>*@
+                <a class="submit" style="text-decoration:none; color:white" href="/Account/CompanyLogin">დამსაქმებელი</a>
             </div>
             <div class="cont2 col-12 col-sm-6 form-group">
                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "ელ.ფოსტა" } })
@@ -30,7 +31,7 @@
                 <p style="color:#e80c4d" class="LoginFailed">@ViewBag.message</p>
             </div>
             <div class="send container">
-                <button id="loginButton" class="submit">შესვლა</button>
+                <button style="color:white" id="loginButton" class="submit">შესვლა</button>
             </div>
         }
     </div>
