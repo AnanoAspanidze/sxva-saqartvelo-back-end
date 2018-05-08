@@ -244,6 +244,7 @@ button{
 	text-align: center;
 	padding: 18px 22px;
 	text-decoration: none;
+    padding: 5px 11px;
 }
  
 /*.ddMenu a:hover, .ddMenu:hover .dropdown-btn {
