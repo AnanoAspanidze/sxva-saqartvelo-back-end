@@ -172,7 +172,7 @@ button{
                     
 
 
-.drpdwnMenu{
+/*.drpdwnMenu{
     float: left;
     overflow: hidden;
 }
@@ -195,9 +195,9 @@ button{
 .dropdown-content {
     display: none;
     position: absolute;
-    /*background-color: rgba(17, 76, 108, 0.82);*/
+    background-color: rgba(17, 76, 108, 0.82);
     min-width: 160px;
-    /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
 
@@ -211,9 +211,115 @@ button{
 }
 
 .dropdown-content a:hover {
-    /*background-color: #ddd;*/
+    background-color: #ddd;
 }
 
 .drpdwnMenu:hover .dropdown-content {
     display: block;
+}*/
+
+
+/*************************************/
+
+
+.dnMenu {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	/*background-color: #1ebb90;*/  
 }
+
+.dnMenu:hover{
+   background-color: rgba(17, 76, 108, 0.82);
+}
+ 
+.ddMenu {
+	float: left;
+}
+ 
+.ddMenu a, .dropdown-btn {
+	display: inline-block;
+	/*color: #fff;*/
+	text-align: center;
+	padding: 18px 22px;
+	text-decoration: none;
+}
+ 
+/*.ddMenu a:hover, .ddMenu:hover .dropdown-btn {
+	background-color: #f5f5f5;
+	color: #1ebb90;
+}*/
+ 
+li.ddMenu {
+	display: inline-block;
+}
+ 
+.ddMenu-menu {
+	display: none;
+	/*position: absolute;*/
+	/*background-color: #f5f5f5;*/
+    /*background-color: rgba(17, 76, 108, 0.82);*/
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
+}
+ 
+.ddMenu-menu a {
+	color: white;
+	padding: 12px 16px;
+    /*padding: 15px 47px;*/
+	display: block;
+	text-align: center;
+}
+ 
+.ddMenu-menu a:hover {
+	/*background-color: #1ebb90;*/
+    background-color: rgba(17, 76, 108, 0.82);
+	/*color: #fff;*/
+}
+ 
+.ddMenu:hover .ddMenu-menu {
+	display: block;
+}
+
+
+  /*.ddnButton{
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -webkit-transition-property: color, background-color;
+  transition-property: color, background-color;
+}
+.ddnButton:hover{
+    -webkit-animation-name: hvr-back-pulse;
+    animation-name: hvr-back-pulse;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-delay: 0.5s;
+    animation-delay: 0.5s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    background-color: #1CAEE5;
+    background-color: #1CAEE5;
+    color: white;
+}
+@-webkit-keyframes ddnButton {
+    50% {
+      background-color: rgba(32, 152, 209, 0.75);
+    }
+  }
+  @keyframes ddnButton {
+    50% {
+      background-color: rgba(32, 152, 209, 0.75);
+    }
+  }
+
+.ddnButton{
+    font-family: "BPG Nino Mtavruli Bold", sans-serif;
+    font-size: 14px;
+    color: white;
+    margin-left: 1vw;
+}*/

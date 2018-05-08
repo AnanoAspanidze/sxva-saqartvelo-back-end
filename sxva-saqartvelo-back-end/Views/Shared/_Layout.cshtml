@@ -62,7 +62,7 @@
                     </div>
                 }*@
 
-                else
+                @*else
                 {
                     <a id="freelancerImg" href="@Url.Action("FreelancerProfile", "Freelancer", new { id = freelancer.ID })" class="image-a" style="background-image: url(/img/pp/@freelancer.Photo);">
                         <img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="~/img/pp/@freelancer.Photo" alt="profile picture">
@@ -74,6 +74,50 @@
                             <a class="logout" style="float:right" href="/Account/Logout"><button class="hvr-back-pulse btn-font">გამოსვლა</button></a>
                         </div>
                     </div>
+                }*@
+                else
+                {
+                    <img src="/img/burger.svg" alt="navigation" id="burger-icon" onclick="openNav()">
+                    <ul class="dnMenu">
+                        @*<li>
+                           <a id="freelancerImg" href="@Url.Action("FreelancerProfile", "Freelancer", new { id = freelancer.ID })" class="image-a" style="background-image: url(/img/pp/@freelancer.Photo);"><img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="~/img/pp/@freelancer.Photo" alt="profile picture"></a>
+                        </li>*@
+                        <li class="ddMenu">
+                            <a class="dropdown-btn" href="@Url.Action("FreelancerProfile", "Freelancer", new { id = freelancer.ID })" style="color:white; cursor:pointer; text-decoration:none">@freelancer.Name @freelancer.Surname</a>
+                            <div class="ddMenu-menu">
+                                <a class="edit" style="text-decoration:none; color:white;" href="@Url.Action("EditFreelancer", "Freelancer", new { id = freelancer.ID })">რედაქტირება</a>
+                                <a class="logout" style="text-decoration:none; color:white;" href="/Account/Logout">გამოსვლა</a>
+                            </div>
+                        </li>
+                        
+                        @*<li>
+                            <div id="myNav" class="overlay">
+                                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                                <div class="overlay-content">
+                                    <a href="/Home/Index">მთავარი</a>
+                                    <a href="/Home/About">ჩვენ შესახებ</a>
+                                    <a href="/Freelancer/Index">დეველოპერები</a>
+                                    <a href="/Home/Contact">კონტაქტი</a>
+                                    <div class="contact-info-in-nav">
+                                        <p>+995 577 67 04 04</p>
+                                        <p>info@geolab.edu.ge</p>
+                                    </div>
+                                    <div class="social-icons-in-nav">
+                                        <a class="no-padding" href="https://plus.google.com/109260799805558176797" target="_blank">
+                                            <img src="/img/soc-icons/gPlus.svg" alt="google plus" class="soc_for_burger">
+                                        </a>
+                                        <a class="no-padding" href="https://www.facebook.com/GeoLabEdu/?ref=br_rs" target="_blank">
+                                            <img src="/img/soc-icons/fb.svg" alt="facebook" class="soc_for_burger">
+                                        </a>
+                                        <a class="no-padding" href="https://www.youtube.com/channel/UCGv7kAqQbpP6H0cpNid0afw" target="_blank">
+                                            <img src="/img/soc-icons/you.svg" alt="youtube" class="soc_for_burger">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <img src="/img/burger.svg" alt="navigation" id="burger-icon" onclick="openNav()">
+                        </li>*@
+                    </ul>
                 }
                 @*if (company != null)
                 {
@@ -145,7 +189,7 @@
                         </div>
                     </div>
                 </div>
-                <img src="/img/burger.svg" alt="navigation" id="burger-icon" onclick="openNav()">
+                @*<img src="/img/burger.svg" alt="navigation" id="burger-icon" onclick="openNav()">*@
             </nav>
         </div>
     </header>
