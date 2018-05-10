@@ -17,6 +17,9 @@
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script type="text/javascript" language="javascript"></script>
+    <script src="~/Scripts/popper.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
@@ -24,6 +27,7 @@
     <script src="~/Scripts/formValidation.js"></script>
     <script src="~/Scripts/filters.js"></script>
     <script src="~/Ckeditor/ckeditor.js"></script>
+   
 </head>
 
 @using sxva_saqartvelo_back_end.Models;
@@ -85,10 +89,9 @@
                     @*<a id="freelancerImg" href="@Url.Action("FreelancerProfile", "Freelancer", new { id = freelancer.ID })" class="image-a" style="background-image: url(/img/pp/@freelancer.Photo);">
                         
                     </a>*@
-                    <img  style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="~/img/pp/@freelancer.Photo" alt="profile picture">
-                    <img src="/img/burger.svg" alt="navigation" id="burger-icon" onclick="openNav()">
                     
-                    <ul class="dnMenu">                        
+                    
+                    @*<ul class="dnMenu">                        
                         <li class="ddMenu">                          
                             <a class="dropdown-btn" href="@Url.Action("FreelancerProfile", "Freelancer", new { id = freelancer.ID })" style="color:white; cursor:pointer; text-decoration:none">@freelancer.Name @freelancer.Surname</a>
                             <div class="ddMenu-menu">
@@ -96,36 +99,21 @@
                                 <a class="logout" style="text-decoration:none; color:white;" href="/Account/Logout">გამოსვლა</a>
                             </div>
                         </li>
-                        
-                        
-                        @*<li>
-                            <div id="myNav" class="overlay">
-                                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                                <div class="overlay-content">
-                                    <a href="/Home/Index">მთავარი</a>
-                                    <a href="/Home/About">ჩვენ შესახებ</a>
-                                    <a href="/Freelancer/Index">დეველოპერები</a>
-                                    <a href="/Home/Contact">კონტაქტი</a>
-                                    <div class="contact-info-in-nav">
-                                        <p>+995 577 67 04 04</p>
-                                        <p>info@geolab.edu.ge</p>
-                                    </div>
-                                    <div class="social-icons-in-nav">
-                                        <a class="no-padding" href="https://plus.google.com/109260799805558176797" target="_blank">
-                                            <img src="/img/soc-icons/gPlus.svg" alt="google plus" class="soc_for_burger">
-                                        </a>
-                                        <a class="no-padding" href="https://www.facebook.com/GeoLabEdu/?ref=br_rs" target="_blank">
-                                            <img src="/img/soc-icons/fb.svg" alt="facebook" class="soc_for_burger">
-                                        </a>
-                                        <a class="no-padding" href="https://www.youtube.com/channel/UCGv7kAqQbpP6H0cpNid0afw" target="_blank">
-                                            <img src="/img/soc-icons/you.svg" alt="youtube" class="soc_for_burger">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <img src="/img/burger.svg" alt="navigation" id="burger-icon" onclick="openNav()">
-                        </li>*@
-                    </ul>
+                    </ul>*@
+
+
+                    <div class="dropdown">
+                        <img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="~/img/pp/@freelancer.Photo" alt="profile picture">
+                        <img src="/img/burger.svg" alt="navigation" id="burger-icon" onclick="openNav()">
+                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">
+                            <span style="color:white" class="caret">@freelancer.Name @freelancer.Surname</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="freelancerProfile" href="@Url.Action("FreelancerProfile", "Freelancer", new { id = freelancer.ID })" style="cursor:pointer; text-decoration:none">პროფილი</a> <span class="caret"></span></li>
+                            <li><a class="edit" style="text-decoration:none;" href="@Url.Action("EditFreelancer", "Freelancer", new { id = freelancer.ID })">რედაქტირება</a></li>
+                            <li><a class="logout" style="text-decoration:none;" href="/Account/Logout">გამოსვლა</a></li>
+                        </ul>
+                    </div>
                 }
                 @*if (company != null)
                 {

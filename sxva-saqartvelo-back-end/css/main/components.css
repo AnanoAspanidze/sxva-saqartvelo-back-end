@@ -284,6 +284,15 @@ li.ddMenu {
 }
 
 
+.freelancerProfile, .edit, .logout{
+    display: inline-block;
+	/*color: #fff;*/
+	text-align: center;
+	padding: 18px 22px;
+	text-decoration: none;
+    padding: 5px 11px;
+}
+
   /*.ddnButton{
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
