@@ -17,7 +17,6 @@
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script type="text/javascript" language="javascript"></script>
-    <script src="~/Scripts/popper.js"></script>
     <script src="~/Scripts/bootstrap.bundle.js"></script>
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
@@ -109,9 +108,9 @@
                             <span style="color:white" class="caret">@freelancer.Name @freelancer.Surname</span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="freelancerProfile" href="@Url.Action("FreelancerProfile", "Freelancer", new { id = freelancer.ID })" style="cursor:pointer; text-decoration:none">პროფილი</a> <span class="caret"></span></li>
-                            <li><a class="edit" style="text-decoration:none;" href="@Url.Action("EditFreelancer", "Freelancer", new { id = freelancer.ID })">რედაქტირება</a></li>
-                            <li><a class="logout" style="text-decoration:none;" href="/Account/Logout">გამოსვლა</a></li>
+                            <li class="profileOptions"><a class="freelancerProfile" href="@Url.Action("FreelancerProfile", "Freelancer", new { id = freelancer.ID })" style="cursor:pointer; text-decoration:none; color:white;">პროფილი</a> <span class="caret"></span></li>
+                            <li class="profileOptions"><a class="edit" style="text-decoration:none; color:white;" href="@Url.Action("EditFreelancer", "Freelancer", new { id = freelancer.ID })">რედაქტირება</a></li>
+                            <li class="profileOptions"><a class="logout" style="text-decoration:none; color:white;" href="/Account/Logout">გამოსვლა</a></li>
                         </ul>
                     </div>
                 }
@@ -210,7 +209,7 @@
     <link href="~/css/pagesNcomponents/candidatInList.css" rel="stylesheet" />
 
     <!-- JS -->
-    <script src="~/Scripts/popper.js"></script>
+    @*<script src="~/Scripts/popper.js"></script>*@
 
     <!-- add elements in html -->
     <script src="~/Scripts/JS/printHeader.js"></script>

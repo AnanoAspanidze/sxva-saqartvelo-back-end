@@ -284,7 +284,7 @@ li.ddMenu {
 }
 
 
-.freelancerProfile, .edit, .logout{
+.freelancerProfile, .companyProfile, .edit, .editCompany, .logout{
     display: inline-block;
 	/*color: #fff;*/
 	text-align: center;
@@ -293,43 +293,6 @@ li.ddMenu {
     padding: 5px 11px;
 }
 
-  /*.ddnButton{
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  -webkit-transition-duration: 0.5s;
-  transition-duration: 0.5s;
-  -webkit-transition-property: color, background-color;
-  transition-property: color, background-color;
+.profileOptions{
+    text-align: center;
 }
-.ddnButton:hover{
-    -webkit-animation-name: hvr-back-pulse;
-    animation-name: hvr-back-pulse;
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-delay: 0.5s;
-    animation-delay: 0.5s;
-    -webkit-animation-timing-function: linear;
-    animation-timing-function: linear;
-    -webkit-animation-iteration-count: infinite;
-    animation-iteration-count: infinite;
-    background-color: #1CAEE5;
-    background-color: #1CAEE5;
-    color: white;
-}
-@-webkit-keyframes ddnButton {
-    50% {
-      background-color: rgba(32, 152, 209, 0.75);
-    }
-  }
-  @keyframes ddnButton {
-    50% {
-      background-color: rgba(32, 152, 209, 0.75);
-    }
-  }
-
-.ddnButton{
-    font-family: "BPG Nino Mtavruli Bold", sans-serif;
-    font-size: 14px;
-    color: white;
-    margin-left: 1vw;
-}*/

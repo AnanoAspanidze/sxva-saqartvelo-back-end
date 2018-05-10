@@ -12,11 +12,15 @@
     <link href="~/css/main/components.css" rel="stylesheet" />
     <link rel=icon href=/img/favicon.png>
     <link href="~/fonts/bpg-nino-mtavruli-bold-master/css/bpg-nino-mtavruli-bold.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css.map" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script type="text/javascript" language="javascript"></script>
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
@@ -79,19 +83,31 @@
                         </div>
                     </div>*@
 
-                    <img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="@Url.Action("logos", "img", new { id = company.Logo})" alt="profile picture">
+                    @*<img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="@Url.Action("logos", "img", new { id = company.Logo})" alt="profile picture">
                     <img src="/img/burger.svg" alt="navigation" id="burger-icon" onclick="openNav()">
 
                     <ul class="dnMenu">
                         <li class="ddMenu">
-                            @*<a class="dropdown-btn" href="@Url.Action("CompanyProfile", "Company", new { id = company.ID })" style="color:white; cursor:pointer; text-decoration:none">@freelancer.Name @freelancer.Surname</a>*@
                             <a class="dropdown-btn" href="@Url.Action("CompanyProfile", "Company", new { id = company.ID })" style="color:white; cursor:pointer; text-decoration:none">@company.Name</a>
                             <div class="ddMenu-menu">
                                 <a class="editCompany" style="text-decoration:none; color:white;" href="@Url.Action("EditCompany", "Company", new { id = company.ID })">რედაქტირება</a>
                                 <a class="logout" href="/Account/CompanyLogout" style="text-decoration:none; color:white;">გამოსვლა</a>
                             </div>
                         </li>
-                    </ul>
+                    </ul>*@
+
+                    <div class="dropdown">
+                        <img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="@Url.Action("logos", "img", new { id = company.Logo})" alt="profile picture">
+                        <img src="/img/burger.svg" alt="navigation" id="burger-icon" onclick="openNav()">
+                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">
+                            <span style="color:white" class="caret">@company.Name</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="profileOptions"><a class="companyProfile" href="@Url.Action("CompanyProfile", "Company", new { id = company.ID })" style="cursor:pointer; text-decoration:none; color:white;">პროფილი</a> <span class="caret"></span></li>
+                            <li class="profileOptions"><a class="editCompany" style="text-decoration:none; color:white;" href="@Url.Action("EditCompany", "Company", new { id = company.ID })">რედაქტირება</a></li>
+                            <li class="profileOptions"><a class="logout" href="/Account/CompanyLogout" style="text-decoration:none; color:white;">გამოსვლა</a></li>
+                        </ul>
+                    </div>
 
                     <script>
                         $(document).ready(function () {
@@ -173,7 +189,7 @@
     <link href="~/css/pagesNcomponents/candidatInList.css" rel="stylesheet" />
 
     <!-- JS -->
-    <script src="~/Scripts/popper.js"></script>
+    @*<script src="~/Scripts/popper.js"></script>*@
 
     <!-- add elements in html -->
     <script src="~/Scripts/JS/printHeader.js"></script>
