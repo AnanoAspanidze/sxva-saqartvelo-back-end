@@ -34,7 +34,6 @@
 @using sxva_saqartvelo_back_end.Helpers;
 
 @{
-    var freelancer = LoginHelper.freelancer();
     var company = LoginHelperForCompany.company();
 }
 <body>
@@ -45,25 +44,6 @@
                 </div>
             </a>
             <nav id="header-nav">
-                @*if (freelancer == null)
-                {
-                    <a class="auth" href="/Account/Login"><button class="hvr-back-pulse btn-font">ავტორიზაცია</button></a>
-                    <a class="register" href="/Account/Register"><button class="btn-font button-active hvr-back-pulse">რეგისტრაცია</button></a>
-                }
-                else
-                {
-                    <a id="freelancerImg" href="@Url.Action("FreelancerProfile", "Freelancer", new { id = freelancer.ID })" class="image-a" style="background-image: url(/img/pp/@freelancer.Photo);">
-                        <img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="~/img/pp/@freelancer.Photo" alt="profile picture">
-                    </a> 
-                    <div class="drpdwnMenu">
-                        დასამატებილი იქნება id
-                        <a class="loggedUser" href="/Freelancer/FreelancerProfile" style="color:white; cursor:pointer; text-decoration:none">@freelancer.Name @freelancer.Surname</a>
-                        <div class="dropdown-content">
-                            <a class="edit" href="@Url.Action("EditFreelancer", "Freelancer", new { id = freelancer.ID })"><button class="hvr-back-pulse btn-font">რედაქტირება</button></a>
-                            <a class="logout" href="/Account/Logout"><button class="hvr-back-pulse btn-font">გამოსვლა</button></a>
-                        </div>
-                    </div>
-                }*@
                 @if (company == null)
                 {
                     <a class="auth" href="/Account/Login"><button class="hvr-back-pulse btn-font">ავტორიზაცია</button></a>
@@ -71,33 +51,30 @@
                 }
                 else
                 {
-                    @*<a id="companyProfileImg" href="@Url.Action("CompanyProfile", "Company", new { id = company.ID })" class="image-a" style="background-image: @Url.Action("logos", "img", new { id = company.Logo})">
-                        <img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="@Url.Action("logos", "img", new { id = company.Logo})" alt="profile picture">
-                    </a>
-                    <div class="drpdwnMenu">
-                        დასამატებილი იქნება id
-                        <a class="loggedCompany" href="/Company/CompanyProfile" style="color:white; cursor:pointer; text-decoration:none">@company.Name</a>
-                        <div class="dropdown-content">
-                            <a class="editCompany" href="@Url.Action("EditCompany", "Company", new { id = company.ID })"><button class="hvr-back-pulse btn-font">რედაქტირება</button></a>
-                            <a class="logout" href="/Account/CompanyLogout"><button class="hvr-back-pulse btn-font">გამოსვლა</button></a>
-                        </div>
-                    </div>*@
-
-                    @*<img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="@Url.Action("logos", "img", new { id = company.Logo})" alt="profile picture">
-                    <img src="/img/burger.svg" alt="navigation" id="burger-icon" onclick="openNav()">
-
-                    <ul class="dnMenu">
-                        <li class="ddMenu">
-                            <a class="dropdown-btn" href="@Url.Action("CompanyProfile", "Company", new { id = company.ID })" style="color:white; cursor:pointer; text-decoration:none">@company.Name</a>
-                            <div class="ddMenu-menu">
-                                <a class="editCompany" style="text-decoration:none; color:white;" href="@Url.Action("EditCompany", "Company", new { id = company.ID })">რედაქტირება</a>
-                                <a class="logout" href="/Account/CompanyLogout" style="text-decoration:none; color:white;">გამოსვლა</a>
-                            </div>
-                        </li>
-                    </ul>*@
-
                     <div class="dropdown">
-                        <img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="@Url.Action("logos", "img", new { id = company.Logo})" alt="profile picture">
+                        <img style="float:left; margin-right:-10px; margin-top:0px" class="rounded-circle" src="@Url.Action("logos", "img", new { id = company.Logo})" alt="profile picture">
+                        <img src="/img/burger.svg" alt="navigation" id="burger-icon" onclick="openNav()">
+                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">
+                            <span style="color:white" class="caret">@company.Name</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="profileOptions"><a class="companyProfile" href="@Url.Action("CompanyProfile", "Company", new { id = company.ID })" style="cursor:pointer; text-decoration:none; color:white;">პროფილი</a> <span class="caret"></span></li>
+                            <li class="profileOptions"><a class="editCompany" href="@Url.Action("EditCompany", "Company", new { id = company.ID })" style="text-decoration:none; color:white;" >რედაქტირება</a></li>
+                            <li class="profileOptions"><a class="logout" href="/Account/CompanyLogout" style="text-decoration:none; color:white;">გამოსვლა</a></li>
+                        </ul>
+                    </div>
+
+                    <script>
+                        $(document).ready(function () {
+                            $(".auth, .register").hide();
+                        });
+                    </script>
+                }
+
+                @*@if (company != null)
+                {
+                    <div class="dropdown">
+                        <img style="float:left; margin-right:-10px; margin-top:0px" class="rounded-circle" src="@Url.Action("logos", "img", new { id = company.Logo})" alt="profile picture">
                         <img src="/img/burger.svg" alt="navigation" id="burger-icon" onclick="openNav()">
                         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-hover="dropdown">
                             <span style="color:white" class="caret">@company.Name</span>
@@ -114,7 +91,7 @@
                             $(".auth, .register").hide();
                         });
                     </script>
-                }
+                }*@
 
                 @*ატვირთული სურათის გამოჩენა header-ში*@
                 @if (ViewBag.uploadedImg != null)
@@ -128,18 +105,6 @@
                         <img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="@Url.Action("logos", "img", new { id = ViewBag.uploadedimg })" alt="profile picture">
                     </a>
                 }
-
-                @*@if (ViewBag.uploadedFreelancerImg != null)
-                {
-                    <script>
-                        $(document).ready(function () {
-                            $("#freelancerImg").hide(); //ახალი სურათის ატვირთვის შემდეგ არსებულის დამალვა
-                        });
-                    </script>
-                    <a id="freelancerUploadedImg" href="@Url.Action("FreelancerProfile", "Freelancer", new { id = freelancer.ID })" class="image-a" style="background-image: @Url.Action("pp", "img", new { id = ViewBag.uploadedFreelancerImg })">
-                        <img style="float:left; margin-right:14px; margin-top:1px" class="rounded-circle" src="@Url.Action("pp", "img", new { id = ViewBag.uploadedFreelancerImg })" alt="profile picture">
-                    </a>
-                }*@
                 <div id="myNav" class="overlay">
                     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                     <div class="overlay-content">
@@ -164,7 +129,6 @@
                         </div>
                     </div>
                 </div>
-                @*<img src="/img/burger.svg" alt="navigation" id="burger-icon" onclick="openNav()">*@
             </nav>
         </div>
     </header>

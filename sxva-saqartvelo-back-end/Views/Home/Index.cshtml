@@ -1,5 +1,24 @@
 ﻿@model PagedList.IPagedList<sxva_saqartvelo_back_end.Models.Freelancer>
 @using PagedList.Mvc;
+@using sxva_saqartvelo_back_end.Models;
+@using sxva_saqartvelo_back_end.Helpers;
+
+@{
+    var freelancer = LoginHelper.freelancer();
+    var company = LoginHelperForCompany.company();
+}
+
+
+@if (freelancer != null)
+{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if(company != null)
+{
+    Layout = "~/Views/Shared/_CompanyLayout.cshtml";
+}
+
 
 <link href="~/Content/PagedList.css" rel="stylesheet" />
 <link href="~/css/pagesNcomponents/homepage.css" rel="stylesheet" />

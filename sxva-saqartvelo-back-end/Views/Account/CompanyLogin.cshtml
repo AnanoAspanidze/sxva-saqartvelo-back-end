@@ -13,7 +13,7 @@
 <section class="container-fluid">
     <div class="row col-9 cont">
         @*@using (Html.BeginForm("CompanyLogin", "Account", FormMethod.Post, new { @class = "cont1 container", onsubmit = "return validateForm()" }))*@
-        @using (Html.BeginForm("CompanyLogin", "Account", FormMethod.Post, new { @class = "cont1 container", onsubmit = "return validateForm()" }))
+        @using (Html.BeginForm("CompanyLogin", "Account", FormMethod.Post, new { @class = "cont1 container"}))
         {
             @Html.AntiForgeryToken()
 
